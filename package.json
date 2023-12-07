@@ -61,7 +61,7 @@
     "rtlcss-webpack-plugin": "4.0.7",
     "sass": "1.55.0",
     "sass-loader": "13.2.0",
-    "webpack": "5.74.0",
+    "webpack": "5.76.0",
     "webpack-cli": "5.1.4",
     "webpack-rtl-plugin": "^2.0.0",
     "@types/react": "^18.2.15",

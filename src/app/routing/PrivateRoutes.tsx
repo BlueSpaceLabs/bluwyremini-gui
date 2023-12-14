@@ -7,7 +7,7 @@ import {MenuTestPage} from '../pages/MenuTestPage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import ContactManagement from '../pages/contact-management/ContactManagement'
-import Messages from '../pages/messages/Messages'
+import MessagesPage from "../pages/messages/MessagesPage";
 import CampaignManagement from '../pages/campaign-management/CampaignManagement'
 import StaticDataManagement from '../pages/static-data/StaticDataManagement'
 import TemplateManagement from '../pages/template-management/TemplateManagement'
@@ -16,6 +16,7 @@ import Profile from '../pages/settings/profile/Profile'
 import Sendmessage from '../pages/settings/send-message/Sendmessage'
 import Faqs from '../pages/settings/Faqs'
 import ChannelManagement from '../pages/channel-management/ChannelManagement'
+import MediaGallery from '../pages/media-gallery/MediaGallery'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -34,7 +35,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='channels/' element={<ChannelManagement />} />
         <Route path="contact-management/*" element={<ContactManagement />} />
-        <Route path='messages' element={<Messages />} />
+        <Route path='messages/*' element={<MessagesPage />} />
         <Route path='campaignmanagement' element={<CampaignManagement />} />
         <Route path='staticdatamanagement' element={<StaticDataManagement />} />
         <Route path='templatemanagement' element={<TemplateManagement />} />
@@ -43,6 +44,7 @@ const PrivateRoutes = () => {
         <Route path='sendmessage' element={<Sendmessage />} />
         <Route path='faqs' element={<Faqs />} />
         <Route path='tickets' element={<Tickets />} />
+        <Route path='media-gallery' element={<MediaGallery />} />
 
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}

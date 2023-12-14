@@ -15,7 +15,7 @@ const SidebarMenuMain = () => {
         fontIcon='bi-app-indicator'
       />
       <SidebarMenuItem to='/channels' icon='whatsapp' title='Channels' fontIcon='bi-layers' />
-      <SidebarMenuItem to='/contactmanagement' icon='phone' title='Manage Contacts' fontIcon='bi-layers' />
+      <SidebarMenuItem to='/contact-management/' icon='phone' title='Manage Contacts' fontIcon='bi-layers' />
       <SidebarMenuItem to='/messages' icon='messages' title='Messages' fontIcon='bi-layers' />
       
       <SidebarMenuItem to='/campaignmanagement' icon='abstract-33' title='Campaign Management' fontIcon='bi-layers' />

@@ -11,14 +11,14 @@ import MessagesPage from "../pages/messages/MessagesPage";
 import CampaignManagement from '../pages/campaign-management/CampaignManagement'
 import StaticDataManagement from '../pages/static-data/StaticDataManagement'
 import TemplateManagement from '../pages/template-management/TemplateManagement'
-import Tickets from '../pages/ticketing/Tickets'
+import Tickets from '../pages/tickets-management/TicketsManagement'
 import Profile from '../pages/settings/profile/Profile'
 import Sendmessage from '../pages/settings/send-message/Sendmessage'
 import Faqs from '../pages/settings/Faqs'
-import ChannelManagement from '../pages/channel-management/ChannelManagement'
 import MediaGallery from '../pages/media-gallery/MediaGallery'
+import ChannelManagement from '../pages/channel-management/ChannelManagement'
 
-const PrivateRoutes = () => {
+const PrivateRoutes = () => { 
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
@@ -33,13 +33,14 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
+      
         <Route path='channels/' element={<ChannelManagement />} />
         <Route path="contact-management/*" element={<ContactManagement />} />
         <Route path='messages/*' element={<MessagesPage />} />
-        <Route path='campaignmanagement' element={<CampaignManagement />} />
+        <Route path='campaign-management' element={<CampaignManagement />} />
         <Route path='staticdatamanagement' element={<StaticDataManagement />} />
         <Route path='templatemanagement' element={<TemplateManagement />} />
-        <Route path='tickets' element={<Tickets />} />
+        <Route path='tickets-management/*' element={<Tickets />} />
         <Route path='profile' element={<Profile />} />
         <Route path='sendmessage' element={<Sendmessage />} />
         <Route path='faqs' element={<Faqs />} />

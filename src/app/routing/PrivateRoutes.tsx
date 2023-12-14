@@ -15,7 +15,7 @@ import Tickets from '../pages/ticketing/Tickets'
 import Profile from '../pages/settings/profile/Profile'
 import Sendmessage from '../pages/settings/send-message/Sendmessage'
 import Faqs from '../pages/settings/Faqs'
-import Channels from '../pages/channels/Channels'
+import ChannelManagement from '../pages/channel-management/ChannelManagement'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -32,7 +32,7 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
-        <Route path='channels' element={<Channels />} />
+        <Route path='channels/' element={<ChannelManagement />} />
         <Route path='contactmanagement' element={<ContactManagement />} />
         <Route path='messages' element={<Messages />} />
         <Route path='campaignmanagement' element={<CampaignManagement />} />

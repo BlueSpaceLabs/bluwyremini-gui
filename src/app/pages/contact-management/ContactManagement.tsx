@@ -1,11 +1,65 @@
 import {FC} from 'react'
-import {PageTitle} from '../../../_metronic/layout/core'
-
+import { Navigate, Routes, Route, Outlet } from "react-router-dom";
+import { PageTitle } from "../../../_metronic/layout/core";
+import { ContactManagementHeader } from "./ContactManagementHeader";
+import { WhatsappPageWrapper } from "./WhatsappPage/WhatsappPage";
+import { FacebookPageWrapper } from "./FacebookPage/FacebookPage";
+import { TelegramPageWrapper } from "./TelegramPage/TelegramPage";
+import { InstagramPageWrapper } from "./InstagramPage/InstagramPage";
 
 const ContactManagement: FC = () => {
   return (
     <>
-      <PageTitle breadcrumbs={[]}>Contact Management</PageTitle>
+      {/*<PageTitle breadcrumbs={[]}>Contact Management</PageTitle>*/}
+      <Routes>
+      <Route
+        element={
+          <>
+            <ContactManagementHeader />
+            <Outlet />
+          </>
+        }
+      >
+        <Route
+          path="/whatsapp"
+          element={
+            <>
+              <PageTitle breadcrumbs={[]}>Contact Management </PageTitle>
+              <WhatsappPageWrapper />
+            </>
+          }
+        />
+        
+        <Route
+          path="/facebook"
+          element={
+            <>
+              <PageTitle breadcrumbs={[]}>Contact Management </PageTitle>
+              <FacebookPageWrapper />
+            </>
+          }
+        />
+        <Route
+          path="/instagram"
+          element={
+            <>
+              <PageTitle breadcrumbs={[]}>Contact Management</PageTitle>
+              <InstagramPageWrapper />
+            </>
+          }
+        />
+        <Route
+          path="/telegram"
+          element={
+            <>
+              <PageTitle breadcrumbs={[]}>Contact Management </PageTitle>
+              <TelegramPageWrapper />
+            </>
+          }
+        />
+        <Route index element={<Navigate to="/contact-management/whatsapp" />} />
+      </Route>
+    </Routes>
          </>
   )
 }

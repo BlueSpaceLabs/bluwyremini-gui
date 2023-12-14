@@ -33,7 +33,7 @@ const PrivateRoutes = () => {
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='channels/' element={<ChannelManagement />} />
-        <Route path='contactmanagement' element={<ContactManagement />} />
+        <Route path="contact-management/*" element={<ContactManagement />} />
         <Route path='messages' element={<Messages />} />
         <Route path='campaignmanagement' element={<CampaignManagement />} />
         <Route path='staticdatamanagement' element={<StaticDataManagement />} />

@@ -1,17 +1,21 @@
-import {useState} from 'react'
+import { useState } from "react";
 import { KTIcon } from "../../../../../../_metronic/helpers";
 import { useListView } from "../../core/ListViewProvider";
 import { UsersListFilter } from "./UsersListFilter";
-import {CreateAppModal, Dropdown1} from '../../../../../../_metronic/partials'
-import {useLayout} from '../../../../../../_metronic/layout/core'
+// import {
+//   CreateAppModal,
+//   Dropdown1,
+// } from "../../../../../../_metronic/partials";
+import { useLayout } from "../../../../../../_metronic/layout/core";
+import { CampaignModal } from "../../campaign-modal/CampaignModal";
 
 const UsersListToolbar = () => {
   const { setItemIdForUpdate } = useListView();
-  const openAddUserModal = () => {
-    setItemIdForUpdate(null);
-  };
-  const {config} = useLayout()
-  const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false)
+  // const openAddUserModal = () => {
+  //   setItemIdForUpdate(null);
+  // };
+  const { config } = useLayout();
+  const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false);
   return (
     <div
       className="d-flex justify-content-end"
@@ -27,7 +31,7 @@ const UsersListToolbar = () => {
       {/* end::Export */}
 
       {/* begin::Add user */}
-     {/*} <button
+      {/*} <button
         type="button"
         className="btn btn-primary"
         onClick={openAddUserModal}
@@ -38,14 +42,22 @@ const UsersListToolbar = () => {
       {/* end::Add user */}
       {config.app?.toolbar?.primaryButton && (
         <a
-          href='#'
+          href="#"
           onClick={() => setShowCreateAppModal(true)}
-          className='btn btn-sm fw-bold btn-primary'
+          className="btn btn-sm fw-bold btn-primary"
         >
-          Add Campaign 
+          Add Campaign
         </a>
       )}
-      <CreateAppModal show={showCreateAppModal} handleClose={() => setShowCreateAppModal(false)} />
+      {/* <CreateAppModal
+        show={showCreateAppModal}
+        handleClose={() => setShowCreateAppModal(false)}
+      /> */}
+
+      <CampaignModal
+        show={showCreateAppModal}
+        handleClose={() => setShowCreateAppModal(false)}
+      />
     </div>
   );
 };

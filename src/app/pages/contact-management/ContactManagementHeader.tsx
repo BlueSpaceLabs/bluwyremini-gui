@@ -21,7 +21,7 @@ const ContactManagementHeader: FC = () => {
                 Whatsapp
               </Link>
             </li>
-            
+
             <li className="nav-item">
               <Link
                 className={
@@ -56,6 +56,18 @@ const ContactManagementHeader: FC = () => {
                 to="/contact-management/telegram"
               >
                 Telegram
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className={
+                  `nav-link text-active-primary me-6 ` +
+                  (location.pathname === "/contact-management/bluwyre" &&
+                    "active")
+                }
+                to="/contact-management/bluwyre"
+              >
+                Bluwyre Contacts
               </Link>
             </li>
           </ul>

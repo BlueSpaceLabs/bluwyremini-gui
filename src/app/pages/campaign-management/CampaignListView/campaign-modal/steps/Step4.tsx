@@ -6,7 +6,7 @@ const Step4: FC = () => {
   return (
     <div className="w-100">
       <div className="pb-10 pb-lg-15">
-        <h2 className="fw-bolder text-gray-900">Billing Details</h2>
+        <h2 className="fw-bolder text-gray-900">Campaign Info</h2>
 
         <div className="text-gray-500 fw-bold fs-6">
           If you need more info, please check out
@@ -20,7 +20,7 @@ const Step4: FC = () => {
 
       <div className="d-flex flex-column mb-7 fv-row">
         <label className="d-flex align-items-center fs-6 fw-bold form-label mb-2">
-          <span className="required">Name On Card</span>
+          <span className="required">Campaign Language</span>
           <i
             className="fas fa-exclamation-circle ms-2 fs-7"
             data-bs-toggle="tooltip"
@@ -39,7 +39,7 @@ const Step4: FC = () => {
         </div>
       </div>
 
-      <div className="d-flex flex-column mb-7 fv-row">
+      {/* <div className="d-flex flex-column mb-7 fv-row">
         <label className="required fs-6 fw-bold form-label mb-2">
           Card Number
         </label>
@@ -73,9 +73,9 @@ const Step4: FC = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="row mb-10">
+      {/* <div className="row mb-10">
         <div className="col-md-8 fv-row">
           <label className="required fs-6 fw-bold form-label mb-2">
             Expiration Date
@@ -161,15 +161,15 @@ const Step4: FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="d-flex flex-stack">
         <div className="me-5">
           <label className="fs-6 fw-bold form-label">
-            Save Card for further billing?
+            Run for all Contacts
           </label>
           <div className="fs-7 fw-bold text-gray-500">
-            If you need more info, please check budget planning
+            Run Campaign for old and new customers.
           </div>
         </div>
 
@@ -181,7 +181,7 @@ const Step4: FC = () => {
             checked={true}
           />
           <span className="form-check-label fw-bold text-gray-500">
-            Save Card
+            All Contacts
           </span>
         </label>
       </div>

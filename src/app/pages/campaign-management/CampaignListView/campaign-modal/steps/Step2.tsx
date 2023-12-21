@@ -6,7 +6,7 @@ const Step2: FC = () => {
   return (
     <div className="w-100">
       <div className="pb-10 pb-lg-15">
-        <h2 className="fw-bolder text-gray-900">Account Info</h2>
+        <h2 className="fw-bolder text-gray-900">Setup Campaign Details</h2>
 
         <div className="text-gray-500 fw-bold fs-6">
           If you need more info, please check out
@@ -18,7 +18,7 @@ const Step2: FC = () => {
         </div>
       </div>
 
-      <div className="mb-10 fv-row">
+      {/* <div className="mb-10 fv-row">
         <label className="d-flex align-items-center form-label mb-3">
           Specify Team Size
           <i
@@ -97,10 +97,10 @@ const Step2: FC = () => {
         <div className="form-text">
           Customers will see this shortened version of your statement descriptor
         </div>
-      </div>
+      </div> */}
 
       <div className="mb-10 fv-row">
-        <label className="form-label mb-3">Team Account Name</label>
+        <label className="form-label mb-3">Campaign Name</label>
 
         <Field
           type="text"
@@ -114,11 +114,11 @@ const Step2: FC = () => {
 
       <div className="mb-0 fv-row">
         <label className="d-flex align-items-center form-label mb-5">
-          Select Account Plan
+          Campaign Goal
           <i
             className="fas fa-exclamation-circle ms-2 fs-7"
             data-bs-toggle="tooltip"
-            title="Monthly billing will be based on your account plan"
+            title="Specify Campaign Goal."
           ></i>
         </label>
 
@@ -133,10 +133,10 @@ const Step2: FC = () => {
 
               <span className="d-flex flex-column">
                 <span className="fw-bolder text-gray-800 text-hover-primary fs-5">
-                  Company Account
+                  Get more visitors
                 </span>
                 <span className="fs-6 fw-bold text-gray-500">
-                  Use images to enhance your post flow
+                  Increase impression traffic onto the platform
                 </span>
               </span>
             </span>
@@ -161,10 +161,10 @@ const Step2: FC = () => {
 
               <span className="d-flex flex-column">
                 <span className="fw-bolder text-gray-800 text-hover-primary fs-5">
-                  Developer Account
+                  Get more messages on chat
                 </span>
                 <span className="fs-6 fw-bold text-gray-500">
-                  Use images to your post time
+                  Increase community interaction and communication
                 </span>
               </span>
             </span>
@@ -192,10 +192,10 @@ const Step2: FC = () => {
 
               <span className="d-flex flex-column">
                 <span className="fw-bolder text-gray-800 text-hover-primary fs-5">
-                  Testing Account
+                  Lead generation
                 </span>
                 <span className="fs-6 fw-bold text-gray-500">
-                  Use images to enhance time travel rivers
+                  Collect contact information for potential customers
                 </span>
               </span>
             </span>

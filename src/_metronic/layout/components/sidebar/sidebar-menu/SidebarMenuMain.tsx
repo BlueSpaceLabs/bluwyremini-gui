@@ -75,6 +75,7 @@ const SidebarMenuMain = () => {
           title="Send Message"
           hasBullet={true}
         />
+        <SidebarMenuItem to="/keywords" title="KeyWords" hasBullet={true} />
         <SidebarMenuItem
           to="/crafted/account/overview"
           title="Profile"

@@ -11,7 +11,7 @@ import TemplateManagement from "../pages/template-management/TemplateManagement"
 import MessagesPage from "../pages/messages/MessagesPage";
 import CampaignManagement from "../pages/campaign-management/CampaignManagement";
 import StaticDataManagement from "../pages/static-data/StaticDataManagement";
-import Tickets from "../pages/tickets-management/TicketsManagement";
+// import Tickets from "../pages/tickets-management/TicketsManagement";
 import Profile from "../pages/settings/profile/Profile";
 import Sendmessage from "../pages/settings/send-message/Sendmessage";
 import KeyWordsPage from "../pages/settings/keywords/KeyWordsPage";
@@ -44,12 +44,12 @@ const PrivateRoutes = () => {
         <Route path="staticdatamanagement" element={<StaticDataManagement />} />
         <Route path="template-management/*" element={<TemplateManagement />} />
         <Route path="media-management/*" element={<MediaManagement />} />
-        <Route path="tickets-management/*" element={<Tickets />} />
+        {/* <Route path="tickets-management/*" element={<Tickets />} /> */}
         <Route path="profile" element={<Profile />} />
         <Route path="sendmessage" element={<Sendmessage />} />
         <Route path="keywords" element={<KeyWordsPage />} />
         <Route path="faqs" element={<Faqs />} />
-        <Route path="tickets" element={<Tickets />} />
+        {/* <Route path="tickets" element={<Tickets />} /> */}
 
         <Route path="menu-test" element={<MenuTestPage />} />
         {/* Lazy Modules */}

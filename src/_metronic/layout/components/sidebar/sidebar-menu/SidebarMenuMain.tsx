@@ -57,12 +57,12 @@ const SidebarMenuMain = () => {
         title="Templates"
         fontIcon="bi-layers"
       />
-      <SidebarMenuItem
+      {/* <SidebarMenuItem
         to="tickets-management/"
         icon="element-plus"
         title="Tickets"
         fontIcon="bi-layers"
-      />
+      /> */}
 
       <SidebarMenuItemWithSub
         to="#"

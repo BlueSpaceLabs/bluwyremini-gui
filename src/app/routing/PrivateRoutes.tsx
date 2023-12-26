@@ -7,10 +7,10 @@ import { MenuTestPage } from "../pages/MenuTestPage";
 import { getCSSVariableValue } from "../../_metronic/assets/ts/_utils";
 import { WithChildren } from "../../_metronic/helpers";
 import ContactManagement from "../pages/contact-management/ContactManagement";
+import TemplateManagement from "../pages/template-management/TemplateManagement";
 import MessagesPage from "../pages/messages/MessagesPage";
 import CampaignManagement from "../pages/campaign-management/CampaignManagement";
 import StaticDataManagement from "../pages/static-data/StaticDataManagement";
-import TemplateManagement from "../pages/template-management/TemplateManagement";
 import Tickets from "../pages/tickets-management/TicketsManagement";
 import Profile from "../pages/settings/profile/Profile";
 import Sendmessage from "../pages/settings/send-message/Sendmessage";
@@ -42,7 +42,7 @@ const PrivateRoutes = () => {
         <Route path="messages/*" element={<MessagesPage />} />
         <Route path="campaign-management" element={<CampaignManagement />} />
         <Route path="staticdatamanagement" element={<StaticDataManagement />} />
-        <Route path="templatemanagement" element={<TemplateManagement />} />
+        <Route path="template-management/*" element={<TemplateManagement />} />
         <Route path="media-management/*" element={<MediaManagement />} />
         <Route path="tickets-management/*" element={<Tickets />} />
         <Route path="profile" element={<Profile />} />

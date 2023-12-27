@@ -67,7 +67,7 @@ const ContactManagementHeader: FC = () => {
                 }
                 to="/contact-management/bluwyre"
               >
-                Bluwyre Contacts
+                Bluwyre
               </Link>
             </li>
           </ul>

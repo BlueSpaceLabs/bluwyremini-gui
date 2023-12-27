@@ -104,23 +104,23 @@ const CampaignModal = ({ show, handleClose }: Props) => {
       >
         <div className="stepper-nav mb-5">
           <div className="stepper-item current" data-kt-stepper-element="nav">
-            <h3 className="stepper-title">Account Type</h3>
+            <h3 className="stepper-title">Setup Campaign</h3>
           </div>
 
           <div className="stepper-item" data-kt-stepper-element="nav">
-            <h3 className="stepper-title">Account Info</h3>
+            <h3 className="stepper-title">Campaign Details</h3>
           </div>
 
           <div className="stepper-item" data-kt-stepper-element="nav">
-            <h3 className="stepper-title">Business Info</h3>
+            <h3 className="stepper-title">Upload Files</h3>
           </div>
 
           <div className="stepper-item" data-kt-stepper-element="nav">
-            <h3 className="stepper-title">Billing Details</h3>
+            <h3 className="stepper-title">Campaign Info</h3>
           </div>
 
           <div className="stepper-item" data-kt-stepper-element="nav">
-            <h3 className="stepper-title">Completed</h3>
+            <h3 className="stepper-title">Trigger Campaign</h3>
           </div>
         </div>
 

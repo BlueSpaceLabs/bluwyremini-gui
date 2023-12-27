@@ -35,7 +35,7 @@ const ChannelManagementHeader = ({ channelTab, setChannelTab }: any) => {
           >
             Instagram
           </div>
-          
+
           <div
             className={`${
               channelTab === "telegram" ? "text-primary" : "text-gray-500"
@@ -44,6 +44,16 @@ const ChannelManagementHeader = ({ channelTab, setChannelTab }: any) => {
             onClick={() => setChannelTab("telegram")}
           >
             Telegram
+          </div>
+
+          <div
+            className={`${
+              channelTab === "dialogFlowCX" ? "text-primary" : "text-gray-500"
+            } `}
+            style={{ cursor: "pointer" }}
+            onClick={() => setChannelTab("dialogFlowCX")}
+          >
+            DialogFlow CX
           </div>
         </div>
       </div>

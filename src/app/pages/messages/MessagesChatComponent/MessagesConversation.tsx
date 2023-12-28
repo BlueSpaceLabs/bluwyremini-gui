@@ -1,8 +1,15 @@
 import React from "react";
-import { ChatInner, Dropdown1 } from "../../../../_metronic/partials";
-import { KTIcon } from "../../../../_metronic/helpers";
+// import {  Dropdown1 } from "../../../../_metronic/partials";
+// import { KTIcon } from "../../../../_metronic/helpers";
+import { ChatConversation } from "./chat/ChatInner";
 
-const MessagesConversation = ({ setShowProfile }) => {
+const MessagesConversation = ({ setShowProfile }: any) => {
+  const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
+
+  const handleSelectChange = (event: any) => {
+    setSelectedKeyWord(event.target.value);
+  };
+
   return (
     <React.Fragment>
       <div className="card" id="kt_chat_messenger">
@@ -10,12 +17,13 @@ const MessagesConversation = ({ setShowProfile }) => {
           <div className="card-title">
             <div className="symbol-group symbol-hover"></div>
             <div className="d-flex justify-content-center flex-column me-3">
-              <a
-                href="#"
+              <span
                 className="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1"
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowProfile(true)}
               >
                 Brian Cox
-              </a>
+              </span>
 
               <div className="mb-0 lh-1">
                 <span className="badge badge-success badge-circle w-10px h-10px me-1"></span>
@@ -25,7 +33,22 @@ const MessagesConversation = ({ setShowProfile }) => {
           </div>
 
           <div className="card-toolbar">
-            <div className="me-n3">
+            <div className="col-lg-8 fv-row" style={{ width: "200px" }}>
+              <select
+                className="form-select form-select-solid form-select-lg"
+                value={selectedKeyWord}
+                onChange={handleSelectChange}
+              >
+                <option value="" selected disabled>
+                  Select KeyWord
+                </option>
+                <option value="kayword_1">KeyWord 1</option>
+                <option value="kayword_2">KeyWord 2</option>
+                <option value="kayword_3">KeyWord 3</option>
+                <option value="kayword_4">KeyWord 4</option>
+              </select>
+            </div>
+            {/* <div className="me-n3">
               <button
                 className="btn btn-active-light-primary"
                 data-kt-menu-trigger="click"
@@ -36,10 +59,10 @@ const MessagesConversation = ({ setShowProfile }) => {
                 Profile Details
               </button>
               <Dropdown1 />
-            </div>
+            </div> */}
           </div>
         </div>
-        <ChatInner />
+        <ChatConversation selectedKeyWord={selectedKeyWord} />
       </div>
     </React.Fragment>
   );

@@ -7,7 +7,8 @@ import { UsersListFilter } from "./UsersListFilter";
 //   Dropdown1,
 // } from "../../../../../../_metronic/partials";
 import { useLayout } from "../../../../../../_metronic/layout/core";
-import { CampaignModal } from "../../campaign-modal/CampaignModal";
+// import { CampaignModal } from "../../campaign-modal/CampaignModal";
+import CustomStepsModal from "../../campaign-modal/custom-steps";
 
 const UsersListToolbar = () => {
   const { setItemIdForUpdate } = useListView();
@@ -16,6 +17,8 @@ const UsersListToolbar = () => {
   // };
   const { config } = useLayout();
   const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false);
+  const [steps, setSteps] = useState<number>(1);
+
   return (
     <div
       className="d-flex justify-content-end"
@@ -54,9 +57,18 @@ const UsersListToolbar = () => {
         handleClose={() => setShowCreateAppModal(false)}
       /> */}
 
-      <CampaignModal
+      {/* <CampaignModal
         show={showCreateAppModal}
         handleClose={() => setShowCreateAppModal(false)}
+      /> */}
+      <CustomStepsModal
+        show={showCreateAppModal}
+        handleClose={() => {
+          setShowCreateAppModal(false);
+          setSteps(1);
+        }}
+        steps={steps}
+        setSteps={setSteps}
       />
     </div>
   );

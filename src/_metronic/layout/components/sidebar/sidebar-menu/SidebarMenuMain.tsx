@@ -52,7 +52,7 @@ const SidebarMenuMain = () => {
         fontIcon="bi-layers"
       />
       <SidebarMenuItem
-        to="/templatemanagement"
+        to="/template-management"
         icon="document"
         title="Templates"
         fontIcon="bi-layers"

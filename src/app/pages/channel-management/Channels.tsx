@@ -2,13 +2,13 @@ import {FC} from 'react'
 import {PageTitle} from '../../../_metronic/layout/core'
 
 
-const Messages: FC = () => {
+const Channels: FC = () => {
   return (
     <>
-      <PageTitle breadcrumbs={[]}>Messages</PageTitle>
+      <PageTitle breadcrumbs={[]}>Social Channels</PageTitle>
       
     </>
   )
 }
 
-export default Messages
+export default Channels;

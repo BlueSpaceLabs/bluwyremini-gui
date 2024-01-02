@@ -35,6 +35,9 @@ const WhatsappConfigurationModal = ({
   initialModalData,
   refetchGetWhatsappData,
   accessKey,
+  setShowSnackBar,
+  setSeveritySnackBar,
+  setMessageSnackBar,
 }: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation(
     serviceAxiosPostWhatsappData
@@ -84,6 +87,9 @@ const WhatsappConfigurationModal = ({
         },
       });
 
+      setShowSnackBar(true);
+      setSeveritySnackBar("success");
+      setMessageSnackBar("Successfully updated configuration details !");
       setFormError(false);
       handleClose();
     }
@@ -94,7 +100,9 @@ const WhatsappConfigurationModal = ({
   }, [initialModalData, show]);
 
   React.useEffect(() => {
-    if (isSuccess) refetchGetWhatsappData();
+    if (isSuccess) {
+      refetchGetWhatsappData();
+    }
   }, [isSuccess]);
 
   return createPortal(

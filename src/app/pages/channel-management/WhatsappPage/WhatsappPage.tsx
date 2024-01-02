@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import WhatsappConfigurationModal from "./ConfigurationModal/ConfigurationModal";
+import CustomSnackBar from "./ConfigurationModal/CustomSnackBar";
 
 const serviceAxiosGetWhatsappData = async ({ channelName, accessKey }: any) => {
   const response = await axios.get(
@@ -25,6 +26,9 @@ const initialValue = {
 
 const WhatsappPage = ({ channelName, accessKey }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
+  const [showSnackBar, setShowSnackBar] = React.useState<boolean>(false);
+  const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
+  const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
   const [channelConfigurationData, setChannelConfigurationData] =
     React.useState<any>(initialValue);
 
@@ -258,6 +262,16 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
         initialModalData={channelConfigurationData}
         refetchGetWhatsappData={refetchGetWhatsappData}
         accessKey={accessKey}
+        setShowSnackBar={setShowSnackBar}
+        setSeveritySnackBar={setSeveritySnackBar}
+        setMessageSnackBar={setMessageSnackBar}
+      />
+
+      <CustomSnackBar
+        openSnackBar={showSnackBar}
+        setShowSnackBar={setShowSnackBar}
+        severitySnackBar={severitySnackBar}
+        messageSnackBar={messageSnackBar}
       />
     </div>
   );

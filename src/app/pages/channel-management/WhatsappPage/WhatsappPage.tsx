@@ -3,10 +3,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import WhatsappConfigurationModal from "./ConfigurationModal/ConfigurationModal";
 
-const channelName = "whatsapp";
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-const serviceAxiosGetWhatsappData = async () => {
+const serviceAxiosGetWhatsappData = async ({ channelName, accessKey }: any) => {
   const response = await axios.get(
     // `https://api.npoint.io/5688efdb520c99d97744`
     `http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php?channelName=${channelName}&accessKey=${accessKey}`
@@ -26,7 +23,7 @@ const initialValue = {
   waWebhookUrl: null,
 };
 
-const WhatsappPage = () => {
+const WhatsappPage = ({ channelName, accessKey }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [channelConfigurationData, setChannelConfigurationData] =
     React.useState<any>(initialValue);
@@ -36,7 +33,9 @@ const WhatsappPage = () => {
     isLoading: isLoadingWhatsappData,
     error: errorWhatsappData,
     refetch: refetchGetWhatsappData,
-  } = useQuery("getWhatsappData", serviceAxiosGetWhatsappData);
+  } = useQuery("getWhatsappData", () =>
+    serviceAxiosGetWhatsappData({ channelName, accessKey })
+  );
 
   console.log(
     { getWhatsappData },
@@ -258,6 +257,7 @@ const WhatsappPage = () => {
         handleClose={() => setShowModal(false)}
         initialModalData={channelConfigurationData}
         refetchGetWhatsappData={refetchGetWhatsappData}
+        accessKey={accessKey}
       />
     </div>
   );

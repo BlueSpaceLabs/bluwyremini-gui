@@ -3,6 +3,9 @@ import { PageTitle } from "../../../_metronic/layout/core";
 import { ChannelManagementHeader } from "./ChannelManagementHeader";
 import ChannelManagementPages from "./ChannelManagementPages";
 
+const accessKey =
+  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
 const ChannelManagement: FC = () => {
   const [channelTab, setChannelTab] = React.useState<string>("whatsapp");
   return (
@@ -12,7 +15,7 @@ const ChannelManagement: FC = () => {
         channelTab={channelTab}
         setChannelTab={setChannelTab}
       />
-      <ChannelManagementPages channelTab={channelTab} />
+      <ChannelManagementPages channelTab={channelTab} accessKey={accessKey} />
     </>
   );
 };

@@ -10,9 +10,6 @@ import { KTIcon } from "../../../../../_metronic/helpers";
 //   handleClose: () => void;
 // };
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
 const serviceAxiosPostWhatsappData = async (data: any) => {
@@ -37,6 +34,7 @@ const WhatsappConfigurationModal = ({
   handleClose,
   initialModalData,
   refetchGetWhatsappData,
+  accessKey,
 }: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation(
     serviceAxiosPostWhatsappData

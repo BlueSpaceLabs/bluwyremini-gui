@@ -1,44 +1,104 @@
 import React from "react";
+import { useMutation } from "react-query";
+import axios from "axios";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
-// import { defaultCreateAppData, ICreateAppData } from "./IAppModels";
 import { KTIcon } from "../../../../../_metronic/helpers";
-// import { StepperComponent } from "../../../../../_metronic/assets/ts/components";
 
 // type Props = {
 //   show: boolean;
 //   handleClose: () => void;
 // };
 
+const accessKey =
+  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const WhatsappConfigurationModal = ({ show, handleClose, setData }: any) => {
-  const [config1Data, setConfig1Data] = React.useState<string>("");
-  const [config2Data, setConfig2Data] = React.useState<string>("");
-  const [config3Data, setConfig3Data] = React.useState<string>("");
-  const [config4Data, setConfig4Data] = React.useState<string>("");
+const serviceAxiosPostWhatsappData = async (data: any) => {
+  try {
+    const response = await axios.post(
+      "http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response?.data;
+  } catch (error: any) {
+    throw error?.response ? error?.response?.data : error?.message;
+  }
+};
+
+const WhatsappConfigurationModal = ({
+  show,
+  handleClose,
+  initialModalData,
+  refetchGetWhatsappData,
+}: any) => {
+  const { mutate, isLoading, isError, error, isSuccess } = useMutation(
+    serviceAxiosPostWhatsappData
+  );
+
+  const [whatsappModalInput, setWhatsappModalInput] =
+    React.useState<any>(initialModalData);
+
   const [formError, setFormError] = React.useState<boolean>(false);
 
+  const handleInputChange = (event: any) => {
+    setWhatsappModalInput({
+      ...whatsappModalInput,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  console.log({ formError });
   const handleSubmitForm = () => {
+    console.log("Submitted Form", whatsappModalInput);
+
     if (
-      config1Data.length < 2 ||
-      config2Data.length < 2 ||
-      config3Data.length < 2 ||
-      config4Data.length < 2
+      whatsappModalInput?.channelName.length < 2 ||
+      whatsappModalInput?.accessToken.length < 2 ||
+      whatsappModalInput?.appId.length < 2 ||
+      whatsappModalInput?.businessId.length < 2 ||
+      whatsappModalInput?.displayNo.length < 2 ||
+      whatsappModalInput?.permanentToken.length < 2 ||
+      whatsappModalInput?.phoneNoId.length < 2 ||
+      whatsappModalInput?.waWebhookToken.length < 2 ||
+      whatsappModalInput?.waWebhookUrl.length < 2
     ) {
       setFormError(true);
     } else {
-      setData({
-        ["channelName"]: "whatsapp",
-        ["config1Data"]: config1Data,
-        ["config2Data"]: config2Data,
-        ["config3Data"]: config3Data,
-        ["config4Data"]: config4Data,
+      mutate({
+        tenant: "bsl",
+        accessKey: accessKey,
+        customer_data: {
+          appId: whatsappModalInput?.appId,
+          businessId: whatsappModalInput?.businessId,
+          phoneNoId: whatsappModalInput?.phoneNoId,
+          displayPhoneNo: whatsappModalInput?.displayNo,
+          permanentToken: whatsappModalInput?.permanentToken,
+          accessToken: whatsappModalInput?.accessToken,
+          webhookUrl: whatsappModalInput?.waWebhookUrl,
+          webhookToken: whatsappModalInput?.waWebhookToken,
+        },
       });
+
       setFormError(false);
       handleClose();
     }
   };
+
+  React.useEffect(() => {
+    setWhatsappModalInput(initialModalData);
+  }, [initialModalData, show]);
+
+  React.useEffect(() => {
+    if (isSuccess) refetchGetWhatsappData();
+  }, [isSuccess]);
+
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -65,112 +125,198 @@ const WhatsappConfigurationModal = ({ show, handleClose, setData }: any) => {
         <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Configuration 1 Data</span>
+              <span className="required">Access Token</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel Configuration 1 Data."
+                title="Specify Channel Access Token."
               ></i>
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
-              placeholder="Enter Configuration 1 Data"
-              value={config1Data}
-              onChange={(event) => {
-                setConfig1Data(event.target.value);
-              }}
+              name="accessToken"
+              placeholder="Enter Access Token"
+              value={whatsappModalInput?.accessToken}
+              onChange={handleInputChange}
             />
-            {config1Data.length < 2 && formError && (
+            {whatsappModalInput?.accessToken?.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Access Token is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Application Id</span>
+              <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Channel Application Id."
+              ></i>
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="appId"
+              placeholder="Enter Application Id"
+              value={whatsappModalInput?.appId}
+              onChange={handleInputChange}
+            />
+            {whatsappModalInput?.appId?.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Application Id is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Business Id</span>
+              <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Channel Business Id."
+              ></i>
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="businessId"
+              placeholder="Enter Business Id"
+              value={whatsappModalInput?.businessId}
+              onChange={handleInputChange}
+            />
+            {whatsappModalInput?.businessId?.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Business Id is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Display Number</span>
+              <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Channel Display Number."
+              ></i>
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="displayNo"
+              placeholder="Enter Display Number"
+              value={whatsappModalInput?.displayNo}
+              onChange={handleInputChange}
+            />
+            {whatsappModalInput?.displayNo?.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Display Number is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Permanent Token</span>
+              <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Channel Permanent Token."
+              ></i>
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="permanentToken"
+              placeholder="Enter Permanent Token"
+              value={whatsappModalInput?.permanentToken}
+              onChange={handleInputChange}
+            />
+            {whatsappModalInput?.permanentToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  Configuration Data 1 is Required.
+                  Permanent Token is Required.
                 </div>
               </div>
             )}
           </div>
 
-          <div className="fv-row mb-10" style={{ width: "45%" }}>
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Configuration 2 Data</span>
+              <span className="required">Phone Number Id</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel Configuration 2 Data."
+                title="Specify Channel Phone Number Id."
               ></i>
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
-              placeholder="Enter Configuration 2 Data"
-              value={config2Data}
-              onChange={(event) => {
-                setConfig2Data(event.target.value);
-              }}
+              name="phoneNoId"
+              placeholder="Enter Phone Number Id"
+              value={whatsappModalInput?.phoneNoId}
+              onChange={handleInputChange}
             />
-            {config2Data.length < 2 && formError && (
+            {whatsappModalInput?.phoneNoId?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  Configuration 2 Data is Required.
+                  Phone Number Id is Required.
                 </div>
               </div>
             )}
           </div>
 
-          <div className="fv-row mb-10" style={{ width: "45%" }}>
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Configuration 3 Data</span>
+              <span className="required">WA Webhook Token</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel Configuration 3 Data."
+                title="Specify Channel WA Webhook Token."
               ></i>
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
-              placeholder="Enter Configuration 3 Data"
-              value={config3Data}
-              onChange={(event) => {
-                setConfig3Data(event.target.value);
-              }}
+              name="waWebhookToken"
+              placeholder="Enter WA Webhook Token"
+              value={whatsappModalInput?.waWebhookToken}
+              onChange={handleInputChange}
             />
-            {config3Data.length < 2 && formError && (
+            {whatsappModalInput?.waWebhookToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  Configuration 3 Data is Required.
+                  WA Webhook Token is Required.
                 </div>
               </div>
             )}
           </div>
 
-          <div className="fv-row mb-10" style={{ width: "45%" }}>
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Configuration 4 Data</span>
+              <span className="required">WA Webhook Url</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel Configuration 4 Data."
+                title="Specify Channel WA Webhook Url."
               ></i>
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
-              placeholder="Enter Configuration 4 Data"
-              value={config4Data}
-              onChange={(event) => {
-                setConfig4Data(event.target.value);
-              }}
+              name="waWebhookUrl"
+              placeholder="Enter WA Webhook Url"
+              value={whatsappModalInput?.waWebhookUrl}
+              onChange={handleInputChange}
             />
-            {config4Data.length < 2 && formError && (
+            {whatsappModalInput?.waWebhookUrl?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  Configuration 4 Data is Required.
-                </div>
+                <div className="fv-help-block">WA Webhook Url is Required.</div>
               </div>
             )}
           </div>

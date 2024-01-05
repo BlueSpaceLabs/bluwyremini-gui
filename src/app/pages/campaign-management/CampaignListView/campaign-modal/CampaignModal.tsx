@@ -130,7 +130,7 @@ const CampaignModal = ({ show, handleClose }: Props) => {
           onSubmit={submitStep}
         >
           {() => (
-            <Form
+            <Form placeholder=""
               className="mx-auto mw-600px w-100 pt-15 pb-10"
               id="kt_create_account_form"
             >

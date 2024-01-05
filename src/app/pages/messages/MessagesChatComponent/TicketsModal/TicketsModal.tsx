@@ -83,7 +83,7 @@ const TicketsModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter Customer Name"
+              placeholder=""
               value={config1Data}
               onChange={(event) => {
                 setConfig1Data(event.target.value);
@@ -109,7 +109,7 @@ const TicketsModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter Customer Number"
+              placeholder=""
               value={config2Data}
               onChange={(event) => {
                 setConfig2Data(event.target.value);
@@ -137,7 +137,7 @@ const TicketsModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter Customer Email"
+              placeholder=""
               value={config3Data}
               onChange={(event) => {
                 setConfig3Data(event.target.value);
@@ -163,7 +163,7 @@ const TicketsModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter Customer Issue"
+              placeholder=""
               value={config4Data}
               onChange={(event) => {
                 setConfig4Data(event.target.value);

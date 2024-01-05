@@ -112,7 +112,7 @@ const AddKeyWordsModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter KeyWord"
+              placeholder=""
               value={mediaTitle}
               onChange={(event) => {
                 setMediaTitle(event.target.value);
@@ -138,7 +138,7 @@ const AddKeyWordsModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter KeyWords Description"
+              placeholder=""
               value={mediaDescription}
               onChange={(event) => {
                 setMediaDescription(event.target.value);

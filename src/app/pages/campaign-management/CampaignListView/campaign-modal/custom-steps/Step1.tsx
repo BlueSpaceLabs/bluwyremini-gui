@@ -137,90 +137,7 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                       </div>
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
-                      <div className="fv-row mb-10 fv-plugins-icon-container">
-                        {/*begin::Label*/}
-                        <label className="d-block fw-semibold fs-6 mb-5">
-                          <span className="required">Company Logo</span>
-                          <span
-                            className="ms-1"
-                            data-bs-toggle="tooltip"
-                            aria-label="E.g. Select a logo to represent the company that's running the campaign."
-                            data-bs-original-title="E.g. Select a logo to represent the company that's running the campaign."
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-information-5 text-gray-500 fs-6" />
-                          </span>{" "}
-                        </label>
-                        {/*end::Label*/}
-                        {/*begin::Image input placeholder*/}
-                        <style
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              "\n                .image-input-placeholder {\n                    background-image: url('/metronic8/demo33/assets/media/svg/files/blank-image.svg');\n                }\n\n                [data-bs-theme=\"dark\"] .image-input-placeholder {\n                    background-image: url('/metronic8/demo33/assets/media/svg/files/blank-image-dark.svg');\n                }                \n            ",
-                          }}
-                        />
-                        {/*end::Image input placeholder*/}
-                        {/*begin::Image input*/}
-                        <div
-                          className="image-input image-input-empty image-input-outline image-input-placeholder"
-                          data-kt-image-input="true"
-                        >
-                          {/*begin::Preview existing avatar*/}
-                          <div className="image-input-wrapper w-125px h-125px" />
-                          {/*end::Preview existing avatar*/}
-                          {/*begin::Label*/}
-                          <label
-                            className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="change"
-                            data-bs-toggle="tooltip"
-                            aria-label="Change avatar"
-                            data-bs-original-title="Change avatar"
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-pencil fs-7" />
-                            {/*begin::Inputs*/}
-                            <input
-                              type="file"
-                              name="avatar"
-                              accept=".png, .jpg, .jpeg"
-                            />
-                            <input type="hidden" name="avatar_remove" />
-                            {/*end::Inputs*/}
-                          </label>
-                          {/*end::Label*/}
-                          {/*begin::Cancel*/}
-                          <span
-                            className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="cancel"
-                            data-bs-toggle="tooltip"
-                            aria-label="Cancel avatar"
-                            data-bs-original-title="Cancel avatar"
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-cross fs-2" />{" "}
-                          </span>
-                          {/*end::Cancel*/}
-                          {/*begin::Remove*/}
-                          <span
-                            className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                            data-kt-image-input-action="remove"
-                            data-bs-toggle="tooltip"
-                            aria-label="Remove avatar"
-                            data-bs-original-title="Remove avatar"
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-cross fs-2" />{" "}
-                          </span>
-                          {/*end::Remove*/}
-                        </div>
-                        {/*end::Image input*/}
-                        {/*begin::Hint*/}
-                        <div className="form-text">
-                          Allowed file types: png, jpg, jpeg.
-                        </div>
-                        {/*end::Hint*/}
-                        <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
-                      </div>
+                     
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
                       <div className="mb-10">
@@ -1167,7 +1084,7 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={13.0}
                                   aria-valuemax={40.0}
                                   aria-valuenow={18.0}
-                                  aria-valuetext={18.0}
+                              
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1188,7 +1105,7 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={18.0}
                                   aria-valuemax={80.0}
                                   aria-valuenow={40.0}
-                                  aria-valuetext={40.0}
+                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1316,7 +1233,7 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                           placeholder="Pick date & time"
                           tabIndex={0}
                           type="text"
-                          readOnly="readonly"
+                          readOnly={true}
                         />
                         {/*end::Datepicker*/}
                       </div>
@@ -1371,7 +1288,7 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                  aria-valuetext={5.0}
+                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>

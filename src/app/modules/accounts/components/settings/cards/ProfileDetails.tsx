@@ -682,13 +682,11 @@ const ProfileDetails: FC = () => {
                   {...formik.getFieldProps('currency')}
                 >
                   <option value=''>Select a currency..</option>
+                  <option value='INR'>INR - Indian Rupee</option>
+                  <option value='BTN'>BTN - Bhutanese Ngultrum</option>
                   <option value='USD'>USD - USA dollar</option>
-                  <option value='GBP'>GBP - British pound</option>
-                  <option value='AUD'>AUD - Australian dollar</option>
-                  <option value='JPY'>JPY - Japanese yen</option>
-                  <option value='SEK'>SEK - Swedish krona</option>
-                  <option value='CAD'>CAD - Canadian dollar</option>
-                  <option value='CHF'>CHF - Swiss franc</option>
+              
+                  
                 </select>
                 {formik.touched.currency && formik.errors.currency && (
                   <div className='fv-plugins-message-container'>
@@ -698,7 +696,7 @@ const ProfileDetails: FC = () => {
               </div>
             </div>
 
-            <div className='row mb-6'>
+            {/*<div className='row mb-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>Communication</label>
 
               <div className='col-lg-8 fv-row'>
@@ -740,7 +738,7 @@ const ProfileDetails: FC = () => {
                   </label>
                 </div>
               </div>
-            </div>
+            </div>*/}
 
             <div className='row mb-0'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>Allow Marketing</label>

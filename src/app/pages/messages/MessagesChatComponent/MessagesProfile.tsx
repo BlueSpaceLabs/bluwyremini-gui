@@ -1,7 +1,8 @@
 import React from "react";
 import { ChatInner, Dropdown1 } from "../../../../_metronic/partials";
 
-const MessagesProfile = ({ setShowProfile }) => {
+//const MessagesProfile = ({ setShowProfile }) => {
+  const MessagesProfile = ({ setShowProfile }: { setShowProfile: any }) => {
   return (
     <React.Fragment>
       <div className="card" id="kt_chat_messenger">

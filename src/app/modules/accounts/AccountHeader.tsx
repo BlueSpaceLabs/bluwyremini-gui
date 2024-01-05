@@ -29,14 +29,14 @@ const AccountHeader: FC = () => {
                   <a href='#'>
                     <KTIcon iconName='verify' className='fs-1 text-primary' />
                   </a>
-                  <a
+                  {/*<a
                     href='#'
                     className='btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3'
                     data-bs-toggle='modal'
                     data-bs-target='#kt_modal_upgrade_plan'
                   >
                     Upgrade to Pro
-                  </a>
+                  </a>*/}
                 </div>
 
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
@@ -64,7 +64,7 @@ const AccountHeader: FC = () => {
                 </div>
               </div>
 
-              <div className='d-flex my-4'>
+             {/*} <div className='d-flex my-4'>
                 <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
                   <KTIcon iconName='check' className='fs-3 d-none' />
 
@@ -93,9 +93,9 @@ const AccountHeader: FC = () => {
                   </button>
                   <Dropdown1 />
                 </div>
-              </div>
+              </div>*/}
             </div>
-
+{/*
             <div className='d-flex flex-wrap flex-stack'>
               <div className='d-flex flex-column flex-grow-1 pe-8'>
                 <div className='d-flex flex-wrap'>
@@ -141,7 +141,7 @@ const AccountHeader: FC = () => {
                   ></div>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
 

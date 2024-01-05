@@ -1173,7 +1173,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={13.0}
                                   aria-valuemax={40.0}
                                   aria-valuenow={18.0}
-                                  aria-valuetext={18.0}
+                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1194,7 +1194,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={18.0}
                                   aria-valuemax={80.0}
                                   aria-valuenow={40.0}
-                                  aria-valuetext={40.0}
+                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1321,7 +1321,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                           placeholder="Pick date & time"
                           tabIndex={0}
                           type="text"
-                          readOnly="readonly"
+                          readOnly={true}
                         />
                         {/*end::Datepicker*/}
                       </div>
@@ -1376,7 +1376,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                  aria-valuetext={5.0}
+                                  
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>

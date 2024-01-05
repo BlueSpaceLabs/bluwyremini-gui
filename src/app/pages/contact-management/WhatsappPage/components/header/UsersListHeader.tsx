@@ -3,7 +3,7 @@ import { UsersListToolbar } from "./UserListToolbar";
 import { UsersListGrouping } from "./UsersListGrouping";
 import { UsersListSearchComponent } from "./UsersListSearchComponent";
 
-const UsersListHeader = () => {
+const UsersListHeader = ({ handleShowAddModal }: any) => {
   // const { selected } = useListView();
   return (
     <div className="card-header border-0 pt-6">
@@ -11,7 +11,11 @@ const UsersListHeader = () => {
       {/* begin::Card toolbar */}
       <div className="card-toolbar">
         {/* begin::Group actions */}
-        {[].length > 0 ? <UsersListGrouping /> : <UsersListToolbar />}
+        {[].length > 0 ? (
+          <UsersListGrouping />
+        ) : (
+          <UsersListToolbar handleShowAddModal={handleShowAddModal} />
+        )}
         {/* end::Group actions */}
       </div>
       {/* end::Card toolbar */}

@@ -1,12 +1,9 @@
 import { KTIcon } from "../../../../../../_metronic/helpers";
-import { useListView } from "../../core/ListViewProvider";
+// import { useListView } from "../../core/ListViewProvider";
 import { UsersListFilter } from "./UsersListFilter";
 
-const UsersListToolbar = () => {
-  const { setItemIdForUpdate } = useListView();
-  const openAddUserModal = () => {
-    setItemIdForUpdate(null);
-  };
+const UsersListToolbar = ({ handleShowAddModal }: any) => {
+  // const { setItemIdForUpdate } = useListView();
 
   return (
     <div
@@ -26,7 +23,7 @@ const UsersListToolbar = () => {
       <button
         type="button"
         className="btn btn-primary"
-        onClick={openAddUserModal}
+        onClick={handleShowAddModal}
       >
         <KTIcon iconName="plus" className="fs-2" />
         Add Contact

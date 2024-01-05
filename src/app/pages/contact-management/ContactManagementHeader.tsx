@@ -1,80 +1,64 @@
-import { FC } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+// import { Link, useLocation } from "react-router-dom";
 
-const ContactManagementHeader: FC = () => {
-  const location = useLocation();
+const ContactManagementHeader = ({ channelTab, setChannelTab }: any) => {
+  // const location = useLocation();
 
   return (
     <div className="card mb-5 mb-xl-10">
-      <div className="card-body pt-0 pb-0">
-        <div className="d-flex overflow-auto h-55px">
-          <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/contact-management/whatsapp" &&
-                    "active")
-                }
-                to="/contact-management/whatsapp"
-              >
-                Whatsapp
-              </Link>
-            </li>
+      <div className="card-body pt-2 pb-2">
+        <div className="w-100 py-3 d-flex gap-8 fw-bold fs-6 ">
+          <div
+            className={`${
+              channelTab === "whatsapp" ? "text-primary" : "text-gray-500"
+            } `}
+            style={{ cursor: "pointer" }}
+            onClick={() => setChannelTab("whatsapp")}
+          >
+            Whatsapp
+          </div>
+          <div
+            className={`${
+              channelTab === "facebook" ? "text-primary" : "text-gray-500"
+            } `}
+            style={{ cursor: "pointer" }}
+            onClick={() => setChannelTab("facebook")}
+          >
+            Messenger
+          </div>
+          <div
+            className={`${
+              channelTab === "instagram" ? "text-primary" : "text-gray-500"
+            } `}
+            style={{ cursor: "pointer" }}
+            onClick={() => setChannelTab("instagram")}
+          >
+            Instagram
+          </div>
 
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/contact-management/facebook" &&
-                    "active")
-                }
-                to="/contact-management/facebook"
-              >
-                Messenger
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/contact-management/instagram" &&
-                    "active")
-                }
-                to="/contact-management/instagram"
-              >
-                Instagram
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/contact-management/telegram" &&
-                    "active")
-                }
-                to="/contact-management/telegram"
-              >
-                Telegram
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/contact-management/bluwyre" &&
-                    "active")
-                }
-                to="/contact-management/bluwyre"
-              >
-                Bluwyre
-              </Link>
-            </li>
-          </ul>
+          <div
+            className={`${
+              channelTab === "telegram" ? "text-primary" : "text-gray-500"
+            } `}
+            style={{ cursor: "pointer" }}
+            onClick={() => setChannelTab("telegram")}
+          >
+            Telegram
+          </div>
+
+          <div
+            className={`${
+              channelTab === "bluwyre" ? "text-primary" : "text-gray-500"
+            } `}
+            style={{ cursor: "pointer" }}
+            onClick={() => setChannelTab("bluwyre")}
+          >
+            Bluwyre
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export { ContactManagementHeader };
+export default ContactManagementHeader;

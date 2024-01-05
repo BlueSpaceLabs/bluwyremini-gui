@@ -1,78 +1,22 @@
-import { FC } from "react";
-import { Navigate, Routes, Route, Outlet } from "react-router-dom";
+import React from "react";
 import { PageTitle } from "../../../_metronic/layout/core";
-import { ContactManagementHeader } from "./ContactManagementHeader";
-import { WhatsappPageWrapper } from "./WhatsappPage/WhatsappPage";
-import { FacebookPageWrapper } from "./FacebookPage/FacebookPage";
-import { TelegramPageWrapper } from "./TelegramPage/TelegramPage";
-import { InstagramPageWrapper } from "./InstagramPage/InstagramPage";
-import { BluwyrePageWrapper } from "./BluwyrePage/BluwyrePage";
+import ContactManagementPages from "./ContactManagementPages";
+import ContactManagementHeader from "./ContactManagementHeader";
 
-const ContactManagement: FC = () => {
+const accessKey =
+  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
+const ContactManagement: React.FC = () => {
+  const [channelTab, setChannelTab] = React.useState<string>("whatsapp");
+
   return (
     <>
-      {/*<PageTitle breadcrumbs={[]}>Contact Management</PageTitle>*/}
-      <Routes>
-        <Route
-          element={
-            <>
-              <ContactManagementHeader />
-              <Outlet />
-            </>
-          }
-        >
-          <Route
-            path="/whatsapp"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Contact Management </PageTitle>
-                <WhatsappPageWrapper />
-              </>
-            }
-          />
-
-          <Route
-            path="/facebook"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Contact Management </PageTitle>
-                <FacebookPageWrapper />
-              </>
-            }
-          />
-          <Route
-            path="/instagram"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Contact Management</PageTitle>
-                <InstagramPageWrapper />
-              </>
-            }
-          />
-          <Route
-            path="/telegram"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Contact Management </PageTitle>
-                <TelegramPageWrapper />
-              </>
-            }
-          />
-          <Route
-            path="/bluwyre"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Contact Management</PageTitle>
-                <BluwyrePageWrapper />
-              </>
-            }
-          />
-          <Route
-            index
-            element={<Navigate to="/contact-management/whatsapp" />}
-          />
-        </Route>
-      </Routes>
+      <PageTitle breadcrumbs={[]}>Contact Management</PageTitle>
+      <ContactManagementHeader
+        channelTab={channelTab}
+        setChannelTab={setChannelTab}
+      />
+      <ContactManagementPages channelTab={channelTab} accessKey={accessKey} />
     </>
   );
 };

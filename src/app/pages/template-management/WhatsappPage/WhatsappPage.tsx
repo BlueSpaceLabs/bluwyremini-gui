@@ -37,7 +37,7 @@ const WhatsappPage = () => {
   } = useQuery("myQueryKey", serviceAxiosGetTemplateWhatsappData);
 
   React.useEffect(() => {
-    if (getWhatsAppListData?.["0"]?.data.length > 0)
+    if (getWhatsAppListData?.["0"]?.data?.length > 0)
       setWhatsAppListViewData(getWhatsAppListData?.["0"]?.data);
   }, [getWhatsAppListData]);
 

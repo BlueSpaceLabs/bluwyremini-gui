@@ -14,8 +14,9 @@ const UsersListToolbar = () => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [addMediaModalData, setAddMediaModalData] =
     React.useState<object>(initialValue);
+  const [serverResponse, setServerResponse] = React.useState(null);
 
-  console.log("addMediaModalData", addMediaModalData);
+  // console.log("addMediaModalData", addMediaModalData);
 
   const { setItemIdForUpdate } = useListView();
   const openAddUserModal = () => {
@@ -50,8 +51,13 @@ const UsersListToolbar = () => {
 
       <AddMediaModal
         show={showModal}
-        handleClose={() => setShowModal(false)}
+        handleClose={() => {
+          setShowModal(false);
+          setServerResponse(null);
+        }}
         setData={setAddMediaModalData}
+        serverResponse={serverResponse}
+        setServerResponse={setServerResponse}
       />
     </div>
   );

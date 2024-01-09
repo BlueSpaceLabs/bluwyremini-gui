@@ -10,6 +10,48 @@ const axiosInstance = axios.create({
   },
 });
 
+// getMediaListData : to get all the media list data
+export const getMediaListData = async (accessKey: string) => {
+  const url = "/getMediaDetails.php";
+
+  const params = {
+    accessKey: accessKey,
+  };
+
+  try {
+    const response = await axiosInstance.get(url, { params });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    throw error;
+  }
+};
+
+// getMediaListDataById : to get the media data by id
+export const getMediaListDataById = async (
+  accessKey: string,
+  imageId: string
+) => {
+  const url = "/getMediaDetails.php";
+
+  const params = {
+    accessKey: accessKey,
+    id: imageId,
+  };
+
+  try {
+    const response = await axiosInstance.get(url, { params });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    throw error;
+  }
+};
+
 interface PostAddMedia {
   tenant: string;
   requestData: {

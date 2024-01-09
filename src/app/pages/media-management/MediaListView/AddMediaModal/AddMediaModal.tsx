@@ -7,7 +7,7 @@ import { KTIcon } from "../../../../../_metronic/helpers";
 import { useMutation } from "react-query";
 import { toAbsoluteUrl } from "../../../../../_metronic/helpers";
 import { postAddMedia } from "../../../../services/MediaManagement";
-
+import axios from "axios";
 // import { StepperComponent } from "../../../../../_metronic/assets/ts/components";
 
 // type Props = {
@@ -22,12 +22,19 @@ const blankImg = toAbsoluteUrl("media/svg/avatars/blank.svg");
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
-const AddMediaModal = ({ show, handleClose, setData }: any) => {
+const AddMediaModal = ({
+  show,
+  handleClose,
+  setData,
+  serverResponse,
+  setServerResponse,
+}: any) => {
   const [mediaTitle, setMediaTitle] = React.useState<string>("");
   const [mediaDescription, setMediaDescription] = React.useState<string>("");
   const [mediaChannel, setMediaChannel] = React.useState<string>("whatsApp");
   const [mediaFile, setMediaFile] = React.useState<string>(blankImg);
   const [formError, setFormError] = React.useState<boolean>(false);
+  const [tenant, setTenant] = React.useState<string>("bsl");
 
   const { mutateAsync } = useMutation(postAddMedia);
 
@@ -35,7 +42,7 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
     if (mediaTitle.length < 2 || mediaDescription.length < 2) {
       setFormError(true);
     } else {
-      mutateAsync({
+      /*mutateAsync({
         requestData: {
           tenant: "bsl",
           accessKey: accessKey,
@@ -47,9 +54,45 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
             channelName: mediaChannel,
           },
         },
-      });
-    }
-  };
+      });*/
+
+      //console.log(mediaTitle,'::',mediaDescription,'::',mediaChannel)
+      const formData = new FormData();
+      // console.log(mediaFile)
+      formData.append("avatar", mediaFile);
+      formData.append("mediaTitle", mediaTitle);
+      formData.append("mediaDescription", mediaDescription);
+      formData.append("mediaChannel", mediaChannel);
+      formData.append("accessKey", accessKey);
+      formData.append("tenant", tenant);
+
+      try {
+        let res = axios
+          .post(
+            "http://3.108.229.60:8082/bluwyremini-backend/info/addMediaDetails.php",
+            formData,
+            {
+              headers: {
+                "content-type": "multipart/form-data",
+              },
+            }
+          )
+          .then(function (response) {
+            console.log(response.data);
+            setMediaTitle("");
+            setMediaDescription("");
+            setMediaFile("");
+            setServerResponse(response.data.message);
+            console.log(response.data.message);
+            return response;
+          });
+
+        //console.log(res)
+      } catch (err) {
+        console.log(err);
+      }
+    } //else
+  }; //fn ends
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -61,6 +104,21 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
     >
       <div className="modal-header">
         <h2>Add Media</h2>
+
+        {serverResponse && (
+          <div
+            className="message"
+            style={{
+              color: "green",
+              textAlign: "center",
+              fontSize: "1.2em",
+              fontFamily: "bold",
+            }}
+          >
+            {serverResponse}
+          </div>
+        )}
+
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
@@ -93,11 +151,10 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
               <div className="d-flex flex-end pt-5">
                 <input
                   type="file"
-                  onChange={(e: any) =>
-                    setMediaFile(URL.createObjectURL(e?.target?.files[0]))
+                  onChange={
+                    (e: any) => setMediaFile(e.target.files[0]) //e.target.files[0]
                   }
                 />
-
                 {/* <button
                   type="button"
                   className="btn btn-secondary"

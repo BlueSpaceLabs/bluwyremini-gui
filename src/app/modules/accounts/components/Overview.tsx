@@ -1,110 +1,213 @@
-import {Link} from 'react-router-dom'
-import {KTIcon} from '../../../../_metronic/helpers'
+import React from "react";
+import { Link } from "react-router-dom";
+import { KTIcon } from "../../../../_metronic/helpers";
 import {
   ChartsWidget1,
   ListsWidget5,
   TablesWidget1,
   TablesWidget5,
-} from '../../../../_metronic/partials/widgets'
+} from "../../../../_metronic/partials/widgets";
+import { useQuery } from "react-query";
+import axios from "axios";
 
+const serviceGetAgentProfileDetails = async () => {
+  const url =
+    "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+  const accessKey =
+    "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+  const agentName = "rohitborkar";
+
+  try {
+    const response = await axios.get(url, {
+      params: {
+        accessKey,
+        agentName,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching agent profile details");
+  }
+};
+
+const initialProfileData = {
+  agentAddress: "",
+  company: "",
+  companyWebsite: "",
+  country: "",
+  createdDatetime: "",
+  emailId: "",
+  firstName: "",
+  language: "",
+  lastName: "",
+  mobileNo: "",
+  modifiedDatetime: "",
+  role: "",
+  timezone: "",
+};
 export function Overview() {
+  const [profileData, setProfileData] = React.useState(initialProfileData);
+
+  const {
+    data: getProfileData,
+    // error,
+    // isLoading,
+  } = useQuery("agentProfileDetails", serviceGetAgentProfileDetails);
+
+  // console.log({ profileData });
+
+  React.useEffect(() => {
+    if (getProfileData) {
+      setProfileData(getProfileData.dataArray);
+    }
+  }, [getProfileData]);
+
   return (
     <>
-      <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
-        <div className='card-header cursor-pointer'>
-          <div className='card-title m-0'>
-            <h3 className='fw-bolder m-0'>Profile Details</h3>
+      <div className="card mb-5 mb-xl-10" id="kt_profile_details_view">
+        <div className="card-header cursor-pointer">
+          <div className="card-title m-0">
+            <h3 className="fw-bolder m-0">Profile Details </h3>
           </div>
 
-          <Link to='/crafted/account/settings' className='btn btn-primary align-self-center'>
+          <Link
+            to="/crafted/account/settings"
+            className="btn btn-primary align-self-center"
+          >
             Edit Profile
           </Link>
         </div>
 
-        <div className='card-body p-9'>
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>Full Name</label>
+        <div className="card-body p-9">
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Full Name</label>
 
-            <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-gray-900'>Max Smith</span>
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {`${profileData.firstName} ${profileData.lastName}`}
+              </span>
             </div>
           </div>
 
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>Company</label>
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Address</label>
 
-            <div className='col-lg-8 fv-row'>
-              <span className='fw-bold fs-6'>Keenthemes</span>
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.agentAddress}
+              </span>
             </div>
           </div>
 
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>
-              Contact Phone
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Country</label>
+
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.country}
+              </span>
+            </div>
+          </div>
+
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Email</label>
+
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.emailId}
+              </span>
+            </div>
+          </div>
+
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">
+              Mobile Number
               <i
-                className='fas fa-exclamation-circle ms-1 fs-7'
-                data-bs-toggle='tooltip'
-                title='Phone number must be active'
+                className="fas fa-exclamation-circle ms-1 fs-7"
+                data-bs-toggle="tooltip"
+                title="Phone number must be active"
               ></i>
             </label>
 
-            <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>044 3276 454 935</span>
+            <div className="col-lg-8 d-flex align-items-center">
+              <span className="fw-bolder fs-6 me-2">
+                {profileData.mobileNo}
+              </span>
 
-              <span className='badge badge-success'>Verified</span>
+              {profileData.mobileNo && (
+                <span className="badge badge-success">Verified</span>
+              )}
             </div>
           </div>
 
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>Company Site</label>
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Company</label>
 
-            <div className='col-lg-8'>
-              <a href='#' className='fw-bold fs-6 text-gray-900 text-hover-primary'>
-                keenthemes.com
-              </a>
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.company}
+              </span>
             </div>
           </div>
 
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>
-              Country
-              <i
-                className='fas fa-exclamation-circle ms-1 fs-7'
-                data-bs-toggle='tooltip'
-                title='Country of origination'
-              ></i>
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">
+              Company Website
             </label>
 
-            <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-gray-900'>Germany</span>
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.companyWebsite}
+              </span>
             </div>
           </div>
 
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>Communication</label>
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted"> Role</label>
 
-            <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-gray-900'>Email, Phone</span>
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.role}
+              </span>
             </div>
           </div>
 
-          <div className='row mb-10'>
-            <label className='col-lg-4 fw-bold text-muted'>Allow Changes</label>
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted"> Time Zone</label>
 
-            <div className='col-lg-8'>
-              <span className='fw-bold fs-6'>Yes</span>
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.timezone}
+              </span>
             </div>
           </div>
 
-          <div className='notice d-flex bg-light-warning rounded border-warning border border-dashed p-6'>
-            <KTIcon iconName='information-5' className='fs-2tx text-warning me-4' />
-            <div className='d-flex flex-stack flex-grow-1'>
-              <div className='fw-bold'>
-                <h4 className='text-gray-800 fw-bolder'>We need your attention!</h4>
-                <div className='fs-6 text-gray-600'>
+          <div className="row mb-7">
+            <label className="col-lg-4 fw-bold text-muted">Language</label>
+
+            <div className="col-lg-8">
+              <span className="fw-bolder fs-6 text-gray-900">
+                {profileData.language}
+              </span>
+            </div>
+          </div>
+          {/* old data */}
+
+          <div className="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+            <KTIcon
+              iconName="information-5"
+              className="fs-2tx text-warning me-4"
+            />
+            <div className="d-flex flex-stack flex-grow-1">
+              <div className="fw-bold">
+                <h4 className="text-gray-800 fw-bolder">
+                  We need your attention!
+                </h4>
+                <div className="fs-6 text-gray-600">
                   Your payment was declined. To start using tools, please
-                  <Link className='fw-bolder' to='/crafted/account/settings'>
-                    {' '}
+                  <Link className="fw-bolder" to="/crafted/account/settings">
+                    {" "}
                     Add Payment Method
                   </Link>
                   .
@@ -115,7 +218,7 @@ export function Overview() {
         </div>
       </div>
 
-{/*}
+      {/*}
       <div className='row gy-10 gx-xl-10'>
         <div className='col-xl-6'>
           <ChartsWidget1 className='card-xxl-stretch mb-5 mb-xl-10' />
@@ -136,5 +239,5 @@ export function Overview() {
         </div>
       </div>*/}
     </>
-  )
+  );
 }

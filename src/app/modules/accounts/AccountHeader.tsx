@@ -1,33 +1,92 @@
+import React, { FC } from "react";
+import { KTIcon, toAbsoluteUrl } from "../../../_metronic/helpers";
+import { Link } from "react-router-dom";
+import { Dropdown1 } from "../../../_metronic/partials";
+import { useLocation } from "react-router";
+import { useQuery } from "react-query";
+import axios from "axios";
 
-import { FC } from 'react'
-import {KTIcon, toAbsoluteUrl} from '../../../_metronic/helpers'
-import {Link} from 'react-router-dom'
-import {Dropdown1} from '../../../_metronic/partials'
-import {useLocation} from 'react-router'
+const serviceGetAgentProfileDetails = async () => {
+  const url =
+    "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+  const accessKey =
+    "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+  const agentName = "rohitborkar";
+
+  try {
+    const response = await axios.get(url, {
+      params: {
+        accessKey,
+        agentName,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching agent profile details");
+  }
+};
+
+const initialProfileData = {
+  agentAddress: "",
+  company: "",
+  companyWebsite: "",
+  country: "",
+  createdDatetime: "",
+  emailId: "",
+  firstName: "",
+  language: "",
+  lastName: "",
+  mobileNo: "",
+  modifiedDatetime: "",
+  role: "",
+  timezone: "",
+};
 
 const AccountHeader: FC = () => {
-  const location = useLocation()
+  const location = useLocation();
+  const [profileData, setProfileData] = React.useState(initialProfileData);
+
+  const {
+    data: getProfileData,
+    // error,
+    // isLoading,
+  } = useQuery("agentProfileDetails", serviceGetAgentProfileDetails);
+
+  // console.log({ profileData });
+
+  React.useEffect(() => {
+    if (getProfileData) {
+      setProfileData(getProfileData.dataArray);
+    }
+  }, [getProfileData]);
 
   return (
-    <div className='card mb-5 mb-xl-10'>
-      <div className='card-body pt-9 pb-0'>
-        <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
-          <div className='me-7 mb-4'>
-            <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-              <img src={toAbsoluteUrl('media/avatars/300-1.jpg')} alt='Metronic' />
-              <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
+    <div className="card mb-5 mb-xl-10">
+      <div className="card-body pt-9 pb-0">
+        <div className="d-flex flex-wrap flex-sm-nowrap mb-3">
+          <div className="me-7 mb-4">
+            <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+              <img
+                src={toAbsoluteUrl("media/avatars/300-1.jpg")}
+                alt="Metronic"
+              />
+              <div className="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
             </div>
           </div>
 
-          <div className='flex-grow-1'>
-            <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
-              <div className='d-flex flex-column'>
-                <div className='d-flex align-items-center mb-2'>
-                  <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    Max Smith
+          <div className="flex-grow-1">
+            <div className="d-flex justify-content-between align-items-start flex-wrap mb-2">
+              <div className="d-flex flex-column">
+                <div className="d-flex align-items-center mb-2">
+                  <a
+                    href="#"
+                    className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
+                  >
+                    {profileData.firstName} {profileData.lastName}
                   </a>
-                  <a href='#'>
-                    <KTIcon iconName='verify' className='fs-1 text-primary' />
+                  <a href="#">
+                    <KTIcon iconName="verify" className="fs-1 text-primary" />
                   </a>
                   {/*<a
                     href='#'
@@ -39,32 +98,32 @@ const AccountHeader: FC = () => {
                   </a>*/}
                 </div>
 
-                <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
+                <div className="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                   <a
-                    href='#'
-                    className='d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2'
+                    href="#"
+                    className="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2"
                   >
-                    <KTIcon iconName='profile-circle' className='fs-4 me-1' />
-                    Developer
+                    <KTIcon iconName="profile-circle" className="fs-4 me-1" />
+                    {profileData.role}
                   </a>
                   <a
-                    href='#'
-                    className='d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2'
+                    href="#"
+                    className="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2"
                   >
-                    <KTIcon iconName='geolocation' className='fs-4 me-1' />
-                    SF, Bay Area
+                    <KTIcon iconName="geolocation" className="fs-4 me-1" />
+                    {profileData.agentAddress}
                   </a>
                   <a
-                    href='#'
-                    className='d-flex align-items-center text-gray-500 text-hover-primary mb-2'
+                    href="#"
+                    className="d-flex align-items-center text-gray-500 text-hover-primary mb-2"
                   >
-                    <KTIcon iconName='sms' className='fs-4 me-1' />
-                    max@kt.com
+                    <KTIcon iconName="sms" className="fs-4 me-1" />
+                    {profileData.emailId}
                   </a>
                 </div>
               </div>
 
-             {/*} <div className='d-flex my-4'>
+              {/*} <div className='d-flex my-4'>
                 <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
                   <KTIcon iconName='check' className='fs-3 d-none' />
 
@@ -95,7 +154,7 @@ const AccountHeader: FC = () => {
                 </div>
               </div>*/}
             </div>
-{/*
+            {/*
             <div className='d-flex flex-wrap flex-stack'>
               <div className='d-flex flex-column flex-grow-1 pe-8'>
                 <div className='d-flex flex-wrap'>
@@ -145,26 +204,28 @@ const AccountHeader: FC = () => {
           </div>
         </div>
 
-        <div className='d-flex overflow-auto h-55px'>
-          <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
-            <li className='nav-item'>
+        <div className="d-flex overflow-auto h-55px">
+          <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
+            <li className="nav-item">
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/account/overview' && 'active')
+                  (location.pathname === "/crafted/account/overview" &&
+                    "active")
                 }
-                to='/crafted/account/overview'
+                to="/crafted/account/overview"
               >
                 Overview
               </Link>
             </li>
-            <li className='nav-item'>
+            <li className="nav-item">
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/account/settings' && 'active')
+                  (location.pathname === "/crafted/account/settings" &&
+                    "active")
                 }
-                to='/crafted/account/settings'
+                to="/crafted/account/settings"
               >
                 Settings
               </Link>
@@ -173,7 +234,7 @@ const AccountHeader: FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export {AccountHeader}
+export { AccountHeader };

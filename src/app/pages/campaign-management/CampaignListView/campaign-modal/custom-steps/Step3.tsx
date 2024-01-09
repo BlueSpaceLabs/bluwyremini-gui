@@ -1,6 +1,12 @@
 import React from "react";
 
-const Step3 = ({ show, handleClose, setSteps }: any) => {
+const Step3 = ({
+  show,
+  handleClose,
+  setSteps,
+  campaignInputData,
+  setCampaignInputData,
+}: any) => {
   if (show)
     return (
       <div
@@ -1011,7 +1017,7 @@ const Step3 = ({ show, handleClose, setSteps }: any) => {
                       <div className="fv-row mb-10">
                         {/*begin::Label*/}
                         <label className="fs-6 fw-semibold mb-2">
-                          Gender
+                          Campaign Channel
                           <span
                             className="ms-1"
                             data-bs-toggle="tooltip"
@@ -1024,219 +1030,49 @@ const Step3 = ({ show, handleClose, setSteps }: any) => {
                         </label>
                         {/*End::Label*/}
                         {/*begin::Row*/}
-                        <div
-                          className="row g-9"
-                          data-kt-buttons="true"
-                          data-kt-buttons-target="[data-kt-button='true']"
-                          data-kt-initialized={1}
+                        <select
+                          className="form-select form-select-solid form-select-lg"
+                          value={campaignInputData.campaignChannel}
+                          onChange={(e) =>
+                            setCampaignInputData({
+                              ...campaignInputData,
+                              campaignChannel: e.target.value,
+                            })
+                          }
                         >
-                          {/*begin::Col*/}
-                          <div className="col">
-                            {/*begin::Option*/}
-                            <label
-                              className="btn btn-outline btn-outline-dashed btn-active-light-primary active d-flex text-start p-6"
-                              data-kt-button="true"
-                            >
-                              {/*begin::Radio*/}
-                              <span className="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                <input
-                                  className="form-check-input"
-                                  type="radio"
-                                  name="campaign_gender"
-                                  defaultValue={1}
-                                  defaultChecked={true}
-                                />
-                              </span>
-                              {/*end::Radio*/}
-                              {/*begin::Info*/}
-                              <span className="ms-5">
-                                <span className="fs-4 fw-bold text-gray-800 d-block">
-                                  All
-                                </span>
-                              </span>
-                              {/*end::Info*/}
-                            </label>
-                            {/*end::Option*/}
-                          </div>
-                          {/*end::Col*/}
-                          {/*begin::Col*/}
-                          <div className="col">
-                            {/*begin::Option*/}
-                            <label
-                              className="btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6"
-                              data-kt-button="true"
-                            >
-                              {/*begin::Radio*/}
-                              <span className="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                <input
-                                  className="form-check-input"
-                                  type="radio"
-                                  name="campaign_gender"
-                                  defaultValue={2}
-                                />
-                              </span>
-                              {/*end::Radio*/}
-                              {/*begin::Info*/}
-                              <span className="ms-5">
-                                <span className="fs-4 fw-bold text-gray-800 d-block">
-                                  Male
-                                </span>
-                              </span>
-                              {/*end::Info*/}
-                            </label>
-                            {/*end::Option*/}
-                          </div>
-                          {/*end::Col*/}
-                          {/*begin::Col*/}
-                          <div className="col">
-                            {/*begin::Option*/}
-                            <label
-                              className="btn btn-outline btn-outline-dashed btn-active-light-primary d-flex text-start p-6"
-                              data-kt-button="true"
-                            >
-                              {/*begin::Radio*/}
-                              <span className="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-                                <input
-                                  className="form-check-input"
-                                  type="radio"
-                                  name="campaign_gender"
-                                  defaultValue={3}
-                                />
-                              </span>
-                              {/*end::Radio*/}
-                              {/*begin::Info*/}
-                              <span className="ms-5">
-                                <span className="fs-4 fw-bold text-gray-800 d-block">
-                                  Female
-                                </span>
-                              </span>
-                              {/*end::Info*/}
-                            </label>
-                            {/*end::Option*/}
-                          </div>
-                          {/*end::Col*/}
-                        </div>
+                          <option value="whatsapp">whatsapp</option>
+                          <option value="telegram">telegram</option>
+                          <option value="messenger">messenger</option>
+                          <option value="instagram">instagram</option>
+                        </select>
                         {/*end::Row*/}
                       </div>
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
-                      <div className="fv-row mb-10">
-                        {/*begin::Label*/}
-                        <label className="fs-6 fw-semibold mb-2">
-                          Age
-                          <span
-                            className="ms-1"
-                            data-bs-toggle="tooltip"
-                            aria-label="Select the minimum and maximum age of the people who will find your ad relevant."
-                            data-bs-original-title="Select the minimum and maximum age of the people who will find your ad relevant."
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-information-5 text-gray-500 fs-6" />
-                          </span>{" "}
-                        </label>
-                        {/*End::Label*/}
-                        {/*begin::Slider*/}
-                        <div className="d-flex flex-stack">
-                          <div
-                            id="kt_modal_create_campaign_age_min"
-                            className="fs-7 fw-semibold text-muted"
-                          >
-                            18
-                          </div>
-                          <div
-                            id="kt_modal_create_campaign_age_slider"
-                            className="noUi-sm w-100 ms-5 me-8 noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr"
-                          >
-                            <div className="noUi-base">
-                              <div className="noUi-connects">
-                                <div
-                                  className="noUi-connect"
-                                  style={{
-                                    transform:
-                                      "translate(7.46269%, 0px) scale(0.328358, 1)",
-                                  }}
-                                />
-                              </div>
-                              <div
-                                className="noUi-origin"
-                                style={{
-                                  transform: "translate(-92.5373%, 0px)",
-                                  zIndex: 5,
-                                }}
-                              >
-                                <div
-                                  className="noUi-handle noUi-handle-lower"
-                                  data-handle={0}
-                                  tabIndex={0}
-                                  role="slider"
-                                  aria-orientation="horizontal"
-                                  aria-valuemin={13.0}
-                                  aria-valuemax={40.0}
-                                  aria-valuenow={18.0}
-                               
-                                >
-                                  <div className="noUi-touch-area" />
-                                </div>
-                              </div>
-                              <div
-                                className="noUi-origin"
-                                style={{
-                                  transform: "translate(-59.7015%, 0px)",
-                                  zIndex: 6,
-                                }}
-                              >
-                                <div
-                                  className="noUi-handle noUi-handle-upper"
-                                  data-handle={1}
-                                  tabIndex={0}
-                                  role="slider"
-                                  aria-orientation="horizontal"
-                                  aria-valuemin={18.0}
-                                  aria-valuemax={80.0}
-                                  aria-valuenow={40.0}
-                                  
-                                >
-                                  <div className="noUi-touch-area" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            id="kt_modal_create_campaign_age_max"
-                            className="fs-7 fw-semibold text-muted"
-                          >
-                            40
-                          </div>
-                        </div>
-                        {/*end::Slider*/}
-                      </div>
+
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
                       <div className="fv-row mb-10">
                         {/*begin::Label*/}
-                        <label className="fs-6 fw-semibold mb-2">
-                          Location
-                          <span
-                            className="ms-1"
-                            data-bs-toggle="tooltip"
-                            aria-label="Enter one or more location points for more specific targeting."
-                            data-bs-original-title="Enter one or more location points for more specific targeting."
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-information-5 text-gray-500 fs-6" />
-                          </span>{" "}
+                        <label className="required form-label mb-3">
+                          Language
                         </label>
-                        {/*End::Label*/}
-                        {/*begin::Tagify*/}
-
+                        {/*end::Label*/}
+                        {/*begin::Input*/}
                         <input
-                          className="form-control d-flex align-items-center"
-                          defaultValue=""
-                          id="kt_modal_create_campaign_location"
-                          data-kt-flags-path="/metronic8/demo33/assets/media/flags/"
-                          tabIndex={-1}
+                          type="text"
+                          className="form-control form-control-lg form-control-solid"
+                          name="campaignLanguage"
+                          // defaultValue=""
+                          value={campaignInputData.campaignLanguage}
+                          onChange={(e) =>
+                            setCampaignInputData({
+                              ...campaignInputData,
+                              campaignLanguage: e.target.value,
+                            })
+                          }
                         />
-                        {/*end::Tagify*/}
+                        {/*end::Input*/}
                       </div>
                       {/*end::Input group*/}
                     </div>
@@ -1377,7 +1213,6 @@ const Step3 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>

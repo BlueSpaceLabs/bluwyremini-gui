@@ -1,6 +1,12 @@
 import React from "react";
 
-const Step1 = ({ show, handleClose, setSteps }: any) => {
+const Step1 = ({
+  show,
+  handleClose,
+  setSteps,
+  campaignInputData,
+  setCampaignInputData,
+}: any) => {
   if (show)
     return (
       <div
@@ -128,16 +134,22 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                         <input
                           type="text"
                           className="form-control form-control-lg form-control-solid"
-                          name="campaign_name"
-                          placeholder=""
-                          defaultValue=""
+                          name="campaignName"
+                          // defaultValue=""
+                          value={campaignInputData.campaignName}
+                          onChange={(e) =>
+                            setCampaignInputData({
+                              ...campaignInputData,
+                              campaignName: e.target.value,
+                            })
+                          }
                         />
                         {/*end::Input*/}
                         <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
                       </div>
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
-                     
+
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
                       <div className="mb-10">
@@ -147,165 +159,57 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                         </label>
                         {/*end::Label*/}
                         {/*begin::Roles*/}
-                        {/*begin::Input row*/}
-                        <div className="d-flex fv-row">
-                          {/*begin::Radio*/}
-                          <div className="form-check form-check-custom form-check-solid">
-                            {/*begin::Input*/}
-                            <input
-                              className="form-check-input me-3"
-                              name="user_role"
-                              type="radio"
-                              defaultValue={0}
-                              id="kt_modal_update_role_option_0"
-                              defaultChecked={true}
-                            />
-                            {/*end::Input*/}
-                            {/*begin::Label*/}
-                            <label
-                              className="form-check-label"
-                              htmlFor="kt_modal_update_role_option_0"
-                            >
-                              <div className="fw-bold text-gray-800">
-                                Get more visitors
-                              </div>
-                              <div className="text-gray-600">
-                                Increase impression traffic onto the platform
-                              </div>
-                            </label>
-                            {/*end::Label*/}
-                          </div>
-                          {/*end::Radio*/}
-                        </div>
-                        {/*end::Input row*/}
-                        <div className="separator separator-dashed my-5" />{" "}
-                        {/*begin::Input row*/}
-                        <div className="d-flex fv-row">
-                          {/*begin::Radio*/}
-                          <div className="form-check form-check-custom form-check-solid">
-                            {/*begin::Input*/}
-                            <input
-                              className="form-check-input me-3"
-                              name="user_role"
-                              type="radio"
-                              defaultValue={1}
-                              id="kt_modal_update_role_option_1"
-                            />
-                            {/*end::Input*/}
-                            {/*begin::Label*/}
-                            <label
-                              className="form-check-label"
-                              htmlFor="kt_modal_update_role_option_1"
-                            >
-                              <div className="fw-bold text-gray-800">
-                                Get more messages on chat
-                              </div>
-                              <div className="text-gray-600">
-                                Increase community interaction and communication
-                              </div>
-                            </label>
-                            {/*end::Label*/}
-                          </div>
-                          {/*end::Radio*/}
-                        </div>
-                        {/*end::Input row*/}
-                        <div className="separator separator-dashed my-5" />{" "}
-                        {/*begin::Input row*/}
-                        <div className="d-flex fv-row">
-                          {/*begin::Radio*/}
-                          <div className="form-check form-check-custom form-check-solid">
-                            {/*begin::Input*/}
-                            <input
-                              className="form-check-input me-3"
-                              name="user_role"
-                              type="radio"
-                              defaultValue={2}
-                              id="kt_modal_update_role_option_2"
-                            />
-                            {/*end::Input*/}
-                            {/*begin::Label*/}
-                            <label
-                              className="form-check-label"
-                              htmlFor="kt_modal_update_role_option_2"
-                            >
-                              <div className="fw-bold text-gray-800">
-                                Get more calls
-                              </div>
-                              <div className="text-gray-600">
-                                Boost telecommunication feedback to provide
-                                precise and accurate information
-                              </div>
-                            </label>
-                            {/*end::Label*/}
-                          </div>
-                          {/*end::Radio*/}
-                        </div>
-                        {/*end::Input row*/}
-                        <div className="separator separator-dashed my-5" />{" "}
-                        {/*begin::Input row*/}
-                        <div className="d-flex fv-row">
-                          {/*begin::Radio*/}
-                          <div className="form-check form-check-custom form-check-solid">
-                            {/*begin::Input*/}
-                            <input
-                              className="form-check-input me-3"
-                              name="user_role"
-                              type="radio"
-                              defaultValue={3}
-                              id="kt_modal_update_role_option_3"
-                            />
-                            {/*end::Input*/}
-                            {/*begin::Label*/}
-                            <label
-                              className="form-check-label"
-                              htmlFor="kt_modal_update_role_option_3"
-                            >
-                              <div className="fw-bold text-gray-800">
-                                Get more likes
-                              </div>
-                              <div className="text-gray-600">
-                                Increase positive interactivity on social media
-                                platforms
-                              </div>
-                            </label>
-                            {/*end::Label*/}
-                          </div>
-                          {/*end::Radio*/}
-                        </div>
-                        {/*end::Input row*/}
-                        <div className="separator separator-dashed my-5" />{" "}
-                        {/*begin::Input row*/}
-                        <div className="d-flex fv-row">
-                          {/*begin::Radio*/}
-                          <div className="form-check form-check-custom form-check-solid">
-                            {/*begin::Input*/}
-                            <input
-                              className="form-check-input me-3"
-                              name="user_role"
-                              type="radio"
-                              defaultValue={4}
-                              id="kt_modal_update_role_option_4"
-                            />
-                            {/*end::Input*/}
-                            {/*begin::Label*/}
-                            <label
-                              className="form-check-label"
-                              htmlFor="kt_modal_update_role_option_4"
-                            >
-                              <div className="fw-bold text-gray-800">
-                                Lead generation
-                              </div>
-                              <div className="text-gray-600">
-                                Collect contact information for potential
-                                customers
-                              </div>
-                            </label>
-                            {/*end::Label*/}
-                          </div>
-                          {/*end::Radio*/}
-                        </div>
-                        {/*end::Input row*/}
+
+                        <select
+                          className="form-select form-select-solid form-select-lg"
+                          value={campaignInputData.campaignGoal}
+                          onChange={(e) =>
+                            setCampaignInputData({
+                              ...campaignInputData,
+                              campaignGoal: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="Get more visitors">
+                            Get more visitors
+                          </option>
+                          <option value="Get more messages on chat">
+                            Get more messages on chat
+                          </option>
+                          <option value="Get more calls">Get more calls</option>
+                          <option value="Get more likes">Get more likes</option>
+                          <option value="Lead generation">
+                            Lead generation
+                          </option>
+                        </select>
+
                         {/*end::Roles*/}
+                      </div>
+                      {/*end::Input group*/}
+
+                      {/*begin::Input group*/}
+                      <div className="mb-10 fv-row fv-plugins-icon-container">
+                        {/*begin::Label*/}
+                        <label className="required form-label mb-3">
+                          Campaign Description
+                        </label>
+                        {/*end::Label*/}
+                        {/*begin::Input*/}
+                        <input
+                          type="text"
+                          className="form-control form-control-lg form-control-solid"
+                          name="campaignDescription"
+                          // defaultValue=""
+                          value={campaignInputData.campaignDescription}
+                          onChange={(e) =>
+                            setCampaignInputData({
+                              ...campaignInputData,
+                              campaignDescription: e.target.value,
+                            })
+                          }
+                        />
+                        {/*end::Input*/}
+                        <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback" />
                       </div>
                       {/*end::Input group*/}
                     </div>
@@ -1084,7 +988,6 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={13.0}
                                   aria-valuemax={40.0}
                                   aria-valuenow={18.0}
-                              
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1105,7 +1008,6 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={18.0}
                                   aria-valuemax={80.0}
                                   aria-valuenow={40.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1288,7 +1190,6 @@ const Step1 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>

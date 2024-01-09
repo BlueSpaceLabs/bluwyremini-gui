@@ -1,6 +1,33 @@
 import React from "react";
 
-const Step2 = ({ show, handleClose, setSteps }: any) => {
+const Step2 = ({
+  show,
+  handleClose,
+  setSteps,
+  campaignInputData,
+  setCampaignInputData,
+}: any) => {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleDivClick = () => {
+    // Trigger a click on the hidden file input
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      // console.log("Selected File:", file);
+
+      setCampaignInputData({
+        ...campaignInputData,
+        campaignUploadFile: file,
+      });
+    }
+  };
+
   if (show)
     return (
       <div
@@ -423,9 +450,17 @@ const Step2 = ({ show, handleClose, setSteps }: any) => {
                       {/*begin::Input group*/}
                       <div className="fv-row mb-10">
                         {/*begin::Dropzone*/}
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          style={{ display: "none" }}
+                          onChange={handleFileChange}
+                          accept=".csv"
+                        />
                         <div
                           className="dropzone dz-clickable"
                           id="kt_modal_create_campaign_files_upload"
+                          onClick={handleDivClick}
                         >
                           {/*begin::Message*/}
                           <div className="dz-message needsclick">
@@ -447,541 +482,67 @@ const Step2 = ({ show, handleClose, setSteps }: any) => {
                         {/*end::Dropzone*/}
                       </div>
                       {/*end::Input group*/}
-                      {/*begin::Input group*/}
-                      <div className="mb-10">
-                        {/*begin::Label*/}
-                        <label className="fs-6 fw-semibold mb-2">
-                          Uploaded File
-                        </label>
-                        {/*End::Label*/}
-                        {/*begin::Files*/}
-                        <div className="mh-300px scroll-y me-n7 pe-7">
-                          {/*begin::File*/}
-                          <div className="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
-                            <div className="d-flex align-items-center">
-                              {/*begin::Avatar*/}
-                              <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/pdf.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              {/*end::Avatar*/}
-                              {/*begin::Details*/}
-                              <div className="ms-6">
-                                <a
-                                  href="#"
-                                  className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
-                                >
-                                  Product Specifications
-                                </a>
-                                <div className="fw-semibold text-muted">
-                                  230kb
+
+                      {campaignInputData.campaignUploadFile && (
+                        <div className="mb-10">
+                          {/*begin::Label*/}
+                          <label className="fs-6 fw-semibold mb-2">
+                            Uploaded File
+                          </label>
+                          {/*End::Label*/}
+
+                          {/*begin::Files*/}
+                          <div className="mh-300px scroll-y me-n7 pe-7">
+                            {/*begin::File*/}
+                            <div className="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
+                              <div className="d-flex align-items-center">
+                                {/*begin::Avatar*/}
+                                <div className="symbol symbol-35px">
+                                  <i
+                                    className="bi bi-filetype-csv"
+                                    style={{ fontSize: "30px" }}
+                                  ></i>
                                 </div>
-                              </div>
-                              {/*end::Details*/}
-                            </div>
-                            {/*begin::Menu*/}
-                            <div className="min-w-100px">
-                              <select
-                                className="form-select form-select-solid form-select-sm select2-hidden-accessible"
-                                data-control="select2"
-                                data-hide-search="true"
-                                data-placeholder="Edit"
-                                data-select2-id="select2-data-13-b6x8"
-                                tabIndex={-1}
-                                aria-hidden="true"
-                                data-kt-initialized={1}
-                              >
-                                <option data-select2-id="select2-data-15-2vcc" />
-                                <option value={1}>Remove</option>
-                                <option value={2}>Modify</option>
-                                <option value={3}>Select</option>
-                              </select>
-                              <span
-                                className="select2 select2-container select2-container--bootstrap5"
-                                dir="ltr"
-                                data-select2-id="select2-data-14-q90a"
-                                style={{ width: "100%" }}
-                              >
-                                <span className="selection">
-                                  <span
-                                    className="select2-selection select2-selection--single form-select form-select-solid form-select-sm"
-                                    role="combobox"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    tabIndex={0}
-                                    aria-disabled="false"
-                                    aria-labelledby="select2-i227-container"
-                                    aria-controls="select2-i227-container"
+                                {/*end::Avatar*/}
+                                {/*begin::Details*/}
+                                <div className="ms-6">
+                                  <a
+                                    href="#"
+                                    className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
                                   >
-                                    <span
-                                      className="select2-selection__rendered"
-                                      id="select2-i227-container"
-                                      role="textbox"
-                                      aria-readonly="true"
-                                      title="Edit"
-                                    >
-                                      <span className="select2-selection__placeholder">
-                                        Edit
-                                      </span>
-                                    </span>
-                                    <span
-                                      className="select2-selection__arrow"
-                                      role="presentation"
-                                    >
-                                      <b role="presentation" />
-                                    </span>
-                                  </span>
-                                </span>
-                                <span
-                                  className="dropdown-wrapper"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </div>
-                            {/*end::Menu*/}
-                          </div>
-                          {/*end::File*/}
-                          {/*begin::File*/}
-                          <div className="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
-                            <div className="d-flex align-items-center">
-                              {/*begin::Avatar*/}
-                              <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/tif.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              {/*end::Avatar*/}
-                              {/*begin::Details*/}
-                              <div className="ms-6">
-                                <a
-                                  href="#"
-                                  className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
-                                >
-                                  Campaign Creative Poster
-                                </a>
-                                <div className="fw-semibold text-muted">
-                                  2.4mb
+                                    {campaignInputData.campaignUploadFile?.name}
+                                  </a>
+                                  <div className="fw-semibold text-muted">
+                                    {campaignInputData.campaignUploadFile
+                                      ?.size / 1024}{" "}
+                                    Kb
+                                  </div>
                                 </div>
+                                {/*end::Details*/}
                               </div>
-                              {/*end::Details*/}
-                            </div>
-                            {/*begin::Menu*/}
-                            <div className="min-w-100px">
-                              <select
-                                className="form-select form-select-solid form-select-sm select2-hidden-accessible"
-                                data-control="select2"
-                                data-hide-search="true"
-                                data-placeholder="Edit"
-                                data-select2-id="select2-data-16-g2bd"
-                                tabIndex={-1}
-                                aria-hidden="true"
-                                data-kt-initialized={1}
-                              >
-                                <option data-select2-id="select2-data-18-wys4" />
-                                <option value={1}>Remove</option>
-                                <option value={2}>Modify</option>
-                                <option value={3}>Select</option>
-                              </select>
-                              <span
-                                className="select2 select2-container select2-container--bootstrap5"
-                                dir="ltr"
-                                data-select2-id="select2-data-17-x196"
-                                style={{ width: "100%" }}
-                              >
-                                <span className="selection">
-                                  <span
-                                    className="select2-selection select2-selection--single form-select form-select-solid form-select-sm"
-                                    role="combobox"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    tabIndex={0}
-                                    aria-disabled="false"
-                                    aria-labelledby="select2-ovgo-container"
-                                    aria-controls="select2-ovgo-container"
-                                  >
-                                    <span
-                                      className="select2-selection__rendered"
-                                      id="select2-ovgo-container"
-                                      role="textbox"
-                                      aria-readonly="true"
-                                      title="Edit"
-                                    >
-                                      <span className="select2-selection__placeholder">
-                                        Edit
-                                      </span>
-                                    </span>
-                                    <span
-                                      className="select2-selection__arrow"
-                                      role="presentation"
-                                    >
-                                      <b role="presentation" />
-                                    </span>
-                                  </span>
-                                </span>
-                                <span
-                                  className="dropdown-wrapper"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </div>
-                            {/*end::Menu*/}
-                          </div>
-                          {/*end::File*/}
-                          {/*begin::File*/}
-                          <div className="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
-                            <div className="d-flex align-items-center">
-                              {/*begin::Avatar*/}
-                              <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/folder-document.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              {/*end::Avatar*/}
-                              {/*begin::Details*/}
-                              <div className="ms-6">
-                                <a
-                                  href="#"
-                                  className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
+                              {/*begin::Menu*/}
+                              <div className="min-w-100px">
+                                <select
+                                  className="form-select form-select-solid form-select-sm select2-hidden-accessible"
+                                  // data-control="select2"
+                                  // data-hide-search="true"
+                                  // data-placeholder="Edit"
+                                  // data-select2-id="select2-data-13-b6x8"
+                                  tabIndex={-1}
+                                  // aria-hidden="true"
+                                  // data-kt-initialized={1}
                                 >
-                                  Campaign Landing Page Source
-                                </a>
-                                <div className="fw-semibold text-muted">
-                                  1.12mb
-                                </div>
+                                  <option value={"Delete"}>Delete</option>
+                                  <option value={"Edit"}>Edit</option>
+                                </select>
                               </div>
-                              {/*end::Details*/}
+                              {/*end::Menu*/}
                             </div>
-                            {/*begin::Menu*/}
-                            <div className="min-w-100px">
-                              <select
-                                className="form-select form-select-solid form-select-sm select2-hidden-accessible"
-                                data-control="select2"
-                                data-hide-search="true"
-                                data-placeholder="Edit"
-                                data-select2-id="select2-data-19-kqbi"
-                                tabIndex={-1}
-                                aria-hidden="true"
-                                data-kt-initialized={1}
-                              >
-                                <option data-select2-id="select2-data-21-112k" />
-                                <option value={1}>Remove</option>
-                                <option value={2}>Modify</option>
-                                <option value={3}>Select</option>
-                              </select>
-                              <span
-                                className="select2 select2-container select2-container--bootstrap5"
-                                dir="ltr"
-                                data-select2-id="select2-data-20-ygh3"
-                                style={{ width: "100%" }}
-                              >
-                                <span className="selection">
-                                  <span
-                                    className="select2-selection select2-selection--single form-select form-select-solid form-select-sm"
-                                    role="combobox"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    tabIndex={0}
-                                    aria-disabled="false"
-                                    aria-labelledby="select2-0wgd-container"
-                                    aria-controls="select2-0wgd-container"
-                                  >
-                                    <span
-                                      className="select2-selection__rendered"
-                                      id="select2-0wgd-container"
-                                      role="textbox"
-                                      aria-readonly="true"
-                                      title="Edit"
-                                    >
-                                      <span className="select2-selection__placeholder">
-                                        Edit
-                                      </span>
-                                    </span>
-                                    <span
-                                      className="select2-selection__arrow"
-                                      role="presentation"
-                                    >
-                                      <b role="presentation" />
-                                    </span>
-                                  </span>
-                                </span>
-                                <span
-                                  className="dropdown-wrapper"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </div>
-                            {/*end::Menu*/}
+                            {/*end::File*/}
                           </div>
-                          {/*end::File*/}
-                          {/*begin::File*/}
-                          <div className="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
-                            <div className="d-flex align-items-center">
-                              {/*begin::Avatar*/}
-                              <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/css.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              {/*end::Avatar*/}
-                              {/*begin::Details*/}
-                              <div className="ms-6">
-                                <a
-                                  href="#"
-                                  className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
-                                >
-                                  Landing Page Styling
-                                </a>
-                                <div className="fw-semibold text-muted">
-                                  85kb
-                                </div>
-                              </div>
-                              {/*end::Details*/}
-                            </div>
-                            {/*begin::Menu*/}
-                            <div className="min-w-100px">
-                              <select
-                                className="form-select form-select-solid form-select-sm select2-hidden-accessible"
-                                data-control="select2"
-                                data-hide-search="true"
-                                data-placeholder="Edit"
-                                data-select2-id="select2-data-22-e2bk"
-                                tabIndex={-1}
-                                aria-hidden="true"
-                                data-kt-initialized={1}
-                              >
-                                <option data-select2-id="select2-data-24-z2pn" />
-                                <option value={1}>Remove</option>
-                                <option value={2}>Modify</option>
-                                <option value={3}>Select</option>
-                              </select>
-                              <span
-                                className="select2 select2-container select2-container--bootstrap5"
-                                dir="ltr"
-                                data-select2-id="select2-data-23-ow50"
-                                style={{ width: "100%" }}
-                              >
-                                <span className="selection">
-                                  <span
-                                    className="select2-selection select2-selection--single form-select form-select-solid form-select-sm"
-                                    role="combobox"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    tabIndex={0}
-                                    aria-disabled="false"
-                                    aria-labelledby="select2-5cf6-container"
-                                    aria-controls="select2-5cf6-container"
-                                  >
-                                    <span
-                                      className="select2-selection__rendered"
-                                      id="select2-5cf6-container"
-                                      role="textbox"
-                                      aria-readonly="true"
-                                      title="Edit"
-                                    >
-                                      <span className="select2-selection__placeholder">
-                                        Edit
-                                      </span>
-                                    </span>
-                                    <span
-                                      className="select2-selection__arrow"
-                                      role="presentation"
-                                    >
-                                      <b role="presentation" />
-                                    </span>
-                                  </span>
-                                </span>
-                                <span
-                                  className="dropdown-wrapper"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </div>
-                            {/*end::Menu*/}
-                          </div>
-                          {/*end::File*/}
-                          {/*begin::File*/}
-                          <div className="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
-                            <div className="d-flex align-items-center">
-                              {/*begin::Avatar*/}
-                              <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/ai.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              {/*end::Avatar*/}
-                              {/*begin::Details*/}
-                              <div className="ms-6">
-                                <a
-                                  href="#"
-                                  className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
-                                >
-                                  Design Source Files
-                                </a>
-                                <div className="fw-semibold text-muted">
-                                  48mb
-                                </div>
-                              </div>
-                              {/*end::Details*/}
-                            </div>
-                            {/*begin::Menu*/}
-                            <div className="min-w-100px">
-                              <select
-                                className="form-select form-select-solid form-select-sm select2-hidden-accessible"
-                                data-control="select2"
-                                data-hide-search="true"
-                                data-placeholder="Edit"
-                                data-select2-id="select2-data-25-1gdd"
-                                tabIndex={-1}
-                                aria-hidden="true"
-                                data-kt-initialized={1}
-                              >
-                                <option data-select2-id="select2-data-27-uo92" />
-                                <option value={1}>Remove</option>
-                                <option value={2}>Modify</option>
-                                <option value={3}>Select</option>
-                              </select>
-                              <span
-                                className="select2 select2-container select2-container--bootstrap5"
-                                dir="ltr"
-                                data-select2-id="select2-data-26-blcs"
-                                style={{ width: "100%" }}
-                              >
-                                <span className="selection">
-                                  <span
-                                    className="select2-selection select2-selection--single form-select form-select-solid form-select-sm"
-                                    role="combobox"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    tabIndex={0}
-                                    aria-disabled="false"
-                                    aria-labelledby="select2-733b-container"
-                                    aria-controls="select2-733b-container"
-                                  >
-                                    <span
-                                      className="select2-selection__rendered"
-                                      id="select2-733b-container"
-                                      role="textbox"
-                                      aria-readonly="true"
-                                      title="Edit"
-                                    >
-                                      <span className="select2-selection__placeholder">
-                                        Edit
-                                      </span>
-                                    </span>
-                                    <span
-                                      className="select2-selection__arrow"
-                                      role="presentation"
-                                    >
-                                      <b role="presentation" />
-                                    </span>
-                                  </span>
-                                </span>
-                                <span
-                                  className="dropdown-wrapper"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </div>
-                            {/*end::Menu*/}
-                          </div>
-                          {/*end::File*/}
-                          {/*begin::File*/}
-                          <div className="d-flex flex-stack py-4 ">
-                            <div className="d-flex align-items-center">
-                              {/*begin::Avatar*/}
-                              <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/doc.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              {/*end::Avatar*/}
-                              {/*begin::Details*/}
-                              <div className="ms-6">
-                                <a
-                                  href="#"
-                                  className="fs-5 fw-bold text-gray-900 text-hover-primary mb-2"
-                                >
-                                  Campaign Plan Document
-                                </a>
-                                <div className="fw-semibold text-muted">
-                                  27kb
-                                </div>
-                              </div>
-                              {/*end::Details*/}
-                            </div>
-                            {/*begin::Menu*/}
-                            <div className="min-w-100px">
-                              <select
-                                className="form-select form-select-solid form-select-sm select2-hidden-accessible"
-                                data-control="select2"
-                                data-hide-search="true"
-                                data-placeholder="Edit"
-                                data-select2-id="select2-data-28-bgwr"
-                                tabIndex={-1}
-                                aria-hidden="true"
-                                data-kt-initialized={1}
-                              >
-                                <option data-select2-id="select2-data-30-sh3i" />
-                                <option value={1}>Remove</option>
-                                <option value={2}>Modify</option>
-                                <option value={3}>Select</option>
-                              </select>
-                              <span
-                                className="select2 select2-container select2-container--bootstrap5"
-                                dir="ltr"
-                                data-select2-id="select2-data-29-qoia"
-                                style={{ width: "100%" }}
-                              >
-                                <span className="selection">
-                                  <span
-                                    className="select2-selection select2-selection--single form-select form-select-solid form-select-sm"
-                                    role="combobox"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    tabIndex={0}
-                                    aria-disabled="false"
-                                    aria-labelledby="select2-3pgh-container"
-                                    aria-controls="select2-3pgh-container"
-                                  >
-                                    <span
-                                      className="select2-selection__rendered"
-                                      id="select2-3pgh-container"
-                                      role="textbox"
-                                      aria-readonly="true"
-                                      title="Edit"
-                                    >
-                                      <span className="select2-selection__placeholder">
-                                        Edit
-                                      </span>
-                                    </span>
-                                    <span
-                                      className="select2-selection__arrow"
-                                      role="presentation"
-                                    >
-                                      <b role="presentation" />
-                                    </span>
-                                  </span>
-                                </span>
-                                <span
-                                  className="dropdown-wrapper"
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </div>
-                            {/*end::Menu*/}
-                          </div>
-                          {/*end::File*/}
+                          {/*end::Files*/}
                         </div>
-                        {/*end::Files*/}
-                      </div>
-                      {/*end::Input group*/}
+                      )}
                     </div>
                     {/*end::Wrapper*/}
                   </div>
@@ -1173,7 +734,6 @@ const Step2 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={13.0}
                                   aria-valuemax={40.0}
                                   aria-valuenow={18.0}
-                                
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1194,7 +754,6 @@ const Step2 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={18.0}
                                   aria-valuemax={80.0}
                                   aria-valuenow={40.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1377,7 +936,6 @@ const Step2 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>

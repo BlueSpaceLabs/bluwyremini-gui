@@ -1,6 +1,6 @@
 import React from "react";
 
-const Step4 = ({ show, handleClose, setSteps }: any) => {
+const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
   if (show)
     return (
       <div
@@ -1173,7 +1173,6 @@ const Step4 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={13.0}
                                   aria-valuemax={40.0}
                                   aria-valuenow={18.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1194,7 +1193,6 @@ const Step4 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={18.0}
                                   aria-valuemax={80.0}
                                   aria-valuenow={40.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1377,7 +1375,6 @@ const Step4 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1466,7 +1463,10 @@ const Step4 = ({ show, handleClose, setSteps }: any) => {
                         type="button"
                         className="btn btn-lg btn-primary d-inline-block"
                         data-kt-stepper-action="submit"
-                        onClick={() => setSteps(5)}
+                        onClick={() => {
+                          handleCampaignSubmit();
+                          setSteps(5);
+                        }}
                       >
                         <span className="indicator-label">
                           Submit

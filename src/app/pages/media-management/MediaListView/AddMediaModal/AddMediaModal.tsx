@@ -3,8 +3,10 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 // import { defaultCreateAppData, ICreateAppData } from "./IAppModels";
 import { KTIcon } from "../../../../../_metronic/helpers";
-import { url } from "inspector";
+// import { url } from "inspector";
+import { useMutation } from "react-query";
 import { toAbsoluteUrl } from "../../../../../_metronic/helpers";
+import { postAddMedia } from "../../../../services/MediaManagement";
 
 // import { StepperComponent } from "../../../../../_metronic/assets/ts/components";
 
@@ -17,23 +19,35 @@ const modalsRoot = document.getElementById("root-modals") || document.body;
 
 const blankImg = toAbsoluteUrl("media/svg/avatars/blank.svg");
 
+const accessKey =
+  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
 const AddMediaModal = ({ show, handleClose, setData }: any) => {
   const [mediaTitle, setMediaTitle] = React.useState<string>("");
   const [mediaDescription, setMediaDescription] = React.useState<string>("");
+  const [mediaChannel, setMediaChannel] = React.useState<string>("whatsApp");
   const [mediaFile, setMediaFile] = React.useState<string>(blankImg);
   const [formError, setFormError] = React.useState<boolean>(false);
+
+  const { mutateAsync } = useMutation(postAddMedia);
 
   const handleSubmitForm = () => {
     if (mediaTitle.length < 2 || mediaDescription.length < 2) {
       setFormError(true);
     } else {
-      setData({
-        ["mediaFile"]: mediaFile,
-        ["mediaTitle"]: mediaTitle,
-        ["mediaDescription"]: mediaDescription,
+      mutateAsync({
+        requestData: {
+          tenant: "bsl",
+          accessKey: accessKey,
+          contact_data: {
+            imageS3Id: "hard_codded",
+            imageS3Url: "hard_codded",
+            mediaTitle: mediaTitle,
+            mediaDescription: mediaDescription,
+            channelName: mediaChannel,
+          },
+        },
       });
-      setFormError(false);
-      handleClose();
     }
   };
   return createPortal(
@@ -112,7 +126,6 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter Media Title"
               value={mediaTitle}
               onChange={(event) => {
                 setMediaTitle(event.target.value);
@@ -138,7 +151,6 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
-              placeholder="Enter Media Description"
               value={mediaDescription}
               onChange={(event) => {
                 setMediaDescription(event.target.value);
@@ -151,6 +163,28 @@ const AddMediaModal = ({ show, handleClose, setData }: any) => {
                 </div>
               </div>
             )}
+          </div>
+
+          <div className=" fv-row mb-2 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Media Channel</span>
+              <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Media Channel."
+              ></i>
+            </label>
+            <select
+              className="form-select form-select-solid form-select-lg"
+              data-hide-search="true"
+              value={mediaChannel}
+              onChange={(e) => setMediaChannel(e.target.value)}
+            >
+              <option value="whatsApp">WhatsApp</option>
+              <option value="telegram">Telegram</option>
+              <option value="instagram">Instagram</option>
+              <option value="messenger">Messenger</option>
+            </select>
           </div>
         </div>
 

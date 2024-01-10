@@ -35,6 +35,7 @@ const AddMediaModal = ({
   const [mediaFile, setMediaFile] = React.useState<string>(blankImg);
   const [formError, setFormError] = React.useState<boolean>(false);
   const [tenant, setTenant] = React.useState<string>("bsl");
+  const [imageURL, setImageURL] = React.useState<string | null>(blankImg);
 
   const { mutateAsync } = useMutation(postAddMedia);
 
@@ -83,6 +84,7 @@ const AddMediaModal = ({
             setMediaDescription("");
             setMediaFile("");
             setServerResponse(response.data.message);
+            setImageURL(blankImg);
             console.log(response.data.message);
             return response;
           });
@@ -93,6 +95,7 @@ const AddMediaModal = ({
       }
     } //else
   }; //fn ends
+
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -143,7 +146,7 @@ const AddMediaModal = ({
               <div
                 className="image-input-wrapper w-125px h-125px"
                 style={{
-                  backgroundImage: `url('${mediaFile}')`,
+                  backgroundImage: `url('${imageURL}')`,
                 }}
               ></div>
               {/* end::Preview existing avatar */}
@@ -151,10 +154,12 @@ const AddMediaModal = ({
               <div className="d-flex flex-end pt-5">
                 <input
                   type="file"
-                  onChange={
-                    (e: any) => setMediaFile(e.target.files[0]) //e.target.files[0]
-                  }
+                  onChange={(e: any) => {
+                    setMediaFile(e.target.files[0]); //e.target.files[0]
+                    setImageURL(URL.createObjectURL(e?.target?.files[0]));
+                  }}
                 />
+
                 {/* <button
                   type="button"
                   className="btn btn-secondary"
@@ -166,6 +171,7 @@ const AddMediaModal = ({
                 </button> */}
               </div>
             </div>
+            <div className="form-text">Allowed file types: png, jpg, jpeg.</div>
             {/* end::Image input */}
           </div>
           {/* end::Input group */}

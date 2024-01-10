@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 // import { useMutation, useQueryClient } from "react-query";
 import { MenuComponent } from "../../../../_metronic/assets/ts/components";
 import { KTIcon } from "../../../../_metronic/helpers";
+import CustomDeleteModal from "./CustomDeleteModal";
 // import CustomEditModal from "./CustomContactModal";
 // import CustomDeleteModal from "./CustomDetailsModal";
 // import CustomDetailsModal from "./CustomDetailsModal";
@@ -30,6 +31,8 @@ any) => {
     MenuComponent.reinitialization();
   }, []);
 
+  const [showDeleteModal, setShowDeleteModal] = React.useState<boolean>(false);
+
   return (
     <>
       <a
@@ -50,15 +53,15 @@ any) => {
         <div className="menu-item px-3">
           <a
             className="menu-link px-3"
-            // onClick={() => setShowEditContactModal(true)}
+            onClick={() => setShowDeleteModal(true)}
           >
-            Edit
+            Delete
           </a>
         </div>
         {/* end::Menu item */}
 
         {/* begin::Menu item */}
-        <div className="menu-item px-3">
+        {/* <div className="menu-item px-3">
           <a
             className="menu-link px-3"
             data-kt-users-table-filter="delete_row"
@@ -66,8 +69,14 @@ any) => {
           >
             Details
           </a>
-        </div>
+        </div> */}
         {/* end::Menu item */}
+
+        <CustomDeleteModal
+          show={showDeleteModal}
+          handleClose={() => setShowDeleteModal(false)}
+          selectedId={detailMediaData.id}
+        />
 
         {/* <CustomEditModal
           show={showEditModal}

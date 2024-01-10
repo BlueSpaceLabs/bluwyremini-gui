@@ -86,11 +86,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Channel Name
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="channelName Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -105,11 +105,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Access Token
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Access Token Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -124,11 +124,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Application Id
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="App Id Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -143,11 +143,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Business Id
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Business Id Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -162,11 +162,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Display Number
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Display Number Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -181,11 +181,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Permanent Token
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Permanent Token Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -200,11 +200,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Phone Number Id
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Phone Number Id Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -219,11 +219,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               WA Webhook Token
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="WA Webhook Token Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -238,11 +238,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               WA Webhook Url
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="WA Webhook Url Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">

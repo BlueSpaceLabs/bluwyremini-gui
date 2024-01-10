@@ -48,11 +48,11 @@ const DialogFlowCXPage = () => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Configuration Data 1
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Configuration Data 1 Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -67,11 +67,11 @@ const DialogFlowCXPage = () => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Configuration Data 2
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Configuration Data 2 Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -86,11 +86,11 @@ const DialogFlowCXPage = () => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Configuration Data 3
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Configuration Data 3 Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -105,11 +105,11 @@ const DialogFlowCXPage = () => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Configuration Data 4
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Configuration Data 4 Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -124,11 +124,11 @@ const DialogFlowCXPage = () => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Configuration Data 5
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Configuration Data 5 Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
@@ -143,11 +143,11 @@ const DialogFlowCXPage = () => {
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Configuration Data 6
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Configuration Data 6 Tooltip"
-              ></i>
+              ></i> */}
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">

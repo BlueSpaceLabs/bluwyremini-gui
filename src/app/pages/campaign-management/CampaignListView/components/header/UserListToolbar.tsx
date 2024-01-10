@@ -28,7 +28,7 @@ const UsersListToolbar = () => {
   const { setItemIdForUpdate } = useListView();
   const [campaignInputData, setCampaignInputData] =
     React.useState(initialValue);
-  console.log("campaignInputData", campaignInputData);
+  // console.log("campaignInputData", campaignInputData);
   // const openAddUserModal = () => {
   //   setItemIdForUpdate(null);
   // };

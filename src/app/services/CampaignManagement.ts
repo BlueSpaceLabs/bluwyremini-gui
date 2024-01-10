@@ -39,3 +39,45 @@ export const postAddCampaign = async ({ requestData }: PostAddCampaign) => {
   //   throw error;
   // }
 };
+
+// getCampaignDataAPI : to get all the campaign list data
+export const getCampaignDataAPI = async (accessKey: string) => {
+  const url = "/getCampaignList.php";
+
+  const params = {
+    accessKey: accessKey,
+  };
+
+  try {
+    const response = await axiosInstance.get(url, { params });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    throw error;
+  }
+};
+
+// getCampaignDataByIdAPI : to get the campaign data by id
+export const getCampaignDataByIdAPI = async (
+  accessKey: string,
+  campaignId: number
+) => {
+  const url = "/getCampaignList.php";
+
+  const params = {
+    accessKey: accessKey,
+    id: campaignId,
+  };
+
+  try {
+    const response = await axiosInstance.get(url, { params });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    throw error;
+  }
+};

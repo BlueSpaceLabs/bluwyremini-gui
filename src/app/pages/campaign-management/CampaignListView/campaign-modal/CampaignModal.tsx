@@ -61,7 +61,7 @@ const CampaignModal = ({ show, handleClose }: Props) => {
 
     setSubmitButton(stepper.currentStepIndex === stepper.totalStepsNumber);
 
-    console.log(values);
+    // console.log(values);
 
     setCurrentSchema(createAccountSchemas[stepper.currentStepIndex - 1]);
   };
@@ -130,7 +130,8 @@ const CampaignModal = ({ show, handleClose }: Props) => {
           onSubmit={submitStep}
         >
           {() => (
-            <Form placeholder=""
+            <Form
+              placeholder=""
               className="mx-auto mw-600px w-100 pt-15 pb-10"
               id="kt_create_account_form"
             >

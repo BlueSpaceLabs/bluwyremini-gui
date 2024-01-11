@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import WhatsappConfigurationModal from "./ConfigurationModal/ConfigurationModal";
 import CustomSnackBar from "./ConfigurationModal/CustomSnackBar";
+import WhatsappAppDetails from "./WhatsappAppDetails";
 
 const serviceAxiosGetWhatsappData = async ({ channelName, accessKey }: any) => {
   const response = await axios.get(
@@ -253,6 +254,9 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
               </span>
             </div>
           </div>
+          {channelConfigurationData.appId && (
+            <WhatsappAppDetails appId={channelConfigurationData.appId} />
+          )}
         </div>
       </div>
 

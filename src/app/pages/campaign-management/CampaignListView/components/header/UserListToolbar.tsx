@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useMutation } from "react-query";
 import { KTIcon } from "../../../../../../_metronic/helpers";
 import { useListView } from "../../core/ListViewProvider";
@@ -13,45 +14,81 @@ import CustomStepsModal from "../../campaign-modal/custom-steps";
 import { postAddCampaign } from "../../../../../services/CampaignManagement";
 
 const initialValue = {
-  campaignName: "Campaign_Name",
-  campaignGoal: "Get more visitors",
-  campaignDescription: "Campaign_Description",
-  campaignUploadFile: null,
-  campaignChannel: "whatsapp",
-  campaignLanguage: "Campaign_Language",
+  campaignName: "",
+  campaignGoal: "",
+  campaignDescription: "",
+  campaignUploadFile: "",
+  campaignChannel: "",
+  campaignLanguage: "",
+  selectedTime: "now",
 };
 
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
 const UsersListToolbar = () => {
+  const [showCampaignMessage, setShowCampaignMessage] = React.useState("");
   const { setItemIdForUpdate } = useListView();
   const [campaignInputData, setCampaignInputData] =
     React.useState(initialValue);
-  // console.log("campaignInputData", campaignInputData);
-  // const openAddUserModal = () => {
-  //   setItemIdForUpdate(null);
-  // };
+  console.log("campaignInputData", campaignInputData);
+
   const { config } = useLayout();
   const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false);
   const [steps, setSteps] = useState<number>(1);
 
-  const { mutateAsync } = useMutation(postAddCampaign);
+  const [tenant, setTenant] = React.useState<string>("bsl");
+  const [accessKey, setAccessKey] = React.useState<string>(
+    "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm"
+  );
+
+  //const { mutateAsync } = useMutation(postAddCampaign);
 
   const handleCampaignSubmit = () => {
-    mutateAsync({
-      requestData: {
-        tenant: "bsl",
-        accessKey: accessKey,
-        contact_data: {
-          campaignName: campaignInputData.campaignName,
-          campaignGoal: campaignInputData.campaignGoal,
-          campaignDescription: campaignInputData.campaignDescription,
-          campaignChannel: campaignInputData.campaignChannel,
-          campaignLanguage: campaignInputData.campaignLanguage,
-        },
-      },
-    });
+    // console.log('campaignName',campaignInputData.campaignName)
+    //console.log('uploadfile ',campaignInputData.campaignUploadFile)
+    const formData = new FormData();
+
+    //prepare form for submission
+    formData.append("accessKey", accessKey);
+    formData.append("tenant", tenant);
+    formData.append("campaignName", campaignInputData.campaignName);
+    formData.append(
+      "campaignDescription",
+      campaignInputData.campaignDescription
+    );
+    formData.append("campaignGoal", campaignInputData.campaignGoal);
+    formData.append("campaignChannel", campaignInputData.campaignChannel);
+    formData.append("selectedTime", campaignInputData.selectedTime);
+    formData.append("avatar", campaignInputData.campaignUploadFile);
+
+    try {
+      let res = axios
+        .post(
+          "http://3.108.229.60:8082/bluwyremini-backend/info/addCampaignDetails.php",
+          formData,
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          }
+        )
+        .then(function (response) {
+          console.log(response.data);
+
+          setShowCampaignMessage(response.data.message);
+          console.log(response.data.message);
+          return response;
+        });
+
+      //console.log(res)
+    } catch (error: any) {
+      console.log(error.message);
+
+      setShowCampaignMessage(error.message);
+
+      throw error;
+    }
   };
   return (
     <div
@@ -106,6 +143,7 @@ const UsersListToolbar = () => {
         campaignInputData={campaignInputData}
         setCampaignInputData={setCampaignInputData}
         handleCampaignSubmit={handleCampaignSubmit}
+        showCampaignMessage={showCampaignMessage}
       />
     </div>
   );

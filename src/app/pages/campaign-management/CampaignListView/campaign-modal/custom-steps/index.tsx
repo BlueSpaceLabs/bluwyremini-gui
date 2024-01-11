@@ -13,6 +13,7 @@ const CustomStepsModal = ({
   campaignInputData,
   setCampaignInputData,
   handleCampaignSubmit,
+  showCampaignMessage,
 }: any) => {
   // const handleNextClick = () => {
   //   if (steps < 4) setSteps(steps + 1);
@@ -62,7 +63,12 @@ const CustomStepsModal = ({
         />
       )}
       {steps === 5 && (
-        <Step5 show={show} handleClose={handleClose} setSteps={setSteps} />
+        <Step5
+          show={show}
+          handleClose={handleClose}
+          setSteps={setSteps}
+          showCampaignMessage={showCampaignMessage}
+        />
       )}
     </>
   );

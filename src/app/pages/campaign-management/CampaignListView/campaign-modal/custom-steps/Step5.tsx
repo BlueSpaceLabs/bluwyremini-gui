@@ -1,6 +1,6 @@
 import React from "react";
 
-const Step5 = ({ show, handleClose, setSteps }: any) => {
+const Step5 = ({ show, handleClose, setSteps, showCampaignMessage }: any) => {
   if (show)
     return (
       <div
@@ -70,7 +70,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                     className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Budget Estimates</h3>
+                    <h3 className="stepper-title">Schedule Campaign</h3>
                   </div>
                   {/*end::Step 4*/}
                   {/*begin::Step 5*/}
@@ -461,10 +461,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/pdf.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -548,10 +545,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/tif.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -635,10 +629,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/folder-document.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -722,10 +713,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/css.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -809,10 +797,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/ai.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -896,10 +881,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/doc.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -1173,7 +1155,6 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={13.0}
                                   aria-valuemax={40.0}
                                   aria-valuenow={18.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1194,7 +1175,6 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={18.0}
                                   aria-valuemax={80.0}
                                   aria-valuenow={40.0}
-                                 
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1376,7 +1356,6 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                                   aria-valuemin={1.0}
                                   aria-valuemax={500.0}
                                   aria-valuenow={5.0}
-                                  
                                 >
                                   <div className="noUi-touch-area" />
                                 </div>
@@ -1404,8 +1383,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                         {/*end::Title*/}
                         {/*begin::Description*/}
                         <div className="fw-semibold text-muted fs-4">
-                          You will receive an email with with the summary of
-                          your newly created campaign!
+                          {showCampaignMessage}
                         </div>
                         {/*end::Description*/}
                       </div>
@@ -1434,11 +1412,7 @@ const Step5 = ({ show, handleClose, setSteps }: any) => {
                       {/*end::Actions*/}
                       {/*begin::Illustration*/}
                       <div className="text-center px-4">
-                        <img
-                          src="/metronic8/demo33/assets/media/illustrations/sketchy-1/9.png"
-                          alt=""
-                          className="mww-100 mh-350px"
-                        />
+                        <img src="" alt="" className="mww-100 mh-350px" />
                       </div>
                       {/*end::Illustration*/}
                     </div>

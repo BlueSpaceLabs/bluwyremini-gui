@@ -179,11 +179,11 @@ const AddMediaModal = ({
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Media Title</span>
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Title."
-              ></i>
+              ></i> */}
             </label>
             <input
               type="text"
@@ -204,11 +204,11 @@ const AddMediaModal = ({
           <div className=" fv-row mb-2 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Media Description</span>
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Description."
-              ></i>
+              ></i> */}
             </label>
             <input
               type="text"
@@ -231,11 +231,11 @@ const AddMediaModal = ({
           <div className=" fv-row mb-2 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Media Channel</span>
-              <i
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Channel."
-              ></i>
+              ></i> */}
             </label>
             <select
               className="form-select form-select-solid form-select-lg"

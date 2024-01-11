@@ -76,7 +76,7 @@ const Step3 = ({
                     className="stepper-item me-5 me-md-15 pending"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Budget Estimates</h3>
+                    <h3 className="stepper-title">Schedule Campaign</h3>
                   </div>
                   {/*end::Step 4*/}
                   {/*begin::Step 5*/}
@@ -467,10 +467,7 @@ const Step3 = ({
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/pdf.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -554,10 +551,7 @@ const Step3 = ({
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/tif.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -641,10 +635,7 @@ const Step3 = ({
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/folder-document.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -728,10 +719,7 @@ const Step3 = ({
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/css.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -815,10 +803,7 @@ const Step3 = ({
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/ai.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -902,10 +887,7 @@ const Step3 = ({
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/doc.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -1052,28 +1034,7 @@ const Step3 = ({
 
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
-                      <div className="fv-row mb-10">
-                        {/*begin::Label*/}
-                        <label className="required form-label mb-3">
-                          Language
-                        </label>
-                        {/*end::Label*/}
-                        {/*begin::Input*/}
-                        <input
-                          type="text"
-                          className="form-control form-control-lg form-control-solid"
-                          name="campaignLanguage"
-                          // defaultValue=""
-                          value={campaignInputData.campaignLanguage}
-                          onChange={(e) =>
-                            setCampaignInputData({
-                              ...campaignInputData,
-                              campaignLanguage: e.target.value,
-                            })
-                          }
-                        />
-                        {/*end::Input*/}
-                      </div>
+
                       {/*end::Input group*/}
                     </div>
                     {/*end::Wrapper*/}
@@ -1269,11 +1230,7 @@ const Step3 = ({
                       {/*end::Actions*/}
                       {/*begin::Illustration*/}
                       <div className="text-center px-4">
-                        <img
-                          src="/metronic8/demo33/assets/media/illustrations/sketchy-1/9.png"
-                          alt=""
-                          className="mww-100 mh-350px"
-                        />
+                        <img src="" alt="" className="mww-100 mh-350px" />
                       </div>
                       {/*end::Illustration*/}
                     </div>

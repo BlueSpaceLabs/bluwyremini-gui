@@ -1,6 +1,43 @@
 import React from "react";
 
-const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
+const Step4 = ({
+  show,
+  handleClose,
+  setSteps,
+  campaignInputData,
+  setCampaignInputData,
+  handleCampaignSubmit,
+}: any) => {
+  const [processCampaignButton, setProcessCampaignButton] =
+    React.useState(true);
+
+  const handleCampaignProcessTimeClick = (buttonType: string) => {
+    if (buttonType === "now") {
+      setCampaignInputData({
+        ...campaignInputData,
+        selectedTime: "now",
+      });
+
+      setProcessCampaignButton(true);
+    } else if (buttonType === "later") {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+      const day = String(currentDate.getDate()).padStart(2, "0");
+      const hours = String(currentDate.getHours()).padStart(2, "0");
+      const minutes = String(currentDate.getMinutes()).padStart(2, "0");
+
+      const localDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+      setCampaignInputData({
+        ...campaignInputData,
+        selectedTime: localDateTime,
+      });
+
+      setProcessCampaignButton(false);
+    }
+  };
+
   if (show)
     return (
       <div
@@ -70,7 +107,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                     className="stepper-item me-5 me-md-15 current"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Budget Estimates</h3>
+                    <h3 className="stepper-title">Schedule Campaign</h3>
                   </div>
                   {/*end::Step 4*/}
                   {/*begin::Step 5*/}
@@ -461,10 +498,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/pdf.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -548,10 +582,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/tif.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -635,10 +666,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/folder-document.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -722,10 +750,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/css.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -809,10 +834,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/ai.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -896,10 +918,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             <div className="d-flex align-items-center">
                               {/*begin::Avatar*/}
                               <div className="symbol symbol-35px">
-                                <img
-                                  src="/metronic8/demo33/assets/media/svg/files/doc.svg"
-                                  alt="icon"
-                                />
+                                <img src="" alt="icon" />
                               </div>
                               {/*end::Avatar*/}
                               {/*begin::Details*/}
@@ -1249,7 +1268,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                       <div className="pb-10 pb-lg-12">
                         {/*begin::Title*/}
                         <h1 className="fw-bold text-gray-900">
-                          Budget Estimates
+                          Schedule Campaign
                         </h1>
                         {/*end::Title*/}
                         {/*begin::Description*/}
@@ -1266,7 +1285,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                       <div className="fv-row mb-10">
                         {/*begin::Label*/}
                         <label className="fs-6 fw-semibold mb-2">
-                          Campaign Duration
+                          Campaign Execution
                           <span
                             className="ms-1"
                             data-bs-toggle="tooltip"
@@ -1283,13 +1302,17 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                           {/*begin::Button*/}
                           <button
                             type="button"
-                            className="btn btn-outline btn-outline-dashed btn-active-light-primary active"
+                            className="btn btn-outline btn-outline-dashed btn-active-light-primary"
                             id="kt_modal_create_campaign_duration_all"
+                            name="btnNow"
+                            onClick={() =>
+                              handleCampaignProcessTimeClick("now")
+                            }
                           >
-                            Continuous duration
+                            Now
                             <br />
                             <span className="fs-7">
-                              Your ad will run continuously for a daily budget.
+                              Campaign will be executed now.
                             </span>
                           </button>
                           {/*end::Button*/}
@@ -1298,91 +1321,51 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                             type="button"
                             className="btn btn-outline btn-outline-dashed btn-active-light-primary btn-outline-default"
                             id="kt_modal_create_campaign_duration_fixed"
+                            name="btnLater"
+                            onClick={() =>
+                              handleCampaignProcessTimeClick("later")
+                            }
+
+                            // onClick={() => setProcessTime("later")}
                           >
-                            Fixed duration
+                            Schedule Later
                             <br />
                             <span className="fs-7">
-                              Your ad will run on the specified dates only.
+                              Your ad will run on the specified date & time
+                              only.
                             </span>
                           </button>
                           {/*end::Button*/}
                         </div>
                         {/*end::Duration option*/}
                         {/*begin::Datepicker*/}
-                        <input
-                          className="form-control form-control-solid d-none flatpickr-input"
-                          placeholder="Pick date & time"
-                          id="kt_modal_create_campaign_datepicker"
-                          type="hidden"
-                        />
-                        <input
-                          className="form-control form-control-solid d-none form-control input"
+                        {/* {campaignInputData.selectedTime !== "now" && ( */}
+                        {!processCampaignButton && (
+                          <input
+                            className="form-control form-control-solid  flatpickr-input"
+                            placeholder="Pick date & time"
+                            id="kt_modal_create_campaign_datepicker"
+                            // type="hidden"
+                            type="datetime-local"
+                            value={campaignInputData.selectedTime}
+                            min={campaignInputData.selectedTime}
+                            onChange={(e) =>
+                              setCampaignInputData({
+                                ...campaignInputData,
+                                selectedTime: e.target.value,
+                              })
+                            }
+                          />
+                        )}
+
+                        {/* <input
+                          className="form-control form-control-solid  form-control input"
                           placeholder="Pick date & time"
                           tabIndex={0}
-                          type="text"
-                          readOnly={true}
-                        />
+                          type="time"
+                          // readOnly={true}
+                        /> */}
                         {/*end::Datepicker*/}
-                      </div>
-                      {/*end::Input group*/}
-                      {/*begin::Input group*/}
-                      <div className="fv-row mb-10">
-                        {/*begin::Label*/}
-                        <label className="fs-6 fw-semibold mb-2">
-                          Daily Budget
-                          <span
-                            className="ms-1"
-                            data-bs-toggle="tooltip"
-                            aria-label="Choose the budget allocated for each day. Higher budget will generate better results"
-                            data-bs-original-title="Choose the budget allocated for each day. Higher budget will generate better results"
-                            data-kt-initialized={1}
-                          >
-                            <i className="ki-outline ki-information-5 text-gray-500 fs-6" />
-                          </span>{" "}
-                        </label>
-                        {/*end::Label*/}
-                        {/*begin::Slider*/}
-                        <div className="d-flex flex-column text-center">
-                          <div className="d-flex align-items-start justify-content-center mb-7">
-                            <span className="fw-bold fs-4 mt-1 me-2">$</span>
-                            <span
-                              className="fw-bold fs-3x"
-                              id="kt_modal_create_campaign_budget_label"
-                            >
-                              5
-                            </span>
-                            <span className="fw-bold fs-3x">.00</span>
-                          </div>
-                          <div
-                            id="kt_modal_create_campaign_budget_slider"
-                            className="noUi-sm noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr"
-                          >
-                            <div className="noUi-base">
-                              <div className="noUi-connects" />
-                              <div
-                                className="noUi-origin"
-                                style={{
-                                  transform: "translate(-99.1984%, 0px)",
-                                  zIndex: 4,
-                                }}
-                              >
-                                <div
-                                  className="noUi-handle noUi-handle-lower"
-                                  data-handle={0}
-                                  tabIndex={0}
-                                  role="slider"
-                                  aria-orientation="horizontal"
-                                  aria-valuemin={1.0}
-                                  aria-valuemax={500.0}
-                                  aria-valuenow={5.0}
-                                >
-                                  <div className="noUi-touch-area" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        {/*end::Slider*/}
                       </div>
                       {/*end::Input group*/}
                     </div>
@@ -1431,11 +1414,7 @@ const Step4 = ({ show, handleClose, setSteps, handleCampaignSubmit }: any) => {
                       {/*end::Actions*/}
                       {/*begin::Illustration*/}
                       <div className="text-center px-4">
-                        <img
-                          src="/metronic8/demo33/assets/media/illustrations/sketchy-1/9.png"
-                          alt=""
-                          className="mww-100 mh-350px"
-                        />
+                        <img src="" alt="" className="mww-100 mh-350px" />
                       </div>
                       {/*end::Illustration*/}
                     </div>

@@ -28,6 +28,14 @@ const Step2 = ({
     }
   };
 
+  const handleDeleteFile = () => {
+    setCampaignInputData({
+      ...campaignInputData,
+      campaignUploadFile: null,
+    });
+    setSteps(1);
+  };
+
   if (show)
     return (
       <div
@@ -97,7 +105,7 @@ const Step2 = ({
                     className="stepper-item me-5 me-md-15 pending"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Budget Estimates</h3>
+                    <h3 className="stepper-title">Schedule Campaign</h3>
                   </div>
                   {/*end::Step 4*/}
                   {/*begin::Step 5*/}
@@ -470,11 +478,9 @@ const Step2 = ({
                             {/*begin::Info*/}
                             <div className="ms-4">
                               <h3 className="dfs-3 fw-bold text-gray-900 mb-1">
-                                Drop campaign files here or click to upload.
+                                Drop campaign file here or click to upload.
                               </h3>
-                              <span className="fw-semibold fs-4 text-muted">
-                                Upload up to 10 files
-                              </span>
+                              <span className="fw-semibold fs-4 text-muted"></span>
                             </div>
                             {/*end::Info*/}
                           </div>
@@ -522,7 +528,7 @@ const Step2 = ({
                               </div>
                               {/*begin::Menu*/}
                               <div className="min-w-100px">
-                                <select
+                                {/* <select
                                   className="form-select form-select-solid form-select-sm select2-hidden-accessible"
                                   // data-control="select2"
                                   // data-hide-search="true"
@@ -533,8 +539,13 @@ const Step2 = ({
                                   // data-kt-initialized={1}
                                 >
                                   <option value={"Delete"}>Delete</option>
-                                  <option value={"Edit"}>Edit</option>
-                                </select>
+                                </select> */}
+                                <button
+                                  className="form-select form-select-solid form-select-sm select2-hidden-accessible"
+                                  onClick={handleDeleteFile}
+                                >
+                                  Delete
+                                </button>
                               </div>
                               {/*end::Menu*/}
                             </div>
@@ -992,11 +1003,7 @@ const Step2 = ({
                       {/*end::Actions*/}
                       {/*begin::Illustration*/}
                       <div className="text-center px-4">
-                        <img
-                          src="/metronic8/demo33/assets/media/illustrations/sketchy-1/9.png"
-                          alt=""
-                          className="mww-100 mh-350px"
-                        />
+                        <img src="" alt="" className="mww-100 mh-350px" />
                       </div>
                       {/*end::Illustration*/}
                     </div>

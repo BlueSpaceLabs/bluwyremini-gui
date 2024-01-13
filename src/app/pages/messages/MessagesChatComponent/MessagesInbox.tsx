@@ -1,7 +1,28 @@
 import React from "react";
 import { KTIcon, toAbsoluteUrl } from "../../../../_metronic/helpers";
+// import { useQuery } from "react-query";
+// import axios from "axios";
+// import WhatsAppInbox from "./Inbox/WhatsAppInbox";
+// import TelegramInbox from "./Inbox/TelegramInbox";
+// import InstagramInbox from "./Inbox/InstagramInbox";
+// import FacebookInbox from "./Inbox/FacebookInbox";
+import InboxList from "./Inbox/InboxList";
 
-const MessagesInbox = ({ messageTab }: any) => {
+// const serviceInboxListData = async () => {
+//   const url =
+//     "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+//   const params = {
+//     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+//     id: "2",
+//     channelName: "all",
+//   };
+
+//   const response = await axios.get(url, { params });
+
+//   return response.data;
+// };
+
+const MessagesInbox = ({ messageTab, setSelectedUser }: any) => {
   //   const [messageTab, SetMessageTab] = React.useState("all_messages");
 
   return (
@@ -56,7 +77,11 @@ const MessagesInbox = ({ messageTab }: any) => {
         </div>
 
         <div className="card-body pt-5" id="kt_chat_contacts_body">
-          <div
+          <InboxList
+            inboxChannel={messageTab}
+            setSelectedUser={setSelectedUser}
+          />
+          {/* <div
             className="scroll-y me-n5 pe-5 h-200px h-lg-auto"
             data-kt-scroll="true"
             data-kt-scroll-activate="{default: false, lg: true}"
@@ -64,162 +89,32 @@ const MessagesInbox = ({ messageTab }: any) => {
             data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header"
             data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body"
             data-kt-scroll-offset="0px"
-          >
-            {(messageTab === "telegram" || messageTab === "all_messages") && (
-              <div className="d-flex flex-stack py-4">
-                <div className="d-flex align-items-center">
-                  <div className="symbol symbol-45px symbol-circle">
-                    <span className="symbol-label bg-light-danger text-danger fs-6 fw-bolder">
-                      M
-                    </span>
-                  </div>
-
-                  <div className="ms-5">
-                    <a
-                      href="#"
-                      className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                    >
-                      Melody Macy
-                    </a>
-                    <div className="fw-bold text-gray-500">
-                      melody@altbox.com
-                    </div>
-                  </div>
-                </div>
-
-                <div className="d-flex flex-column align-items-end ms-2">
-                  <span className="text-muted fs-7 mb-1">5 hrs</span>
-                </div>
-              </div>
+          > */}
+          {/* {(messageTab === "telegram" || messageTab === "all_messages") && (
+              <TelegramInbox />
             )}
 
-            <div className="separator separator-dashed d-none"></div>
+            <div className="separator separator-dashed d-none"></div> */}
 
-            {(messageTab === "telegram" || messageTab === "all_messages") && (
-              <div className="d-flex flex-stack py-4">
-                <div className="d-flex align-items-center">
-                  <div className="symbol symbol-45px symbol-circle">
-                    <img
-                      alt="Pic"
-                      src={toAbsoluteUrl("media/avatars/300-1.jpg")}
-                    />
-                  </div>
+          {/* {(messageTab === "whatsapp" || messageTab === "all_messages") && (
+              <WhatsAppInbox inboxListData={inboxListData} />
+            )} */}
 
-                  <div className="ms-5">
-                    <a
-                      href="#"
-                      className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                    >
-                      Max Smith
-                    </a>
-                    <div className="fw-bold text-gray-500">max@kt.com</div>
-                  </div>
-                </div>
-
-                <div className="d-flex flex-column align-items-end ms-2">
-                  <span className="text-muted fs-7 mb-1">20 hrs</span>
-                </div>
-              </div>
-            )}
-
-            <div className="separator separator-dashed d-none"></div>
-
-            {(messageTab === "whatsapp" || messageTab === "all_messages") && (
-              <div className="d-flex flex-stack py-4">
-                <div className="d-flex align-items-center">
-                  <div className="symbol symbol-45px symbol-circle">
-                    <img
-                      alt="Pic"
-                      src={toAbsoluteUrl("media/avatars/300-5.jpg")}
-                    />
-                  </div>
-
-                  <div className="ms-5">
-                    <a
-                      href="#"
-                      className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                    >
-                      Sean Bean
-                    </a>
-                    <div className="fw-bold text-gray-500">
-                      sean@dellito.com
-                    </div>
-                  </div>
-                </div>
-
-                <div className="d-flex flex-column align-items-end ms-2">
-                  <span className="text-muted fs-7 mb-1">20 hrs</span>
-                  <span className="badge badge-sm badge-circle badge-light-success">
-                    6
-                  </span>
-                </div>
-              </div>
-            )}
-
-            <div className="separator separator-dashed d-none"></div>
+          {/* <div className="separator separator-dashed d-none"></div>
 
             {(messageTab === "instagram" || messageTab === "all_messages") && (
-              <div className="d-flex flex-stack py-4">
-                <div className="d-flex align-items-center">
-                  <div className="symbol symbol-45px symbol-circle">
-                    <img
-                      alt="Pic"
-                      src={toAbsoluteUrl("media/avatars/300-25.jpg")}
-                    />
-                  </div>
-
-                  <div className="ms-5">
-                    <a
-                      href="#"
-                      className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                    >
-                      Brian Cox
-                    </a>
-                    <div className="fw-bold text-gray-500">
-                      brian@exchange.com
-                    </div>
-                  </div>
-                </div>
-
-                <div className="d-flex flex-column align-items-end ms-2">
-                  <span className="text-muted fs-7 mb-1">20 hrs</span>
-                </div>
-              </div>
-            )}
-
+              <InstagramInbox />
+            )} */}
+          {/* 
             <div className="separator separator-dashed d-none"></div>
 
             {(messageTab === "facebook" || messageTab === "all_messages") && (
-              <div className="d-flex flex-stack py-4">
-                <div className="d-flex align-items-center">
-                  <div className="symbol symbol-45px symbol-circle">
-                    <span className="symbol-label bg-light-warning text-warning fs-6 fw-bolder">
-                      M
-                    </span>
-                  </div>
+              <FacebookInbox />
+            )} */}
 
-                  <div className="ms-5">
-                    <a
-                      href="#"
-                      className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                    >
-                      Mikaela Collins
-                    </a>
-                    <div className="fw-bold text-gray-500">
-                      mikaela@pexcom.com
-                    </div>
-                  </div>
-                </div>
+          {/* <div className="separator separator-dashed d-none"></div> */}
 
-                <div className="d-flex flex-column align-items-end ms-2">
-                  <span className="text-muted fs-7 mb-1">1 day</span>
-                </div>
-              </div>
-            )}
-
-            {/* <div className="separator separator-dashed d-none"></div> */}
-
-            {/* {(messageTab === "all_messages" || "whatsapp") && (
+          {/* {(messageTab === "all_messages" || "whatsapp") && (
           <div className="d-flex flex-stack py-4">
             <div className="d-flex align-items-center">
               <div className="symbol symbol-45px symbol-circle">
@@ -251,9 +146,9 @@ const MessagesInbox = ({ messageTab }: any) => {
           </div>
         )} */}
 
-            {/* <div className="separator separator-dashed d-none"></div> */}
+          {/* <div className="separator separator-dashed d-none"></div> */}
 
-            {/* {(messageTab === "all_messages" || "whatsapp") && (
+          {/* {(messageTab === "all_messages" || "whatsapp") && (
           <div className="d-flex flex-stack py-4">
             <div className="d-flex align-items-center">
               <div className="symbol symbol-45px symbol-circle">
@@ -282,9 +177,9 @@ const MessagesInbox = ({ messageTab }: any) => {
           </div>
         )} */}
 
-            {/* <div className="separator separator-dashed d-none"></div> */}
+          {/* <div className="separator separator-dashed d-none"></div> */}
 
-            {/* {(messageTab === "all_messages" || "whatsapp") && (
+          {/* {(messageTab === "all_messages" || "whatsapp") && (
           <div className="d-flex flex-stack py-4">
             <div className="d-flex align-items-center">
               <div className="symbol symbol-45px symbol-circle">
@@ -314,72 +209,7 @@ const MessagesInbox = ({ messageTab }: any) => {
             </div>
           </div>
         )} */}
-
-            {/* <div className="separator separator-dashed d-none"></div> */}
-
-            {/* {(messageTab === "all_messages" || "whatsapp") && (
-          <div className="d-flex flex-stack py-4">
-            <div className="d-flex align-items-center">
-              <div className="symbol symbol-45px symbol-circle">
-                <img
-                  alt="Pic"
-                  src={toAbsoluteUrl("media/avatars/300-23.jpg")}
-                />
-              </div>
-
-              <div className="ms-5">
-                <a
-                  href="#"
-                  className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                >
-                  Dan Wilson
-                </a>
-                <div className="fw-bold text-gray-500">
-                  dam@consilting.com
-                </div>
-              </div>
-            </div>
-
-            <div className="d-flex flex-column align-items-end ms-2">
-              <span className="text-muted fs-7 mb-1">2 weeks</span>
-              <span className="badge badge-sm badge-circle badge-light-warning">
-                9
-              </span>
-            </div>
-          </div>
-        )} */}
-
-            {/* <div className="separator separator-dashed d-none"></div> */}
-
-            {/* {(messageTab === "all_messages" || "whatsapp") && (
-          <div className="d-flex flex-stack py-4">
-            <div className="d-flex align-items-center">
-              <div className="symbol symbol-45px symbol-circle">
-                <span className="symbol-label bg-light-danger text-danger fs-6 fw-bolder">
-                  E
-                </span>
-                <div className="symbol-badge bg-success start-100 top-100 border-4 h-15px w-15px ms-n2 mt-n2"></div>
-              </div>
-
-              <div className="ms-5">
-                <a
-                  href="#"
-                  className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                >
-                  Emma Bold
-                </a>
-                <div className="fw-bold text-gray-500">
-                  emma@intenso.com
-                </div>
-              </div>
-            </div>
-
-            <div className="d-flex flex-column align-items-end ms-2">
-              <span className="text-muted fs-7 mb-1">1 day</span>
-            </div>
-          </div>
-        )} */}
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </React.Fragment>

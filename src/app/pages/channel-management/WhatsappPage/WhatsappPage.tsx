@@ -32,6 +32,11 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
   const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
   const [channelConfigurationData, setChannelConfigurationData] =
     React.useState<any>(initialValue);
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const {
     data: getWhatsappData,
@@ -114,11 +119,22 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
+              {/* <span className="fw-bolder fs-6 me-2">
                 {channelConfigurationData.accessToken
                   ? channelConfigurationData.accessToken
                   : "No Data to show."}
-              </span>
+              </span> */}
+
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control form-control-lg form-control-solid"
+                value={
+                  channelConfigurationData.accessToken
+                    ? channelConfigurationData.accessToken
+                    : "No Data to show."
+                }
+                onClick={togglePasswordVisibility}
+              />
             </div>
           </div>
 
@@ -190,11 +206,22 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
             </label>
 
             <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
+              {/* <span className="fw-bolder fs-6 me-2">
                 {channelConfigurationData.permanentToken
                   ? channelConfigurationData.permanentToken
                   : "No Data to show."}
-              </span>
+              </span> */}
+
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control form-control-lg form-control-solid"
+                value={
+                  channelConfigurationData.permanentToken
+                    ? channelConfigurationData.permanentToken
+                    : "No Data to show."
+                }
+                onClick={togglePasswordVisibility}
+              />
             </div>
           </div>
 
@@ -255,7 +282,9 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
             </div>
           </div>
           {channelConfigurationData.appId && (
-            <WhatsappAppDetails appId={channelConfigurationData.appId} />
+            <WhatsappAppDetails
+              channelConfigurationData={channelConfigurationData}
+            />
           )}
         </div>
       </div>

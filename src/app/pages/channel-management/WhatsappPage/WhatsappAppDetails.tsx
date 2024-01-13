@@ -1,45 +1,83 @@
 import React from "react";
-import { useQuery } from "react-query";
 import axios from "axios";
 
-const serviceAppDetailData = async () => {
-  const response = await axios.get(
-    "https://graph.facebook.com/v18.0/104801782499737",
-    {
-      headers: {
-        Authorization:
-          "Bearer EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
-      },
-    }
-  );
-  return response.data;
-};
-
-const WhatsappAppDetails = ({ appId }: any) => {
-  console.log({ appId });
+const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
+  console.log({ channelConfigurationData });
   const [detailData, setDetailData] = React.useState({
     verified_name: null,
     throughput: null,
     quality_rating: null,
   });
 
-  const {
-    data: appDetailData,
-    isLoading,
-    isError,
-  } = useQuery("appDetailData", serviceAppDetailData);
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     const url =
+  //       "http://3.108.229.60:8082/bluwyremini-backend/info/getWabaBusinessInfo.php";
+  //     try {
+  //       const params = {
+  //         accessKey:
+  //           "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+  //         // channelConfigurationData.accessToken,
+  //         phoneNoId: channelConfigurationData.phoneNoId,
+  //         accessToken: channelConfigurationData.permanentToken,
+  //         channelName: "whatsapp",
+  //       };
+  //       const response = await axios.get(url, { params });
+
+  //       console.log({ params });
+
+  //       console.log("subhro 01", response.data);
+  //       if (response.data) {
+  //         setDetailData({
+  //           verified_name: response.data.verifiedName,
+  //           throughput: response.data.throughputLevel,
+  //           quality_rating: response.data.qualityRating,
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    console.log({ appDetailData });
-    if (appDetailData) {
-      setDetailData(appDetailData);
-    }
-  }, [appDetailData]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://3.108.229.60:8082/bluwyremini-backend/info/getWabaBusinessInfo.php",
+          {
+            params: {
+              accessKey:
+                "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+              phoneNoId: "104801782499737",
+              accessToken:
+                "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+              channelName: "whatsapp",
+            },
+          }
+        );
+        if (response.data) {
+          setDetailData({
+            verified_name: response.data.verifiedName,
+            throughput: response.data.throughputLevel,
+            quality_rating: response.data.qualityRating,
+          });
+        }
 
-  // React.useEffect(() => {
-  //   const resp = serviceAppDetailData();
-  //   console.log("resp", resp);
-  // }, [appId]);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  console.log("subhro 009", data);
 
   return (
     <React.Fragment>

@@ -23,7 +23,7 @@ import { MessagesChat } from "./MessagesChatComponent/MessagesChat";
 // ];
 
 const MessagesPage = () => {
-  const [messageTab, SetMessageTab] = React.useState("all_messages");
+  const [messageTab, SetMessageTab] = React.useState("all");
 
   return (
     <Routes>

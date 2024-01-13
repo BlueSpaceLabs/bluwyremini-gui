@@ -5,6 +5,7 @@ import MessagesProfile from "./MessagesProfile";
 
 const MessagesChat = ({ messageTab }: any) => {
   const [showProfile, setShowProfile] = React.useState<boolean>(false);
+  const [selectedInbox, setSelectedUser] = React.useState(null);
 
   return (
     <div
@@ -14,11 +15,17 @@ const MessagesChat = ({ messageTab }: any) => {
       }}
     >
       <div style={{ width: `${showProfile ? "29%" : "40%"}` }}>
-        <MessagesInbox messageTab={messageTab} />
+        <MessagesInbox
+          messageTab={messageTab}
+          setSelectedUser={setSelectedUser}
+        />
       </div>
 
       <div style={{ width: `${showProfile ? "43%" : "58%"}` }}>
-        <MessagesConversation setShowProfile={setShowProfile} />
+        <MessagesConversation
+          setShowProfile={setShowProfile}
+          selectedInbox={selectedInbox}
+        />
       </div>
       {showProfile && (
         <div style={{ width: "25%" }}>

@@ -27,7 +27,7 @@ const MessagesHeader = ({ messageTab, SetMessageTab }: any) => {
               messageTab === "all_messages" ? "text-primary" : "text-gray-500"
             } `}
             style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("all_messages")}
+            onClick={() => SetMessageTab("all")}
           >
             All Messages
           </div>

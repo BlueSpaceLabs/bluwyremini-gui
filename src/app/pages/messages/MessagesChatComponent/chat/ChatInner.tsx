@@ -1,26 +1,56 @@
 import React, { FC, useState } from "react";
 import clsx from "clsx";
 import {
-  toAbsoluteUrl,
   defaultMessages,
   defaultUserInfos,
   MessageModel,
   UserInfoModel,
   messageFromClient,
 } from "../../../../../_metronic/helpers";
-
-type Props = {
-  selectedKeyWord?: string;
-  isDrawer?: boolean;
-};
+import { useMutation } from "react-query";
+import axios from "axios";
+// type Props = {
+//   selectedKeyWord?: string;
+//   isDrawer?: boolean;
+// };
 
 const bufferMessages = defaultMessages;
 
-const ChatConversation: FC<Props> = ({ isDrawer = false, selectedKeyWord }) => {
+const ChatConversation = ({
+  isDrawer = false,
+  selectedKeyWord,
+  conversationData,
+  selectedInbox,
+}: any) => {
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
-  const [userInfos] = useState<UserInfoModel[]>(defaultUserInfos);
+  // const [userInfos] = useState<UserInfoModel[]>(defaultUserInfos);
+
+  // console.log("selectedInbox", selectedInbox);
+
+  const handleSendMessageClick = async () => {
+    try {
+      const response = await axios.post(
+        "https://qa.client.bluwyre.io/whatsapp/webhook",
+        {
+          message: message,
+          phoneNo: selectedInbox.custNumber,
+          userType: "agent",
+          accesskey:
+            "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+          displayPhoneNo: "919810804885",
+          phoneNoId: "104801782499737",
+        }
+      );
+
+      // Handle the response as needed
+      console.log(response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error:", error);
+    }
+  };
 
   const sendMessage = () => {
     const newMessage: MessageModel = {
@@ -58,9 +88,12 @@ const ChatConversation: FC<Props> = ({ isDrawer = false, selectedKeyWord }) => {
       id={isDrawer ? "kt_drawer_chat_messenger_body" : "kt_chat_messenger_body"}
     >
       <div
-        className={clsx("scroll-y me-n5 pe-5", {
-          "h-300px h-lg-auto": !isDrawer,
-        })}
+        className={clsx(
+          "scroll-y me-n5 pe-5 h-250px"
+          // , {
+          //   "h-150px h-lg-auto": !isDrawer,
+          // }
+        )}
         data-kt-element="messages"
         data-kt-scroll="true"
         data-kt-scroll-activate="{default: false, lg: true}"
@@ -77,90 +110,101 @@ const ChatConversation: FC<Props> = ({ isDrawer = false, selectedKeyWord }) => {
         }
         data-kt-scroll-offset={isDrawer ? "0px" : "5px"}
       >
-        {messages.map((message, index) => {
-          const userInfo = userInfos[message.user];
-          const state = message.type === "in" ? "info" : "primary";
-          const templateAttr = {};
-          if (message.template) {
-            Object.defineProperty(templateAttr, "data-kt-element", {
-              value: `template-${message.type}`,
-            });
-          }
-          const contentClass = `${isDrawer ? "" : "d-flex"} justify-content-${
-            message.type === "in" ? "start" : "end"
-          } mb-10`;
-          return (
-            <div
-              key={`message${index}`}
-              className={clsx("d-flex", contentClass, "mb-10", {
-                "d-none": message.template,
-              })}
-              {...templateAttr}
-            >
-              <div
-                className={clsx(
-                  "d-flex flex-column align-items",
-                  `align-items-${message.type === "in" ? "start" : "end"}`
-                )}
-              >
-                <div className="d-flex align-items-center mb-2">
-                  {message.type === "in" ? (
-                    <>
-                      <div className="symbol  symbol-35px symbol-circle ">
-                        <img
-                          alt="Pic"
-                          src={toAbsoluteUrl(`media/${userInfo.avatar}`)}
-                        />
-                      </div>
-                      <div className="ms-3">
-                        <a
-                          href="#"
-                          className="fs-5 fw-bolder text-gray-900 text-hover-primary me-1"
-                        >
-                          {userInfo.name}
-                        </a>
-                        <span className="text-muted fs-7 mb-1">
-                          {message.time}
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="me-3">
-                        <span className="text-muted fs-7 mb-1">
-                          {message.time}
-                        </span>
-                        <a
-                          href="#"
-                          className="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1"
-                        >
-                          You
-                        </a>
-                      </div>
-                      <div className="symbol  symbol-35px symbol-circle ">
-                        <img
-                          alt="Pic"
-                          src={toAbsoluteUrl(`media/${userInfo.avatar}`)}
-                        />
-                      </div>
-                    </>
-                  )}
-                </div>
+        {conversationData.length > 0 ? (
+          conversationData.map((message: any, index: number) => {
+            // const userInfo = userInfos[message.custName];
+            const state = message.userType === "customer" ? "info" : "primary";
+            // const templateAttr = {};
+            // if (message.template) {
+            //   Object.defineProperty(templateAttr, "data-kt-element", {
+            //     value: `template-${message.type}`,
+            //   });
+            // }
+            // const contentClass = `${isDrawer ? "" : "d-flex"} justify-content-${
+            //   message.type === "in" ? "start" : "end"
+            // } mb-10`;
 
+            return (
+              <div
+                key={`message${index}`}
+                // className={clsx("d-flex", contentClass, "mb-10", {
+                //   "d-none": message.template,
+                // })}
+                // {...templateAttr}
+              >
                 <div
                   className={clsx(
-                    "p-5 rounded",
-                    `bg-light-${state}`,
-                    "text-gray-900 fw-bold mw-lg-400px",
-                    `text-${message.type === "in" ? "start" : "end"}`
+                    "d-flex flex-column align-items",
+                    `align-items-${
+                      message.userType === "customer" ? "start" : "end"
+                    }`
                   )}
-                  data-kt-element="message-text"
-                  dangerouslySetInnerHTML={{ __html: message.text }}
-                ></div>
+                >
+                  <div className="d-flex align-items-center mb-2">
+                    {message.userType === "customer" ? (
+                      <>
+                        {/* <div className="symbol  symbol-35px symbol-circle ">
+                        <img
+                          alt="Pic"
+                          src={toAbsoluteUrl(`media/${userInfo.avatar}`)}
+                        />
+                      </div> */}
+                        <div className="ms-3">
+                          <a
+                            href="#"
+                            className="fs-5 fw-bolder text-gray-900 text-hover-primary me-1"
+                          >
+                            {/* {userInfo.name} */}
+                            {message.custName}
+                          </a>
+                          <span className="text-muted fs-7 mb-1">
+                            {message.lastInteractionDatetime}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="me-3">
+                          <span className="text-muted fs-7 mb-1">
+                            {/* {message.time} */}
+                            {message.lastInteractionDatetime}
+                          </span>
+                          <a
+                            href="#"
+                            className="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1"
+                          >
+                            You
+                          </a>
+                        </div>
+                        <div className="symbol  symbol-35px symbol-circle ">
+                          {/* <img
+                          alt="Pic"
+                          src={toAbsoluteUrl(`media/${userInfo.avatar}`)}
+                        /> */}
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  <div
+                    className={clsx(
+                      "p-5 rounded",
+                      `bg-light-${state}`,
+                      "text-gray-900 fw-bold mw-lg-400px",
+                      `text-${
+                        message.userType === "customer" ? "start" : "end"
+                      }`
+                    )}
+                    data-kt-element="message-text"
+                    dangerouslySetInnerHTML={{ __html: message.userInput }}
+                  ></div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className="fs-7 fw-bold text-gray-500">No messages to show.</div>
+        )}
       </div>
 
       <div
@@ -204,7 +248,8 @@ const ChatConversation: FC<Props> = ({ isDrawer = false, selectedKeyWord }) => {
             className="btn btn-primary"
             type="button"
             data-kt-element="send"
-            onClick={sendMessage}
+            // onClick={sendMessage}
+            onClick={handleSendMessageClick}
           >
             Send
           </button>

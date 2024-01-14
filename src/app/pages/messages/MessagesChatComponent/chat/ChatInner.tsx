@@ -25,6 +25,8 @@ const ChatConversation = ({
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
+  const chatContainerRef = React.useRef<HTMLDivElement | null>(null);
+
   // const [userInfos] = useState<UserInfoModel[]>(defaultUserInfos);
 
   // console.log("selectedInbox", selectedInbox);
@@ -44,6 +46,7 @@ const ChatConversation = ({
         }
       );
 
+      setMessage("");
       // Handle the response as needed
       console.log(response.data);
     } catch (error) {
@@ -98,10 +101,24 @@ const ChatConversation = ({
       (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
     );
 
-    if (days > 0) return `${days} days, ${hours} hours, ${minutes} minutes`;
-    else if (hours > 0) return `${hours} hours, ${minutes} minutes`;
-    else return `${minutes} minutes`;
+    if (days > 0) return `${days} days`;
+    else if (hours > 0) return `${hours} hrs`;
+    else return `${minutes} mins`;
   };
+
+  const handleNameInitialsFinder = (inputString: string) => {
+    const words = inputString.split(" ");
+    const initials = words.map((word) => word[0].toUpperCase());
+
+    return initials.join("");
+  };
+
+  React.useEffect(() => {
+    if (chatContainerRef.current) {
+      const chatContainer = chatContainerRef.current;
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [conversationData]);
 
   return (
     <div
@@ -130,6 +147,7 @@ const ChatConversation = ({
             : "#kt_content, #kt_app_content, #kt_chat_messenger_body"
         }
         data-kt-scroll-offset={isDrawer ? "0px" : "5px"}
+        ref={chatContainerRef}
       >
         {conversationData.length > 0 ? (
           conversationData.map((message: any, index: number) => {
@@ -170,13 +188,14 @@ const ChatConversation = ({
                           src={toAbsoluteUrl(`media/${userInfo.avatar}`)}
                         />
                       </div> */}
-                        <div className="ms-3">
+                        <div className="ms-3 d-flex gap-1">
                           <a
-                            href="#"
+                            // href="#"
                             className="fs-5 fw-bolder text-gray-900 text-hover-primary me-1"
                           >
                             {/* {userInfo.name} */}
-                            {message.custName}
+
+                            {handleNameInitialsFinder(message.custName)}
                           </a>
                           <span className="text-muted fs-7 mb-1">
                             {calculateTimeDifference(

@@ -56,13 +56,14 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
               </span>
             </div>
             <div className="d-flex justify-content-center flex-column me-3">
-              <a
-                href="#"
+              <span
                 className="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1"
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowProfile(false)}
               >
                 {/* Brian Cox */}
                 {profileData.profileName}
-              </a>
+              </span>
 
               <div className="mb-0 lh-1">
                 <span className="badge badge-success badge-circle w-10px h-10px me-1"></span>
@@ -71,7 +72,7 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
             </div>
           </div>
 
-          <div className="card-toolbar">
+          {/* <div className="card-toolbar">
             <div className="me-n3">
               <button
                 className="btn btn-sm btn-icon btn-active-light-primary"
@@ -84,7 +85,7 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
               </button>
               <Dropdown1 />
             </div>
-          </div>
+          </div> */}
         </div>
         {/* <ChatInner /> */}
         <div className="d-flex flex-column p-4">

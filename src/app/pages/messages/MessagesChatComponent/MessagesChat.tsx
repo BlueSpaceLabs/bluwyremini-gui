@@ -29,7 +29,10 @@ const MessagesChat = ({ messageTab }: any) => {
       </div>
       {showProfile && (
         <div style={{ width: "25%" }}>
-          <MessagesProfile setShowProfile={setShowProfile} />
+          <MessagesProfile
+            setShowProfile={setShowProfile}
+            selectedInbox={selectedInbox}
+          />
         </div>
       )}
     </div>

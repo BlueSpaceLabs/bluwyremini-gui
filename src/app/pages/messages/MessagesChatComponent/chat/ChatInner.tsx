@@ -82,6 +82,27 @@ const ChatConversation = ({
     if (selectedKeyWord) setMessage(selectedKeyWord);
   }, [selectedKeyWord]);
 
+  const calculateTimeDifference = (chatTime: number) => {
+    const currentDate: any = new Date();
+    const givenDate: any = new Date(chatTime);
+    // console.log("Type of givenDate:", typeof givenDate);
+    // console.log("Type of currentDate:", typeof currentDate);
+
+    const differenceInMilliseconds = Math.abs(givenDate - currentDate);
+
+    const days = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
+    );
+
+    if (days > 0) return `${days} days, ${hours} hours, ${minutes} minutes`;
+    else if (hours > 0) return `${hours} hours, ${minutes} minutes`;
+    else return `${minutes} minutes`;
+  };
+
   return (
     <div
       className="card-body"
@@ -158,7 +179,10 @@ const ChatConversation = ({
                             {message.custName}
                           </a>
                           <span className="text-muted fs-7 mb-1">
-                            {message.lastInteractionDatetime}
+                            {calculateTimeDifference(
+                              message.lastInteractionDatetime
+                            )}
+                            {/* {message.lastInteractionDatetime} */}
                           </span>
                         </div>
                       </>
@@ -167,7 +191,10 @@ const ChatConversation = ({
                         <div className="me-3">
                           <span className="text-muted fs-7 mb-1">
                             {/* {message.time} */}
-                            {message.lastInteractionDatetime}
+                            {calculateTimeDifference(
+                              message.lastInteractionDatetime
+                            )}
+                            {/* {message.lastInteractionDatetime}  */}
                           </span>
                           <a
                             href="#"

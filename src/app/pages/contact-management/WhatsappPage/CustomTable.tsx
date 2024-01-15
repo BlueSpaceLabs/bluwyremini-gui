@@ -140,14 +140,15 @@ export default function CustomContactTable({
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Full Name
               </TableCell>
+              {/*<TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Mobile Number
+    </TableCell>*/}
+              
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Mobile Number
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Last Interaction
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                WABA Mobile Number
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Created Date
@@ -174,15 +175,16 @@ export default function CustomContactTable({
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.crmFullname}
                   </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                  {/*<TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.mobileNo}
+              </TableCell>*/}
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.wabaMobileNo}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.lastInteractionDatetime}
                   </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.wabaMobileNo}
-                  </TableCell>
+                  
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.createdDatetime}
                   </TableCell>

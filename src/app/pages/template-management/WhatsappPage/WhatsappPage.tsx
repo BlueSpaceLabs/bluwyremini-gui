@@ -18,7 +18,7 @@ const serviceAxiosGetTemplateWhatsappData = async () => {
     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
     waba_id: "116042751363278",
     access_token:
-      "EAAvZAe0w3fFoBABFN7CqXZCwavZCjjrISEZA8vNOcJyqzZBYnyJ07KDERmZCWZCg86Xh7r7JWjelY7D7wz4XN2aZCZAjmSMa8tjZA0L869VcQs6AEwKSGg1H1qHeJrUgd3Yk7ug3FdW7jA825HO2Q4CKj73gxfjjS9BChg6z019mJoWi5MamqbSmeb",
+      "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
     channelName: "whatsapp",
   };
 

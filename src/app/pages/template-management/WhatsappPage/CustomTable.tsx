@@ -125,9 +125,9 @@ export default function CustomTemplateTable({ tableData }: any) {
         <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+              {/*<TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Template Id
-              </TableCell>
+    </TableCell>*/}
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Template Name
               </TableCell>
@@ -155,9 +155,9 @@ export default function CustomTemplateTable({ tableData }: any) {
             ).map((row: any) => {
               return (
                 <TableRow key={row.name}>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                  {/*<TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.id}
-                  </TableCell>
+              </TableCell>*/}
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.name}
                   </TableCell>

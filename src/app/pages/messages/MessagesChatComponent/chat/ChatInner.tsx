@@ -35,7 +35,7 @@ const ChatConversation = ({
   const handleSendMessageClick = async () => {
     try {
       const response = await axios.post(
-        "https://qa.client.bluwyre.io/whatsapp/webhook",
+        "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
         {
           message: message,
           phoneNo: selectedInbox.custNumber,

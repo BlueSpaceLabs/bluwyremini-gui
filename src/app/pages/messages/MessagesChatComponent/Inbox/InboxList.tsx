@@ -54,6 +54,25 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
   //     fetchData();
   //   }, []); // The empty dependency array ensures the effect runs once when the component mounts
 
+  const calculateTimeDifference = (chatTime: number) => {
+    const currentDate: any = new Date();
+    const givenDate: any = new Date(chatTime);
+
+    const differenceInMilliseconds = Math.abs(givenDate - currentDate);
+
+    const days = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (differenceInMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
+    );
+
+    if (days > 0) return `${days} days`;
+    else if (hours > 0) return `${hours} hrs`;
+    else return `${minutes} mins`;
+  };
+
   return (
     <div
       className="scroll-y me-n5 pe-5 h-200px h-lg-auto"
@@ -88,7 +107,7 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
 
           <div className="d-flex flex-column align-items-end ms-2">
             <span className="text-muted fs-7 mb-1">
-              {item?.lastInteractionDatetime}
+              {calculateTimeDifference(item?.lastInteractionDatetime)}
             </span>
             <span className="badge badge-sm badge-circle badge-light-success">
               6

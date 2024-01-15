@@ -31,6 +31,7 @@ const ChatConversation = ({
 
   // console.log("selectedInbox", selectedInbox);
 
+  console.log(selectedInbox);
   const handleSendMessageClick = async () => {
     try {
       const response = await axios.post(
@@ -38,6 +39,7 @@ const ChatConversation = ({
         {
           message: message,
           phoneNo: selectedInbox.custNumber,
+          custName: selectedInbox.custName,
           userType: "agent",
           accesskey:
             "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
@@ -47,6 +49,9 @@ const ChatConversation = ({
       );
 
       setMessage("");
+      if (response) {
+        //logic to refetch data
+      }
       // Handle the response as needed
       console.log(response.data);
     } catch (error) {
@@ -88,8 +93,6 @@ const ChatConversation = ({
   const calculateTimeDifference = (chatTime: number) => {
     const currentDate: any = new Date();
     const givenDate: any = new Date(chatTime);
-    // console.log("Type of givenDate:", typeof givenDate);
-    // console.log("Type of currentDate:", typeof currentDate);
 
     const differenceInMilliseconds = Math.abs(givenDate - currentDate);
 
@@ -188,15 +191,18 @@ const ChatConversation = ({
                           src={toAbsoluteUrl(`media/${userInfo.avatar}`)}
                         />
                       </div> */}
-                        <div className="ms-3 d-flex gap-1">
-                          <a
+                        <div className="ms-3 d-flex gap-1 align-items-end">
+                          <div className="symbol symbol-45px symbol-circle">
+                            <span className="symbol-label bg-light-warning text-warning fs-6 fw-bolder">
+                              {handleNameInitialsFinder(message.custName)}
+                            </span>
+                          </div>
+                          {/* <a
                             // href="#"
                             className="fs-5 fw-bolder text-gray-900 text-hover-primary me-1"
                           >
-                            {/* {userInfo.name} */}
-
                             {handleNameInitialsFinder(message.custName)}
-                          </a>
+                          </a> */}
                           <span className="text-muted fs-7 mb-1">
                             {calculateTimeDifference(
                               message.lastInteractionDatetime
@@ -207,20 +213,32 @@ const ChatConversation = ({
                       </>
                     ) : (
                       <>
-                        <div className="me-3">
-                          <span className="text-muted fs-7 mb-1">
-                            {/* {message.time} */}
+                        {/* <div className="me-3"> */}
+                        {/* <span className="text-muted fs-7 mb-1">
                             {calculateTimeDifference(
                               message.lastInteractionDatetime
                             )}
-                            {/* {message.lastInteractionDatetime}  */}
-                          </span>
-                          <a
+                          </span> */}
+                        {/* <a
                             href="#"
                             className="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1"
                           >
                             You
-                          </a>
+                          </a> */}
+                        {/* </div> */}
+
+                        <div className="ms-3 d-flex gap-1 align-items-end">
+                          <span className="text-muted fs-7 mb-1">
+                            {calculateTimeDifference(
+                              message.lastInteractionDatetime
+                            )}
+                          </span>
+
+                          <div className="symbol symbol-45px symbol-circle">
+                            <span className="symbol-label bg-light-warning text-warning fs-6 fw-bolder">
+                              You
+                            </span>
+                          </div>
                         </div>
                         <div className="symbol  symbol-35px symbol-circle ">
                           {/* <img

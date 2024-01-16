@@ -3,7 +3,7 @@ import WhatsappPage from "./WhatsappPage/WhatsappPage";
 import TelegramPage from "./TelegramPage/TelegramPage";
 import InstagramPage from "./InstagramPage/InstagramPage";
 import FacebookPage from "./FacebookPage/FacebookPage";
-import DialogFlowCXPage from "./DialogFlowCX/DialogFlowCXPage";
+import DialogFlowCXPage from "./DialogFlowCX";
 
 const ChannelManagementPages = ({ channelTab, accessKey }: any) => {
   if (channelTab === "whatsapp") {
@@ -15,7 +15,7 @@ const ChannelManagementPages = ({ channelTab, accessKey }: any) => {
   } else if (channelTab === "instagram") {
     return <InstagramPage />;
   } else if (channelTab === "dialogFlowCX") {
-    return <DialogFlowCXPage />;
+    return <DialogFlowCXPage channelName={channelTab} accessKey={accessKey} />;
   } else {
     return null;
   }

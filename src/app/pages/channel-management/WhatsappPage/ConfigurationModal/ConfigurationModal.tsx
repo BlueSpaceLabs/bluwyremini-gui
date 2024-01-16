@@ -15,7 +15,7 @@ const modalsRoot = document.getElementById("root-modals") || document.body;
 const serviceAxiosPostWhatsappData = async (data: any) => {
   try {
     const response = await axios.post(
-      "http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php",
+      `http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=whatsapp`,
       data,
       {
         headers: {

@@ -22,6 +22,8 @@ import axios from "axios";
 const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
   const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [conversationData, setConversationData] = React.useState([]);
+  const [sendMessageClick, setSendMessageClick] =
+    React.useState<boolean>(false);
   // const { data: conversationDetails, isLoading, isError } =
   //   // useQuery("conversationDataAPI", () =>
   //   //   serviceConversationDetails(selectedInbox?.custNumber)
@@ -51,6 +53,7 @@ const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
 
         const response = await axios.get(url, { params });
 
+        // console.log("refetch Message");
         setConversationData(response.data);
       } catch (error) {
         // setError(error);
@@ -58,8 +61,15 @@ const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
         // setIsLoading(false);
       }
     };
+    if (selectedInbox?.custNumber)
+      // Fetch messages initially
+      fetchData();
 
-    if (selectedInbox?.custNumber) fetchData();
+    // Poll for new messages every 5 seconds (adjust as needed)
+    const intervalMessageFetch = setInterval(fetchData, 5000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalMessageFetch);
   }, [selectedInbox?.custNumber]);
 
   if (selectedInbox?.custNumber) {
@@ -119,6 +129,7 @@ const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
             selectedKeyWord={selectedKeyWord}
             conversationData={conversationData}
             selectedInbox={selectedInbox}
+            setSendMessageClick={setSendMessageClick}
           />
         </div>
       </React.Fragment>

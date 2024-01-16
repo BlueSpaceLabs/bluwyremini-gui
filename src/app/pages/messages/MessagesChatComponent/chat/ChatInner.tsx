@@ -21,6 +21,7 @@ const ChatConversation = ({
   selectedKeyWord,
   conversationData,
   selectedInbox,
+  setSendMessageClick,
 }: any) => {
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -31,60 +32,63 @@ const ChatConversation = ({
 
   // console.log("selectedInbox", selectedInbox);
 
-  console.log(selectedInbox);
   const handleSendMessageClick = async () => {
-    try {
-      const response = await axios.post(
-        "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
-        {
-          message: message,
-          phoneNo: selectedInbox.custNumber,
-          custName: selectedInbox.custName,
-          userType: "agent",
-          accesskey:
-            "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
-          displayPhoneNo: "919810804885",
-          phoneNoId: "104801782499737",
+    if (message.length > 0)
+      try {
+        const response = await axios.post(
+          "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
+          {
+            message: message,
+            phoneNo: selectedInbox.custNumber,
+            custName: selectedInbox.custName,
+            userType: "agent",
+            accesskey:
+              "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+            displayPhoneNo: "919810804885",
+            phoneNoId: "104801782499737",
+          }
+        );
+
+        setMessage("");
+        // console.log("subhro 01", response);
+        if (response?.status === 200) {
+          // console.log("refetch 1");
+          setSendMessageClick((preValue: boolean) => !preValue);
+          //logic to refetch data
         }
-      );
-
-      setMessage("");
-      if (response) {
-        //logic to refetch data
+        // Handle the response as needed
+        // console.log(response.data);
+      } catch (error) {
+        // Handle errors
+        console.error("Error:", error);
       }
-      // Handle the response as needed
-      console.log(response.data);
-    } catch (error) {
-      // Handle errors
-      console.error("Error:", error);
-    }
-  };
-
-  const sendMessage = () => {
-    const newMessage: MessageModel = {
-      user: 2,
-      type: "out",
-      text: message,
-      time: "Just now",
-    };
-
-    bufferMessages.push(newMessage);
-    setMessages(bufferMessages);
-    toggleChatUpdateFlat(!chatUpdateFlag);
-    setMessage("");
-    setTimeout(() => {
-      bufferMessages.push(messageFromClient);
-      setMessages(() => bufferMessages);
-      toggleChatUpdateFlat((flag) => !flag);
-    }, 1000);
   };
 
   const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      sendMessage();
+      handleSendMessageClick();
     }
   };
+
+  // const sendMessage = () => {
+  //   const newMessage: MessageModel = {
+  //     user: 2,
+  //     type: "out",
+  //     text: message,
+  //     time: "Just now",
+  //   };
+
+  //   bufferMessages.push(newMessage);
+  //   setMessages(bufferMessages);
+  //   toggleChatUpdateFlat(!chatUpdateFlag);
+  //   setMessage("");
+  //   setTimeout(() => {
+  //     bufferMessages.push(messageFromClient);
+  //     setMessages(() => bufferMessages);
+  //     toggleChatUpdateFlat((flag) => !flag);
+  //   }, 1000);
+  // };
 
   React.useEffect(() => {
     if (selectedKeyWord) setMessage(selectedKeyWord);

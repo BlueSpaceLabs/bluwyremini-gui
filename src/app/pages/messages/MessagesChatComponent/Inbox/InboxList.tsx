@@ -1,33 +1,66 @@
 import React from "react";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 import axios from "axios";
 
-const serviceInboxListData = async (inboxChannel: string) => {
-  const url =
-    "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
-  const params = {
-    accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-    id: "2",
-    channelName: inboxChannel,
-  };
+// const serviceInboxListData = async (inboxChannel: string) => {
+//   const url =
+//     "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+//   const params = {
+//     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+//     id: "2",
+//     channelName: inboxChannel,
+//   };
 
-  const response = await axios.get(url, { params });
+//   const response = await axios.get(url, { params });
 
-  return response.data;
-};
+//   return response.data;
+// };
 
 const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
   const [inboxListData, setInboxListData] = React.useState([]);
 
-  const {
-    data: inboxAPIData,
-    isLoading,
-    error,
-  } = useQuery("inboxList", () => serviceInboxListData(inboxChannel));
+  // const {
+  //   data: inboxAPIData,
+  //   isLoading,
+  //   error,
+  // } = useQuery("inboxList", () => serviceInboxListData(inboxChannel));
+
+  // React.useEffect(() => {
+  //   // if (inboxAPIData && inboxAPIData.length > 0) setInboxListData(inboxAPIData);
+  // }, [inboxAPIData]);
 
   React.useEffect(() => {
-    if (inboxAPIData && inboxAPIData.length > 0) setInboxListData(inboxAPIData);
-  }, [inboxAPIData]);
+    const fetchData = async () => {
+      try {
+        const url =
+          "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+        const params = {
+          accessKey:
+            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          id: "2",
+          channelName: inboxChannel,
+        };
+
+        const response = await axios.get(url, { params });
+
+        // console.log("refetch Inbox");
+        setInboxListData(response?.data);
+      } catch (error) {
+        console.log("error fetching", error);
+        // setError(error);
+      } finally {
+        // setIsLoading(false);
+      }
+    };
+    // Fetch inbox initially
+    fetchData();
+
+    // Poll for new inbox every 5 seconds (adjust as needed)
+    const intervalInboxFetch = setInterval(fetchData, 5000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalInboxFetch);
+  }, []);
 
   //   React.useEffect(() => {
   //     const fetchData = async () => {

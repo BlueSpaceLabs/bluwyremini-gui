@@ -76,7 +76,11 @@ const MessagesInbox = ({ messageTab, setSelectedUser }: any) => {
           </form>
         </div>
 
-        <div className="card-body pt-5" id="kt_chat_contacts_body">
+        <div
+          className="card-body pt-5 scroll-y"
+          id="kt_chat_contacts_body"
+          style={{ height: "438px" }}
+        >
           <InboxList
             inboxChannel={messageTab}
             setSelectedUser={setSelectedUser}

@@ -24,7 +24,7 @@ const MessagesHeader = ({ messageTab, SetMessageTab }: any) => {
         <div className="w-75 py-3 d-flex gap-8 fw-bold fs-6 ">
           <div
             className={`${
-              messageTab === "all_messages" ? "text-primary" : "text-gray-500"
+              messageTab === "all" ? "text-primary" : "text-gray-500"
             } `}
             style={{ cursor: "pointer" }}
             onClick={() => SetMessageTab("all")}

@@ -2,18 +2,18 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PageHeader from "./PageHeader";
 import axios from "axios";
-import DialogFlowCXConfigModal from "./ConfigurationModal/Modal";
 import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
-import DialogFlowDataList from "./DataList";
+import TelegramConfigModal from "./ConfigurationModal/Modal";
+import TelegramDataList from "./DataList";
 
-const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
-  console.log(channelName, accessKey);
+const TelegramPage = ({ channelName, accessKey }: any) => {
+  // console.log(channelName, accessKey);
 
   const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);
   const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
   const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
 
-  const [dialogFlowCXListData, setDialogFlowCXListData] = useState(null);
+  const [telegramData, setTelegramData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = React.useState<boolean>(false);
@@ -25,7 +25,7 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
         "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php",
         {
           params: {
-            channelName: "dialogflowcx",
+            channelName: "telegram",
             accessKey:
               "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
           },
@@ -33,7 +33,9 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
       );
       const responseData = response?.data;
 
-      setDialogFlowCXListData(responseData.data);
+      // console.log("responseData", responseData);
+
+      setTelegramData(responseData.data);
     } catch (error: any) {
       setError(error);
     } finally {
@@ -49,12 +51,12 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
     <Box className="card mb-5 mb-xl-10">
       <PageHeader setShowModal={setShowModal} />
 
-      <DialogFlowDataList dialogFlowCXListData={dialogFlowCXListData} />
+      <TelegramDataList telegramData={telegramData} />
 
-      <DialogFlowCXConfigModal
+      <TelegramConfigModal
         show={showModal}
         handleClose={() => setShowModal(false)}
-        initialModalData={dialogFlowCXListData}
+        initialModalData={telegramData}
         setRefetch={setRefetch}
         setShowSnackbar={setShowSnackbar}
         setSeveritySnackBar={setSeveritySnackBar}
@@ -71,4 +73,4 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
   );
 };
 
-export default DialogFlowCXPage;
+export default TelegramPage;

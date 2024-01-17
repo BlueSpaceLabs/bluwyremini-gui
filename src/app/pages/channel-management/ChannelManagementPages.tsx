@@ -1,8 +1,8 @@
 import React from "react";
 import WhatsappPage from "./WhatsappPage/WhatsappPage";
-import TelegramPage from "./TelegramPage/TelegramPage";
 import InstagramPage from "./InstagramPage/InstagramPage";
 import FacebookPage from "./FacebookPage/FacebookPage";
+import TelegramPage from "./TelegramPage";
 import DialogFlowCXPage from "./DialogFlowCX";
 
 const ChannelManagementPages = ({ channelTab, accessKey }: any) => {

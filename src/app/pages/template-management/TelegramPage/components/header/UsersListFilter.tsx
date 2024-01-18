@@ -72,10 +72,10 @@ const UsersListFilter = () => {
               value={lastLogin}
             >
               <option value=""></option>
-              <option value="Yesterday">Today</option>
-              <option value="20 mins ago">Last Week</option>
-              <option value="5 hours ago">Last Month</option>
-              <option value="2 days ago">Last Year</option>
+              <option value="today">Today</option>
+              <option value="last_7_days">Last 7 Days</option>
+              <option value="last_30_days">Last 30 Days</option>
+              <option value="last_year">Last Year</option>
             </select>
           </div>
           {/* end::Input group */}

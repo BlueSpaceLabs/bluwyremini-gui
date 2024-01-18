@@ -69,7 +69,7 @@ const ChatConversation = ({
       const response = await axios.post(
         "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
         {
-          message: "Chat close by Agent",
+          message: "Thank you. Please enter *Hi* to start new conversion for any query.",
           close_chat: 1,
           phoneNo: selectedInbox.custNumber,
           custName: selectedInbox.custName,

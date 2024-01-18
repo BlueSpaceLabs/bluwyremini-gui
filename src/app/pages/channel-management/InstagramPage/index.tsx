@@ -3,29 +3,29 @@ import React, { useEffect, useState } from "react";
 import PageHeader from "./PageHeader";
 import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
-import TelegramConfigModal from "./ConfigurationModal/Modal";
-import TelegramDataList from "./DataList";
+import InstagramDataList from "./DataList";
+import InstagramConfigModal from "./ConfigurationModal/Modal";
 
-const TelegramPage = ({ channelName, accessKey }: any) => {
+const InstagramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);
 
   const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);
   const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
   const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
 
-  const [telegramData, setTelegramData] = useState(null);
+  const [instagramData, setInstagramData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [refetch, setRefetch] = React.useState<boolean>(false);
 
-  const serviceGetTelegramData = async () => {
+  const serviceGetInstagramData = async () => {
     try {
       const response = await axios.get(
         "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php",
         {
           params: {
-            channelName: "telegram",
+            channelName: "instagram",
             accessKey:
               "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
           },
@@ -33,9 +33,9 @@ const TelegramPage = ({ channelName, accessKey }: any) => {
       );
       const responseData = response?.data;
 
-      // console.log("responseData", responseData);
+      console.log("responseData", responseData);
 
-      setTelegramData(responseData.data);
+      setInstagramData(responseData.data);
     } catch (error: any) {
       setError(error);
     } finally {
@@ -44,19 +44,19 @@ const TelegramPage = ({ channelName, accessKey }: any) => {
   };
 
   useEffect(() => {
-    serviceGetTelegramData();
+    serviceGetInstagramData();
   }, [refetch]);
 
   return (
     <Box className="card mb-5 mb-xl-10">
       <PageHeader setShowModal={setShowModal} />
 
-      <TelegramDataList telegramData={telegramData} />
+      <InstagramDataList instagramData={instagramData} />
 
-      <TelegramConfigModal
+      <InstagramConfigModal
         show={showModal}
         handleClose={() => setShowModal(false)}
-        initialModalData={telegramData}
+        initialModalData={instagramData}
         setRefetch={setRefetch}
         setShowSnackbar={setShowSnackbar}
         setSeveritySnackBar={setSeveritySnackBar}
@@ -73,4 +73,4 @@ const TelegramPage = ({ channelName, accessKey }: any) => {
   );
 };
 
-export default TelegramPage;
+export default InstagramPage;

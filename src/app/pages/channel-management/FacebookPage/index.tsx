@@ -19,7 +19,7 @@ const FacebookPage = ({ channelName, accessKey }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [refetch, setRefetch] = React.useState<boolean>(false);
 
-  const serviceGetDialogFlowCXData = async () => {
+  const serviceGetFacebookData = async () => {
     try {
       const response = await axios.get(
         "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php",
@@ -44,7 +44,7 @@ const FacebookPage = ({ channelName, accessKey }: any) => {
   };
 
   useEffect(() => {
-    serviceGetDialogFlowCXData();
+    serviceGetFacebookData();
   }, [refetch]);
 
   return (

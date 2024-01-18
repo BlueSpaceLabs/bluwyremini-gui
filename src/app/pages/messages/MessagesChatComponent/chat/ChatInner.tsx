@@ -64,6 +64,39 @@ const ChatConversation = ({
       }
   };
 
+  const handleEndChatClick = async () => {
+    try {
+      const response = await axios.post(
+        "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
+        {
+          message: "Chat close by Agent",
+          close_chat: 1,
+          phoneNo: selectedInbox.custNumber,
+          custName: selectedInbox.custName,
+          userType: "agent",
+          tenant: "bsl",
+          accesskey:
+            "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+          displayPhoneNo: "919810804885",
+          phoneNoId: "104801782499737",
+        }
+      );
+
+      setMessage("");
+      // console.log("subhro 01", response);
+      // if (response?.status === 200) {
+      //   // console.log("refetch 1");
+      //   setSendMessageClick((preValue: boolean) => !preValue);
+      //   //logic to refetch data
+      // }
+      // Handle the response as needed
+      // console.log(response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error:", error);
+    }
+  };
+
   const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
@@ -310,6 +343,15 @@ const ChatConversation = ({
               title="Coming soon"
             >
               <i className="bi bi-upload fs-3"></i>
+            </button>
+            <button
+              className="btn btn-sm btn-icon btn-active-light-primary me-1"
+              type="button"
+              data-bs-toggle="tooltip"
+              title="Close Session"
+              onClick={handleEndChatClick}
+            >
+              <i className="bi bi-x-circle fs-3"></i>
             </button>
           </div>
           <button

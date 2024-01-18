@@ -70,7 +70,7 @@ const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalMessageFetch);
-  }, [selectedInbox?.custNumber]);
+  }, [selectedInbox?.custNumber, sendMessageClick]);
 
   if (selectedInbox?.custNumber) {
     return (

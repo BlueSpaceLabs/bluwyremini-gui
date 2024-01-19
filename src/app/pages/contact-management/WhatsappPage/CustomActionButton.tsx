@@ -31,15 +31,15 @@ const CustomActionButton = ({
 
   return (
     <>
-      <a
-        href="#"
-        className="btn btn-light btn-active-light-primary btn-sm"
+      <span
+        // href="#"
+        // className="btn btn-light btn-active-light-primary btn-sm"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom-end"
       >
         Actions
         <KTIcon iconName="down" className="fs-5 m-0" />
-      </a>
+      </span>
       {/* begin::Menu */}
       <div
         className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
@@ -47,24 +47,24 @@ const CustomActionButton = ({
       >
         {/* begin::Menu item */}
         <div className="menu-item px-3">
-          <a
+          <span
             className="menu-link px-3"
             onClick={() => setShowEditContactModal(true)}
           >
             Edit
-          </a>
+          </span>
         </div>
         {/* end::Menu item */}
 
         {/* begin::Menu item */}
         <div className="menu-item px-3">
-          <a
+          <span
             className="menu-link px-3"
             data-kt-users-table-filter="delete_row"
             onClick={() => setShowDetailsModal(true)}
           >
             Details
-          </a>
+          </span>
         </div>
         {/* end::Menu item */}
 

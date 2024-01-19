@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { KTIcon } from "../../../../../../_metronic/helpers";
@@ -12,6 +12,7 @@ import { useLayout } from "../../../../../../_metronic/layout/core";
 // import { CampaignModal } from "../../campaign-modal/CampaignModal";
 import CustomStepsModal from "../../campaign-modal/custom-steps";
 import { postAddCampaign } from "../../../../../services/CampaignManagement";
+import { DateRangeFilter } from "./DateRangeFilter";
 
 const initialValue = {
   campaignName: "",
@@ -90,18 +91,33 @@ const UsersListToolbar = () => {
       throw error;
     }
   };
+
+  const [fromDate, setFromDate] = useState<string>("");
+  const [toDate, setToDate] = useState<string>("");
+  const [showExport, setShowExport] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log("Calling API", { fromDate }, { toDate });
+    if (fromDate && toDate) setShowExport(true);
+    else setShowExport(false);
+  }, [fromDate, toDate]);
+
   return (
     <div
       className="d-flex justify-content-end"
       data-kt-user-table-toolbar="base"
     >
-      <UsersListFilter />
+      <DateRangeFilter setFromDate={setFromDate} setToDate={setToDate} />
+
+      {/* <UsersListFilter /> */}
 
       {/* begin::Export */}
-      <button type="button" className="btn btn-light-primary me-3">
-        <KTIcon iconName="exit-up" className="fs-2" />
-        Export
-      </button>
+      {showExport && (
+        <button type="button" className="btn btn-light-primary me-3">
+          <KTIcon iconName="exit-up" className="fs-2" />
+          Export
+        </button>
+      )}
       {/* end::Export */}
 
       {/* begin::Add user */}

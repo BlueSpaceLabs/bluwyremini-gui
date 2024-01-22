@@ -134,11 +134,12 @@ export default function CustomContactTable({
         <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Bluwyre Id
-              </TableCell>
+             
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Full Name
+              </TableCell>
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Bluwyre Id
               </TableCell>
               {/*<TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Mobile Number
@@ -168,12 +169,13 @@ export default function CustomContactTable({
             ).map((row: any) => {
               return (
                 <TableRow key={row.name}>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.bluwyreId}
-                  </TableCell>
+                 
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.crmFullname}
+                    <span style={{color:"black"}}>{row.crmFullname}</span>
+                  </TableCell>
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.bluwyreId}
                   </TableCell>
                   {/*<TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.mobileNo}

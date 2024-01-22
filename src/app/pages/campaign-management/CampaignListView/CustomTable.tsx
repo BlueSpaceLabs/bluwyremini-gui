@@ -156,7 +156,7 @@ export default function CustomCampaignTable({ tableData }: any) {
               return (
                 <TableRow key={row.id}>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.campaignName}
+                    <span style={{color:"black"}}>{row.campaignName}</span>
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.channel}

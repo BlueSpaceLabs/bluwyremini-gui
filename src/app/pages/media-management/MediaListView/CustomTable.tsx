@@ -134,10 +134,7 @@ any) {
         <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Media File
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+            <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Media Title
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
@@ -148,6 +145,9 @@ any) {
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Upload Date
+              </TableCell>
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Media File
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Action
@@ -165,12 +165,9 @@ any) {
               return (
                 <TableRow key={row.id}>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    <img src={row.mediaUrl} alt={row.mediaName} width={100} />
+                     <span style={{color:"black"}}>{row.mediaTitle}</span>
                   </TableCell>
-
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.mediaTitle}
-                  </TableCell>
+ 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.mediaDescription}
                   </TableCell>
@@ -179,6 +176,9 @@ any) {
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.createdDatetime}
+                  </TableCell>
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    <img src={row.mediaUrl} alt={row.mediaName} width={100} />
                   </TableCell>
 
                   {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">

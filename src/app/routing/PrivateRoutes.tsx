@@ -10,7 +10,7 @@ import ContactManagement from "../pages/contact-management/ContactManagement";
 import TemplateManagement from "../pages/template-management/TemplateManagement";
 import MessagesPage from "../pages/messages/MessagesPage";
 import CampaignManagement from "../pages/campaign-management/CampaignManagement";
-import StaticDataManagement from "../pages/static-data/StaticDataManagement";
+// import StaticDataManagement from "../pages/static-data/StaticDataManagement";
 // import Tickets from "../pages/tickets-management/TicketsManagement";
 import Profile from "../pages/settings/profile/Profile";
 import Sendmessage from "../pages/settings/send-message/Sendmessage";
@@ -18,6 +18,7 @@ import KeyWordsPage from "../pages/settings/keywords/KeyWordsPage";
 import Faqs from "../pages/settings/Faqs";
 import ChannelManagement from "../pages/channel-management/ChannelManagement";
 import MediaManagement from "../pages/media-management/MediaManagement";
+import StaticDataManagement from "../pages/static-data";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));

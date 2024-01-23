@@ -5,44 +5,47 @@ import axios from "axios";
 // import { useListView } from "../../core/ListViewProvider";
 // import { UsersListFilter } from "./UsersListFilter";
 
-const UsersListToolbar = ({ handleShowAddModal }: any) => {
+const UsersListToolbar = ({
+  handleShowAddModal,
+  setFromDate,
+  setToDate,
+}: any) => {
   // const { setItemIdForUpdate } = useListView();
-  const [fromDate, setFromDate] = useState<string>("");
-  const [toDate, setToDate] = useState<string>("");
+
   const [showExport, setShowExport] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("Calling API", { fromDate }, { toDate });
+  // useEffect(() => {
+  //   console.log("Calling API", { fromDate }, { toDate });
 
-    if (fromDate && toDate) {
-      setShowExport(true);
-      const serviceGetContactDetails = async () => {
-        try {
-          const response = await axios.get(
-            "http://3.108.229.60:8082/bluwyremini-backend/info/getContactDetails.php",
-            {
-              params: {
-                channelName: "whatsapp",
-                accessKey:
-                  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-                from: fromDate,
-                to: toDate,
-              },
-            }
-          );
-          const responseData = response?.data;
+  //   if (fromDate && toDate) {
+  //     setShowExport(true);
+  //     const serviceGetContactDetails = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           "http://3.108.229.60:8082/bluwyremini-backend/info/getContactDetails.php",
+  //           {
+  //             params: {
+  //               channelName: "whatsapp",
+  //               accessKey:
+  //                 "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+  //               from: fromDate,
+  //               to: toDate,
+  //             },
+  //           }
+  //         );
+  //         const responseData = response?.data;
 
-          console.log("responseData", responseData);
-        } catch (error: any) {
-          console.log(error);
-        } finally {
-          console.log("API Fetch Done");
-        }
-      };
+  //         console.log("responseData", responseData);
+  //       } catch (error: any) {
+  //         console.log(error);
+  //       } finally {
+  //         console.log("API Fetch Done");
+  //       }
+  //     };
 
-      serviceGetContactDetails();
-    } else setShowExport(false);
-  }, [fromDate, toDate]);
+  //     serviceGetContactDetails();
+  //   } else setShowExport(false);
+  // }, [fromDate, toDate]);
 
   return (
     <div

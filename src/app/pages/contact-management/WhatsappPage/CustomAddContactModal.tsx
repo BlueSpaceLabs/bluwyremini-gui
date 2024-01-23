@@ -27,7 +27,8 @@ const AddWhatsAppContactModal = ({
   handleClose,
   accessKey,
   channelName,
-  refetchWhatsAppContactListData,
+  // refetchWhatsAppContactListData,
+  setRefetchData,
   setShowSnackbar,
   setSeveritySnackBar,
   setMessageSnackBar,
@@ -81,7 +82,8 @@ const AddWhatsAppContactModal = ({
             setShowSnackbar(true);
             setSeveritySnackBar("success");
             setMessageSnackBar("Successfully added Contact Details !");
-            refetchWhatsAppContactListData();
+            // refetchWhatsAppContactListData();
+            setRefetchData((preValue: boolean) => !preValue);
           },
           onError: () => {
             setShowSnackbar(true);

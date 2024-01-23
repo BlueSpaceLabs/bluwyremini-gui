@@ -18,7 +18,8 @@ const EditWhatsAppContactModal = ({
   initialModalData,
   accessKey,
   channelName,
-  refetchWhatsAppContactListData,
+  // refetchWhatsAppContactListData,
+  setRefetchData,
   setShowSnackbar,
   setSeveritySnackBar,
   setMessageSnackBar,
@@ -68,7 +69,8 @@ const EditWhatsAppContactModal = ({
             setShowSnackbar(true);
             setSeveritySnackBar("success");
             setMessageSnackBar("Successfully updated Contact Details !");
-            refetchWhatsAppContactListData();
+            // refetchWhatsAppContactListData();
+            setRefetchData((preValue: boolean) => !preValue);
           },
           onError: () => {
             setShowSnackbar(true);

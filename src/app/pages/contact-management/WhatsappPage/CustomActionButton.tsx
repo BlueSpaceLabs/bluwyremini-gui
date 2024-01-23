@@ -15,7 +15,8 @@ const CustomActionButton = ({
   detailContactData,
   accessKey,
   channelName,
-  refetchWhatsAppContactListData,
+  // refetchWhatsAppContactListData,
+  setRefetchData,
   setShowSnackbar,
   setSeveritySnackBar,
   setMessageSnackBar,
@@ -85,7 +86,8 @@ const CustomActionButton = ({
           initialModalData={detailContactData}
           accessKey={accessKey}
           channelName={channelName}
-          refetchWhatsAppContactListData={refetchWhatsAppContactListData}
+          // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
+          setRefetchData={setRefetchData}
           setShowSnackbar={setShowSnackbar}
           setSeveritySnackBar={setSeveritySnackBar}
           setMessageSnackBar={setMessageSnackBar}

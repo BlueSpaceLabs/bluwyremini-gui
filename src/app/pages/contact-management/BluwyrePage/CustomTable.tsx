@@ -9,14 +9,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-// import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import { CustomActionButton } from "./CustomActionButton";
-// import { CustomActionButton } from "./CustomActionButton";
+import { Checkbox } from "@mui/material";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -98,22 +96,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomContactTable({
-  tableData,
-  accessKey,
-  channelName,
-  // refetchWhatsAppContactListData,
-  setRefetchData,
-  setShowSnackbar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
-}: any) {
+export default function CustomContactTable({ tableData }: any) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - tableData?.length) : 0;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -129,7 +118,7 @@ export default function CustomContactTable({
     setPage(0);
   };
 
-  if (tableData.length > 0) {
+  if (tableData?.length > 0) {
     return (
       <TableContainer sx={{ pt: 4 }}>
         <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
@@ -141,21 +130,17 @@ export default function CustomContactTable({
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Bluwyre Id
               </TableCell>
-              {/*<TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Mobile Number
-    </TableCell>*/}
-
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Mobile Number
+                WhatsApp
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Last Interaction
+                Telegram
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Created Date
+                Instagram
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Action
+                Facebook
               </TableCell>
             </TableRow>
           </TableHead>
@@ -168,57 +153,40 @@ export default function CustomContactTable({
               : tableData
             ).map((row: any) => {
               return (
-                <TableRow key={row.name}>
+                <TableRow key={row?.name}>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    <span style={{ color: "black" }}>{row.crmFullname}</span>
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.bluwyreId}
-                  </TableCell>
-                  {/*<TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.mobileNo}
-              </TableCell>*/}
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.wabaMobileNo}
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.lastInteractionDatetime}
+                    <span style={{ color: "black" }}>{row?.crmFullname}</span>
                   </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.createdDatetime}
+                    {row?.bluwyreId}
                   </TableCell>
 
-                  {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.lastModifiedDatetime}
-                  </TableCell> */}
-
-                  {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.nameToAddress}
-                  </TableCell> */}
-
-                  {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.wabaLastInteractionDatetime}
-                  </TableCell> */}
-
-                  {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.wabaName}
-                  </TableCell> */}
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    <Checkbox
+                      checked={row?.waEnabled === "1" ? true : false}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+                    />
+                  </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {/* Action */}
-                    {/* <UserActionsCell id={1} /> */}
-                    <CustomActionButton
-                      detailContactData={row}
-                      accessKey={accessKey}
-                      channelName={channelName}
-                      // refetchWhatsAppContactListData={
-                      //   refetchWhatsAppContactListData
-                      // }
-                      setRefetchData={setRefetchData}
-                      setShowSnackbar={setShowSnackbar}
-                      setSeveritySnackBar={setSeveritySnackBar}
-                      setMessageSnackBar={setMessageSnackBar}
+                    <Checkbox
+                      checked={row?.telegramEnabled === "1" ? true : false}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+                    />
+                  </TableCell>
+
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    <Checkbox
+                      checked={row?.instaEnabled === "1" ? true : false}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+                    />
+                  </TableCell>
+
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    <Checkbox
+                      checked={row?.fbmEnabled === "1" ? true : false}
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
                     />
                   </TableCell>
                 </TableRow>
@@ -235,7 +203,7 @@ export default function CustomContactTable({
               <TablePagination
                 rowsPerPageOptions={[10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={tableData.length}
+                count={tableData?.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

@@ -134,9 +134,9 @@ export default function CustomCampaignTable({ tableData }: any) {
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Delivery Report
               </TableCell>
-             {/*} <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Execution Date Time
-              </TableCell>*/}
+              </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Created Date Time
     </TableCell>
@@ -164,9 +164,9 @@ export default function CustomCampaignTable({ tableData }: any) {
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     Sent: {row.sentCount}, Delivered: {row.deliveredCount}, Read: {row.readCount}
                   </TableCell>
-                 {/*} <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.executionDatetime}
-                  </TableCell>*/}
+                  </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.createdDatetime}
                   </TableCell>

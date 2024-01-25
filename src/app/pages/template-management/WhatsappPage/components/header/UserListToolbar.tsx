@@ -39,15 +39,12 @@ const UsersListToolbar = () => {
       {/* end::Export */}
 
       {/* begin::Add user */}
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={openAddUserModal}
-      >
-        <KTIcon iconName="plus" className="fs-2" />
-        Add Template
-      </button>
+      
       {/* end::Add user */}
+      <a href="https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278" target="_blank">
+<input type="button" className="btn btn-primary" value="Add Template" />
+</a>
+
     </div>
   );
 };

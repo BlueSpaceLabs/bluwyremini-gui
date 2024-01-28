@@ -20,7 +20,7 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
   return (
     <>
       <a
-        href="#"
+        href=""
         className="btn btn-light btn-active-light-primary btn-sm"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom-end"
@@ -35,9 +35,9 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
       >
         {/* begin::Menu item */}
         <div className="menu-item px-3">
-          <a className="menu-link px-3" onClick={() => setShowEditModal(true)}>
+          <span className="menu-link px-3" onClick={() => setShowEditModal(true)}>
             Details
-          </a>
+          </span>
         </div>
         {/* end::Menu item */}
 
@@ -46,9 +46,10 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
           <a
             className="menu-link px-3"
             data-kt-users-table-filter="delete_row"
-            onClick={() => setShowDeleteModal(true)}
+            href={`https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278&id=${detailTemplateData.id}`}
+            target="_blank"
           >
-            Delete
+            Edit Template
           </a>
         </div>
         {/* end::Menu item */}

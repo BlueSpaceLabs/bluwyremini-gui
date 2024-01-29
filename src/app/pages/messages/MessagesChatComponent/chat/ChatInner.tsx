@@ -33,6 +33,10 @@ const ChatConversation = ({
   // console.log("selectedInbox", selectedInbox);
 
   const handleSendMessageClick = async () => {
+    const storedData = sessionStorage.getItem("whatsAppStoredData");
+    let whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
     if (message.length > 0)
       try {
         const response = await axios.post(
@@ -42,10 +46,9 @@ const ChatConversation = ({
             phoneNo: selectedInbox.custNumber,
             custName: selectedInbox.custName,
             userType: "agent",
-            accesskey:
-              "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
-            displayPhoneNo: "919810804885",
-            phoneNoId: "104801782499737",
+            accesskey: whatsAppStoredData?.accessToken,
+            displayPhoneNo: whatsAppStoredData?.displayNo,
+            phoneNoId: whatsAppStoredData?.phoneNoId,
           }
         );
 
@@ -65,20 +68,24 @@ const ChatConversation = ({
   };
 
   const handleEndChatClick = async () => {
+    const storedData = sessionStorage.getItem("whatsAppStoredData");
+    let whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
     try {
       const response = await axios.post(
         "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
         {
-          message: "Thank you. Please enter *Hi* to start new conversion for any query.",
+          message:
+            "Thank you. Please enter *Hi* to start new conversion for any query.",
           close_chat: 1,
           phoneNo: selectedInbox.custNumber,
           custName: selectedInbox.custName,
           userType: "agent",
           tenant: "bsl",
-          accesskey:
-            "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
-          displayPhoneNo: "919810804885",
-          phoneNoId: "104801782499737",
+          accesskey: whatsAppStoredData?.accessToken,
+          displayPhoneNo: whatsAppStoredData?.displayNo,
+          phoneNoId: whatsAppStoredData?.phoneNoId,
         }
       );
 

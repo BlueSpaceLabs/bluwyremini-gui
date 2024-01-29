@@ -40,14 +40,15 @@ const MessagesHeader = ({ messageTab, SetMessageTab }: any) => {
           >
             Whatsapp
           </div>
+          
           <div
             className={`${
-              messageTab === "telegram" ? "text-primary" : "text-gray-500"
+              messageTab === "messenger" ? "text-primary" : "text-gray-500"
             } `}
             style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("telegram")}
+            onClick={() => SetMessageTab("messenger")}
           >
-            Telegram
+            Messenger
           </div>
           <div
             className={`${
@@ -60,12 +61,12 @@ const MessagesHeader = ({ messageTab, SetMessageTab }: any) => {
           </div>
           <div
             className={`${
-              messageTab === "facebook" ? "text-primary" : "text-gray-500"
+              messageTab === "telegram" ? "text-primary" : "text-gray-500"
             } `}
             style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("facebook")}
+            onClick={() => SetMessageTab("telegram")}
           >
-            Facebook
+            Telegram
           </div>
         </div>
         <div className="w-25 d-flex justify-content-end">

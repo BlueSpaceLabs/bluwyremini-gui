@@ -24,9 +24,9 @@ const Private: FC = () => {
               </div>
               <div
                 style={{ cursor: "pointer" }}
-                onClick={() => SetMessageTab("telegram")}
+                onClick={() => SetMessageTab("messenger")}
               >
-                Telegram
+                Messenger
               </div>
               <div
                 style={{ cursor: "pointer" }}
@@ -34,11 +34,12 @@ const Private: FC = () => {
               >
                 Instagram
               </div>
+              
               <div
                 style={{ cursor: "pointer" }}
-                onClick={() => SetMessageTab("facebook")}
+                onClick={() => SetMessageTab("telegram")}
               >
-                Facebook
+                Telegram
               </div>
             </div>
             <form className="w-100 position-relative" autoComplete="off">
@@ -191,7 +192,7 @@ const Private: FC = () => {
 
               <div className="separator separator-dashed d-none"></div>
 
-              {(messageTab === "facebook" || messageTab === "all_messages") && (
+              {(messageTab === "messenger" || messageTab === "all_messages") && (
                 <div className="d-flex flex-stack py-4">
                   <div className="d-flex align-items-center">
                     <div className="symbol symbol-45px symbol-circle">

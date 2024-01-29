@@ -19,9 +19,14 @@ import axios from "axios";
 //   return response.data;
 // };
 
-const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
+const MessagesConversation = ({
+  setShowProfile,
+  selectedInbox,
+  messageTab,
+}: any) => {
   const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [conversationData, setConversationData] = React.useState([]);
+
   const [sendMessageClick, setSendMessageClick] =
     React.useState<boolean>(false);
   // const { data: conversationDetails, isLoading, isError } =
@@ -41,6 +46,10 @@ const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
+      const storedData = sessionStorage.getItem("whatsAppStoredData");
+      let whatsAppStoredData;
+      if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
       try {
         const url =
           "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUserDetails.php";
@@ -130,6 +139,7 @@ const MessagesConversation = ({ setShowProfile, selectedInbox }: any) => {
             conversationData={conversationData}
             selectedInbox={selectedInbox}
             setSendMessageClick={setSendMessageClick}
+            messageTab={messageTab}
           />
         </div>
       </React.Fragment>

@@ -47,8 +47,6 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
 
         const response = await axios.get(url, { params });
 
-        console.log("subhro 007", response);
-
         // console.log("refetch Inbox");
         if (response?.data?.length > 0) setInboxListData(response?.data);
         else setInboxListData([]);
@@ -69,7 +67,6 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
     return () => clearInterval(intervalInboxFetch);
   }, [inboxChannel]);
 
-  console.log("subhro 009", inboxListData);
   //   React.useEffect(() => {
   //     const fetchData = async () => {
   //       try {

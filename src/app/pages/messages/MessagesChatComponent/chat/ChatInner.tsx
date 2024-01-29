@@ -22,6 +22,7 @@ const ChatConversation = ({
   conversationData,
   selectedInbox,
   setSendMessageClick,
+  messageTab,
 }: any) => {
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -39,21 +40,37 @@ const ChatConversation = ({
 
     if (message.length > 0)
       try {
+        const chatChannel =
+          messageTab === "whatsapp"
+            ? "channelWhatsapp"
+            : messageTab === "messenger"
+            ? "channelMessenger"
+            : messageTab === "telegram"
+            ? "channelTelegram"
+            : messageTab === "instagram"
+            ? "channelInstagram"
+            : "all";
+
         const response = await axios.post(
-          "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
+          `http://3.108.229.60:8082/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
           {
             message: message,
             phoneNo: selectedInbox.custNumber,
             custName: selectedInbox.custName,
             userType: "agent",
-            accesskey: whatsAppStoredData?.accessToken,
-            displayPhoneNo: whatsAppStoredData?.displayNo,
-            phoneNoId: whatsAppStoredData?.phoneNoId,
+            accesskey:
+              // whatsAppStoredData?.accessToken,
+              "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+            displayPhoneNo:
+              // whatsAppStoredData?.displayNo,
+              "919810804885",
+            phoneNoId:
+              // whatsAppStoredData?.phoneNoId,
+              "104801782499737",
           }
         );
 
         setMessage("");
-        // console.log("subhro 01", response);
         if (response?.status === 200) {
           // console.log("refetch 1");
           setSendMessageClick((preValue: boolean) => !preValue);
@@ -73,8 +90,20 @@ const ChatConversation = ({
     if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
     try {
+      const chatChannel =
+        messageTab === "whatsapp"
+          ? "channelWhatsapp"
+          : messageTab === "messenger"
+          ? "channelMessenger"
+          : messageTab === "telegram"
+          ? "channelTelegram"
+          : messageTab === "instagram"
+          ? "channelInstagram"
+          : "all";
+
       const response = await axios.post(
-        "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
+        // "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
+        `http://3.108.229.60:8082/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
         {
           message:
             "Thank you. Please enter *Hi* to start new conversion for any query.",
@@ -83,14 +112,19 @@ const ChatConversation = ({
           custName: selectedInbox.custName,
           userType: "agent",
           tenant: "bsl",
-          accesskey: whatsAppStoredData?.accessToken,
-          displayPhoneNo: whatsAppStoredData?.displayNo,
-          phoneNoId: whatsAppStoredData?.phoneNoId,
+          accesskey:
+            // whatsAppStoredData?.accessToken,
+            "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+          displayPhoneNo:
+            // whatsAppStoredData?.displayNo,
+            "919810804885",
+          phoneNoId:
+            // whatsAppStoredData?.phoneNoId,
+            "104801782499737",
         }
       );
 
       setMessage("");
-      // console.log("subhro 01", response);
       // if (response?.status === 200) {
       //   // console.log("refetch 1");
       //   setSendMessageClick((preValue: boolean) => !preValue);
@@ -155,7 +189,7 @@ const ChatConversation = ({
 
   const handleNameInitialsFinder = (inputString: string) => {
     const words = inputString.split(" ");
-    const initials = words.map((word) => word[0].toUpperCase());
+    const initials = words.map((word) => word[0]?.toUpperCase());
 
     return initials.join("");
   };

@@ -13,6 +13,10 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
+      const storedData = sessionStorage.getItem("whatsAppStoredData");
+      let whatsAppStoredData;
+      if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
       try {
         const url =
           "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUserDetails.php";

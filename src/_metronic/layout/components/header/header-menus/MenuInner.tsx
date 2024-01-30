@@ -12,11 +12,12 @@ export function MenuInner() {
       <MenuItem  title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
 
 
+{/*}
       <MenuInnerWithSub title='Settings' to='#' menuPlacement='bottom-start' menuTrigger='click'>
       <MenuItem icon='abstract-28' to='/sendmessage' title='Send Message' />
         <MenuItem icon='abstract-28' to='/profile' title='Profile' />
         <MenuItem icon='abstract-28' to='/faqs' title='FAQs' />
-      </MenuInnerWithSub>
+      </MenuInnerWithSub>*/}
       
 
 

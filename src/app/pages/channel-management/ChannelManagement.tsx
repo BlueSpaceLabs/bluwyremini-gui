@@ -10,7 +10,7 @@ const ChannelManagement: FC = () => {
   const [channelTab, setChannelTab] = React.useState<string>("whatsapp");
   return (
     <>
-      <PageTitle breadcrumbs={[]}>Channel Management</PageTitle>
+     <div style={{marginTop:-30}}><PageTitle breadcrumbs={[]}>Channel Management</PageTitle></div>
       <ChannelManagementHeader
         channelTab={channelTab}
         setChannelTab={setChannelTab}

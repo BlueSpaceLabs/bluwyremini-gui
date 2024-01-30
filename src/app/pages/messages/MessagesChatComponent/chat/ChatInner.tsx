@@ -67,6 +67,7 @@ const ChatConversation = ({
             phoneNoId:
               // whatsAppStoredData?.phoneNoId,
               "104801782499737",
+            fbSenderId: messageTab === "messenger" ? "6732214643507332" : null,
           }
         );
 
@@ -121,6 +122,7 @@ const ChatConversation = ({
           phoneNoId:
             // whatsAppStoredData?.phoneNoId,
             "104801782499737",
+          fbSenderId: messageTab === "messenger" ? "6732214643507332" : null,
         }
       );
 

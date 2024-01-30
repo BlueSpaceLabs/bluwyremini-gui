@@ -99,7 +99,7 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
               ></i> */}
             </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
+            <div className="col-lg-1 d-flex align-items-center">
               <span className="fw-bolder fs-6 me-2">
                 {channelConfigurationData.channelName
                   ? channelConfigurationData.channelName

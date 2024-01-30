@@ -17,47 +17,48 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to="/channels"
         icon="whatsapp"
-        title="Channels"
+        title="Channel Configurations"
         fontIcon="bi-layers"
       />
       <SidebarMenuItem
         to="/contact-management/"
         icon="phone"
-        title="Manage Contacts"
+        title="Contacts"
         fontIcon="bi-layers"
       />
-      <SidebarMenuItem
-        to="/messages/private"
-        icon="messages"
-        title="Messages"
-        fontIcon="bi-layers"
-      />
-
       <SidebarMenuItem
         to="/campaign-management"
         icon="abstract-33"
-        title="Campaign Management"
-        fontIcon="bi-layers"
-      />
-      <SidebarMenuItem
-        to="/media-management"
-        icon="abstract-36"
-        title="Media Gallery"
-        fontIcon="bi-layers"
-      />
-      <SidebarMenuItem
-        to="/staticdatamanagement"
-        icon="data"
-        title="Static Data"
+        title="Outbound Campaigns"
         fontIcon="bi-layers"
       />
       <SidebarMenuItem
         to="/template-management"
         icon="document"
-        title="Templates"
+        title="Messaging Templates"
         fontIcon="bi-layers"
       />
-      {/* <SidebarMenuItem
+      <SidebarMenuItem
+        to="/media-management"
+        icon="abstract-36"
+        title="Content Library"
+        fontIcon="bi-layers"
+      />
+      <SidebarMenuItem
+        to="/messages/private"
+        icon="messages"
+        title="Messages Inbox"
+        fontIcon="bi-layers"
+      />
+
+     {/*  <SidebarMenuItem
+        to="/staticdatamanagement"
+        icon="data"
+        title="Static Data"
+        fontIcon="bi-layers"
+      />
+      
+      <SidebarMenuItem
         to="tickets-management/"
         icon="element-plus"
         title="Tickets"
@@ -66,23 +67,35 @@ const SidebarMenuMain = () => {
 
       <SidebarMenuItemWithSub
         to="#"
-        title="Settings"
+        title="Configurations"
         icon="setting-2"
         fontIcon="bi-person"
       >
+        <SidebarMenuItem to="/keywords" title="Canned Responses" hasBullet={true} />
         <SidebarMenuItem
           to="/sendmessage"
-          title="Send Message"
+          title="Platform APIs"
           hasBullet={true}
         />
-        <SidebarMenuItem to="/keywords" title="KeyWords" hasBullet={true} />
-        <SidebarMenuItem
-          to="/crafted/account/overview"
-          title="Profile"
-          hasBullet={true}
-        />
-        <SidebarMenuItem to="/faqs" title="FAQs" hasBullet={true} />
       </SidebarMenuItemWithSub>
+      <SidebarMenuItem
+        to=""
+        icon="messages"
+        title="Agents"
+        fontIcon="bi-layers"
+      />
+      <SidebarMenuItem
+        to="/crafted/account/overview"
+        icon="messages"
+        title="Profile Management"
+        fontIcon="bi-layers"
+      />
+      <SidebarMenuItem
+        to="/faqs"
+        icon="messages"
+        title="FAQs"
+        fontIcon="bi-layers"
+      />
     </>
   );
 };

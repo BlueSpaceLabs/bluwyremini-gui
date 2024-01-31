@@ -1,11 +1,13 @@
 import React, { FC, useEffect } from "react";
 // import { useMutation, useQueryClient } from "react-query";
-import { MenuComponent } from "../../../../_metronic/assets/ts/components";
-import { KTIcon } from "../../../../_metronic/helpers";
+
 // import CustomEditModal from "./CustomContactModal";
 // import CustomDeleteModal from "./CustomDetailsModal";
+// import CustomDetailsModal from "./CustomDetailsModal";
+// import EditWhatsAppContactModal from "./CustomEditContactModal";
+import { MenuComponent } from "../../../../../_metronic/assets/ts/components";
+import { KTIcon } from "../../../../../_metronic/helpers";
 import CustomDetailsModal from "./CustomDetailsModal";
-import EditWhatsAppContactModal from "./CustomEditContactModal";
 
 // type Props = {
 //   id: ID;
@@ -30,6 +32,8 @@ const CustomActionButton = ({
     MenuComponent.reinitialization();
   }, []);
 
+  console.log("detailContactData", detailContactData);
+
   return (
     <>
       <span
@@ -47,14 +51,14 @@ const CustomActionButton = ({
         data-kt-menu="true"
       >
         {/* begin::Menu item */}
-        {/* <div className="menu-item px-3">
+        <div className="menu-item px-3">
           <span
             className="menu-link px-3"
-            onClick={() => setShowEditContactModal(true)}
+            // onClick={() => setShowEditContactModal(true)}
           >
             Edit
           </span>
-        </div> */}
+        </div>
         {/* end::Menu item */}
 
         {/* begin::Menu item */}
@@ -74,14 +78,14 @@ const CustomActionButton = ({
           handleClose={() => setShowEditModal(false)}
           detailContactData={detailContactData}
         /> */}
+
         <CustomDetailsModal
           show={showDetailsModal}
           handleClose={() => setShowDetailsModal(false)}
           detailContactData={detailContactData}
-          openEditModal={() => setShowEditContactModal(true)}
         />
 
-        <EditWhatsAppContactModal
+        {/* <EditWhatsAppContactModal
           show={showEditContactModal}
           handleClose={() => setShowEditContactModal(false)}
           initialModalData={detailContactData}
@@ -92,7 +96,7 @@ const CustomActionButton = ({
           setShowSnackbar={setShowSnackbar}
           setSeveritySnackBar={setSeveritySnackBar}
           setMessageSnackBar={setMessageSnackBar}
-        />
+        /> */}
       </div>
       {/* end::Menu */}
     </>

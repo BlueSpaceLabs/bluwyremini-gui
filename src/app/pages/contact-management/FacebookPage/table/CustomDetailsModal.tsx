@@ -1,7 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
-import { KTIcon } from "../../../../_metronic/helpers";
+import { KTIcon } from "../../../../../_metronic/helpers";
 
 // type Props = {
 //   show: boolean;
@@ -10,16 +10,7 @@ import { KTIcon } from "../../../../_metronic/helpers";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const CustomDetailsModal = ({
-  show,
-  handleClose,
-  detailContactData,
-  openEditModal,
-}: any) => {
-  const handleEditButtonClick = () => {
-    openEditModal();
-    handleClose();
-  };
+const CustomDetailsModal = ({ show, handleClose, detailContactData }: any) => {
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -32,23 +23,11 @@ const CustomDetailsModal = ({
       <div className="modal-header">
         <h2>Template Details : {detailContactData.bluwyreId}</h2>
         {/* begin::Close */}
-
-        <div className="d-flex gap-3">
-          <button
-            type="button"
-            className="btn btn-lg btn-secondary"
-            onClick={handleEditButtonClick}
-          >
-            Edit
-            {/* <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" /> */}
-          </button>
-
-          <div
-            className="btn btn-sm btn-icon btn-active-color-primary"
-            onClick={handleClose}
-          >
-            <KTIcon className="fs-1" iconName="cross" />
-          </div>
+        <div
+          className="btn btn-sm btn-icon btn-active-color-primary"
+          onClick={handleClose}
+        >
+          <KTIcon className="fs-1" iconName="cross" />
         </div>
         {/* end::Close */}
       </div>

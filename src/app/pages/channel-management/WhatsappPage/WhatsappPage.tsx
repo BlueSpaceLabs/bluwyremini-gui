@@ -124,8 +124,15 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                   ? channelConfigurationData.accessToken
                   : "No Data to show."}
               </span> */}
-
-              <input
+              <textarea name="postContent" rows={4} cols={70} value={
+                  channelConfigurationData.accessToken
+                    ? channelConfigurationData.accessToken
+                    : "No Data to show."
+                }
+                onClick={togglePasswordVisibility}
+                readOnly
+                />
+              {/*<input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
                 value={
@@ -134,7 +141,7 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                     : "No Data to show."
                 }
                 onClick={togglePasswordVisibility}
-              />
+              />*/}
             </div>
           </div>
 
@@ -211,8 +218,12 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                   ? channelConfigurationData.permanentToken
                   : "No Data to show."}
               </span> */}
-
-              <input
+              <textarea name="postContent" rows={4} cols={70}  value={
+                  channelConfigurationData.permanentToken
+                    ? channelConfigurationData.permanentToken
+                    : "No Data to show."
+                }/>
+              {/*<input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
                 value={
@@ -221,7 +232,7 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                     : "No Data to show."
                 }
                 onClick={togglePasswordVisibility}
-              />
+              />*/}
             </div>
           </div>
 

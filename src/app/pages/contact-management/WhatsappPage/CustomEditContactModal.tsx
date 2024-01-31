@@ -109,9 +109,10 @@ const EditWhatsAppContactModal = ({
 
       <div className="modal-body py-lg-10 px-lg-10">
         {/*begin::Form Group */}
-        <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+
+        <div className="modal-body py-lg-10 px-lg-10">
+          <div className="row mb-7">
+            <label className="col-lg-4 d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Bluwyre Id</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
@@ -119,23 +120,26 @@ const EditWhatsAppContactModal = ({
                 title="Specify Channel Bluwyre Id."
               ></i>
             </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="bluwyreId"
-              value={addWhatsappContactInput?.bluwyreId}
-              onChange={handleInputChange}
-              disabled
-            />
-            {addWhatsappContactInput?.bluwyreId?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Bluwyre Id is Required.</div>
-              </div>
-            )}
+            <div className="col-lg-8">
+              <input
+                type="text"
+                className="form-control form-control-lg form-control-solid"
+                name="bluwyreId"
+                value={addWhatsappContactInput?.bluwyreId}
+                onChange={handleInputChange}
+                disabled
+              />
+
+              {addWhatsappContactInput?.bluwyreId?.length < 2 && formError && (
+                <div className="fv-plugins-message-container">
+                  <div className="fv-help-block">Bluwyre Id is Required.</div>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+          <div className="row mb-7">
+            <label className="col-lg-4 d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Mobile Number</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
@@ -143,22 +147,27 @@ const EditWhatsAppContactModal = ({
                 title="Specify Channel Mobile Number."
               ></i>
             </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="mobileNo"
-              value={addWhatsappContactInput?.mobileNo}
-              onChange={handleInputChange}
-            />
-            {addWhatsappContactInput?.mobileNo?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Mobile Number is Required.</div>
-              </div>
-            )}
+
+            <div className="col-lg-8">
+              <input
+                type="text"
+                className="form-control form-control-lg form-control-solid"
+                name="mobileNo"
+                value={addWhatsappContactInput?.mobileNo}
+                onChange={handleInputChange}
+              />
+              {addWhatsappContactInput?.mobileNo?.length < 2 && formError && (
+                <div className="fv-plugins-message-container">
+                  <div className="fv-help-block">
+                    Mobile Number is Required.
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+          <div className="row mb-7">
+            <label className="col-lg-4 d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Customer Full Name</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
@@ -166,24 +175,28 @@ const EditWhatsAppContactModal = ({
                 title="Specify Channel Customer Full Name."
               ></i>
             </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="crmFullname"
-              value={addWhatsappContactInput?.crmFullname}
-              onChange={handleInputChange}
-            />
-            {addWhatsappContactInput?.crmFullname?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  Customer Full Name is Required.
-                </div>
-              </div>
-            )}
+
+            <div className="col-lg-8">
+              <input
+                type="text"
+                className="form-control form-control-lg form-control-solid"
+                name="crmFullname"
+                value={addWhatsappContactInput?.crmFullname}
+                onChange={handleInputChange}
+              />
+              {addWhatsappContactInput?.crmFullname?.length < 2 &&
+                formError && (
+                  <div className="fv-plugins-message-container">
+                    <div className="fv-help-block">
+                      Customer Full Name is Required.
+                    </div>
+                  </div>
+                )}
+            </div>
           </div>
 
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+          <div className="row mb-7">
+            <label className="col-lg-4 d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Name To Address</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
@@ -191,25 +204,27 @@ const EditWhatsAppContactModal = ({
                 title="Specify Channel Name To Address."
               ></i>
             </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="nameToAddress"
-              value={addWhatsappContactInput?.nameToAddress}
-              onChange={handleInputChange}
-            />
-            {addWhatsappContactInput?.nameToAddress?.length < 2 &&
-              formError && (
-                <div className="fv-plugins-message-container">
-                  <div className="fv-help-block">
-                    Name To Address is Required.
-                  </div>
-                </div>
-              )}
-          </div>
 
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+            <div className="col-lg-8">
+              <input
+                type="text"
+                className="form-control form-control-lg form-control-solid"
+                name="nameToAddress"
+                value={addWhatsappContactInput?.nameToAddress}
+                onChange={handleInputChange}
+              />
+              {addWhatsappContactInput?.nameToAddress?.length < 2 &&
+                formError && (
+                  <div className="fv-plugins-message-container">
+                    <div className="fv-help-block">
+                      Name To Address is Required.
+                    </div>
+                  </div>
+                )}
+            </div>
+          </div>
+          <div className="row mb-7">
+            <label className="col-lg-4 d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">WABA Mobile Number</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
@@ -217,24 +232,28 @@ const EditWhatsAppContactModal = ({
                 title="Specify Channel WABA Mobile Number."
               ></i>
             </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="wabaMobileNo"
-              value={addWhatsappContactInput?.wabaMobileNo}
-              onChange={handleInputChange}
-            />
-            {addWhatsappContactInput?.wabaMobileNo?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  WABA Mobile Number is Required.
-                </div>
-              </div>
-            )}
+
+            <div className="col-lg-8">
+              <input
+                type="text"
+                className="form-control form-control-lg form-control-solid"
+                name="wabaMobileNo"
+                value={addWhatsappContactInput?.wabaMobileNo}
+                onChange={handleInputChange}
+              />
+              {addWhatsappContactInput?.wabaMobileNo?.length < 2 &&
+                formError && (
+                  <div className="fv-plugins-message-container">
+                    <div className="fv-help-block">
+                      WABA Mobile Number is Required.
+                    </div>
+                  </div>
+                )}
+            </div>
           </div>
 
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+          <div className="row mb-7">
+            <label className="col-lg-4 d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">WABA Name</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
@@ -242,18 +261,21 @@ const EditWhatsAppContactModal = ({
                 title="Specify Channel WABA Name."
               ></i>
             </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="wabaName"
-              value={addWhatsappContactInput?.wabaName}
-              onChange={handleInputChange}
-            />
-            {addWhatsappContactInput?.wabaName?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">WABA Name is Required.</div>
-              </div>
-            )}
+
+            <div className="col-lg-8">
+              <input
+                type="text"
+                className="form-control form-control-lg form-control-solid"
+                name="wabaName"
+                value={addWhatsappContactInput?.wabaName}
+                onChange={handleInputChange}
+              />
+              {addWhatsappContactInput?.wabaName?.length < 2 && formError && (
+                <div className="fv-plugins-message-container">
+                  <div className="fv-help-block">WABA Name is Required.</div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

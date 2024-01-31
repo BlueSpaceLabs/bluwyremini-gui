@@ -67,11 +67,12 @@ const ChatConversation = ({
             phoneNoId:
               // whatsAppStoredData?.phoneNoId,
               "104801782499737",
-            fbSenderId: messageTab === "messenger" ? "6732214643507332" : null,
+            fbSenderId: messageTab === "messenger" ?  selectedInbox?.fbSenderId : null,
           }
         );
 
         setMessage("");
+        //console.log('fbSenderId-',selectedInbox.fbSenderId)
         if (response?.status === 200) {
           // console.log("refetch 1");
           setSendMessageClick((preValue: boolean) => !preValue);
@@ -122,7 +123,7 @@ const ChatConversation = ({
           phoneNoId:
             // whatsAppStoredData?.phoneNoId,
             "104801782499737",
-          fbSenderId: messageTab === "messenger" ? "6732214643507332" : null,
+          fbSenderId: messageTab === "messenger" ?  selectedInbox?.fbSenderId : null,
         }
       );
 

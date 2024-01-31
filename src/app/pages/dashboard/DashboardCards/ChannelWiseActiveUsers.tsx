@@ -61,7 +61,7 @@ const ChannelWiseActiveUsers = () => {
       <Box className={`fw-semibold text-white`}>
       <span className="bi bi-telegram" style={{fontSize:25,color:"lightblue"}}> </span> - {telegarmCount}
       </Box>
-      <br/><center><button className='btn btn-' style={{backgroundColor:"darkred",color:"white"}}>Engage</button></center>
+      <br/><center><button className='btn' style={{backgroundColor:"red",color:"white", minWidth:300}}>Engage</button></center>
  </Box>
 </Box>
 </div>

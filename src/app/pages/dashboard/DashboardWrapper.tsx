@@ -24,6 +24,7 @@ import ChannelWiseActiveUsers from './DashboardCards/ChannelWiseActiveUsers';
 import OutBoundCampaign from './DashboardCards/OutBoundCampaign'
 
 import BarChart from './DashboardCards/Barchart'
+import botlogo from './bot-analytics.png'
 
 const DashboardPage: FC = () => (
   <>
@@ -39,12 +40,30 @@ const DashboardPage: FC = () => (
           <Box className="text-white fw-bold fs-2 mb-1 mt-1">
           Templates
           </Box>
-          <br/>
+          
               <Box className={`fw-semibold text-lightgray`}>
               Create
               </Box>
              <br/>
+             <Box>
+             <div className = "head-text" style={{position:"relative"}}>
+                <div className = "head-image">
+              <img src={"https://img.freepik.com/free-vector/blue-curve-background_53876-113112.jpg?w=1060&t=st=1706704708~exp=1706705308~hmac=a54930b9534eb8736c96b017656e1f61dc34097247ba60a235c43993defc2d53"}
+              height={150} width={300}
+              />
+                </div>
+               <div className='text-on-image' style={{ position:"absolute",
+  right: 50,
+  left: 20,
+  bottom: 65}}>
+                
+                <span><b>Manage Templates by clicking below</b></span>
+                
+              </div>
+             </div> 
              <button className='btn btn-primary' style={{backgroundColor:"green",color:"white",marginRight:0}}>Template Management</button>
+             </Box>
+             
          </Box>
         </Box>
       </div>
@@ -54,7 +73,7 @@ const DashboardPage: FC = () => (
            {/* begin::Row */}
       <div className='row g-5 g-xl-8'>
       <div className='col-xl-4'>
-        <Box className="card bg-dark card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
+        <Box className="card bg-info card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
          <Box className="card-body"><br/>
          <br/><h1 style={{color:"white", textAlign:"center"}}>Perfomance <br/> Metrics</h1>
          </Box>
@@ -63,15 +82,16 @@ const DashboardPage: FC = () => (
 
 
       <div className='col-xl-4'>
-        <Box className="card bg-white card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
+        <Box className="card bg-white card-xl-stretch mb-xl-9" style={{backgroundColor:""}}>
          <BarChart/>
         </Box>
       </div>
 
       <div className='col-xl-4'>
-        <Box className="card bg-info card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
-         <Box className="card-body"><br/>
-         <br/><h1 style={{color:"white", textAlign:"center"}}>Bot Analytics</h1><br/>
+        <Box className="card bg card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
+         <Box className="card-body">
+         {/*<br/><h1 style={{color:"white", textAlign:"center"}}>Bot Analytics</h1><br/>*/}
+         <img src={botlogo}  height={150} width={320}/ >
          </Box>
          
         </Box>

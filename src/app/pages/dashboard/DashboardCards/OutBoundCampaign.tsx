@@ -51,7 +51,7 @@ const OutBoundCampaign = () => {
           <Box className=" text-white fw-bold fs-2 mb-1 mt-1">
           Outbound Campaign
           </Box>
-          Summary of last 30 days<br/>
+          Summary of last 30 days<br/><br/>
               <Box className={`fw-semibold text-lightgray`}>
               Campaigns Created : {campaignsCreated}<br/>
                 Total Users Targeted : {totalUsersTargeted}<br/>
@@ -60,8 +60,8 @@ const OutBoundCampaign = () => {
                 Messaged Read: {readCount}<br/>
                 CTR ( Approximated):
                               </Box>
-             <br/>
-             <button className='btn btn-primary' style={{backgroundColor:"blue",color:"white",marginRight:"0"}}>Create Campaign</button>
+             <br/><br/>
+             <center><button className='btn btn-primary' style={{backgroundColor:"blue",color:"white",minWidth:300}}>Create Campaign</button></center>
          </Box>
         </Box>
       </div>

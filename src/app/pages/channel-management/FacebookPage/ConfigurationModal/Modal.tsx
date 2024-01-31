@@ -32,6 +32,7 @@ const FacebookConfigModal = ({
 }: any) => {
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
+  const [editData, setEditData] = React.useState<boolean>(true);
 
   useEffect(() => {
     setModalInput({
@@ -73,6 +74,10 @@ const FacebookConfigModal = ({
       setFormError(false);
 
       try {
+        // const storedData = sessionStorage.getItem("whatsAppStoredData");
+        // let whatsAppStoredData;
+        // if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
         const response = await axios.post(
           "http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=messenger",
           {
@@ -111,9 +116,14 @@ const FacebookConfigModal = ({
       } finally {
         setRefetch((preValue: boolean) => !preValue);
         handleClose();
+        setEditData(true);
       }
     }
   };
+
+  React.useEffect(() => {
+    setEditData(true);
+  }, [show]);
 
   return createPortal(
     <Modal
@@ -126,11 +136,24 @@ const FacebookConfigModal = ({
     >
       <Box className="modal-header">
         <h2>Configure Facebook Channel</h2>
-        <Box
-          className="btn btn-sm btn-icon btn-active-color-primary"
-          onClick={handleClose}
-        >
-          <KTIcon className="fs-1" iconName="cross" />
+
+        <Box className="d-flex flex-start gap-3">
+          <button
+            type="button"
+            className="btn btn-lg btn-secondary"
+            // onClick={submit}
+            onClick={() => setEditData(false)}
+          >
+            Edit
+            {/* <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" /> */}
+          </button>
+
+          <Box
+            className="btn btn-sm btn-icon btn-active-color-primary"
+            onClick={handleClose}
+          >
+            <KTIcon className="fs-1" iconName="cross" />
+          </Box>
         </Box>
       </Box>
 
@@ -138,6 +161,7 @@ const FacebookConfigModal = ({
         modalInput={modalInput}
         handleInputChange={handleInputChange}
         formError={formError}
+        readOnly={editData}
       />
 
       <Box className="d-flex flex-end py-3 px-8">
@@ -146,6 +170,7 @@ const FacebookConfigModal = ({
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
           onClick={handleSubmit}
+          disabled={editData}
         >
           Submit
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />

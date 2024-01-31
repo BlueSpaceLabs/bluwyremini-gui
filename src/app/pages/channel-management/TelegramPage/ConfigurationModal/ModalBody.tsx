@@ -8,6 +8,7 @@ const CustomInputCard = ({
   inputName,
   handleInputChange,
   formError,
+  readOnly,
 }: any) => {
   return (
     <Box className=" fv-row mb-10 " sx={{ width: "45%" }}>
@@ -27,6 +28,7 @@ const CustomInputCard = ({
         name={inputName}
         value={inputValue}
         onChange={handleInputChange}
+        readOnly={readOnly}
       />
       {inputValue?.length < 2 && formError && (
         <Box className="fv-plugins-message-container">
@@ -37,7 +39,12 @@ const CustomInputCard = ({
   );
 };
 
-const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
+const ModalBody = ({
+  modalInput,
+  handleInputChange,
+  formError,
+  readOnly,
+}: any) => {
   return (
     <Box className="modal-body py-lg-10 px-lg-10">
       <Box className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
@@ -47,6 +54,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"telegramToken"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
 
         <CustomInputCard
@@ -55,6 +63,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"telegramWebhookUrl"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
         <CustomInputCard
           labelTitle={"telegram Webhook Token"}
@@ -62,6 +71,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"telegramWebookToken"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
       </Box>
     </Box>

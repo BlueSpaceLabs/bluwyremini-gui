@@ -31,6 +31,7 @@ const InstagramConfigModal = ({
 }: any) => {
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
+  const [editData, setEditData] = React.useState<boolean>(true);
 
   useEffect(() => {
     setModalInput({
@@ -68,6 +69,10 @@ const InstagramConfigModal = ({
       setFormError(true);
     } else {
       setFormError(false);
+
+      // const storedData = sessionStorage.getItem("whatsAppStoredData");
+      // let whatsAppStoredData;
+      // if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
       try {
         const response = await axios.post(
@@ -107,9 +112,14 @@ const InstagramConfigModal = ({
       } finally {
         setRefetch((preValue: boolean) => !preValue);
         handleClose();
+        setEditData(true);
       }
     }
   };
+
+  React.useEffect(() => {
+    setEditData(true);
+  }, [show]);
 
   return createPortal(
     <Modal
@@ -122,11 +132,24 @@ const InstagramConfigModal = ({
     >
       <Box className="modal-header">
         <h2>Configure Instagram Channel</h2>
-        <Box
-          className="btn btn-sm btn-icon btn-active-color-primary"
-          onClick={handleClose}
-        >
-          <KTIcon className="fs-1" iconName="cross" />
+
+        <Box className="d-flex flex-start gap-3">
+          <button
+            type="button"
+            className="btn btn-lg btn-secondary"
+            // onClick={submit}
+            onClick={() => setEditData(false)}
+          >
+            Edit
+            {/* <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" /> */}
+          </button>
+
+          <Box
+            className="btn btn-sm btn-icon btn-active-color-primary"
+            onClick={handleClose}
+          >
+            <KTIcon className="fs-1" iconName="cross" />
+          </Box>
         </Box>
       </Box>
 
@@ -134,6 +157,7 @@ const InstagramConfigModal = ({
         modalInput={modalInput}
         handleInputChange={handleInputChange}
         formError={formError}
+        readOnly={editData}
       />
 
       <Box className="d-flex flex-end py-3 px-8">
@@ -142,6 +166,7 @@ const InstagramConfigModal = ({
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
           onClick={handleSubmit}
+          disabled={editData}
         >
           Submit
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />

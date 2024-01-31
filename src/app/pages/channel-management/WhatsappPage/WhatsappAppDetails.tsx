@@ -26,7 +26,6 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
 
   //       console.log({ params });
 
-  //       console.log("subhro 01", response.data);
   //       if (response.data) {
   //         setDetailData({
   //           verified_name: response.data.verifiedName,
@@ -53,9 +52,8 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
             params: {
               accessKey:
                 "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-              phoneNoId: "104801782499737",
-              accessToken:
-                "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+              phoneNoId: channelConfigurationData?.phoneNoId,
+              accessToken: channelConfigurationData?.accessToken,
               channelName: "whatsapp",
             },
           }
@@ -76,8 +74,6 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
 
     fetchData();
   }, []); // Empty dependency array means this effect runs once after the initial render
-
-  console.log("subhro 009", data);
 
   return (
     <React.Fragment>

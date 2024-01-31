@@ -13,6 +13,10 @@ import { KTIcon } from "../../../../../_metronic/helpers";
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
 const serviceAxiosPostWhatsappData = async (data: any) => {
+  // const storedData = sessionStorage.getItem("whatsAppStoredData");
+  // let whatsAppStoredData;
+  // if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
   try {
     const response = await axios.post(
       `http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=whatsapp`,
@@ -47,6 +51,7 @@ const WhatsappConfigurationModal = ({
     React.useState<any>(initialModalData);
 
   const [formError, setFormError] = React.useState<boolean>(false);
+  const [editData, setEditData] = React.useState<boolean>(true);
 
   const handleInputChange = (event: any) => {
     setWhatsappModalInput({
@@ -91,6 +96,7 @@ const WhatsappConfigurationModal = ({
       setSeveritySnackBar("success");
       setMessageSnackBar("Successfully updated configuration details !");
       setFormError(false);
+      setEditData(true);
       handleClose();
     }
   };
@@ -105,6 +111,10 @@ const WhatsappConfigurationModal = ({
     }
   }, [isSuccess]);
 
+  React.useEffect(() => {
+    setEditData(true);
+  }, [show]);
+
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -117,12 +127,25 @@ const WhatsappConfigurationModal = ({
       <div className="modal-header">
         <h2>Configure Whatsapp Channel</h2>
         {/* begin::Close */}
-        <div
-          className="btn btn-sm btn-icon btn-active-color-primary"
-          onClick={handleClose}
-        >
-          <KTIcon className="fs-1" iconName="cross" />
+        <div className="d-flex flex-start gap-3">
+          <button
+            type="button"
+            className="btn btn-lg btn-secondary"
+            // onClick={submit}
+            onClick={() => setEditData(false)}
+          >
+            Edit
+            {/* <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" /> */}
+          </button>
+
+          <div
+            className="btn btn-sm btn-icon btn-active-color-primary"
+            onClick={handleClose}
+          >
+            <KTIcon className="fs-1" iconName="cross" />
+          </div>
         </div>
+
         {/* end::Close */}
       </div>
 
@@ -145,6 +168,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter Access Token"
               value={whatsappModalInput?.accessToken}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.accessToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -169,6 +193,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter Application Id"
               value={whatsappModalInput?.appId}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.appId?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -191,6 +216,7 @@ const WhatsappConfigurationModal = ({
               className="form-control form-control-lg form-control-solid"
               name="businessId"
               placeholder="Enter Business Id"
+              readOnly={editData}
               value={whatsappModalInput?.businessId}
               onChange={handleInputChange}
             />
@@ -217,6 +243,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter Display Number"
               value={whatsappModalInput?.displayNo}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.displayNo?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -241,6 +268,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter Permanent Token"
               value={whatsappModalInput?.permanentToken}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.permanentToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -267,6 +295,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter Phone Number Id"
               value={whatsappModalInput?.phoneNoId}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.phoneNoId?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -293,6 +322,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter WA Webhook Token"
               value={whatsappModalInput?.waWebhookToken}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.waWebhookToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -319,6 +349,7 @@ const WhatsappConfigurationModal = ({
               placeholder="Enter WA Webhook Url"
               value={whatsappModalInput?.waWebhookUrl}
               onChange={handleInputChange}
+              readOnly={editData}
             />
             {whatsappModalInput?.waWebhookUrl?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
@@ -331,13 +362,14 @@ const WhatsappConfigurationModal = ({
         {/*end::Form Group */}
       </div>
 
-      <div className="d-flex flex-end py-3 px-8">
+      <div className="d-flex flex-end py-3 px-8 ">
         <button
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
           // onClick={submit}
           onClick={handleSubmitForm}
+          disabled={editData}
         >
           Submit
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />

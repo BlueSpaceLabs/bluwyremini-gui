@@ -8,6 +8,7 @@ const CustomInputCard = ({
   inputName,
   handleInputChange,
   formError,
+  readOnly,
 }: any) => {
   return (
     <Box className=" fv-row mb-10 " sx={{ width: "45%" }}>
@@ -27,6 +28,7 @@ const CustomInputCard = ({
         name={inputName}
         value={inputValue}
         onChange={handleInputChange}
+        readOnly={readOnly}
       />
       {inputValue?.length < 2 && formError && (
         <Box className="fv-plugins-message-container">
@@ -37,7 +39,12 @@ const CustomInputCard = ({
   );
 };
 
-const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
+const ModalBody = ({
+  modalInput,
+  handleInputChange,
+  formError,
+  readOnly,
+}: any) => {
   return (
     <Box className="modal-body py-lg-10 px-lg-10">
       <Box className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
@@ -47,6 +54,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"appId"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
         <CustomInputCard
           labelTitle={"Business Id"}
@@ -54,6 +62,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"businessId"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
         <CustomInputCard
           labelTitle={"Facebook Access Token"}
@@ -61,6 +70,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"fbAccessToken"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
         <CustomInputCard
           labelTitle={"Facebook Webhook Token"}
@@ -68,6 +78,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"fbWebhookToken"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
         <CustomInputCard
           labelTitle={"Facebook Webhook Url"}
@@ -75,6 +86,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"fbWebhookUrl"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
         <CustomInputCard
           labelTitle={"Page Id"}
@@ -82,6 +94,7 @@ const ModalBody = ({ modalInput, handleInputChange, formError }: any) => {
           inputName={"pageId"}
           handleInputChange={handleInputChange}
           formError={formError}
+          readOnly={readOnly}
         />
       </Box>
     </Box>

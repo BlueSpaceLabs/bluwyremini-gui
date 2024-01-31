@@ -124,15 +124,21 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                   ? channelConfigurationData.accessToken
                   : "No Data to show."}
               </span> */}
-              <textarea name="postContent" rows={4} cols={70} value={
+              <textarea
+                name="postContent"
+                rows={4}
+                cols={70}
+                value={
                   channelConfigurationData.accessToken
-                    ? channelConfigurationData.accessToken
+                    ? showPassword
+                      ? channelConfigurationData.accessToken
+                      : "*".repeat(channelConfigurationData.accessToken.length)
                     : "No Data to show."
                 }
                 onClick={togglePasswordVisibility}
                 readOnly
-                />
-              {/*<input
+              />
+              {/* <input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
                 value={
@@ -141,7 +147,8 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                     : "No Data to show."
                 }
                 onClick={togglePasswordVisibility}
-              />*/}
+                style={{ display: "inline-block", maxHeight: "170px" }}
+              /> */}
             </div>
           </div>
 
@@ -218,11 +225,22 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                   ? channelConfigurationData.permanentToken
                   : "No Data to show."}
               </span> */}
-              <textarea name="postContent" rows={4} cols={70}  value={
+              <textarea
+                name="postContent"
+                rows={4}
+                cols={70}
+                value={
                   channelConfigurationData.permanentToken
-                    ? channelConfigurationData.permanentToken
+                    ? showPassword
+                      ? channelConfigurationData.permanentToken
+                      : "*".repeat(
+                          channelConfigurationData.permanentToken.length
+                        )
                     : "No Data to show."
-                }/>
+                }
+                onClick={togglePasswordVisibility}
+                readOnly
+              />
               {/*<input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"

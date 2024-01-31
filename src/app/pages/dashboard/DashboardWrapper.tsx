@@ -99,7 +99,7 @@ const DashboardPage: FC = () => (
     </div>
       {/* begin::Row */}
     <div className='row g-5 g-xl-8'>
-      <div className='col-xl-6'>
+      <div className='col-xl-4'>
         <Box className="card bg-warning card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
          <Box className="card-body"><br/>
          <br/><h1 style={{color:"white", textAlign:"center"}}>Agent Metrics</h1>
@@ -109,7 +109,7 @@ const DashboardPage: FC = () => (
         </Box>
       </div>
 
-      <div className='col-xl-3'>
+      <div className='col-xl-4'>
         <Box className="card bg-success card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
          <Box className="card-body"><br/>
          <br/><h3 style={{color:"white", textAlign:"center"}}>Write to us for any new
@@ -122,7 +122,7 @@ need</h3>
       </div>
 
 
-      <div className='col-xl-3'>
+      <div className='col-xl-4'>
         <Box className="card bg-dark card-xl-stretch mb-xl-8" style={{backgroundColor:""}}>
          <Box className="card-body"><br/>
          <br/><h3 style={{color:"white", textAlign:"center"}}>Explore platform APIs</h3>

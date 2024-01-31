@@ -52,7 +52,7 @@ const OutBoundCampaign = () => {
           Outbound Campaign
           </Box>
           Summary of last 30 days<br/><br/>
-              <Box className={`fw-semibold text-lightgray`}>
+              <Box className={`fw-semibold text-lightgray`} style={{color:"lightblue"}}>
               Campaigns Created : {campaignsCreated}<br/>
                 Total Users Targeted : {totalUsersTargeted}<br/>
                 Messages Sent: {sentCount}<br/>

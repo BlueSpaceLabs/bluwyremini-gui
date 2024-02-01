@@ -179,7 +179,7 @@ any) {
                     <span>{row.mediaTitle}</span>
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.mediaDescription}
+                    {row.mediaType}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.mediaChannel}

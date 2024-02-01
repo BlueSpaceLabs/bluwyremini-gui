@@ -50,12 +50,21 @@ any) => {
         data-kt-menu="true"
       >
         {/* begin::Menu item */}
-        <div className="menu-item px-3">
+        {/* <div className="menu-item px-3">
           <span
             className="menu-link px-3"
             onClick={() => setShowDeleteModal(true)}
           >
             Delete
+          </span>
+        </div> */}
+
+        <div className="menu-item px-3">
+          <span
+            className="menu-link px-3"
+            // onClick={() => setShowDeleteModal(true)}
+          >
+            Edit
           </span>
         </div>
         {/* end::Menu item */}

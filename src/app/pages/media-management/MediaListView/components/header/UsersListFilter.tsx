@@ -60,6 +60,7 @@ const UsersListFilter = () => {
           <div className="mb-10">
             <label className="form-label fs-6 fw-bold">Channel:</label>
             <select
+            name="channelType"
               className="form-select form-select-solid fw-bolder"
               data-kt-select2="true"
               data-placeholder="Select option"
@@ -82,6 +83,7 @@ const UsersListFilter = () => {
           <div className="mb-10">
             <label className="form-label fs-6 fw-bold">Media Type:</label>
             <select
+            name="mediaType"
               className="form-select form-select-solid fw-bolder"
               data-kt-select2="true"
               data-placeholder="Select option"

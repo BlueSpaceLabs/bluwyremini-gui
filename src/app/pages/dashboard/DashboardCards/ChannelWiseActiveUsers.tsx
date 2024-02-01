@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import axios from "axios";
 
@@ -61,7 +62,7 @@ const ChannelWiseActiveUsers = () => {
       <Box className={`fw-semibold text-white`}>
       <span className="bi bi-telegram" style={{fontSize:25,color:"lightblue"}}> </span> - {telegarmCount}
       </Box>
-      <br/><center><button className='btn' style={{backgroundColor:"red",color:"white", minWidth:300}}>Engage</button></center>
+      <br/><center><Link to="/contact-management" className='btn' style={{backgroundColor:"red",color:"white", minWidth:300}}>Engage</Link></center>
  </Box>
 </Box>
 </div>

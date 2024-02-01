@@ -61,7 +61,16 @@ const DashboardPage: FC = () => (
                 
               </div>
              </div> 
-             <button className='btn btn-primary' style={{backgroundColor:"green",color:"white",marginRight:0}}>Template Management</button>
+        
+             <a
+             style={{backgroundColor:"green",color:"white",marginRight:0}}
+            className="menu-link px-3 btn btn-primary"
+            data-kt-users-table-filter="delete_row"
+            href={`https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278}`}
+            target="_blank"
+          >
+            Template Management
+          </a>
              </Box>
              
          </Box>

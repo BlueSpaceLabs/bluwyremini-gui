@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import axios from "axios";
 
@@ -61,7 +62,7 @@ const OutBoundCampaign = () => {
                 CTR ( Approximated):
                               </Box>
              <br/><br/>
-             <center><button className='btn btn-primary' style={{backgroundColor:"blue",color:"white",minWidth:300}}>Create Campaign</button></center>
+             <center><Link to="/campaign-management" className='btn btn-primary' style={{backgroundColor:"blue",color:"white",minWidth:300}}>Create Campaign</Link></center>
          </Box>
         </Box>
       </div>

@@ -58,7 +58,7 @@ const UsersListFilter = () => {
         <div className="px-7 py-5" data-kt-user-table-filter="form">
           {/* begin::Input group */}
           <div className="mb-10">
-            <label className="form-label fs-6 fw-bold">Role:</label>
+            <label className="form-label fs-6 fw-bold">Channel:</label>
             <select
               className="form-select form-select-solid fw-bolder"
               data-kt-select2="true"
@@ -69,19 +69,18 @@ const UsersListFilter = () => {
               onChange={(e) => setRole(e.target.value)}
               value={role}
             >
-              <option value=""></option>
-              <option value="Administrator">Administrator</option>
-              <option value="Analyst">Analyst</option>
-              <option value="Developer">Developer</option>
-              <option value="Support">Support</option>
-              <option value="Trial">Trial</option>
+              <option value="">Select Channel</option>
+              <option value="whatsapp">Whatsapp</option>
+              <option value="messenger">Messenger</option>
+              <option value="instagram">Instagram</option>
+              <option value="telegram">Telegram</option>
             </select>
           </div>
           {/* end::Input group */}
 
           {/* begin::Input group */}
           <div className="mb-10">
-            <label className="form-label fs-6 fw-bold">Last login:</label>
+            <label className="form-label fs-6 fw-bold">Media Type:</label>
             <select
               className="form-select form-select-solid fw-bolder"
               data-kt-select2="true"
@@ -92,11 +91,10 @@ const UsersListFilter = () => {
               onChange={(e) => setLastLogin(e.target.value)}
               value={lastLogin}
             >
-              <option value=""></option>
-              <option value="Yesterday">Yesterday</option>
-              <option value="20 mins ago">20 mins ago</option>
-              <option value="5 hours ago">5 hours ago</option>
-              <option value="2 days ago">2 days ago</option>
+              <option value="">Select Media Type</option>
+              <option value="audio">Audio</option>
+              <option value="video">Video</option>
+              <option value="image">Image</option>
             </select>
           </div>
           {/* end::Input group */}

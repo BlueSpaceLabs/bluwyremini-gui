@@ -3,6 +3,7 @@ import React, { FC, useEffect } from "react";
 import { MenuComponent } from "../../../../_metronic/assets/ts/components";
 import { KTIcon } from "../../../../_metronic/helpers";
 import CustomDeleteModal from "./CustomDeleteModal";
+import EditMediaModal from "./AddMediaModal/EditMediaModal";
 // import CustomEditModal from "./CustomContactModal";
 // import CustomDeleteModal from "./CustomDetailsModal";
 // import CustomDetailsModal from "./CustomDetailsModal";
@@ -32,6 +33,7 @@ any) => {
   }, []);
 
   const [showDeleteModal, setShowDeleteModal] = React.useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
 
   return (
     <>
@@ -62,7 +64,7 @@ any) => {
         <div className="menu-item px-3">
           <span
             className="menu-link px-3"
-            // onClick={() => setShowDeleteModal(true)}
+            onClick={() => setShowEditModal(true)}
           >
             Edit
           </span>
@@ -85,6 +87,23 @@ any) => {
           show={showDeleteModal}
           handleClose={() => setShowDeleteModal(false)}
           selectedId={detailMediaData.id}
+          selectedMediaName={detailMediaData.mediaName}
+          handleEditModalClose={() => {
+            setShowEditModal(false);
+          }}
+        />
+
+        <EditMediaModal
+          show={showEditModal}
+          handleClose={() => {
+            setShowEditModal(false);
+            // setServerResponse(null);
+          }}
+          detailMediaData={detailMediaData}
+          deleteModalOpen={() => setShowDeleteModal(true)}
+          // setData={setAddMediaModalData}
+          // serverResponse={serverResponse}
+          // setServerResponse={setServerResponse}
         />
 
         {/* <CustomEditModal

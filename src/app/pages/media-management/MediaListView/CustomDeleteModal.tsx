@@ -2,6 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
+import axios from "axios";
 
 // type Props = {
 //   show: boolean;
@@ -10,7 +11,38 @@ import { KTIcon } from "../../../../_metronic/helpers";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const CustomDeleteModal = ({ show, handleClose, selectedId }: any) => {
+const CustomDeleteModal = ({
+  show,
+  handleClose,
+  selectedId,
+  selectedMediaName,
+  handleEditModalClose,
+}: any) => {
+  const handleDeleteClick = async () => {
+    const url =
+      "http://3.108.229.60:8082/bluwyremini-backend/info/deleteMediaDetails.php";
+    const accessKey =
+      "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
+    try {
+      const response = await axios.post(url, null, {
+        params: {
+          accessKey,
+          id: selectedId,
+          mediaName: selectedMediaName,
+        },
+      });
+
+      console.log("Response:", response?.data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      console.log("Request completed.");
+      handleEditModalClose();
+      handleClose();
+    }
+  };
+
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -21,7 +53,7 @@ const CustomDeleteModal = ({ show, handleClose, selectedId }: any) => {
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Delete Media : {selectedId}</h2>
+        <h2>Delete Media </h2>
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
@@ -35,7 +67,9 @@ const CustomDeleteModal = ({ show, handleClose, selectedId }: any) => {
       <div className="modal-body py-lg-10 px-lg-10">
         {/*begin::Form Group */}
         <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
-          <div className="text-gray-600 fw-bold fs-5">Confirm to Delete !</div>
+          <div className="text-gray-600 fw-bold fs-5">
+            Confirm to Delete {selectedMediaName} !
+          </div>
         </div>
 
         {/*end::Form Group */}
@@ -55,7 +89,7 @@ const CustomDeleteModal = ({ show, handleClose, selectedId }: any) => {
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
-          onClick={handleClose}
+          onClick={handleDeleteClick}
         >
           Confirm
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />

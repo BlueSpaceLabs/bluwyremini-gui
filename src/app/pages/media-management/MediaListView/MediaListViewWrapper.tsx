@@ -11,8 +11,9 @@ import { UsersListHeader } from "../MediaListView/components/header/UsersListHea
 // import { UsersTable } from "../MediaListView/table/UsersTable";
 import { UserEditModal } from "../MediaListView/user-edit-modal/UserEditModal";
 import CustomMediaTable from "./CustomTable";
-import { getMediaListData } from "../../../services/MediaManagement";
-import { useQuery } from "react-query";
+// import { getMediaListData } from "../../../services/MediaManagement";
+// import { useQuery } from "react-query";
+import axios from "axios";
 
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
@@ -21,25 +22,56 @@ const MediaListView = () => {
   const { itemIdForUpdate } = useListView();
   const [mediaListViewData, setMediaListViewData] = React.useState([]);
 
-  const {
-    data: getMediaList,
-    // isLoading,
-    // refetch: refetchMediaData,
-  } = useQuery("getMediaListData", () => getMediaListData(accessKey));
+  const [channelType, setChannelType] = React.useState("");
+  const [mediaType, setMediaType] = React.useState("");
+
+  // const {
+  //   data: getMediaList,
+  //   // isLoading,
+  //   refetch: refetchMediaData,
+  // } = useQuery("getMediaListData", () => getMediaListData(accessKey));
+
+  // React.useEffect(() => {
+  //   if (getMediaList) {
+  //     setMediaListViewData(getMediaList);
+  //     // console.log({ getMediaList });
+  //     // const jsonArray = JSON.parse(getMediaList?.data);
+  //     // if (jsonArray.length > 0) setWhatsAppListViewData(jsonArray);
+  //   }
+  // }, [getMediaList]);
 
   React.useEffect(() => {
-    if (getMediaList) {
-      setMediaListViewData(getMediaList);
-      // console.log({ getMediaList });
-      // const jsonArray = JSON.parse(getMediaList?.data);
-      // if (jsonArray.length > 0) setWhatsAppListViewData(jsonArray);
-    }
-  }, [getMediaList]);
+    const getMediaListData = async () => {
+      const url =
+        "http://3.108.229.60:8082/bluwyremini-backend/info/getMediaDetails.php";
+
+      const params = {
+        accessKey: accessKey,
+        channelType: channelType,
+        mediaType: mediaType,
+      };
+
+      try {
+        const response = await axios.get(url, { params });
+        setMediaListViewData(response.data);
+      } catch (error) {
+        setMediaListViewData([]);
+        console.error("Error fetching data:", error);
+      } finally {
+        console.log("image list fetch");
+      }
+    };
+
+    getMediaListData();
+  }, [channelType, mediaType]);
 
   return (
     <>
       <KTCard>
-        <UsersListHeader />
+        <UsersListHeader
+          setChannelType={setChannelType}
+          setMediaType={setMediaType}
+        />
         {/* <UsersTable /> */}
         <CustomMediaTable
           tableData={mediaListViewData}

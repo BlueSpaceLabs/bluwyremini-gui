@@ -128,7 +128,15 @@ any) {
     setPage(0);
   };
 
-  console.log(tableData, "subhro 007");
+  const handleMediaShow = ({ type, src, alt }: any) => {
+    if (type === "image") {
+      return <img src={src} alt={alt} width={50} height={50} />;
+    } else if (type === "video") {
+      return <video src={src} width={50} height={50} />;
+    } else {
+      return "not supported";
+    }
+  };
 
   if (tableData.length > 0) {
     return (
@@ -188,12 +196,18 @@ any) {
                     {row.createdDatetime}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    <img
+                    {/* <img
                       src={row.mediaUrl}
                       alt={row.mediaName}
                       width={50}
                       height={50}
-                    />
+                    /> */}
+
+                    {handleMediaShow({
+                      type: row.mediaType,
+                      src: row.mediaUrl,
+                      alt: row.mediaName,
+                    })}
                   </TableCell>
 
                   {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">

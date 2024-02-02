@@ -10,7 +10,7 @@ const initialValue = {
   mediaDescription: null,
 };
 
-const UsersListToolbar = () => {
+const UsersListToolbar = ({ setChannelType, setMediaType }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [addMediaModalData, setAddMediaModalData] =
     React.useState<object>(initialValue);
@@ -28,7 +28,10 @@ const UsersListToolbar = () => {
       className="d-flex justify-content-end"
       data-kt-user-table-toolbar="base"
     >
-      <UsersListFilter />
+      <UsersListFilter
+        setChannelType={setChannelType}
+        setMediaType={setMediaType}
+      />
 
       {/* begin::Export */}
       {/* <button type="button" className="btn btn-light-primary me-3">

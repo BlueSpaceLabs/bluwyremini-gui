@@ -1,9 +1,9 @@
 import React from "react";
-// import { useMutation } from "react-query";
+import { useMutation } from "react-query";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
-// import { postEditWhatsappContact } from "../../../services/ContactManagement";
+import { postAddWhatsappContact } from "../../../../services/ContactManagement";
 
 // type Props = {
 //   show: boolean;
@@ -12,10 +12,19 @@ import { KTIcon } from "../../../../../_metronic/helpers";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const EditWhatsAppContactModal = ({
+const initialValue = {
+  firstChannel: "",
+  lastInteractedChannel: "",
+  mobileNo: "",
+  crmFullname: "",
+  nameToAddress: "",
+  wabaMobileNo: "",
+  wabaName: "",
+};
+
+const AddWhatsAppContactModal = ({
   show,
   handleClose,
-  initialModalData,
   accessKey,
   channelName,
   // refetchWhatsAppContactListData,
@@ -24,11 +33,12 @@ const EditWhatsAppContactModal = ({
   setSeveritySnackBar,
   setMessageSnackBar,
 }: any) => {
-  const [addWhatsappContactInput, setAddWhatsappContactInput] =
-    React.useState<any>(initialModalData);
-  const [formError, setFormError] = React.useState<boolean>(false);
+  const { mutateAsync } = useMutation(postAddWhatsappContact);
 
-  // const { mutateAsync } = useMutation(postEditWhatsappContact);
+  const [addWhatsappContactInput, setAddWhatsappContactInput] =
+    React.useState<any>(initialValue);
+
+  const [formError, setFormError] = React.useState<boolean>(false);
 
   const handleInputChange = (event: any) => {
     setAddWhatsappContactInput({
@@ -37,9 +47,10 @@ const EditWhatsAppContactModal = ({
     });
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = async () => {
     if (
-      addWhatsappContactInput?.bluwyreId.length < 2 ||
+      addWhatsappContactInput?.firstChannel.length < 2 ||
+      addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
       addWhatsappContactInput?.mobileNo.length < 2 ||
       addWhatsappContactInput?.crmFullname.length < 2 ||
       addWhatsappContactInput?.nameToAddress.length < 2 ||
@@ -48,41 +59,43 @@ const EditWhatsAppContactModal = ({
     ) {
       setFormError(true);
     } else {
-      // mutateAsync(
-      //   {
-      //     channelName: channelName,
-      //     requestData: {
-      //       tenant: "bsl",
-      //       accessKey: accessKey,
-      //       contact_data: {
-      //         bluwyreId: addWhatsappContactInput?.bluwyreId,
-      //         mobileNo: addWhatsappContactInput?.mobileNo,
-      //         crmFullname: addWhatsappContactInput?.crmFullname,
-      //         nameToAddress: addWhatsappContactInput?.nameToAddress,
-      //         wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
-      //         wabaName: addWhatsappContactInput?.wabaName,
-      //       },
-      //     },
-      //   },
-      //   {
-      //     onSuccess: () => {
-      //       setShowSnackbar(true);
-      //       setSeveritySnackBar("success");
-      //       setMessageSnackBar("Successfully updated Contact Details !");
-      //       // refetchWhatsAppContactListData();
-      //       setRefetchData((preValue: boolean) => !preValue);
-      //     },
-      //     onError: () => {
-      //       setShowSnackbar(true);
-      //       setSeveritySnackBar("error");
-      //       setMessageSnackBar("Failed to update Contact Details !");
-      //     },
-      //     onSettled: () => {
-      //       setFormError(false);
-      //       handleClose();
-      //     },
-      //   }
-      // );
+      mutateAsync(
+        {
+          channelName: channelName,
+          requestData: {
+            tenant: "bsl",
+            accessKey: accessKey,
+            contact_data: {
+              mobileNo: addWhatsappContactInput?.mobileNo,
+              firstChannel: addWhatsappContactInput?.firstChannel,
+              lastInteractedChannel:
+                addWhatsappContactInput?.lastInteractedChannel,
+              crmFullname: addWhatsappContactInput?.crmFullname,
+              nameToAddress: addWhatsappContactInput?.nameToAddress,
+              wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
+              wabaName: addWhatsappContactInput?.wabaName,
+            },
+          },
+        },
+        {
+          onSuccess: () => {
+            setShowSnackbar(true);
+            setSeveritySnackBar("success");
+            setMessageSnackBar("Successfully added Contact Details !");
+            // refetchWhatsAppContactListData();
+            setRefetchData((preValue: boolean) => !preValue);
+          },
+          onError: () => {
+            setShowSnackbar(true);
+            setSeveritySnackBar("error");
+            setMessageSnackBar("Failed to add Contact Details !");
+          },
+          onSettled: () => {
+            setFormError(false);
+            handleClose();
+          },
+        }
+      );
     }
   };
 
@@ -96,7 +109,7 @@ const EditWhatsAppContactModal = ({
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Edit Facebook Contact</h2>
+        <h2>Add Telegram Contact</h2>
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
@@ -112,26 +125,51 @@ const EditWhatsAppContactModal = ({
         <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Bluwyre Id</span>
+              <span className="required">First Channel</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel Bluwyre Id."
+                title="Specify Channel firstChannel."
               ></i>
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="bluwyreId"
-              value={addWhatsappContactInput?.bluwyreId}
+              name="firstChannel"
+              value={addWhatsappContactInput?.firstChannel}
               onChange={handleInputChange}
-              disabled
             />
-            {addWhatsappContactInput?.bluwyreId?.length < 2 && formError && (
+            {addWhatsappContactInput?.firstChannel?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Bluwyre Id is Required.</div>
+                <div className="fv-help-block">firstChannel is Required.</div>
               </div>
             )}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Last Interacted Channel</span>
+              <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Channel Last Interacted Channel."
+              ></i>
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="lastInteractedChannel"
+              value={addWhatsappContactInput?.lastInteractedChannel}
+              onChange={handleInputChange}
+            />
+            {addWhatsappContactInput?.lastInteractedChannel?.length < 2 &&
+              formError && (
+                <div className="fv-plugins-message-container">
+                  <div className="fv-help-block">
+                    Last Interacted Channel is Required.
+                  </div>
+                </div>
+              )}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
@@ -277,4 +315,4 @@ const EditWhatsAppContactModal = ({
   );
 };
 
-export default EditWhatsAppContactModal;
+export default AddWhatsAppContactModal;

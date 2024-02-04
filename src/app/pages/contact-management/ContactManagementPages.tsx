@@ -1,19 +1,25 @@
 import React from "react";
 import WhatsappPage from "./WhatsappPage/WhatsappPage";
-import { TelegramPageWrapper } from "./TelegramPage/TelegramPage";
 import ChannelDetails from "./BluwyrePage";
-import FacebookPage from "./FacebookPage";
-import InstagramPage from "./InstagramPage";
+// import FacebookPage from "./FacebookPage";
+// import InstagramPage from "./InstagramPage";
+// import TelegramPage from "./TelegramPage";
+import FaceBookTempPage from "./FacebookPage/Home";
+import InstagramTempPage from "./InstagramPage/Home";
+import TelegramTempPage from "./TelegramPage/Home";
 
 const ContactManagementPages = ({ channelTab, accessKey }: any) => {
   if (channelTab === "whatsapp") {
     return <WhatsappPage channelName={channelTab} accessKey={accessKey} />;
   } else if (channelTab === "telegram") {
-    return <TelegramPageWrapper />;
+    // return <TelegramPage />;
+    return <TelegramTempPage />;
   } else if (channelTab === "facebook") {
-    return <FacebookPage />;
+    // return <FacebookPage />;
+    return <FaceBookTempPage />;
   } else if (channelTab === "instagram") {
-    return <InstagramPage />;
+    // return <InstagramPage />;
+    return <InstagramTempPage />;
   } else if (channelTab === "bluwyre") {
     return <ChannelDetails />;
   } else {

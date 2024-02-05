@@ -281,27 +281,40 @@ any) => {
           </div>
           {/* end::Input group */}
 
-          <div className=" fv-row mb-3 w-100 ">
+          {/* <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Media Id</span>
-              {/* <i
+              <span>Media Id</span> */}
+          {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Title."
               ></i> */}
-            </label>
-            <input
+          {/* </label> */}
+          {/* <input
               type="text"
               className="form-control form-control-lg form-control-solid"
               // name="config1"
               value={mediaId}
               readOnly
-            />
-            {/* {mediaTitle.length < 2 && formError && (
+            /> */}
+
+          {/* <span className="fw-bolder fs-5 text-gray-500">{mediaId}</span> */}
+          {/* {mediaTitle.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Media Title is Required.</div>
               </div>
             )} */}
+          {/* </div> */}
+
+          <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
+            <div className="w-25">
+              <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+                <span>Media Id</span>
+              </label>
+            </div>
+            <div className="w-75">
+              <span className="fw-bolder fs-5 text-gray-500">{mediaId}</span>
+            </div>
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
@@ -354,28 +367,40 @@ any) => {
             )}
           </div>
 
-          <div className=" fv-row mb-3 w-100 ">
+          <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
+            <div className="w-25">
+              <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+                <span>Media Type</span>
+              </label>
+            </div>
+            <div className="w-75">
+              <span className="fw-bolder fs-5 text-gray-500">{mediaType}</span>
+            </div>
+          </div>
+
+          {/* <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Media Type</span>
-              {/* <i
+              <span>Media Type</span> */}
+          {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Title."
               ></i> */}
-            </label>
-            <input
+          {/* </label> */}
+          {/* <input
               type="text"
               className="form-control form-control-lg form-control-solid"
               // name="config1"
               value={mediaType}
               readOnly
-            />
-            {/* {mediaTitle.length < 2 && formError && (
+            /> */}
+          {/* <span className="fw-bolder fs-5 text-gray-500">{mediaType}</span> */}
+          {/* {mediaTitle.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Media Title is Required.</div>
               </div>
             )} */}
-          </div>
+          {/* </div> */}
 
           <div className=" fv-row mb-2 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
@@ -400,51 +425,87 @@ any) => {
           </div>
         </div>
 
-        <div className=" fv-row mb-3 w-100 ">
+        <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
+          <div className="w-25">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span>Media Upload Date</span>
+            </label>
+          </div>
+          <div className="w-75">
+            <span className="fw-bolder fs-5 text-gray-500">
+              {createdDatetime}
+            </span>
+          </div>
+        </div>
+
+        {/* <div className=" fv-row mb-3 w-100 ">
           <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-            <span className="required">Media Upload Date</span>
-            {/* <i
+            <span>Media Upload Date</span> */}
+        {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Title."
               ></i> */}
-          </label>
-          <input
+        {/* </label> */}
+        {/* <input
             type="text"
             className="form-control form-control-lg form-control-solid"
             // name="config1"
             value={createdDatetime}
             readOnly
-          />
-          {/* {mediaTitle.length < 2 && formError && (
+          /> */}
+
+        {/* <span className="fw-bolder fs-5 text-gray-500">
+            {createdDatetime}
+          </span> */}
+
+        {/* {mediaTitle.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Media Title is Required.</div>
               </div>
             )} */}
+        {/* </div> */}
+
+        <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
+          <div className="w-25">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span>Media Last Modified</span>
+            </label>
+          </div>
+          <div className="w-75">
+            <span className="fw-bolder fs-5 text-gray-500">
+              {modifiedDatetime}
+            </span>
+          </div>
         </div>
 
-        <div className=" fv-row mb-3 w-100 ">
+        {/* <div className=" fv-row mb-3 w-100 ">
           <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-            <span className="required">Media Last Modified</span>
-            {/* <i
+            <span>Media Last Modified</span> */}
+        {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify Media Title."
               ></i> */}
-          </label>
-          <input
+        {/* </label> */}
+        {/* <input
             type="text"
             className="form-control form-control-lg form-control-solid"
             // name="config1"
             value={modifiedDatetime}
             readOnly
-          />
-          {/* {mediaTitle.length < 2 && formError && (
+          /> */}
+
+        {/* <span className="fw-bolder fs-5 text-gray-500">
+            {modifiedDatetime}
+          </span> */}
+
+        {/* {mediaTitle.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Media Title is Required.</div>
               </div>
             )} */}
-        </div>
+        {/* </div> */}
 
         <div className=" fv-row mb-3 w-100 ">
           <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
@@ -460,7 +521,9 @@ any) => {
             className="form-control form-control-lg form-control-solid"
             // name="config1"
             value={imageURL ? imageURL : ""}
-            readOnly
+            onChange={(event) => {
+              setImageURL(event.target.value);
+            }}
           />
           {/* {mediaTitle.length < 2 && formError && (
               <div className="fv-plugins-message-container">

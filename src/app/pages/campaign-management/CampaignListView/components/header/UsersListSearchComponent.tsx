@@ -31,7 +31,7 @@ const UsersListSearchComponent = () => {
     <div className="card-title">
       {/* begin::Search */}
       <div className="d-flex align-items-center position-relative my-1">
-        <KTIcon iconName="magnifier" className="fs-1 position-absolute ms-6" />
+        {/*<KTIcon iconName="magnifier" className="fs-1 position-absolute ms-6" />
         <input
           type="text"
           data-kt-user-table-filter="search"
@@ -39,7 +39,7 @@ const UsersListSearchComponent = () => {
           placeholder="Search user"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        />*/}
       </div>
       {/* end::Search */}
     </div>

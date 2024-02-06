@@ -23,7 +23,7 @@ import CampaignStatus from "./DashboardCards/CampaignStatus";
 import ChannelWiseActiveUsers from './DashboardCards/ChannelWiseActiveUsers';
 import OutBoundCampaign from './DashboardCards/OutBoundCampaign'
 
-import BarChart from './DashboardCards/Barchart'
+import ChannelUtilization from './DashboardCards/ChannelUtilization'
 import botlogo from './bot-analytics.png'
 
 const DashboardPage: FC = () => (
@@ -92,7 +92,7 @@ const DashboardPage: FC = () => (
 
       <div className='col-xl-4'>
         <Box className="card bg-white card-xl-stretch mb-xl-9" style={{backgroundColor:""}}>
-         <BarChart/>
+         <ChannelUtilization/>
         </Box>
       </div>
 

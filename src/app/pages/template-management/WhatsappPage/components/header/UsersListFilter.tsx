@@ -62,8 +62,9 @@ const UsersListFilter = () => {
 
           {/* begin::Input group */}
           <div className="mb-10">
-            <label className="form-label fs-6 fw-bold">Users Created:</label>
+            <label className="form-label fs-6 fw-bold">Tempate Category</label>
             <select
+            name="template_category"
               className="form-select form-select-solid fw-bolder"
               data-kt-select2="true"
               data-placeholder="Select option"
@@ -73,11 +74,32 @@ const UsersListFilter = () => {
               onChange={(e) => setLastLogin(e.target.value)}
               value={lastLogin}
             >
-              <option value=""></option>
-              <option value="today">Today</option>
-              <option value="last_7_days">Last 7 Days</option>
-              <option value="last_30_days">Last 30 Days</option>
-              <option value="last_year">Last Year</option>
+              <option value="">Select Category</option>
+              <option value="APPROVED">Marketing</option>
+              <option value="PENDING">Utility</option>
+              <option value="REJECTED">Transactional</option>
+              
+            </select>
+          </div>
+
+          <div className="mb-10">
+            <label className="form-label fs-6 fw-bold">Tempate Status</label>
+            <select
+            name="template_status"
+              className="form-select form-select-solid fw-bolder"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              data-kt-user-table-filter="two-step"
+              data-hide-search="true"
+              onChange={(e) => setLastLogin(e.target.value)}
+              value={lastLogin}
+            >
+              <option value="">Select Status</option>
+              <option value="APPROVED">Approved</option>
+              <option value="PENDING">Pending</option>
+              <option value="REJECTED">Rejected</option>
+              <option value="DELETED">Deleted</option>
             </select>
           </div>
           {/* end::Input group */}

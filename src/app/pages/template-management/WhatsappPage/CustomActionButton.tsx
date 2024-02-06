@@ -42,7 +42,7 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
         {/* end::Menu item */}
 
         {/* begin::Menu item */}
-        <div className="menu-item px-3">
+        {/*<div className="menu-item px-3">
           <a
             className="menu-link px-3"
             data-kt-users-table-filter="delete_row"
@@ -51,7 +51,7 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
           >
             Edit Template
           </a>
-        </div>
+        </div>*/}
         {/* end::Menu item */}
 
         <CustomEditModal

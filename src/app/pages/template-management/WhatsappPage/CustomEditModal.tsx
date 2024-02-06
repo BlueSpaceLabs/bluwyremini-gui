@@ -23,6 +23,7 @@ const CustomEditModal = ({ show, handleClose, detailTemplateData }: any) => {
       <div className="modal-header">
         <h2>Template Details : {detailTemplateData.id}</h2>
         {/* begin::Close */}
+       
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
           onClick={handleClose}
@@ -135,7 +136,24 @@ const CustomEditModal = ({ show, handleClose, detailTemplateData }: any) => {
         {/*end::Detail List Group */}
       </div>
 
+
       <div className="d-flex flex-end py-3 px-8 ">
+      <a
+            className="btn btn-primary"
+            href={`https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278&id=${detailTemplateData.id}`}
+            target="_blank"
+          >
+            Edit
+          </a>
+          &nbsp;&nbsp;
+          <a
+            className="btn btn-primary"
+            href={`https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278&id=${detailTemplateData.id}`}
+            target="_blank"
+          >
+            Delete
+          </a>
+          &nbsp;&nbsp;
         <button
           type="button"
           className="btn btn-lg btn-primary"

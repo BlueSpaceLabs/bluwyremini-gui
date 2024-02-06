@@ -5,7 +5,7 @@ const TemplateManagementHeader: FC = () => {
   const location = useLocation();
 
   return (
-    <div className="card mb-5 mb-xl-10">
+    <div className="card mb-1 mb-xl-1">
       <div className="card-body pt-0 pb-0">
         <div className="d-flex overflow-auto h-55px">
           <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
@@ -21,7 +21,7 @@ const TemplateManagementHeader: FC = () => {
                 Whatsapp
               </Link>
             </li>
-
+{/*
             <li className="nav-item">
               <Link
                 className={
@@ -58,6 +58,7 @@ const TemplateManagementHeader: FC = () => {
                 Telegram
               </Link>
             </li>
+              */}
           </ul>
         </div>
       </div>

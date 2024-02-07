@@ -108,8 +108,8 @@ const UsersListToolbar = () => {
       data-kt-user-table-toolbar="base"
     >
       <DateRangeFilter setFromDate={setFromDate} setToDate={setToDate} />
-
-      {/* <UsersListFilter /> */}
+      
+      <UsersListFilter />
 
       {/* begin::Export */}
       {showExport && (

@@ -19,7 +19,7 @@ const MessagesHeader = ({ messageTab, SetMessageTab }: any) => {
     React.useState<any>(initialValue);
 
   return (
-    <div className="card mb-5 mb-xl-10">
+    <div className="card mb-1 mb-xl-1">
       <div className="card-body pt-2 pb-2 d-flex align-items-center">
         <div className="w-75 py-3 d-flex gap-8 fw-bold fs-6 ">
           <div

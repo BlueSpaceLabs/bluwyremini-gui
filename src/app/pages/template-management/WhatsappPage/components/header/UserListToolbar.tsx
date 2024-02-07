@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { KTIcon } from "../../../../../../_metronic/helpers";
 import { useListView } from "../../core/ListViewProvider";
-// import { UsersListFilter } from "./UsersListFilter";
+ import { UsersListFilter } from "./UsersListFilter";
 import { DateRangeFilter } from "./DateRangeFilter";
 
 const UsersListToolbar = () => {
@@ -25,9 +25,9 @@ const UsersListToolbar = () => {
       className="d-flex justify-content-end"
       data-kt-user-table-toolbar="base"
     >
-      <DateRangeFilter setFromDate={setFromDate} setToDate={setToDate} />
+     {/*} <DateRangeFilter setFromDate={setFromDate} setToDate={setToDate} />*/}
 
-      {/* <UsersListFilter /> */}
+       <UsersListFilter /> 
 
       {/* begin::Export */}
       {showExport && (

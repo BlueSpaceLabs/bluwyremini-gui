@@ -11,6 +11,7 @@ const TemplateManagement: FC = () => {
   return (
     <>
       {/*<PageTitle breadcrumbs={[]}>Templates</PageTitle>*/}
+      <div style={{marginTop:-30}}>
       <Routes>
         <Route
           element={
@@ -29,7 +30,7 @@ const TemplateManagement: FC = () => {
               </>
             }
           />
-
+{/*}
           <Route
             path="/facebook"
             element={
@@ -56,13 +57,14 @@ const TemplateManagement: FC = () => {
                 <TelegramPageWrapper />
               </>
             }
-          />
+          />*/}
           <Route
             index
             element={<Navigate to="/template-management/whatsapp" />}
           />
         </Route>
       </Routes>
+     </div>
     </>
   );
 };

@@ -128,15 +128,16 @@ export default function CustomTemplateTable({ tableData }: any) {
               {/*<TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Template Id
     </TableCell>*/}
+    <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Template Id
+              </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Template Name
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Template Category
               </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Template Language
-              </TableCell>
+              
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Template Status
               </TableCell>
@@ -158,6 +159,9 @@ export default function CustomTemplateTable({ tableData }: any) {
                   {/*<TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.id}
               </TableCell>*/}
+               <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.id}
+                  </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.name}
                   </TableCell>
@@ -167,9 +171,7 @@ export default function CustomTemplateTable({ tableData }: any) {
                   {/* <TableCell  className="text-gray-600 fw-bold fs-8 py-8">
                   {row.components}
                 </TableCell> */}
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.language}
-                  </TableCell>
+                 
                   {/* <TableCell  className="text-gray-600 fw-bold fs-8 py-8">
                   {row.previous_category}
                 </TableCell> */}

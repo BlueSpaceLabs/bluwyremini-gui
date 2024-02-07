@@ -5,11 +5,11 @@ import FileUploadForm from "./FileUploadForm";
 
 const CampaignManagement: FC = () => {
   return (
-    <>
+    <div style={{marginTop:-30}}>
       <PageTitle breadcrumbs={[]}>Campaign Management</PageTitle>
       <CampaignListViewWrapper />
      {/*<FileUploadForm/>*/}
-    </>
+    </div>
   );
 };
 

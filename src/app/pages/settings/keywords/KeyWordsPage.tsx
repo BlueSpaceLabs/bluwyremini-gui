@@ -4,10 +4,10 @@ import { KeyWordsListViewWrapper } from "./KeyWordsListView/KeyWordsListViewWrap
 
 const KeyWordsPage: FC = () => {
   return (
-    <>
+    <div style={{marginTop:-30}}>
       <PageTitle breadcrumbs={[]}>KeyWords</PageTitle>
       <KeyWordsListViewWrapper />
-    </>
+    </div>
   );
 };
 

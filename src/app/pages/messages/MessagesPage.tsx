@@ -31,14 +31,14 @@ const MessagesPage = () => {
         <Route
           path="private"
           element={
-            <>
+            <div style={{marginTop:-30}}>
               <PageTitle breadcrumbs={[]}>Messages</PageTitle>
               <MessagesHeader
                 messageTab={messageTab}
                 SetMessageTab={SetMessageTab}
               />
               <MessagesChat messageTab={messageTab} />
-            </>
+            </div>
           }
         />
         {/* <Route

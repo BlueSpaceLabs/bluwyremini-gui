@@ -5,10 +5,10 @@ import { MediaListViewWrapper } from "./MediaListView/MediaListViewWrapper";
 
 const MediaManagement: FC = () => {
   return (
-    <>
+    <div style={{marginTop:-30}}>
       <PageTitle breadcrumbs={[]}>Media Management</PageTitle>
       <MediaListViewWrapper />
-    </>
+    </div>
   );
 };
 

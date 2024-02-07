@@ -203,7 +203,7 @@ export default function CustomContactTable({
                   </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.wabaMobileNo}
+                    {row.mobileNo}
                   </TableCell>
 
                   {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">

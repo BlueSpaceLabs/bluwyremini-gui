@@ -19,7 +19,7 @@ const initialValue = {
   crmFullname: "",
   nameToAddress: "",
   wabaMobileNo: "",
-  wabaName: "",
+  wabaName:""
 };
 
 const AddWhatsAppContactModal = ({
@@ -48,18 +48,21 @@ const AddWhatsAppContactModal = ({
   };
 
   const handleSubmitForm = async () => {
+    
     if (
       addWhatsappContactInput?.firstChannel.length < 2 ||
-      addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
+      //addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
       addWhatsappContactInput?.mobileNo.length < 2 ||
       addWhatsappContactInput?.crmFullname.length < 2 ||
-      addWhatsappContactInput?.nameToAddress.length < 2 ||
-      addWhatsappContactInput?.wabaMobileNo.length < 2 ||
-      addWhatsappContactInput?.wabaName.length < 2
+      addWhatsappContactInput?.nameToAddress.length < 2
+     // addWhatsappContactInput?.wabaMobileNo.length < 2 ||
+     // addWhatsappContactInput?.wabaName.length < 2
     ) {
+      console.log('innerr')
       setFormError(true);
     } else {
       mutateAsync(
+        
         {
           channelName: channelName,
           requestData: {
@@ -109,7 +112,7 @@ const AddWhatsAppContactModal = ({
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Add Facebook Contact</h2>
+        <h2>Add Messenger Contact</h2>
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
@@ -148,11 +151,11 @@ const AddWhatsAppContactModal = ({
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Last Interacted Channel</span>
+              <span className="">Last Interacted Channel</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel Last Interacted Channel."
+                title="Specify Last Interacted Channel."
               ></i>
             </label>
             <input
@@ -162,14 +165,14 @@ const AddWhatsAppContactModal = ({
               value={addWhatsappContactInput?.lastInteractedChannel}
               onChange={handleInputChange}
             />
-            {addWhatsappContactInput?.lastInteractedChannel?.length < 2 &&
+            {/*{addWhatsappContactInput?.lastInteractedChannel?.length < 2 &&
               formError && (
                 <div className="fv-plugins-message-container">
                   <div className="fv-help-block">
                     Last Interacted Channel is Required.
                   </div>
                 </div>
-              )}
+              )}*/}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
@@ -236,7 +239,7 @@ const AddWhatsAppContactModal = ({
               value={addWhatsappContactInput?.nameToAddress}
               onChange={handleInputChange}
             />
-            {addWhatsappContactInput?.nameToAddress?.length < 2 &&
+           {addWhatsappContactInput?.nameToAddress?.length < 2 &&
               formError && (
                 <div className="fv-plugins-message-container">
                   <div className="fv-help-block">
@@ -248,11 +251,11 @@ const AddWhatsAppContactModal = ({
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">WABA Mobile Number</span>
+              <span className="">Messenger Id</span>
               <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Channel WABA Mobile Number."
+                title="Specify channel messenger id."
               ></i>
             </label>
             <input
@@ -262,16 +265,16 @@ const AddWhatsAppContactModal = ({
               value={addWhatsappContactInput?.wabaMobileNo}
               onChange={handleInputChange}
             />
-            {addWhatsappContactInput?.wabaMobileNo?.length < 2 && formError && (
+           {/*} {addWhatsappContactInput?.wabaMobileNo?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  WABA Mobile Number is Required.
+                  Messenger Id is Required.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+         {/* <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">WABA Name</span>
               <i
@@ -292,7 +295,7 @@ const AddWhatsAppContactModal = ({
                 <div className="fv-help-block">WABA Name is Required.</div>
               </div>
             )}
-          </div>
+          </div>*/}
         </div>
 
         {/*end::Form Group */}

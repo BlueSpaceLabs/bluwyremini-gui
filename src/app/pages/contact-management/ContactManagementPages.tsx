@@ -13,13 +13,13 @@ const ContactManagementPages = ({ channelTab, accessKey }: any) => {
     return <WhatsappPage channelName={channelTab} accessKey={accessKey} />;
   } else if (channelTab === "telegram") {
     // return <TelegramPage />;
-    return <TelegramTempPage />;
+    return <TelegramTempPage channelName={channelTab} accessKey={accessKey} />;
   } else if (channelTab === "facebook") {
     // return <FacebookPage />;
-    return <FaceBookTempPage />;
+    return <FaceBookTempPage channelName={channelTab} accessKey={accessKey} />;
   } else if (channelTab === "instagram") {
     // return <InstagramPage />;
-    return <InstagramTempPage />;
+    return <InstagramTempPage channelName={channelTab} accessKey={accessKey} />;
   } else if (channelTab === "bluwyre") {
     return <ChannelDetails />;
   } else {

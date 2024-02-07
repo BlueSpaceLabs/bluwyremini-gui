@@ -44,7 +44,7 @@ const InstagramTempPage = ({ channelName, accessKey }: any) => {
           "http://3.108.229.60:8082/bluwyremini-backend/info/getContactDetails.php",
           {
             params: {
-              channelName: "whatsapp",
+              channelName: "instagram",
               accessKey:
                 "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
               search: searchContact,

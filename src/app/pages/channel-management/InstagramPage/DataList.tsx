@@ -28,7 +28,7 @@ const InstagramDataList = ({ instagramData }: any) => {
   console.log("instagramData", instagramData);
 
   return (
-    <Box className="card-body p-9">
+    <Box className="card-body p-9" style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
       <ListCard labelTitle={"App Id"} listData={instagramData?.appId} />
       <ListCard
         labelTitle={"Business Id"}

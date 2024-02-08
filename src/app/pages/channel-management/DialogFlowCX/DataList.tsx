@@ -28,7 +28,7 @@ const DialogFlowDataList = ({ dialogFlowCXListData }: any) => {
   console.log("dialogFlowCXListData", dialogFlowCXListData);
 
   return (
-    <Box className="card-body p-9">
+    <Box className="card-body p-9" style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
       <ListCard
         labelTitle={"AgentName"}
         listData={dialogFlowCXListData?.dcxAgentName}

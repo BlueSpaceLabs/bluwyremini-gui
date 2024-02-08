@@ -28,7 +28,7 @@ const TelegramDataList = ({ telegramData }: any) => {
   // console.log("telegramData", telegramData);
 
   return (
-    <Box className="card-body p-9">
+    <Box className="card-body p-9" style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
       <ListCard
         labelTitle={"Telegram Token"}
         listData={telegramData?.telegramToken}

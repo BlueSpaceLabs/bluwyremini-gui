@@ -89,6 +89,7 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
         </div>
 
         <div className="card-body p-9">
+          <div style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
           <div className="row mb-7">
             <label className="col-lg-4 fw-bold text-muted">
               Channel Name
@@ -301,20 +302,37 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                 title="WA Webhook Url Tooltip"
               ></i> */}
             </label>
-
+             
             <div className="col-lg-8 d-flex align-items-center">
               <span className="fw-bolder fs-6 me-2">
                 {channelConfigurationData.waWebhookUrl
                   ? channelConfigurationData.waWebhookUrl
                   : "No Data to show."}
               </span>
+              <br/><hr/>
             </div>
           </div>
-          {channelConfigurationData.appId && (
-            <WhatsappAppDetails
-              channelConfigurationData={channelConfigurationData}
-            />
-          )}
+         </div> 
+          <br/>
+          <div className="" style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
+            <br/>
+            <h3>Waba Health Status</h3><br/><br/>
+              {channelConfigurationData.appId && (
+                <WhatsappAppDetails
+                  channelConfigurationData={channelConfigurationData}
+                />
+              )}
+          </div>
+         {/* <div className="row mb-7" style={{backgroundColor:"lavender",padding:10}}>
+            <br/>
+            <h3>Audit Logs</h3><br/><br/><br/>
+              {channelConfigurationData.appId && (
+                <WhatsappAppDetails
+                  channelConfigurationData={channelConfigurationData}
+                />
+              )}
+          </div> */}
+
         </div>
       </div>
 

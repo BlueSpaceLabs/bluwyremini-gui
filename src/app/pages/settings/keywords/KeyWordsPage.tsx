@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 import { PageTitle } from "../../../../_metronic/layout/core";
-import { KeyWordsListViewWrapper } from "./KeyWordsListView/KeyWordsListViewWrapper";
+import KeyWordListView from "./ListView";
 
 const KeyWordsPage: FC = () => {
   return (
-    <div style={{marginTop:-30}}>
+    <div style={{ marginTop: -30 }}>
       <PageTitle breadcrumbs={[]}>KeyWords</PageTitle>
-      <KeyWordsListViewWrapper />
+
+      <KeyWordListView />
     </div>
   );
 };

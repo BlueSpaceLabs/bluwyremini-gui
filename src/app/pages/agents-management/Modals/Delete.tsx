@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
-import { KTIcon } from "../../../../../_metronic/helpers";
+import { KTIcon } from "../../../../_metronic/helpers";
 
 // type Props = {
 //   show: boolean;
@@ -58,7 +58,7 @@ const DeleteKeyWordModal = ({
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Delete KeyWord </h2>
+        <h2>Delete Agent </h2>
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"

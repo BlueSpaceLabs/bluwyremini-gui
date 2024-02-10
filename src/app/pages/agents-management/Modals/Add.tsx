@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
-import { KTIcon } from "../../../../../_metronic/helpers";
+import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
-import DeleteKeyWordModal from "./Delete";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
 // import { url } from "inspector";
 
@@ -16,22 +15,20 @@ import DeleteKeyWordModal from "./Delete";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const EditKeyWordModal = ({
-  show,
-  handleClose,
-  initialData,
-  setRefetchList,
-  closeDetailModal,
-}: any) => {
-  const [keyWordTitle, setKeyWordTitle] = React.useState<string>("");
-  const [keyWordDescription, setKeyWordDescription] =
-    React.useState<string>("");
+const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
+  const [agentName, setAgentName] = React.useState<string>("");
+  const [contactNumber, setContactNumber] = React.useState<string>("");
+  const [department, setDepartment] = React.useState<string>("");
+  const [agentEmailId, setAgentEmailId] = React.useState<string>("");
   const [formError, setFormError] = React.useState<boolean>(false);
-  const [showDeleteKeyWordModal, setShowDeleteKeyWordModal] =
-    React.useState<boolean>(false);
 
   const handleAddKeyWordSubmit = async () => {
-    if (keyWordDescription.length < 2) {
+    if (
+      agentName.length < 2 ||
+      contactNumber.length < 2 ||
+      department.length < 2 ||
+      agentEmailId.length < 2
+    ) {
       setFormError(true);
     } else {
       setFormError(false);
@@ -42,7 +39,10 @@ const EditKeyWordModal = ({
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
           keyword_data: {
-            description: keyWordDescription,
+            agentName: agentName,
+            contactNumber: contactNumber,
+            department: department,
+            agentEmailId: agentEmailId,
           },
         };
 
@@ -52,29 +52,27 @@ const EditKeyWordModal = ({
           },
         };
 
-        const selectedId = initialData.id;
-
-        const response = await axios.put(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/updateKeywordDetails.php?id=${selectedId}`,
+        const response = await axios.post(
+          "http://3.108.229.60:8082/bluwyremini-backend/info/addKeyword.php",
           data,
           config
         );
 
-        setRefetchList((preV: boolean) => !preV);
         console.log("response", response);
+
+        setRefetchList((preV: boolean) => !preV);
       } catch (error) {
         console.error("Error:", error);
       } finally {
+        setAgentName("");
+        setContactNumber("");
+        setDepartment("");
+        setAgentEmailId("");
+
         handleClose();
-        closeDetailModal();
       }
     }
   };
-
-  useEffect(() => {
-    setKeyWordTitle(initialData.keyword);
-    setKeyWordDescription(initialData.description);
-  }, [initialData]);
 
   return createPortal(
     <Modal
@@ -86,7 +84,7 @@ const EditKeyWordModal = ({
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Edit KeyWords</h2>
+        <h2>Add Agents</h2>
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
@@ -141,55 +139,108 @@ const EditKeyWordModal = ({
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">KeyWords</span>
-              <i
+              <span className="required">Agent Name</span>
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify KeyWords."
-              ></i>
+              ></i> */}
             </label>
+
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
               placeholder=""
-              value={keyWordTitle}
-              // onChange={(event) => {
-              //   setKeyWordTitle(event.target.value);
-              // }}
-              readOnly
+              value={agentName}
+              onChange={(event) => {
+                setAgentName(event.target.value);
+              }}
             />
-            {/* {keyWordTitle.length < 2 && formError && (
+            {agentName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">KeyWords Title is Required.</div>
+                <div className="fv-help-block">Agent Name is Required.</div>
               </div>
-            )} */}
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Department</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="config1"
+              placeholder=""
+              value={department}
+              onChange={(event) => {
+                setDepartment(event.target.value);
+              }}
+            />
+            {department.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Department is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Email Id</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="config1"
+              placeholder=""
+              value={agentEmailId}
+              onChange={(event) => {
+                setAgentEmailId(event.target.value);
+              }}
+            />
+            {agentEmailId.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Email Id is Required.</div>
+              </div>
+            )}
           </div>
 
           <div className=" fv-row mb-2 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">KeyWords Description</span>
-              <i
+              <span className="required">Contact Number</span>
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify KeyWords Description."
-              ></i>
+                title="Specify Contact Number."
+              ></i> */}
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
               placeholder=""
-              value={keyWordDescription}
+              value={contactNumber}
               onChange={(event) => {
-                setKeyWordDescription(event.target.value);
+                setContactNumber(event.target.value);
               }}
             />
-            {keyWordDescription.length < 2 && formError && (
+
+            {contactNumber.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  KeyWords Description is Required.
-                </div>
+                <div className="fv-help-block">Contact Number is Required.</div>
               </div>
             )}
           </div>
@@ -198,7 +249,7 @@ const EditKeyWordModal = ({
         {/*end::Form Group */}
       </div>
 
-      <div className="d-flex flex-end py-3 px-8 gap-3">
+      <div className="d-flex flex-end py-3 px-8">
         <button
           type="button"
           className="btn btn-lg btn-primary"
@@ -208,38 +259,10 @@ const EditKeyWordModal = ({
           Submit
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
         </button>
-        <button
-          type="button"
-          className="btn btn-lg btn-primary"
-          data-kt-stepper-action="submit"
-          // onClick={handleAddKeyWordSubmit}
-          onClick={() => setShowDeleteKeyWordModal(true)}
-        >
-          Delete
-          <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
-        </button>
-        <button
-          type="button"
-          className="btn btn-lg btn-primary"
-          data-kt-stepper-action="submit"
-          onClick={handleClose}
-        >
-          Cancel
-          <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
-        </button>
       </div>
-
-      <DeleteKeyWordModal
-        show={showDeleteKeyWordModal}
-        handleClose={() => setShowDeleteKeyWordModal(false)}
-        closeEditModal={handleClose}
-        closeDetailModal={closeDetailModal}
-        detailData={initialData}
-        setRefetchList={setRefetchList}
-      />
     </Modal>,
     modalsRoot
   );
 };
 
-export default EditKeyWordModal;
+export default AddKeyWordModal;

@@ -14,11 +14,12 @@ import CampaignManagement from "../pages/campaign-management/CampaignManagement"
 // import Tickets from "../pages/tickets-management/TicketsManagement";
 import Profile from "../pages/settings/profile/Profile";
 import Sendmessage from "../pages/settings/send-message/Sendmessage";
-import KeyWordsPage from "../pages/settings/keywords/KeyWordsPage";
 import Faqs from "../pages/settings/Faqs";
 import ChannelManagement from "../pages/channel-management/ChannelManagement";
 import MediaManagement from "../pages/media-management/MediaManagement";
 import StaticDataManagement from "../pages/static-data";
+import KeyWordsPage from "../pages/settings/keywords";
+import AgentsPage from "../pages/agents-management";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -49,6 +50,7 @@ const PrivateRoutes = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="sendmessage" element={<Sendmessage />} />
         <Route path="keywords" element={<KeyWordsPage />} />
+        <Route path="agents" element={<AgentsPage />} />
         <Route path="faqs" element={<Faqs />} />
         {/* <Route path="tickets" element={<Tickets />} /> */}
 

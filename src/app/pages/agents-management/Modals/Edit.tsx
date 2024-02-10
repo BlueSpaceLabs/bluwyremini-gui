@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
-import { KTIcon } from "../../../../../_metronic/helpers";
+import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
 import DeleteKeyWordModal from "./Delete";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
@@ -23,15 +23,21 @@ const EditKeyWordModal = ({
   setRefetchList,
   closeDetailModal,
 }: any) => {
-  const [keyWordTitle, setKeyWordTitle] = React.useState<string>("");
-  const [keyWordDescription, setKeyWordDescription] =
-    React.useState<string>("");
+  const [agentName, setAgentName] = React.useState<string>("");
+  const [contactNumber, setContactNumber] = React.useState<string>("");
+  const [department, setDepartment] = React.useState<string>("");
+  const [agentEmailId, setAgentEmailId] = React.useState<string>("");
   const [formError, setFormError] = React.useState<boolean>(false);
   const [showDeleteKeyWordModal, setShowDeleteKeyWordModal] =
     React.useState<boolean>(false);
 
   const handleAddKeyWordSubmit = async () => {
-    if (keyWordDescription.length < 2) {
+    if (
+      agentName.length < 2 ||
+      contactNumber.length < 2 ||
+      department.length < 2 ||
+      agentEmailId.length < 2
+    ) {
       setFormError(true);
     } else {
       setFormError(false);
@@ -42,7 +48,10 @@ const EditKeyWordModal = ({
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
           keyword_data: {
-            description: keyWordDescription,
+            agentName: agentName,
+            contactNumber: contactNumber,
+            department: department,
+            agentEmailId: agentEmailId,
           },
         };
 
@@ -65,6 +74,11 @@ const EditKeyWordModal = ({
       } catch (error) {
         console.error("Error:", error);
       } finally {
+        setAgentName("");
+        setContactNumber("");
+        setDepartment("");
+        setAgentEmailId("");
+
         handleClose();
         closeDetailModal();
       }
@@ -72,8 +86,10 @@ const EditKeyWordModal = ({
   };
 
   useEffect(() => {
-    setKeyWordTitle(initialData.keyword);
-    setKeyWordDescription(initialData.description);
+    setAgentName(initialData.keyword);
+    setContactNumber(initialData.keyword);
+    setDepartment(initialData.keyword);
+    setAgentEmailId(initialData.keyword);
   }, [initialData]);
 
   return createPortal(
@@ -86,7 +102,7 @@ const EditKeyWordModal = ({
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Edit KeyWords</h2>
+        <h2>Edit Agent Details</h2>
         {/* begin::Close */}
         <div
           className="btn btn-sm btn-icon btn-active-color-primary"
@@ -141,55 +157,108 @@ const EditKeyWordModal = ({
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">KeyWords</span>
-              <i
+              <span className="required">Agent Name</span>
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
                 title="Specify KeyWords."
-              ></i>
+              ></i> */}
             </label>
+
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
               placeholder=""
-              value={keyWordTitle}
-              // onChange={(event) => {
-              //   setKeyWordTitle(event.target.value);
-              // }}
-              readOnly
+              value={agentName}
+              onChange={(event) => {
+                setAgentName(event.target.value);
+              }}
             />
-            {/* {keyWordTitle.length < 2 && formError && (
+            {agentName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">KeyWords Title is Required.</div>
+                <div className="fv-help-block">Agent Name is Required.</div>
               </div>
-            )} */}
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Department</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="config1"
+              placeholder=""
+              value={department}
+              onChange={(event) => {
+                setDepartment(event.target.value);
+              }}
+            />
+            {department.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Department is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Email Id</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="config1"
+              placeholder=""
+              value={agentEmailId}
+              onChange={(event) => {
+                setAgentEmailId(event.target.value);
+              }}
+            />
+            {agentEmailId.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Email Id is Required.</div>
+              </div>
+            )}
           </div>
 
           <div className=" fv-row mb-2 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">KeyWords Description</span>
-              <i
+              <span className="required">Contact Number</span>
+              {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify KeyWords Description."
-              ></i>
+                title="Specify Contact Number."
+              ></i> */}
             </label>
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
               name="config1"
               placeholder=""
-              value={keyWordDescription}
+              value={contactNumber}
               onChange={(event) => {
-                setKeyWordDescription(event.target.value);
+                setContactNumber(event.target.value);
               }}
             />
-            {keyWordDescription.length < 2 && formError && (
+
+            {contactNumber.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  KeyWords Description is Required.
-                </div>
+                <div className="fv-help-block">Contact Number is Required.</div>
               </div>
             )}
           </div>

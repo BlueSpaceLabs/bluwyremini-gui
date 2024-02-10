@@ -51,7 +51,7 @@ const SidebarMenuMain = () => {
         fontIcon="bi-layers"
       />
 
-     {/*  <SidebarMenuItem
+      {/*  <SidebarMenuItem
         to="/staticdatamanagement"
         icon="data"
         title="Static Data"
@@ -71,7 +71,11 @@ const SidebarMenuMain = () => {
         icon="setting-2"
         fontIcon="bi-person"
       >
-        <SidebarMenuItem to="/keywords" title="Canned Responses" hasBullet={true} />
+        <SidebarMenuItem
+          to="/keywords"
+          title="Canned Responses"
+          hasBullet={true}
+        />
         <SidebarMenuItem
           to="/sendmessage"
           title="Platform APIs"
@@ -79,7 +83,7 @@ const SidebarMenuMain = () => {
         />
       </SidebarMenuItemWithSub>
       <SidebarMenuItem
-        to=""
+        to="/agents"
         icon="messages"
         title="Agents"
         fontIcon="bi-layers"

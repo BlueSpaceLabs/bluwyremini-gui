@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 // import { useMutation, useQueryClient } from "react-query";
-import { MenuComponent } from "../../../../../_metronic/assets/ts/components";
-import { KTIcon } from "../../../../../_metronic/helpers";
+import { MenuComponent } from "../../../../_metronic/assets/ts/components";
+import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
 import EditKeyWordModal from "../Modals/Edit";
 import DeleteKeyWordModal from "../Modals/Delete";

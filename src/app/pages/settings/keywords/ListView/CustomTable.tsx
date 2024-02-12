@@ -128,6 +128,9 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
         <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
+            <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                KeyWord Id
+              </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 KeyWord Title
               </TableCell>
@@ -136,13 +139,13 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
                 KeyWord Description
               </TableCell>
 
-              {/* <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Full Name
-              </TableCell> */}
+               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Created At
+              </TableCell>
 
-              {/* <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Last Interaction
-              </TableCell> */}
+             <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Last Modified
+              </TableCell> 
 
               {/* <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Last Modified
@@ -171,6 +174,9 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
             ).map((row: any) => {
               return (
                 <TableRow key={row.id}>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.id}
+                  </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.keyword}
                   </TableCell>
@@ -179,13 +185,13 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
                     {row.description}
                   </TableCell>
 
-                  {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    <span style={{ color: "black" }}>{row.crmFullname}</span>
-                  </TableCell> */}
+                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    <span style={{ color: "" }}>{row.createdDatetime}</span>
+                  </TableCell> 
 
-                  {/*<TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.mobileNo}
-              </TableCell>*/}
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.updatedDatetime}
+              </TableCell>
 
                   {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.lastInteractionDatetime}

@@ -10,6 +10,7 @@ const OutBoundCampaign = () => {
     const [readCount, setReadCount] = React.useState<any[]>([]);
     const [deliveredCount, setDeliveredCount] = React.useState<any[]>([]);
     const [sentCount, setSentCount] = React.useState<any[]>([]);
+    const [failedCount, setFailedCount] = React.useState<any[]>([]);
 
     React.useEffect(() => {
       const fetchData = async () => {
@@ -28,9 +29,9 @@ const OutBoundCampaign = () => {
           setCampaignsCreated(response.data.totalCampaigns);
           setTotalUsersTargeted(response.data.totalUsersTargeted);
           setReadCount(response.data.readCount);
-          setDeliveredCount(response.data.deliveredCount);
-          setSentCount(response.data.sentCount);
-         
+          setDeliveredCount(response.data.readCount);
+          setSentCount(response.data.readCount);
+          setFailedCount(response.data.errorCount);  
 
         } catch (error) {
           console.log({ error });
@@ -59,6 +60,7 @@ const OutBoundCampaign = () => {
                 Messages Sent: {sentCount}<br/>
                 Messages Delivered: {deliveredCount}<br/>
                 Messaged Read: {readCount}<br/>
+                Failed Count: {failedCount}<br/>
                 CTR ( Approximated):
                               </Box>
              <br/><br/>

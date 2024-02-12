@@ -5,6 +5,7 @@ import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import TelegramConfigModal from "./ConfigurationModal/Modal";
 import TelegramDataList from "./DataList";
+import AuditLogs from "./AuditLogs";
 
 const TelegramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);
@@ -52,6 +53,10 @@ const TelegramPage = ({ channelName, accessKey }: any) => {
       <PageHeader setShowModal={setShowModal} />
 
       <TelegramDataList telegramData={telegramData} />
+
+      <br />
+
+      <AuditLogs />
 
       <TelegramConfigModal
         show={showModal}

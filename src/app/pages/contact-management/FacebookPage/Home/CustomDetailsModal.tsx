@@ -20,6 +20,8 @@ const CustomDetailsModal = ({
     openEditModal();
     handleClose();
   };
+
+  console.log("detailContactData", detailContactData);
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -138,6 +140,28 @@ const CustomDetailsModal = ({
             </span>
           </div>
         </div>
+
+        <div className="row mb-7">
+          <label className="col-lg-4 fw-bold text-muted">Email</label>
+
+          <div className="col-lg-8">
+            <span className="fw-bolder fs-6 text-gray-900">
+              {detailContactData.email}
+            </span>
+          </div>
+        </div>
+
+        <div className="row mb-7">
+          <label className="col-lg-4 fw-bold text-muted">Tags</label>
+
+          <div className="col-lg-8">
+            <span className="fw-bolder fs-6 text-gray-900">
+              {detailContactData.tags}
+            </span>
+          </div>
+        </div>
+
+        <hr />
 
         <div className="row mb-7">
           <label className="col-lg-4 fw-bold text-muted">Name To Address</label>

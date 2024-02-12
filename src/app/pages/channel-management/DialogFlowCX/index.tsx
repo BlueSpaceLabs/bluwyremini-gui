@@ -5,6 +5,7 @@ import axios from "axios";
 import DialogFlowCXConfigModal from "./ConfigurationModal/Modal";
 import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import DialogFlowDataList from "./DataList";
+import AuditLogs from "./AuditLogs";
 
 const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
   console.log(channelName, accessKey);
@@ -50,6 +51,10 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
       <PageHeader setShowModal={setShowModal} />
 
       <DialogFlowDataList dialogFlowCXListData={dialogFlowCXListData} />
+
+      <br />
+
+      <AuditLogs />
 
       <DialogFlowCXConfigModal
         show={showModal}

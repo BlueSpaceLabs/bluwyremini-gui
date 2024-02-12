@@ -4,6 +4,7 @@ import axios from "axios";
 import WhatsappConfigurationModal from "./ConfigurationModal/ConfigurationModal";
 import CustomSnackBar from "./ConfigurationModal/CustomSnackBar";
 import WhatsappAppDetails from "./WhatsappAppDetails";
+import AuditLogs from "./AuditLogs";
 
 const serviceAxiosGetWhatsappData = async ({ channelName, accessKey }: any) => {
   const response = await axios.get(
@@ -89,57 +90,65 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
         </div>
 
         <div className="card-body p-9">
-          <div style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Channel Name
-              {/* <i
+          <div
+            style={{
+              backgroundColor: "lavender",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          >
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Channel Name
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="channelName Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-1 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.channelName
-                  ? channelConfigurationData.channelName
-                  : "No Data to show."}
-              </span>
+              <div className="col-lg-1 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.channelName
+                    ? channelConfigurationData.channelName
+                    : "No Data to show."}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Access Token
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Access Token
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Access Token Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              {/* <span className="fw-bolder fs-6 me-2">
+              <div className="col-lg-8 d-flex align-items-center">
+                {/* <span className="fw-bolder fs-6 me-2">
                 {channelConfigurationData.accessToken
                   ? channelConfigurationData.accessToken
                   : "No Data to show."}
               </span> */}
-              <textarea
-                name="postContent"
-                rows={4}
-                cols={70}
-                value={
-                  channelConfigurationData.accessToken
-                    ? showPassword
-                      ? channelConfigurationData.accessToken
-                      : "*".repeat(channelConfigurationData.accessToken.length)
-                    : "No Data to show."
-                }
-                onClick={togglePasswordVisibility}
-                readOnly
-              />
-              {/* <input
+                <textarea
+                  name="postContent"
+                  rows={4}
+                  cols={70}
+                  value={
+                    channelConfigurationData.accessToken
+                      ? showPassword
+                        ? channelConfigurationData.accessToken
+                        : "*".repeat(
+                            channelConfigurationData.accessToken.length
+                          )
+                      : "No Data to show."
+                  }
+                  onClick={togglePasswordVisibility}
+                  readOnly
+                />
+                {/* <input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
                 value={
@@ -150,99 +159,99 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                 onClick={togglePasswordVisibility}
                 style={{ display: "inline-block", maxHeight: "170px" }}
               /> */}
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Application Id
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Application Id
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="App Id Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.appId
-                  ? channelConfigurationData.appId
-                  : "No Data to show."}
-              </span>
+              <div className="col-lg-8 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.appId
+                    ? channelConfigurationData.appId
+                    : "No Data to show."}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Business Id
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Business Id
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Business Id Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.businessId
-                  ? channelConfigurationData.businessId
-                  : "No Data to show."}
-              </span>
+              <div className="col-lg-8 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.businessId
+                    ? channelConfigurationData.businessId
+                    : "No Data to show."}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Display Number
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Display Number
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Display Number Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.displayNo
-                  ? channelConfigurationData.displayNo
-                  : "No Data to show."}
-              </span>
+              <div className="col-lg-8 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.displayNo
+                    ? channelConfigurationData.displayNo
+                    : "No Data to show."}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Permanent Token
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Permanent Token
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Permanent Token Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              {/* <span className="fw-bolder fs-6 me-2">
+              <div className="col-lg-8 d-flex align-items-center">
+                {/* <span className="fw-bolder fs-6 me-2">
                 {channelConfigurationData.permanentToken
                   ? channelConfigurationData.permanentToken
                   : "No Data to show."}
               </span> */}
-              <textarea
-                name="postContent"
-                rows={4}
-                cols={70}
-                value={
-                  channelConfigurationData.permanentToken
-                    ? showPassword
-                      ? channelConfigurationData.permanentToken
-                      : "*".repeat(
-                          channelConfigurationData.permanentToken.length
-                        )
-                    : "No Data to show."
-                }
-                onClick={togglePasswordVisibility}
-                readOnly
-              />
-              {/*<input
+                <textarea
+                  name="postContent"
+                  rows={4}
+                  cols={70}
+                  value={
+                    channelConfigurationData.permanentToken
+                      ? showPassword
+                        ? channelConfigurationData.permanentToken
+                        : "*".repeat(
+                            channelConfigurationData.permanentToken.length
+                          )
+                      : "No Data to show."
+                  }
+                  onClick={togglePasswordVisibility}
+                  readOnly
+                />
+                {/*<input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
                 value={
@@ -252,78 +261,105 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                 }
                 onClick={togglePasswordVisibility}
               />*/}
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              Phone Number Id
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                Phone Number Id
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="Phone Number Id Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.phoneNoId
-                  ? channelConfigurationData.phoneNoId
-                  : "No Data to show."}
-              </span>
+              <div className="col-lg-8 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.phoneNoId
+                    ? channelConfigurationData.phoneNoId
+                    : "No Data to show."}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              WA Webhook Token
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                WA Webhook Token
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="WA Webhook Token Tooltip"
               ></i> */}
-            </label>
+              </label>
 
-            <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.waWebhookToken
-                  ? channelConfigurationData.waWebhookToken
-                  : "No Data to show."}
-              </span>
+              <div className="col-lg-8 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.waWebhookToken
+                    ? channelConfigurationData.waWebhookToken
+                    : "No Data to show."}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="row mb-7">
-            <label className="col-lg-4 fw-bold text-muted">
-              WA Webhook Url
-              {/* <i
+            <div className="row mb-7">
+              <label className="col-lg-4 fw-bold text-muted">
+                WA Webhook Url
+                {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
                 title="WA Webhook Url Tooltip"
               ></i> */}
-            </label>
-             
-            <div className="col-lg-8 d-flex align-items-center">
-              <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.waWebhookUrl
-                  ? channelConfigurationData.waWebhookUrl
-                  : "No Data to show."}
-              </span>
-              <br/><hr/>
+              </label>
+
+              <div className="col-lg-8 d-flex align-items-center">
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.waWebhookUrl
+                    ? channelConfigurationData.waWebhookUrl
+                    : "No Data to show."}
+                </span>
+                <br />
+                <hr />
+              </div>
             </div>
           </div>
-         </div> 
-          <br/>
-          <div className="" style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
-            <br/>
-            <h3>Waba Health Status</h3><br/><br/>
-              {channelConfigurationData.appId && (
-                <WhatsappAppDetails
-                  channelConfigurationData={channelConfigurationData}
-                />
-              )}
+          <br />
+          <div
+            className=""
+            style={{
+              backgroundColor: "lavender",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          >
+            <br />
+            <h3>Waba Health Status</h3>
+            <br />
+            <br />
+            {channelConfigurationData.appId && (
+              <WhatsappAppDetails
+                channelConfigurationData={channelConfigurationData}
+              />
+            )}
           </div>
-         {/* <div className="row mb-7" style={{backgroundColor:"lavender",padding:10}}>
+
+          <br />
+          <div
+            className=""
+            style={{
+              backgroundColor: "lavender",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          >
+            <br />
+            <h3>Audit Logs</h3>
+            <br />
+            <br />
+            {channelConfigurationData.appId && <AuditLogs />}
+          </div>
+
+          {/* <div className="row mb-7" style={{backgroundColor:"lavender",padding:10}}>
             <br/>
             <h3>Audit Logs</h3><br/><br/><br/>
               {channelConfigurationData.appId && (
@@ -332,7 +368,6 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
                 />
               )}
           </div> */}
-
         </div>
       </div>
 

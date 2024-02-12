@@ -5,6 +5,7 @@ import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import InstagramDataList from "./DataList";
 import InstagramConfigModal from "./ConfigurationModal/Modal";
+import AuditLogs from "./AuditLogs";
 
 const InstagramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);
@@ -52,6 +53,10 @@ const InstagramPage = ({ channelName, accessKey }: any) => {
       <PageHeader setShowModal={setShowModal} />
 
       <InstagramDataList instagramData={instagramData} />
+
+      <br />
+
+      <AuditLogs />
 
       <InstagramConfigModal
         show={showModal}

@@ -5,6 +5,7 @@ import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import FacebookDataList from "./DataList";
 import FacebookConfigModal from "./ConfigurationModal/Modal";
+import AuditLogs from "./AuditLogs";
 
 const FacebookPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);
@@ -52,6 +53,10 @@ const FacebookPage = ({ channelName, accessKey }: any) => {
       <PageHeader setShowModal={setShowModal} />
 
       <FacebookDataList facebookData={facebookData} />
+
+      <br />
+
+      <AuditLogs />
 
       <FacebookConfigModal
         show={showModal}

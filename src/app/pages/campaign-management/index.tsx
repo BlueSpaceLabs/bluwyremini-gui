@@ -10,32 +10,28 @@ const CampaignManagementPage = () => {
     <div style={{ marginTop: -30 }}>
       <PageTitle breadcrumbs={[]}>Campaign Management</PageTitle>
 
-      <div className="card mb-1 mb-xl-1">
-        <div className="card-body pt-2 pb-2">
+      <div className="card mb-1 mb-xl-1" style={{padding:50}}>
+        <div className="card-body pt-2 pb-2" style={{padding:100}}>
           {/* <div className="w-100 py-3 d-flex gap-8 fw-bold fs-6 "> */}
-          <Box
-            display={"flex"}
-            justifyContent={campaignType === "" ? "space-between" : ""}
-            minHeight={campaignType === "" ? 500 : "auto"}
-            gap={3}
-            p={1}
-          >
-            <Box
+         
+            <button
               className="btn btn-primary align-self-center"
               onClick={() => setCampaignType("active")}
-              display={"inline-block"}
+              style={{padding:100}}
               // p={campaignType === "" ? 5 : 0}
             >
-              Active User Campaign
-            </Box>
+              <h2>Active User Campaign</h2>
+            </button>
 
-            <Box
+      &nbsp;&nbsp;
+            <button
               className="btn btn-primary align-self-center"
               onClick={() => setCampaignType("inactive")}
+              style={{padding:100}}
             >
-              Pushed Based Campaign
-            </Box>
-          </Box>
+              <h2>Pushed Based Campaign</h2>
+            </button>
+          
           {/* </div> */}
         </div>
       </div>

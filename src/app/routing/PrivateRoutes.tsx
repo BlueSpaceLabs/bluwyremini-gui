@@ -9,7 +9,6 @@ import { WithChildren } from "../../_metronic/helpers";
 import ContactManagement from "../pages/contact-management/ContactManagement";
 import TemplateManagement from "../pages/template-management/TemplateManagement";
 import MessagesPage from "../pages/messages/MessagesPage";
-import CampaignManagement from "../pages/campaign-management/CampaignManagement";
 // import StaticDataManagement from "../pages/static-data/StaticDataManagement";
 // import Tickets from "../pages/tickets-management/TicketsManagement";
 import Profile from "../pages/settings/profile/Profile";
@@ -20,6 +19,7 @@ import MediaManagement from "../pages/media-management/MediaManagement";
 import StaticDataManagement from "../pages/static-data";
 import KeyWordsPage from "../pages/settings/keywords";
 import AgentsPage from "../pages/agents-management";
+import CampaignManagementPage from "../pages/campaign-management";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -42,7 +42,10 @@ const PrivateRoutes = () => {
         <Route path="channels/" element={<ChannelManagement />} />
         <Route path="contact-management/*" element={<ContactManagement />} />
         <Route path="messages/*" element={<MessagesPage />} />
-        <Route path="campaign-management" element={<CampaignManagement />} />
+        <Route
+          path="campaign-management"
+          element={<CampaignManagementPage />}
+        />
         <Route path="staticdatamanagement" element={<StaticDataManagement />} />
         <Route path="template-management/*" element={<TemplateManagement />} />
         <Route path="media-management/*" element={<MediaManagement />} />

@@ -29,6 +29,7 @@ const DetailCardUI = ({
         <button
           className="btn btn-secondary align-self-center"
           onClick={handleCreateCampaignClick}
+          disabled={activeUser || activeUser === "0"}
         >
           Create Campaign
         </button>

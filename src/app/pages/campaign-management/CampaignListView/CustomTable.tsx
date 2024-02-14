@@ -139,7 +139,10 @@ export default function CustomCampaignTable({ tableData }: any) {
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Created Date Time
-    </TableCell>
+              </TableCell>
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Campaign Status
+              </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Action
               </TableCell>
@@ -156,19 +159,23 @@ export default function CustomCampaignTable({ tableData }: any) {
               return (
                 <TableRow key={row.id}>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    <span style={{color:"black"}}>{row.campaignName}</span>
+                    <span style={{ color: "black" }}>{row.campaignName}</span>
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.channel}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    Sent: {row.sentCount}, Delivered: {row.deliveredCount}, Read: {row.readCount}
+                    Sent: {row.sentCount}, Delivered: {row.deliveredCount},
+                    Read: {row.readCount}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.executionDatetime}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.createdDatetime}
+                  </TableCell>
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.campaignStatus}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {/* Action */}

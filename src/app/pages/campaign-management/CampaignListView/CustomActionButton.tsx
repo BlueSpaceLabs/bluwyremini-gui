@@ -4,6 +4,7 @@ import { MenuComponent } from "../../../../_metronic/assets/ts/components";
 import { KTIcon } from "../../../../_metronic/helpers";
 // import CustomEditModal from "./CustomEditModal";
 import CustomDeleteModal from "./CustomDeleteModal";
+import DetailCampaignModal from "./DetailModal";
 
 // type Props = {
 //   id: ID;
@@ -11,7 +12,9 @@ import CustomDeleteModal from "./CustomDeleteModal";
 
 const CustomActionButton = ({ detailCampaignData }: any) => {
   const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
-  const [showDeleteModal, setShowDeleteModal] = React.useState<boolean>(false);
+
+  const [showDetailCampaignModal, setShowDetailCampaignModal] =
+    React.useState<boolean>(false);
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -46,9 +49,9 @@ const CustomActionButton = ({ detailCampaignData }: any) => {
           <a
             className="menu-link px-3"
             data-kt-users-table-filter="delete_row"
-            onClick={() => setShowDeleteModal(true)}
+            onClick={() => setShowDetailCampaignModal(true)}
           >
-            Delete
+            Details
           </a>
         </div>
         {/* end::Menu item */}
@@ -58,13 +61,21 @@ const CustomActionButton = ({ detailCampaignData }: any) => {
           handleClose={() => setShowEditModal(false)}
           detailTemplateData={detailTemplateData}
         /> */}
-        <CustomDeleteModal
+
+        {/* <CustomDeleteModal
           show={showDeleteModal}
           handleClose={() => setShowDeleteModal(false)}
           selectedId={detailCampaignData.id}
-        />
+        /> */}
       </div>
       {/* end::Menu */}
+
+      <DetailCampaignModal
+        show={showDetailCampaignModal}
+        handleClose={() => setShowDetailCampaignModal(false)}
+        selectedId={detailCampaignData.id}
+        // setRefetchList={setRefetchList}
+      />
     </>
   );
 };

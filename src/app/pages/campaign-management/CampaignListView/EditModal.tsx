@@ -2,6 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
+// import EditKeyWordModal from "./Edit";
 
 // type Props = {
 //   show: boolean;
@@ -10,12 +11,14 @@ import { KTIcon } from "../../../../_metronic/helpers";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const CustomDeleteModal = ({
+const EditCampaignModal = ({
   show,
   handleClose,
-  selectedId,
   campaignDetailData,
+  setRefetchList,
 }: any) => {
+  // console.log("campaignDetailData", campaignDetailData);
+
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -26,34 +29,49 @@ const CustomDeleteModal = ({
       backdrop={true}
     >
       <div className="modal-header">
-        <h2>Delete Campaign : {campaignDetailData?.campaignName}</h2>
-        {/* begin::Close */}
-        <div
-          className="btn btn-sm btn-icon btn-active-color-primary"
-          onClick={handleClose}
-        >
-          <KTIcon className="fs-1" iconName="cross" />
+        <h2>Edit Campaign : {campaignDetailData?.campaignName} </h2>
+
+        <div className="d-flex gap-3">
+          <div
+            className="btn btn-sm btn-icon btn-active-color-primary"
+            onClick={handleClose}
+          >
+            <KTIcon className="fs-1" iconName="cross" />
+          </div>
         </div>
-        {/* end::Close */}
       </div>
 
       <div className="modal-body py-lg-10 px-lg-10">
-        {/*begin::Form Group */}
-        <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
-          <div className="text-gray-600 fw-bold fs-5">Confirm to Delete !</div>
-        </div>
+        <label className="fs-6 fw-semibold mb-2 required">
+          Campaign Execution
+        </label>
 
-        {/*end::Form Group */}
+        <input
+          className="form-control form-control-solid  flatpickr-input"
+          placeholder="Pick date & time"
+          id="kt_modal_create_campaign_datepicker"
+          // type="hidden"
+          type="datetime-local"
+          // value={campaignInputData.selectedTime}
+          // min={campaignInputData.selectedTime}
+          // onChange={(e) =>
+          //   setCampaignInputData({
+          //     ...campaignInputData,
+          //     selectedTime: e.target.value,
+          //   })
+          // }
+        />
       </div>
 
-      <div className="d-flex flex-end py-3 px-8 gap-2">
+      <div className="d-flex flex-end py-3 px-8 gap-3">
         <button
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
+          //   onClick={() => setShowDeleteModal(true)}
           onClick={handleClose}
         >
-          Cancel
+          Update
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
         </button>
         <button
@@ -62,7 +80,7 @@ const CustomDeleteModal = ({
           data-kt-stepper-action="submit"
           onClick={handleClose}
         >
-          Confirm
+          Close
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
         </button>
       </div>
@@ -71,4 +89,4 @@ const CustomDeleteModal = ({
   );
 };
 
-export default CustomDeleteModal;
+export default EditCampaignModal;

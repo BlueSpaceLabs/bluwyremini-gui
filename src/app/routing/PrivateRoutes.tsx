@@ -20,6 +20,8 @@ import StaticDataManagement from "../pages/static-data";
 import KeyWordsPage from "../pages/settings/keywords";
 import AgentsPage from "../pages/agents-management";
 import CampaignManagementPage from "../pages/campaign-management";
+import PushedCampaign from "../pages/campaign-management/PushedCampaign";
+import ActiveCampaign from "../pages/campaign-management/ActiveCampaign";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -46,6 +48,9 @@ const PrivateRoutes = () => {
           path="campaign-management"
           element={<CampaignManagementPage />}
         />
+        <Route path="campaign-management/pushed" element={<PushedCampaign />} />
+        <Route path="campaign-management/active" element={<ActiveCampaign />} />
+
         <Route path="staticdatamanagement" element={<StaticDataManagement />} />
         <Route path="template-management/*" element={<TemplateManagement />} />
         <Route path="media-management/*" element={<MediaManagement />} />

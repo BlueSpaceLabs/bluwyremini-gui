@@ -106,7 +106,7 @@ const ActiveUserDetails = () => {
     try {
       let res = axios
         .post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addCampaignDetails.php",
+          "http://3.108.229.60:8082/bluwyremini-backend/info/addCampaignDetailsRealTime.php",
           formData,
           {
             headers: {

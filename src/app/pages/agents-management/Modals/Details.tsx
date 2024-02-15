@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
-import EditKeyWordModal from "./Edit";
+import EditAgentsModal from "./Edit";
 
 // type Props = {
 //   show: boolean;
@@ -22,13 +22,13 @@ const DetailCard = ({ title, description }: any) => {
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const DetailKeyWordModal = ({
+const DetailAgentsModal = ({
   show,
   handleClose,
   detailData,
   setRefetchList,
 }: any) => {
-  const [showEditKeyWordModal, setShowEditKeyWordModal] =
+  const [showEditAgentsModal, setShowEditAgentsModal] =
     React.useState<boolean>(false);
 
   return createPortal(
@@ -47,7 +47,7 @@ const DetailKeyWordModal = ({
           <button
             type="button"
             className="btn btn-lg btn-secondary"
-            onClick={() => setShowEditKeyWordModal(true)}
+            onClick={() => setShowEditAgentsModal(true)}
           >
             Edit
             {/* <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" /> */}
@@ -63,24 +63,61 @@ const DetailKeyWordModal = ({
       </div>
 
       <div className="modal-body py-lg-10 px-lg-10">
-        <DetailCard title={"Agent Id"} description={detailData.keyword} />
-
-        <DetailCard title={"Agent Name"} description={detailData.keyword} />
+        <DetailCard title={"Agent Id"} description={detailData.id} />
 
         <DetailCard
-          title={"Agent Contact Number"}
-          description={detailData.keyword}
+          title={"Agent Name"}
+          description={`${detailData.firstName} ${detailData.lastName}`}
         />
 
-        <DetailCard title={"Department"} description={detailData.keyword} />
+        <DetailCard
+          title={"Agent Address"}
+          description={detailData.agentAddress}
+        />
 
-        <DetailCard title={"Agent Email Id"} description={detailData.keyword} />
+        <DetailCard title={"Agent Type"} description={detailData.agentType} />
 
-        <DetailCard title={"Created Time"} description={detailData.keyword} />
+        <DetailCard title={"Agent Company"} description={detailData.company} />
 
         <DetailCard
-          title={"Last Modified Time"}
-          description={detailData.keyword}
+          title={"Agent Company Website"}
+          description={detailData.companyWebsite}
+        />
+
+        <DetailCard title={"Agent Country"} description={detailData.country} />
+
+        <DetailCard
+          title={"Agent Created Date"}
+          description={detailData.createdDatetime}
+        />
+
+        <DetailCard title={"Agent Email Id"} description={detailData.emailId} />
+
+        <DetailCard
+          title={"Agent Language"}
+          description={detailData.language}
+        />
+
+        <DetailCard
+          title={"Agent Mobile Number"}
+          description={detailData.mobileNo}
+        />
+
+        <DetailCard
+          title={"Agent Country"}
+          description={detailData.modifiedDatetime}
+        />
+
+        <DetailCard title={"Agent Role"} description={detailData.role} />
+
+        <DetailCard
+          title={"Agent Time Zone"}
+          description={detailData.timezone}
+        />
+
+        <DetailCard
+          title={"Agent User Name"}
+          description={detailData.username}
         />
       </div>
 
@@ -96,10 +133,10 @@ const DetailKeyWordModal = ({
         </button>
       </div>
 
-      <EditKeyWordModal
-        show={showEditKeyWordModal}
-        handleClose={() => setShowEditKeyWordModal(false)}
-        initialData={detailData}
+      <EditAgentsModal
+        show={showEditAgentsModal}
+        handleClose={() => setShowEditAgentsModal(false)}
+        detailData={detailData}
         setRefetchList={setRefetchList}
         closeDetailModal={handleClose}
       />
@@ -108,4 +145,4 @@ const DetailKeyWordModal = ({
   );
 };
 
-export default DetailKeyWordModal;
+export default DetailAgentsModal;

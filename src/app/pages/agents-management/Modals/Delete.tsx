@@ -11,7 +11,7 @@ import { KTIcon } from "../../../../_metronic/helpers";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const DeleteKeyWordModal = ({
+const DeleteAgentsModal = ({
   show,
   handleClose,
   closeEditModal,
@@ -19,6 +19,8 @@ const DeleteKeyWordModal = ({
   detailData,
   setRefetchList,
 }: any) => {
+  // console.log("detailData", detailData);
+
   const handleDeleteClick = async () => {
     try {
       const config = {
@@ -30,17 +32,17 @@ const DeleteKeyWordModal = ({
       };
 
       const response = await axios.post(
-        "http://3.108.229.60:8082/bluwyremini-backend/info/deleteKeywordDetails.php",
+        "http://3.108.229.60:8082/bluwyremini-backend/info/deleteAgentProfileDetails.php",
         null,
         config
       );
 
       setRefetchList((preV: boolean) => !preV);
-      console.log("Response:", response);
+      // console.log("Response:", response);
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      console.log("Delete Request completed.");
+      // console.log("Delete Request completed.");
 
       closeEditModal();
       closeDetailModal();
@@ -73,7 +75,7 @@ const DeleteKeyWordModal = ({
         {/*begin::Form Group */}
         <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
           <div className="text-gray-600 fw-bold fs-5">
-            Confirm to Delete {detailData.keyword} !
+            Confirm to Delete {detailData.firstName} {detailData.lastName} !
           </div>
         </div>
 
@@ -105,4 +107,4 @@ const DeleteKeyWordModal = ({
   );
 };
 
-export default DeleteKeyWordModal;
+export default DeleteAgentsModal;

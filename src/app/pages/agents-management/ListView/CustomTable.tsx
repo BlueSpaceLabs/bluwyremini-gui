@@ -16,7 +16,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 // import { CustomActionButton } from "./CustomActionButton";
-import ActionButtonKeyWordListView from "./ActionButton";
+import ActionButtonAgentsListView from "./ActionButton";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -98,7 +98,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
+export default function CustomAgentsTable({ tableData, setRefetchList }: any) {
   // console.log("tableData", tableData);
 
   const [page, setPage] = React.useState(0);
@@ -133,20 +133,20 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
               </TableCell>
 
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                Agent UserName
+              </TableCell>
+
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Agent Name
               </TableCell>
 
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Agent Contact Number
+                Agent Type
               </TableCell>
 
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Department
+                Agent Mobile Number
               </TableCell>
-
-              {/* <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Full Name
-              </TableCell> */}
 
               {/* <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Last Interaction
@@ -180,19 +180,23 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
               return (
                 <TableRow key={row.id}>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.keyword}
+                    {row.id}
                   </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.name}
+                    {row.username}
                   </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.contact}
+                    {`${row.firstName} ${row.lastName}`}
                   </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.description}
+                    {row.agentType}
+                  </TableCell>
+
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                    {row.mobileNo}
                   </TableCell>
 
                   {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
@@ -228,8 +232,7 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
                   </TableCell> */}
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {/* Action */}
-                    <ActionButtonKeyWordListView
+                    <ActionButtonAgentsListView
                       detailData={row}
                       setRefetchList={setRefetchList}
                     />

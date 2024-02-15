@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
-import DeleteKeyWordModal from "./Delete";
+import DeleteAgentsModal from "./Delete";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
 // import { url } from "inspector";
 
@@ -16,27 +16,52 @@ import DeleteKeyWordModal from "./Delete";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const EditKeyWordModal = ({
+const initialData = {
+  mobileNo: "",
+  firstName: "",
+  lastName: "",
+  emailAddress: "",
+  designation: "",
+  address: "",
+  country: "",
+  company: "",
+  companyWebsite: "",
+  agentUsername: "",
+  agentPassword: "",
+  agentType: "",
+  language: "",
+  timeZone: "",
+};
+
+const EditAgentsModal = ({
   show,
   handleClose,
-  initialData,
+  detailData,
   setRefetchList,
   closeDetailModal,
 }: any) => {
-  const [agentName, setAgentName] = React.useState<string>("");
-  const [contactNumber, setContactNumber] = React.useState<string>("");
-  const [department, setDepartment] = React.useState<string>("");
-  const [agentEmailId, setAgentEmailId] = React.useState<string>("");
+  const [agentInputData, setAgentInputData] = useState(initialData);
+
   const [formError, setFormError] = React.useState<boolean>(false);
-  const [showDeleteKeyWordModal, setShowDeleteKeyWordModal] =
+  const [showDeleteAgentsModal, setShowDeleteAgentsModal] =
     React.useState<boolean>(false);
 
-  const handleAddKeyWordSubmit = async () => {
+  const handleEditAgentsSubmit = async () => {
     if (
-      agentName.length < 2 ||
-      contactNumber.length < 2 ||
-      department.length < 2 ||
-      agentEmailId.length < 2
+      agentInputData.mobileNo.length < 2 ||
+      agentInputData.firstName.length < 2 ||
+      agentInputData.lastName.length < 2 ||
+      agentInputData.emailAddress.length < 2 ||
+      agentInputData.designation.length < 2 ||
+      agentInputData.address.length < 2 ||
+      agentInputData.country.length < 2 ||
+      agentInputData.company.length < 2 ||
+      agentInputData.companyWebsite.length < 2 ||
+      // agentInputData.agentUsername.length < 2 ||
+      // agentInputData.agentPassword.length < 2 ||
+      agentInputData.agentType.length < 2
+      // agentInputData.language.length < 2 ||
+      // agentInputData.timeZone.length < 2
     ) {
       setFormError(true);
     } else {
@@ -47,11 +72,21 @@ const EditKeyWordModal = ({
           tenant: "bsl",
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-          keyword_data: {
-            agentName: agentName,
-            contactNumber: contactNumber,
-            department: department,
-            agentEmailId: agentEmailId,
+          agent_data: {
+            mobileNo: agentInputData.mobileNo,
+            firstName: agentInputData.firstName,
+            lastName: agentInputData.lastName,
+            emailAddress: agentInputData.emailAddress,
+            designation: agentInputData.designation,
+            address: agentInputData.address,
+            country: agentInputData.country,
+            company: agentInputData.company,
+            comapanyWebsite: agentInputData.companyWebsite,
+            // agentUsername: agentInputData.agentUsername,
+            // agentPassword: agentInputData.agentPassword,
+            agentType: agentInputData.agentType,
+            // language: agentInputData.language,
+            // timeZone: agentInputData.timeZone,
           },
         };
 
@@ -61,23 +96,21 @@ const EditKeyWordModal = ({
           },
         };
 
-        const selectedId = initialData.id;
+        const selectedId = detailData.id;
 
         const response = await axios.put(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/updateKeywordDetails.php?id=${selectedId}`,
+          `http://3.108.229.60:8082/bluwyremini-backend/info/modifyAgentProfileDetails.php?id=${selectedId}`,
+
           data,
           config
         );
 
         setRefetchList((preV: boolean) => !preV);
-        console.log("response", response);
+        // console.log("response", response);
       } catch (error) {
         console.error("Error:", error);
       } finally {
-        setAgentName("");
-        setContactNumber("");
-        setDepartment("");
-        setAgentEmailId("");
+        setAgentInputData(initialData);
 
         handleClose();
         closeDetailModal();
@@ -86,11 +119,28 @@ const EditKeyWordModal = ({
   };
 
   useEffect(() => {
-    setAgentName(initialData.keyword);
-    setContactNumber(initialData.keyword);
-    setDepartment(initialData.keyword);
-    setAgentEmailId(initialData.keyword);
-  }, [initialData]);
+    setAgentInputData({
+      ...agentInputData,
+      mobileNo: detailData?.mobileNo,
+      firstName: detailData?.firstName,
+      lastName: detailData?.lastName,
+      emailAddress: detailData?.emailId,
+      designation: detailData?.role,
+      address: detailData?.agentAddress,
+      country: detailData?.country,
+      company: detailData?.company,
+      companyWebsite: detailData?.companyWebsite,
+      agentUsername: detailData?.username,
+      agentType: detailData?.agentType,
+      language: detailData?.language,
+      timeZone: detailData?.timezone,
+    });
+    // agentPassword: detailData?.,
+  }, [detailData]);
+
+  const handleInputChange = (e: any) => {
+    setAgentInputData({ ...agentInputData, [e.target.name]: e.target.value });
+  };
 
   return createPortal(
     <Modal
@@ -157,7 +207,7 @@ const EditKeyWordModal = ({
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Name</span>
+              <span className="required">Agent Type</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -165,26 +215,31 @@ const EditKeyWordModal = ({
               ></i> */}
             </label>
 
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="config1"
-              placeholder=""
-              value={agentName}
-              onChange={(event) => {
-                setAgentName(event.target.value);
-              }}
-            />
-            {agentName.length < 2 && formError && (
+            <select
+              className="form-select form-select-solid fw-bolder"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              data-kt-user-table-filter="two-step"
+              data-hide-search="true"
+              name="agentType"
+              onChange={handleInputChange}
+              value={agentInputData.agentType}
+            >
+              <option value="Agent">Agent</option>
+              <option value="Admin">Admin</option>
+            </select>
+
+            {agentInputData.agentType.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Agent Name is Required.</div>
+                <div className="fv-help-block">Agent Type is Required.</div>
               </div>
             )}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Department</span>
+              <span className="required">Mobile Number</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -195,23 +250,21 @@ const EditKeyWordModal = ({
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
+              name="mobileNo"
               placeholder=""
-              value={department}
-              onChange={(event) => {
-                setDepartment(event.target.value);
-              }}
+              value={agentInputData.mobileNo}
+              onChange={handleInputChange}
             />
-            {department.length < 2 && formError && (
+            {agentInputData.mobileNo.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Department is Required.</div>
+                <div className="fv-help-block">Mobile Number is Required.</div>
               </div>
             )}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Email Id</span>
+              <span className="required">First Name</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -222,46 +275,278 @@ const EditKeyWordModal = ({
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
+              name="firstName"
               placeholder=""
-              value={agentEmailId}
-              onChange={(event) => {
-                setAgentEmailId(event.target.value);
-              }}
+              value={agentInputData.firstName}
+              onChange={handleInputChange}
             />
-            {agentEmailId.length < 2 && formError && (
+            {agentInputData.firstName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Agent Email Id is Required.</div>
+                <div className="fv-help-block">First Name is Required.</div>
               </div>
             )}
           </div>
 
-          <div className=" fv-row mb-2 w-100 ">
+          <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Contact Number</span>
+              <span className="required">Last Name</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Contact Number."
+                title="Specify KeyWords."
               ></i> */}
             </label>
+
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
+              name="lastName"
               placeholder=""
-              value={contactNumber}
-              onChange={(event) => {
-                setContactNumber(event.target.value);
-              }}
+              value={agentInputData.lastName}
+              onChange={handleInputChange}
             />
-
-            {contactNumber.length < 2 && formError && (
+            {agentInputData.lastName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Contact Number is Required.</div>
+                <div className="fv-help-block">Last Name is Required.</div>
               </div>
             )}
           </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Email Id</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="emailAddress"
+              placeholder=""
+              value={agentInputData.emailAddress}
+              onChange={handleInputChange}
+            />
+            {agentInputData.emailAddress.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Email Id is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Designation</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="designation"
+              placeholder=""
+              value={agentInputData.designation}
+              onChange={handleInputChange}
+            />
+            {agentInputData.designation.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Designation is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Address</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="address"
+              placeholder=""
+              value={agentInputData.address}
+              onChange={handleInputChange}
+            />
+            {agentInputData.address.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Address is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Country</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="country"
+              placeholder=""
+              value={agentInputData.country}
+              onChange={handleInputChange}
+            />
+            {agentInputData.country.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Country is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Company</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="company"
+              placeholder=""
+              value={agentInputData.company}
+              onChange={handleInputChange}
+            />
+            {agentInputData.company.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Company is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Company Website</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="companyWebsite"
+              placeholder=""
+              value={agentInputData.companyWebsite}
+              onChange={handleInputChange}
+            />
+            {agentInputData.companyWebsite.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  Agent Company Website is Required.
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent User Name</span>
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="agentUsername"
+              placeholder=""
+              value={agentInputData.agentUsername}
+              onChange={handleInputChange}
+            />
+            {agentInputData.agentUsername.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  Agent User Name is Required.
+                </div>
+              </div>
+            )}
+          </div> */}
+
+          {/* <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Password</span>
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="agentPassword"
+              placeholder=""
+              value={agentInputData.agentPassword}
+              onChange={handleInputChange}
+            />
+            {agentInputData.agentPassword.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Password is Required.</div>
+              </div>
+            )}
+          </div> */}
+
+          {/* <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Language</span>
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="language"
+              placeholder=""
+              value={agentInputData.language}
+              onChange={handleInputChange}
+            />
+            {agentInputData.language.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Language is Required.</div>
+              </div>
+            )}
+          </div> */}
+
+          {/* <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Time Zone</span>
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="timeZone"
+              placeholder=""
+              value={agentInputData.timeZone}
+              onChange={handleInputChange}
+            />
+            {agentInputData.timeZone.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  Agent Time Zone is Required.
+                </div>
+              </div>
+            )}
+          </div> */}
         </div>
 
         {/*end::Form Group */}
@@ -272,7 +557,7 @@ const EditKeyWordModal = ({
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
-          onClick={handleAddKeyWordSubmit}
+          onClick={handleEditAgentsSubmit}
         >
           Submit
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
@@ -281,8 +566,7 @@ const EditKeyWordModal = ({
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
-          // onClick={handleAddKeyWordSubmit}
-          onClick={() => setShowDeleteKeyWordModal(true)}
+          onClick={() => setShowDeleteAgentsModal(true)}
         >
           Delete
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
@@ -298,12 +582,12 @@ const EditKeyWordModal = ({
         </button>
       </div>
 
-      <DeleteKeyWordModal
-        show={showDeleteKeyWordModal}
-        handleClose={() => setShowDeleteKeyWordModal(false)}
+      <DeleteAgentsModal
+        show={showDeleteAgentsModal}
+        handleClose={() => setShowDeleteAgentsModal(false)}
         closeEditModal={handleClose}
         closeDetailModal={closeDetailModal}
-        detailData={initialData}
+        detailData={detailData}
         setRefetchList={setRefetchList}
       />
     </Modal>,
@@ -311,4 +595,4 @@ const EditKeyWordModal = ({
   );
 };
 
-export default EditKeyWordModal;
+export default EditAgentsModal;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
@@ -15,19 +15,40 @@ import axios from "axios";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
-  const [agentName, setAgentName] = React.useState<string>("");
-  const [contactNumber, setContactNumber] = React.useState<string>("");
-  const [department, setDepartment] = React.useState<string>("");
-  const [agentEmailId, setAgentEmailId] = React.useState<string>("");
+const initialData = {
+  mobileNo: "",
+  firstName: "",
+  lastName: "",
+  emailAddress: "",
+  designation: "",
+  address: "",
+  country: "",
+  company: "",
+  companyWebsite: "",
+  agentUsername: "",
+  agentPassword: "",
+  agentType: "Agent",
+};
+
+const AddAgentsModal = ({ show, handleClose, setRefetchList }: any) => {
+  const [agentInputData, setAgentInputData] = useState(initialData);
+
   const [formError, setFormError] = React.useState<boolean>(false);
 
-  const handleAddKeyWordSubmit = async () => {
+  const handleAddAgentsSubmit = async () => {
     if (
-      agentName.length < 2 ||
-      contactNumber.length < 2 ||
-      department.length < 2 ||
-      agentEmailId.length < 2
+      agentInputData.mobileNo.length < 2 ||
+      agentInputData.firstName.length < 2 ||
+      agentInputData.lastName.length < 2 ||
+      agentInputData.emailAddress.length < 2 ||
+      agentInputData.designation.length < 2 ||
+      agentInputData.address.length < 2 ||
+      agentInputData.country.length < 2 ||
+      agentInputData.company.length < 2 ||
+      agentInputData.companyWebsite.length < 2 ||
+      agentInputData.agentUsername.length < 2 ||
+      agentInputData.agentPassword.length < 2 ||
+      agentInputData.agentType.length < 2
     ) {
       setFormError(true);
     } else {
@@ -38,11 +59,19 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
           tenant: "bsl",
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-          keyword_data: {
-            agentName: agentName,
-            contactNumber: contactNumber,
-            department: department,
-            agentEmailId: agentEmailId,
+          agent_data: {
+            mobileNo: agentInputData.mobileNo,
+            firstName: agentInputData.firstName,
+            lastName: agentInputData.lastName,
+            emailAddress: agentInputData.emailAddress,
+            designation: agentInputData.designation,
+            address: agentInputData.address,
+            country: agentInputData.country,
+            company: agentInputData.company,
+            comapanyWebsite: agentInputData.companyWebsite,
+            agentUsername: agentInputData.agentUsername,
+            agentPassword: agentInputData.agentPassword,
+            agentType: agentInputData.agentType,
           },
         };
 
@@ -53,25 +82,26 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
         };
 
         const response = await axios.post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addKeyword.php",
+          "http://3.108.229.60:8082/bluwyremini-backend/info/addAgentProfileDetails.php",
           data,
           config
         );
 
-        console.log("response", response);
+        // console.log("response", response);
 
         setRefetchList((preV: boolean) => !preV);
       } catch (error) {
         console.error("Error:", error);
       } finally {
-        setAgentName("");
-        setContactNumber("");
-        setDepartment("");
-        setAgentEmailId("");
+        setAgentInputData(initialData);
 
         handleClose();
       }
     }
+  };
+
+  const handleInputChange = (e: any) => {
+    setAgentInputData({ ...agentInputData, [e.target.name]: e.target.value });
   };
 
   return createPortal(
@@ -139,7 +169,7 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Name</span>
+              <span className="required">Agent Type</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -147,26 +177,31 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
               ></i> */}
             </label>
 
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="config1"
-              placeholder=""
-              value={agentName}
-              onChange={(event) => {
-                setAgentName(event.target.value);
-              }}
-            />
-            {agentName.length < 2 && formError && (
+            <select
+              className="form-select form-select-solid fw-bolder"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              data-kt-user-table-filter="two-step"
+              data-hide-search="true"
+              name="agentType"
+              onChange={handleInputChange}
+              value={agentInputData.agentType}
+            >
+              <option value="Agent">Agent</option>
+              <option value="Admin">Admin</option>
+            </select>
+
+            {agentInputData.agentType.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Agent Name is Required.</div>
+                <div className="fv-help-block">Agent Type is Required.</div>
               </div>
             )}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Department</span>
+              <span className="required">Mobile Number</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -177,23 +212,21 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
+              name="mobileNo"
               placeholder=""
-              value={department}
-              onChange={(event) => {
-                setDepartment(event.target.value);
-              }}
+              value={agentInputData.mobileNo}
+              onChange={handleInputChange}
             />
-            {department.length < 2 && formError && (
+            {agentInputData.mobileNo.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Department is Required.</div>
+                <div className="fv-help-block">Mobile Number is Required.</div>
               </div>
             )}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Email Id</span>
+              <span className="required">First Name</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -204,43 +237,243 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
+              name="firstName"
               placeholder=""
-              value={agentEmailId}
-              onChange={(event) => {
-                setAgentEmailId(event.target.value);
-              }}
+              value={agentInputData.firstName}
+              onChange={handleInputChange}
             />
-            {agentEmailId.length < 2 && formError && (
+            {agentInputData.firstName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Agent Email Id is Required.</div>
+                <div className="fv-help-block">First Name is Required.</div>
               </div>
             )}
           </div>
 
-          <div className=" fv-row mb-2 w-100 ">
+          <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Contact Number</span>
+              <span className="required">Last Name</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
-                title="Specify Contact Number."
+                title="Specify KeyWords."
               ></i> */}
             </label>
+
             <input
               type="text"
               className="form-control form-control-lg form-control-solid"
-              name="config1"
+              name="lastName"
               placeholder=""
-              value={contactNumber}
-              onChange={(event) => {
-                setContactNumber(event.target.value);
-              }}
+              value={agentInputData.lastName}
+              onChange={handleInputChange}
             />
-
-            {contactNumber.length < 2 && formError && (
+            {agentInputData.lastName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Contact Number is Required.</div>
+                <div className="fv-help-block">Last Name is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent User Name</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="agentUsername"
+              placeholder=""
+              value={agentInputData.agentUsername}
+              onChange={handleInputChange}
+            />
+            {agentInputData.agentUsername.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  Agent User Name is Required.
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Password</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="agentPassword"
+              placeholder=""
+              value={agentInputData.agentPassword}
+              onChange={handleInputChange}
+            />
+            {agentInputData.agentPassword.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Password is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Email Id</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="emailAddress"
+              placeholder=""
+              value={agentInputData.emailAddress}
+              onChange={handleInputChange}
+            />
+            {agentInputData.emailAddress.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Email Id is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Designation</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="designation"
+              placeholder=""
+              value={agentInputData.designation}
+              onChange={handleInputChange}
+            />
+            {agentInputData.designation.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Designation is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Address</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="address"
+              placeholder=""
+              value={agentInputData.address}
+              onChange={handleInputChange}
+            />
+            {agentInputData.address.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Address is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Country</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="country"
+              placeholder=""
+              value={agentInputData.country}
+              onChange={handleInputChange}
+            />
+            {agentInputData.country.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Country is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Company</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="company"
+              placeholder=""
+              value={agentInputData.company}
+              onChange={handleInputChange}
+            />
+            {agentInputData.company.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Agent Company is Required.</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" fv-row mb-3 w-100 ">
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span className="required">Agent Company Website</span>
+              {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify KeyWords."
+              ></i> */}
+            </label>
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="companyWebsite"
+              placeholder=""
+              value={agentInputData.companyWebsite}
+              onChange={handleInputChange}
+            />
+            {agentInputData.companyWebsite.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  Agent Company Website is Required.
+                </div>
               </div>
             )}
           </div>
@@ -254,7 +487,7 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
-          onClick={handleAddKeyWordSubmit}
+          onClick={handleAddAgentsSubmit}
         >
           Submit
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
@@ -265,4 +498,4 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
   );
 };
 
-export default AddKeyWordModal;
+export default AddAgentsModal;

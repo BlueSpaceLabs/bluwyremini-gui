@@ -2,24 +2,21 @@ import React, { FC, useEffect } from "react";
 // import { useMutation, useQueryClient } from "react-query";
 import { MenuComponent } from "../../../../_metronic/assets/ts/components";
 import { KTIcon } from "../../../../_metronic/helpers";
-import axios from "axios";
-import EditKeyWordModal from "../Modals/Edit";
-import DeleteKeyWordModal from "../Modals/Delete";
-import DetailKeyWordModal from "../Modals/Details";
+import DetailAgentsModal from "../Modals/Details";
 // import EditWhatsAppContactModal from "./CustomEditContactModal";
 
 // type Props = {
 //   id: ID;
 // };
 
-const ActionButtonKeyWordListView = ({ detailData, setRefetchList }: any) => {
-  // console.log("detailContactData", detailContactData);
+const ActionButtonAgentsListView = ({ detailData, setRefetchList }: any) => {
+  // console.log("detailData", detailData);
 
   useEffect(() => {
     MenuComponent.reinitialization();
   }, []);
 
-  const [showDetailKeyWordModal, setShowDetailKeyWordModal] =
+  const [showDetailAgentsModal, setShowDetailAgentsModal] =
     React.useState<boolean>(false);
 
   return (
@@ -43,7 +40,7 @@ const ActionButtonKeyWordListView = ({ detailData, setRefetchList }: any) => {
         <div className="menu-item px-3">
           <span
             className="menu-link px-3"
-            onClick={() => setShowDetailKeyWordModal(true)}
+            onClick={() => setShowDetailAgentsModal(true)}
           >
             Detail
           </span>
@@ -52,16 +49,9 @@ const ActionButtonKeyWordListView = ({ detailData, setRefetchList }: any) => {
         {/* end::Menu item */}
       </div>
 
-      {/* <EditKeyWordModal
-        show={showEditKeyWordModal}
-        handleClose={() => setShowEditKeyWordModal(false)}
-        initialData={detailData}
-        setRefetchList={setRefetchList}
-      /> */}
-
-      <DetailKeyWordModal
-        show={showDetailKeyWordModal}
-        handleClose={() => setShowDetailKeyWordModal(false)}
+      <DetailAgentsModal
+        show={showDetailAgentsModal}
+        handleClose={() => setShowDetailAgentsModal(false)}
         detailData={detailData}
         setRefetchList={setRefetchList}
       />
@@ -69,4 +59,4 @@ const ActionButtonKeyWordListView = ({ detailData, setRefetchList }: any) => {
   );
 };
 
-export default ActionButtonKeyWordListView;
+export default ActionButtonAgentsListView;

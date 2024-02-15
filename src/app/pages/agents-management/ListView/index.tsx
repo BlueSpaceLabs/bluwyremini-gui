@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
-import CustomKeyWordTable from "./CustomTable";
-import ListViewHeader from "./ListViewHeader";
 import axios from "axios";
 import { KTCard } from "../../../../_metronic/helpers";
-import AddKeyWordModal from "../Modals/Add";
+import CustomAgentsTable from "./CustomTable";
+import ListViewHeader from "./ListViewHeader";
+import AddAgentsModal from "../Modals/Add";
 
-const KeyWordListView = () => {
-  const [keyWordListViewData, setKeyWordListViewData] = useState([]);
-  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
-  const [showAddKeyWordModal, setShowAddKeyWordModal] = useState(false);
+const AgentsListView = () => {
+  const [agentsListViewData, setAgentsListViewData] = useState([]);
+  const [searchAgent, setSearchAgent] = useState<string>("");
+  const [showAddAgentsModal, setShowAddAgentsModal] = useState(false);
 
   const [refetchList, setRefetchList] = useState<boolean>(false);
 
-  console.log("refetchList", refetchList);
+  // console.log("refetchList", refetchList);
   useEffect(() => {
     const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getKeywordDetails.php";
+      "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
     const params = {
       accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-      searchKeyWord: searchKeyWord,
+      searchAgent: searchAgent,
     };
 
     const fetchData = async () => {
       try {
         const response = await axios.get(url, { params });
+        const responseData = response.data;
 
-        console.log("response", response.data);
-        setKeyWordListViewData(response.data);
+        setAgentsListViewData(responseData.dataArray);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,31 +38,31 @@ const KeyWordListView = () => {
     return () => {
       // Optionally, cancel ongoing requests or perform other cleanup
     };
-  }, [refetchList, searchKeyWord]); // Empty dependency array means this effect will only run once after the initial render
+  }, [refetchList, searchAgent]); // Empty dependency array means this effect will only run once after the initial render
 
   return (
     <React.Fragment>
       <KTCard>
         {/* search & add modal */}
         <ListViewHeader
-          setSearchKeyWord={setSearchKeyWord}
-          showAddModal={() => setShowAddKeyWordModal(true)}
+          setSearchAgent={setSearchAgent}
+          showAddModal={() => setShowAddAgentsModal(true)}
         />
 
         {/* table & action - edit & delete */}
-        <CustomKeyWordTable
-          tableData={keyWordListViewData}
+        <CustomAgentsTable
+          tableData={agentsListViewData}
           setRefetchList={setRefetchList}
         />
       </KTCard>
 
-      <AddKeyWordModal
-        show={showAddKeyWordModal}
-        handleClose={() => setShowAddKeyWordModal(false)}
+      <AddAgentsModal
+        show={showAddAgentsModal}
+        handleClose={() => setShowAddAgentsModal(false)}
         setRefetchList={setRefetchList}
       />
     </React.Fragment>
   );
 };
 
-export default KeyWordListView;
+export default AgentsListView;

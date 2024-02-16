@@ -5,9 +5,9 @@ import { UsersListHeader } from "./components/header/UsersListHeader";
 import AddWhatsAppContactModal from "./CustomAddContactModal";
 import CustomContactTable from "./CustomTable";
 // import { getContactWhatsAppData } from "../../../services/ContactManagement";
-import CustomSnackBar from "../../../../components/CustomSnackbar/CustomSnackBar";
 import axios from "axios";
 import { KTCard } from "../../../../../_metronic/helpers";
+import CustomSnackBar from "../../../../components/CustomSnackbar";
 
 const FaceBookTempPage = ({ channelName, accessKey }: any) => {
   const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);

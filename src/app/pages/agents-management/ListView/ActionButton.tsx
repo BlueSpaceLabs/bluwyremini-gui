@@ -9,7 +9,11 @@ import DetailAgentsModal from "../Modals/Details";
 //   id: ID;
 // };
 
-const ActionButtonAgentsListView = ({ detailData, setRefetchList }: any) => {
+const ActionButtonAgentsListView = ({
+  detailData,
+  setRefetchList,
+  setSnackbar,
+}: any) => {
   // console.log("detailData", detailData);
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const ActionButtonAgentsListView = ({ detailData, setRefetchList }: any) => {
         handleClose={() => setShowDetailAgentsModal(false)}
         detailData={detailData}
         setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </>
   );

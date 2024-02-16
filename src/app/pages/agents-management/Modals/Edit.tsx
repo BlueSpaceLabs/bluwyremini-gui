@@ -39,6 +39,7 @@ const EditAgentsModal = ({
   detailData,
   setRefetchList,
   closeDetailModal,
+  setSnackbar,
 }: any) => {
   const [agentInputData, setAgentInputData] = useState(initialData);
 
@@ -107,8 +108,24 @@ const EditAgentsModal = ({
 
         setRefetchList((preV: boolean) => !preV);
         // console.log("response", response);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Updated Agents",
+        });
       } catch (error) {
         console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Update Agent",
+        });
       } finally {
         setAgentInputData(initialData);
 
@@ -589,6 +606,7 @@ const EditAgentsModal = ({
         closeDetailModal={closeDetailModal}
         detailData={detailData}
         setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </Modal>,
     modalsRoot

@@ -5,7 +5,7 @@ import axios from "axios";
 import { KTCard } from "../../../../../_metronic/helpers";
 import AddKeyWordModal from "../Modals/Add";
 
-const KeyWordListView = () => {
+const KeyWordListView = ({ setSnackbar }: any) => {
   const [keyWordListViewData, setKeyWordListViewData] = useState([]);
   const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   const [showAddKeyWordModal, setShowAddKeyWordModal] = useState(false);
@@ -53,6 +53,7 @@ const KeyWordListView = () => {
         <CustomKeyWordTable
           tableData={keyWordListViewData}
           setRefetchList={setRefetchList}
+          setSnackbar={setSnackbar}
         />
       </KTCard>
 
@@ -60,6 +61,7 @@ const KeyWordListView = () => {
         show={showAddKeyWordModal}
         handleClose={() => setShowAddKeyWordModal(false)}
         setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </React.Fragment>
   );

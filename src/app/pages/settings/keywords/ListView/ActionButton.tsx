@@ -12,7 +12,11 @@ import DetailKeyWordModal from "../Modals/Details";
 //   id: ID;
 // };
 
-const ActionButtonKeyWordListView = ({ detailData, setRefetchList }: any) => {
+const ActionButtonKeyWordListView = ({
+  detailData,
+  setRefetchList,
+  setSnackbar,
+}: any) => {
   // console.log("detailContactData", detailContactData);
 
   useEffect(() => {
@@ -64,6 +68,7 @@ const ActionButtonKeyWordListView = ({ detailData, setRefetchList }: any) => {
         handleClose={() => setShowDetailKeyWordModal(false)}
         detailData={detailData}
         setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </>
   );

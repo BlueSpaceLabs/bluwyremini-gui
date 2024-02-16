@@ -12,13 +12,45 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 export default function CustomSnackBar({
   showSnackbar,
-  setShowSnackbar,
+  setSnackbar,
   severitySnackBar,
   messageSnackBar,
 }: any) {
-  // const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);
-  // const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
-  // const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
+  console.log(
+    "CustomSnackBar called internal",
+    { showSnackbar },
+    { setSnackbar },
+    { severitySnackBar },
+    { messageSnackBar }
+  );
+  //   const [snackbar, setSnackbar] = useState({
+  //     showSnackbar: false,
+  //     severitySnackBar: "",
+  //     messageSnackBar: "",
+  //   });
+
+  // <CustomSnackBar
+  //       showSnackbar={snackbar.showSnackbar}
+  //       setSnackbar={setSnackbar}
+  //       severitySnackBar={snackbar.severitySnackBar}
+  //       messageSnackBar={snackbar.messageSnackBar}
+  //     />
+
+  // setSnackbar({
+  //   showSnackbar: true,
+  //   severitySnackBar: "success",
+  //   messageSnackBar: response?.data?.message
+  //     ? response?.data?.message
+  //     : "Successfully SnackBarMessage",
+  // });
+
+  // setSnackbar({
+  //   showSnackbar: true,
+  //   severitySnackBar: "error",
+  //   messageSnackBar: error?.response?.data?.message
+  //     ? error?.response?.data?.message
+  //     : "Failed to SnackBarMessage",
+  // });
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -28,7 +60,10 @@ export default function CustomSnackBar({
       return;
     }
 
-    setShowSnackbar(false);
+    setSnackbar((preValue) => ({
+      ...preValue,
+      showSnackbar: false,
+    }));
   };
 
   return (

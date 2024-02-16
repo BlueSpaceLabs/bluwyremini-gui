@@ -30,7 +30,12 @@ const initialData = {
   agentType: "Agent",
 };
 
-const AddAgentsModal = ({ show, handleClose, setRefetchList }: any) => {
+const AddAgentsModal = ({
+  show,
+  handleClose,
+  setRefetchList,
+  setSnackbar,
+}: any) => {
   const [agentInputData, setAgentInputData] = useState(initialData);
 
   const [formError, setFormError] = React.useState<boolean>(false);
@@ -87,11 +92,27 @@ const AddAgentsModal = ({ show, handleClose, setRefetchList }: any) => {
           config
         );
 
-        // console.log("response", response);
+        // console.log("response:", response);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Added Agents",
+        });
 
         setRefetchList((preV: boolean) => !preV);
       } catch (error) {
-        console.error("Error:", error);
+        // console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Add Agent",
+        });
       } finally {
         setAgentInputData(initialData);
 

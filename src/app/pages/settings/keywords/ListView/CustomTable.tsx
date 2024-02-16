@@ -98,7 +98,11 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
+export default function CustomKeyWordTable({
+  tableData,
+  setRefetchList,
+  setSnackbar,
+}: any) {
   // console.log("tableData", tableData);
 
   const [page, setPage] = React.useState(0);
@@ -128,7 +132,7 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
         <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-            <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 KeyWord Id
               </TableCell>
               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
@@ -139,13 +143,13 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
                 KeyWord Description
               </TableCell>
 
-               <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Created At
               </TableCell>
 
-             <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Last Modified
-              </TableCell> 
+              </TableCell>
 
               {/* <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                 Last Modified
@@ -174,7 +178,7 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
             ).map((row: any) => {
               return (
                 <TableRow key={row.id}>
-                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.id}
                   </TableCell>
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
@@ -185,13 +189,13 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
                     {row.description}
                   </TableCell>
 
-                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     <span style={{ color: "" }}>{row.createdDatetime}</span>
-                  </TableCell> 
+                  </TableCell>
 
                   <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.updatedDatetime}
-              </TableCell>
+                  </TableCell>
 
                   {/* <TableCell className="text-gray-600 fw-bold fs-8 py-8">
                     {row.lastInteractionDatetime}
@@ -222,6 +226,7 @@ export default function CustomKeyWordTable({ tableData, setRefetchList }: any) {
                     <ActionButtonKeyWordListView
                       detailData={row}
                       setRefetchList={setRefetchList}
+                      setSnackbar={setSnackbar}
                     />
                   </TableCell>
                 </TableRow>

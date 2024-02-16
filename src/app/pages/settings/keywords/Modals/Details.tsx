@@ -27,6 +27,7 @@ const DetailKeyWordModal = ({
   handleClose,
   detailData,
   setRefetchList,
+  setSnackbar,
 }: any) => {
   const [showEditKeyWordModal, setShowEditKeyWordModal] =
     React.useState<boolean>(false);
@@ -89,6 +90,7 @@ const DetailKeyWordModal = ({
         initialData={detailData}
         setRefetchList={setRefetchList}
         closeDetailModal={handleClose}
+        setSnackbar={setSnackbar}
       />
     </Modal>,
     modalsRoot

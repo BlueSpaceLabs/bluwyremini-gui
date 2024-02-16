@@ -2,10 +2,10 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PageHeader from "./PageHeader";
 import axios from "axios";
-import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import InstagramDataList from "./DataList";
 import InstagramConfigModal from "./ConfigurationModal/Modal";
 import AuditLogs from "./AuditLogs";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 const InstagramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);

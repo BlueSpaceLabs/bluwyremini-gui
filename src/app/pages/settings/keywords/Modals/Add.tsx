@@ -15,7 +15,12 @@ import axios from "axios";
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
 
-const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
+const AddKeyWordModal = ({
+  show,
+  handleClose,
+  setRefetchList,
+  setSnackbar,
+}: any) => {
   const [keyWordTitle, setKeyWordTitle] = React.useState<string>("");
   const [keyWordDescription, setKeyWordDescription] =
     React.useState<string>("");
@@ -52,9 +57,25 @@ const AddKeyWordModal = ({ show, handleClose, setRefetchList }: any) => {
 
         console.log("response", response);
 
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Added KeyWord !",
+        });
+
         setRefetchList((preV: boolean) => !preV);
       } catch (error) {
         console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Add KeyWord !",
+        });
       } finally {
         setKeyWordTitle("");
         setKeyWordDescription("");

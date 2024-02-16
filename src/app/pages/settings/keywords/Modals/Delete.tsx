@@ -18,6 +18,7 @@ const DeleteKeyWordModal = ({
   closeDetailModal,
   detailData,
   setRefetchList,
+  setSnackbar,
 }: any) => {
   const handleDeleteClick = async () => {
     try {
@@ -37,8 +38,24 @@ const DeleteKeyWordModal = ({
 
       setRefetchList((preV: boolean) => !preV);
       console.log("Response:", response);
+
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "success",
+        messageSnackBar: response?.data?.message
+          ? response?.data?.message
+          : "Successfully Deleted KeyWord !",
+      });
     } catch (error) {
       console.error("Error:", error);
+
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "error",
+        messageSnackBar: error?.response?.data?.message
+          ? error?.response?.data?.message
+          : "Failed to Delete KeyWord !",
+      });
     } finally {
       console.log("Delete Request completed.");
 

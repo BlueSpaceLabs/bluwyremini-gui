@@ -27,6 +27,7 @@ const DetailAgentsModal = ({
   handleClose,
   detailData,
   setRefetchList,
+  setSnackbar,
 }: any) => {
   const [showEditAgentsModal, setShowEditAgentsModal] =
     React.useState<boolean>(false);
@@ -139,6 +140,7 @@ const DetailAgentsModal = ({
         detailData={detailData}
         setRefetchList={setRefetchList}
         closeDetailModal={handleClose}
+        setSnackbar={setSnackbar}
       />
     </Modal>,
     modalsRoot

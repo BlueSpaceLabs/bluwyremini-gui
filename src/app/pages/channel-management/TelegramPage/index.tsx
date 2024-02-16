@@ -2,10 +2,10 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PageHeader from "./PageHeader";
 import axios from "axios";
-import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import TelegramConfigModal from "./ConfigurationModal/Modal";
 import TelegramDataList from "./DataList";
 import AuditLogs from "./AuditLogs";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 const TelegramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);

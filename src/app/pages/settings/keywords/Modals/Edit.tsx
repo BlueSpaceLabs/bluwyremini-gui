@@ -22,6 +22,7 @@ const EditKeyWordModal = ({
   initialData,
   setRefetchList,
   closeDetailModal,
+  setSnackbar,
 }: any) => {
   const [keyWordTitle, setKeyWordTitle] = React.useState<string>("");
   const [keyWordDescription, setKeyWordDescription] =
@@ -62,8 +63,24 @@ const EditKeyWordModal = ({
 
         setRefetchList((preV: boolean) => !preV);
         console.log("response", response);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Updated KeyWord !",
+        });
       } catch (error) {
         console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Update KeyWord !",
+        });
       } finally {
         handleClose();
         closeDetailModal();
@@ -236,6 +253,7 @@ const EditKeyWordModal = ({
         closeDetailModal={closeDetailModal}
         detailData={initialData}
         setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </Modal>,
     modalsRoot

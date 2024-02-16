@@ -98,7 +98,11 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomAgentsTable({ tableData, setRefetchList }: any) {
+export default function CustomAgentsTable({
+  tableData,
+  setRefetchList,
+  setSnackbar,
+}: any) {
   // console.log("tableData", tableData);
 
   const [page, setPage] = React.useState(0);
@@ -235,6 +239,7 @@ export default function CustomAgentsTable({ tableData, setRefetchList }: any) {
                     <ActionButtonAgentsListView
                       detailData={row}
                       setRefetchList={setRefetchList}
+                      setSnackbar={setSnackbar}
                     />
                   </TableCell>
                 </TableRow>

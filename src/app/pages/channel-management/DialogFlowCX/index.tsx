@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import PageHeader from "./PageHeader";
 import axios from "axios";
 import DialogFlowCXConfigModal from "./ConfigurationModal/Modal";
-import CustomSnackBar from "../../../components/CustomSnackbar/CustomSnackBar";
 import DialogFlowDataList from "./DataList";
 import AuditLogs from "./AuditLogs";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
   console.log(channelName, accessKey);

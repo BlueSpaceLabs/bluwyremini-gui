@@ -5,7 +5,7 @@ import CustomAgentsTable from "./CustomTable";
 import ListViewHeader from "./ListViewHeader";
 import AddAgentsModal from "../Modals/Add";
 
-const AgentsListView = () => {
+const AgentsListView = ({ setSnackbar }: any) => {
   const [agentsListViewData, setAgentsListViewData] = useState([]);
   const [searchAgent, setSearchAgent] = useState<string>("");
   const [showAddAgentsModal, setShowAddAgentsModal] = useState(false);
@@ -53,6 +53,7 @@ const AgentsListView = () => {
         <CustomAgentsTable
           tableData={agentsListViewData}
           setRefetchList={setRefetchList}
+          setSnackbar={setSnackbar}
         />
       </KTCard>
 
@@ -60,6 +61,7 @@ const AgentsListView = () => {
         show={showAddAgentsModal}
         handleClose={() => setShowAddAgentsModal(false)}
         setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </React.Fragment>
   );

@@ -17,9 +17,7 @@ const CustomActionButton = ({
   channelName,
   // refetchWhatsAppContactListData,
   setRefetchData,
-  setShowSnackbar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
+  setSnackbar,
 }: any) => {
   const [showEditContactModal, setShowEditContactModal] =
     React.useState<boolean>(false);
@@ -89,9 +87,7 @@ const CustomActionButton = ({
           channelName={channelName}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
           setRefetchData={setRefetchData}
-          setShowSnackbar={setShowSnackbar}
-          setSeveritySnackBar={setSeveritySnackBar}
-          setMessageSnackBar={setMessageSnackBar}
+          setSnackbar={setSnackbar}
         />
       </div>
       {/* end::Menu */}

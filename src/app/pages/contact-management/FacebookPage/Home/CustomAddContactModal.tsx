@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import { postAddWhatsappContact } from "../../../../services/ContactManagement";
+import axios from "axios";
 
 // type Props = {
 //   show: boolean;
@@ -19,7 +20,7 @@ const initialValue = {
   crmFullname: "",
   nameToAddress: "",
   wabaMobileNo: "",
-  wabaName:""
+  wabaName: "",
 };
 
 const AddWhatsAppContactModal = ({
@@ -29,9 +30,7 @@ const AddWhatsAppContactModal = ({
   channelName,
   // refetchWhatsAppContactListData,
   setRefetchData,
-  setShowSnackbar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
+  setSnackbar,
 }: any) => {
   const { mutateAsync } = useMutation(postAddWhatsappContact);
 
@@ -48,59 +47,132 @@ const AddWhatsAppContactModal = ({
   };
 
   const handleSubmitForm = async () => {
-    
     if (
       addWhatsappContactInput?.firstChannel.length < 2 ||
-      //addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
+      // addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
       addWhatsappContactInput?.mobileNo.length < 2 ||
       addWhatsappContactInput?.crmFullname.length < 2 ||
-      addWhatsappContactInput?.nameToAddress.length < 2
-     // addWhatsappContactInput?.wabaMobileNo.length < 2 ||
-     // addWhatsappContactInput?.wabaName.length < 2
+      addWhatsappContactInput?.nameToAddress.length < 2 ||
+      addWhatsappContactInput?.wabaMobileNo.length < 2
+      // addWhatsappContactInput?.wabaName.length < 2
     ) {
-      console.log('innerr')
       setFormError(true);
     } else {
-      mutateAsync(
-        
-        {
-          channelName: channelName,
-          requestData: {
-            tenant: "bsl",
-            accessKey: accessKey,
-            contact_data: {
-              mobileNo: addWhatsappContactInput?.mobileNo,
-              firstChannel: addWhatsappContactInput?.firstChannel,
-              lastInteractedChannel:
-                addWhatsappContactInput?.lastInteractedChannel,
-              crmFullname: addWhatsappContactInput?.crmFullname,
-              nameToAddress: addWhatsappContactInput?.nameToAddress,
-              wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
-              wabaName: addWhatsappContactInput?.wabaName,
-            },
+      setFormError(false);
+
+      try {
+        const data = {
+          tenant: "bsl",
+          accessKey: accessKey,
+          contact_data: {
+            mobileNo: addWhatsappContactInput?.mobileNo,
+            firstChannel: addWhatsappContactInput?.firstChannel,
+            lastInteractedChannel:
+              addWhatsappContactInput?.lastInteractedChannel,
+            crmFullname: addWhatsappContactInput?.crmFullname,
+            nameToAddress: addWhatsappContactInput?.nameToAddress,
+            wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
+            wabaName: addWhatsappContactInput?.wabaName,
           },
-        },
-        {
-          onSuccess: () => {
-            setShowSnackbar(true);
-            setSeveritySnackBar("success");
-            setMessageSnackBar("Successfully added Contact Details !");
-            // refetchWhatsAppContactListData();
-            setRefetchData((preValue: boolean) => !preValue);
+        };
+
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
           },
-          onError: () => {
-            setShowSnackbar(true);
-            setSeveritySnackBar("error");
-            setMessageSnackBar("Failed to add Contact Details !");
-          },
-          onSettled: () => {
-            setFormError(false);
-            handleClose();
-          },
-        }
-      );
+        };
+
+        const response = await axios.post(
+          `http://3.108.229.60:8082/bluwyremini-backend/info/addContactInfo.php?channelName=${channelName}`,
+          data,
+          config
+        );
+
+        console.log("response", response);
+
+        // refetchWhatsAppContactListData();
+        setRefetchData((preValue: boolean) => !preValue);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully added Contact Details !",
+        });
+
+        // setRefetchList((preV: boolean) => !preV);
+      } catch (error) {
+        console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to add Contact Details !",
+        });
+      } finally {
+        setFormError(false);
+        handleClose();
+      }
     }
   };
+
+  // const handleSubmitForm = async () => {
+
+  //   if (
+  //     addWhatsappContactInput?.firstChannel.length < 2 ||
+  //     //addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
+  //     addWhatsappContactInput?.mobileNo.length < 2 ||
+  //     addWhatsappContactInput?.crmFullname.length < 2 ||
+  //     addWhatsappContactInput?.nameToAddress.length < 2
+  //    // addWhatsappContactInput?.wabaMobileNo.length < 2 ||
+  //    // addWhatsappContactInput?.wabaName.length < 2
+  //   ) {
+  //     console.log('innerr')
+  //     setFormError(true);
+  //   } else {
+  //     mutateAsync(
+
+  //       {
+  //         channelName: channelName,
+  //         requestData: {
+  //           tenant: "bsl",
+  //           accessKey: accessKey,
+  //           contact_data: {
+  //             mobileNo: addWhatsappContactInput?.mobileNo,
+  //             firstChannel: addWhatsappContactInput?.firstChannel,
+  //             lastInteractedChannel:
+  //               addWhatsappContactInput?.lastInteractedChannel,
+  //             crmFullname: addWhatsappContactInput?.crmFullname,
+  //             nameToAddress: addWhatsappContactInput?.nameToAddress,
+  //             wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
+  //             wabaName: addWhatsappContactInput?.wabaName,
+  //           },
+  //         },
+  //       },
+  //       {
+  //         onSuccess: () => {
+  //           setShowSnackbar(true);
+  //           setSeveritySnackBar("success");
+  //           setMessageSnackBar("Successfully added Contact Details !");
+  //           // refetchWhatsAppContactListData();
+  //           setRefetchData((preValue: boolean) => !preValue);
+  //         },
+  //         onError: () => {
+  //           setShowSnackbar(true);
+  //           setSeveritySnackBar("error");
+  //           setMessageSnackBar("Failed to add Contact Details !");
+  //         },
+  //         onSettled: () => {
+  //           setFormError(false);
+  //           handleClose();
+  //         },
+  //       }
+  //     );
+  //   }
+  // };
 
   return createPortal(
     <Modal
@@ -239,7 +311,7 @@ const AddWhatsAppContactModal = ({
               value={addWhatsappContactInput?.nameToAddress}
               onChange={handleInputChange}
             />
-           {addWhatsappContactInput?.nameToAddress?.length < 2 &&
+            {addWhatsappContactInput?.nameToAddress?.length < 2 &&
               formError && (
                 <div className="fv-plugins-message-container">
                   <div className="fv-help-block">
@@ -265,7 +337,7 @@ const AddWhatsAppContactModal = ({
               value={addWhatsappContactInput?.wabaMobileNo}
               onChange={handleInputChange}
             />
-           {/*} {addWhatsappContactInput?.wabaMobileNo?.length < 2 && formError && (
+            {/*} {addWhatsappContactInput?.wabaMobileNo?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
                   Messenger Id is Required.
@@ -274,7 +346,7 @@ const AddWhatsAppContactModal = ({
             )} */}
           </div>
 
-         {/* <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+          {/* <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">WABA Name</span>
               <i

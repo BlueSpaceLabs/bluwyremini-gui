@@ -28,6 +28,7 @@ const AddMediaModal = ({
   setData,
   serverResponse,
   setServerResponse,
+  setSnackbar,
 }: any) => {
   const [mediaTitle, setMediaTitle] = React.useState<string>("");
   const [mediaDescription, setMediaDescription] = React.useState<string>("");
@@ -68,7 +69,7 @@ const AddMediaModal = ({
       formData.append("tenant", tenant);
 
       try {
-        let res = axios
+        let response = axios
           .post(
             "http://3.108.229.60:8082/bluwyremini-backend/info/addMediaDetails.php",
             formData,
@@ -85,13 +86,31 @@ const AddMediaModal = ({
             setMediaFile("");
             setServerResponse(response.data.message);
             setImageURL(blankImg);
-            console.log(response.data.message);
+            // console.log(response.data.message);
+
+            setSnackbar({
+              showSnackbar: true,
+              severitySnackBar: "success",
+              messageSnackBar: response?.data?.message
+                ? response?.data?.message
+                : "Successfully Added Media !",
+            });
+            handleClose();
+
             return response;
           });
 
         //console.log(res)
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.error(error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Add Media !",
+        });
       }
     } //else
   }; //fn ends

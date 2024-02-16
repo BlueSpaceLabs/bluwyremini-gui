@@ -28,6 +28,7 @@ const EditMediaModal = ({
   detailMediaData,
   deleteModalOpen,
   setData,
+  setSnackbar,
 }: // serverResponse,
 // setServerResponse,
 any) => {
@@ -112,13 +113,30 @@ any) => {
             setMediaFile("");
             setServerResponse(response.data.message);
             setImageURL(blankImg);
-            console.log(response.data.message);
+            // console.log(response.data.message);
+
+            setSnackbar({
+              showSnackbar: true,
+              severitySnackBar: "success",
+              messageSnackBar: response?.data?.message
+                ? response?.data?.message
+                : "Successfully Updated Media !",
+            });
+            handleClose();
             return response;
           });
 
         //console.log(res)
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Update Media !",
+        });
       }
     } //else
   }; //fn ends

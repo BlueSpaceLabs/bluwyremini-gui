@@ -26,9 +26,7 @@ const FacebookConfigModal = ({
   handleClose,
   initialModalData,
   setRefetch,
-  setShowSnackbar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
+  setSnackbar,
 }: any) => {
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
@@ -103,16 +101,24 @@ const FacebookConfigModal = ({
         // console.log(response.data);
         // Handle success
 
-        setShowSnackbar(true);
-        setSeveritySnackBar("success");
-        setMessageSnackBar("Successfully updated Facebook Configuration!");
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully updated Facebook Configuration!",
+        });
       } catch (error) {
         console.error("Error:", error);
         // Handle error
 
-        setShowSnackbar(true);
-        setSeveritySnackBar("error");
-        setMessageSnackBar("Failed to update Facebook Configuration!");
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to update Facebook Configuration !",
+        });
       } finally {
         setRefetch((preValue: boolean) => !preValue);
         handleClose();

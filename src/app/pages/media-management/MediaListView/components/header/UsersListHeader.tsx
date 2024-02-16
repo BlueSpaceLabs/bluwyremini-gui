@@ -3,7 +3,11 @@ import { UsersListToolbar } from "./UserListToolbar";
 import { UsersListGrouping } from "./UsersListGrouping";
 import { UsersListSearchComponent } from "./UsersListSearchComponent";
 
-const UsersListHeader = ({ setChannelType, setMediaType }: any) => {
+const UsersListHeader = ({
+  setChannelType,
+  setMediaType,
+  setSnackbar,
+}: any) => {
   // const { selected } = useListView();
   return (
     <div className="card-header border-0 pt-6">
@@ -17,6 +21,7 @@ const UsersListHeader = ({ setChannelType, setMediaType }: any) => {
           <UsersListToolbar
             setChannelType={setChannelType}
             setMediaType={setMediaType}
+            setSnackbar={setSnackbar}
           />
         )}
         {/* end::Group actions */}

@@ -10,7 +10,11 @@ const initialValue = {
   mediaDescription: null,
 };
 
-const UsersListToolbar = ({ setChannelType, setMediaType }: any) => {
+const UsersListToolbar = ({
+  setChannelType,
+  setMediaType,
+  setSnackbar,
+}: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [addMediaModalData, setAddMediaModalData] =
     React.useState<object>(initialValue);
@@ -61,6 +65,7 @@ const UsersListToolbar = ({ setChannelType, setMediaType }: any) => {
         setData={setAddMediaModalData}
         serverResponse={serverResponse}
         setServerResponse={setServerResponse}
+        setSnackbar={setSnackbar}
       />
     </div>
   );

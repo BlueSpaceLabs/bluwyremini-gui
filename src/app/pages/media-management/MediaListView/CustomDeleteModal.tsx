@@ -17,6 +17,7 @@ const CustomDeleteModal = ({
   selectedId,
   selectedMediaName,
   handleEditModalClose,
+  setSnackbar,
 }: any) => {
   const handleDeleteClick = async () => {
     const url =
@@ -33,9 +34,25 @@ const CustomDeleteModal = ({
         },
       });
 
-      console.log("Response:", response?.data);
+      // console.log("Response:", response?.data);
+
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "success",
+        messageSnackBar: response?.data?.message
+          ? response?.data?.message
+          : "Successfully Deleted Media !",
+      });
     } catch (error) {
       console.error("Error:", error);
+
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "error",
+        messageSnackBar: error?.response?.data?.message
+          ? error?.response?.data?.message
+          : "Failed to Delete Media !",
+      });
     } finally {
       console.log("Request completed.");
       handleEditModalClose();

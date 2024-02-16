@@ -39,9 +39,7 @@ const WhatsappConfigurationModal = ({
   initialModalData,
   refetchGetWhatsappData,
   accessKey,
-  setShowSnackBar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
+  setSnackbar,
 }: any) => {
   const { mutate, isLoading, isError, error, isSuccess } = useMutation(
     serviceAxiosPostWhatsappData
@@ -60,10 +58,7 @@ const WhatsappConfigurationModal = ({
     });
   };
 
-  console.log({ formError });
-  const handleSubmitForm = () => {
-    console.log("Submitted Form", whatsappModalInput);
-
+  const handleSubmitForm = async () => {
     if (
       whatsappModalInput?.channelName.length < 2 ||
       whatsappModalInput?.accessToken.length < 2 ||
@@ -77,39 +72,69 @@ const WhatsappConfigurationModal = ({
     ) {
       setFormError(true);
     } else {
-      mutate({
-        tenant: "bsl",
-        accessKey: accessKey,
-        customer_data: {
-          appId: whatsappModalInput?.appId,
-          businessId: whatsappModalInput?.businessId,
-          phoneNoId: whatsappModalInput?.phoneNoId,
-          displayPhoneNo: whatsappModalInput?.displayNo,
-          permanentToken: whatsappModalInput?.permanentToken,
-          accessToken: whatsappModalInput?.accessToken,
-          webhookUrl: whatsappModalInput?.waWebhookUrl,
-          webhookToken: whatsappModalInput?.waWebhookToken,
-        },
-      });
-
-      setShowSnackBar(true);
-      setSeveritySnackBar("success");
-      setMessageSnackBar("Successfully updated configuration details !");
       setFormError(false);
-      setEditData(true);
-      handleClose();
+
+      try {
+        const data = {
+          tenant: "bsl",
+          accessKey: accessKey,
+          customer_data: {
+            appId: whatsappModalInput?.appId,
+            businessId: whatsappModalInput?.businessId,
+            phoneNoId: whatsappModalInput?.phoneNoId,
+            displayPhoneNo: whatsappModalInput?.displayNo,
+            permanentToken: whatsappModalInput?.permanentToken,
+            accessToken: whatsappModalInput?.accessToken,
+            webhookUrl: whatsappModalInput?.waWebhookUrl,
+            webhookToken: whatsappModalInput?.waWebhookToken,
+          },
+        };
+
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const response = await axios.post(
+          `http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=whatsapp`,
+          data,
+          config
+        );
+
+        console.log("response", response);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Updated Whatsapp Configuration Details !",
+        });
+
+        // setRefetchList((preV: boolean) => !preV);
+      } catch (error) {
+        console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed  Updated Whatsapp Configuration Details !",
+        });
+      } finally {
+        setFormError(false);
+        setEditData(true);
+        refetchGetWhatsappData();
+        handleClose();
+      }
     }
   };
 
   React.useEffect(() => {
     setWhatsappModalInput(initialModalData);
   }, [initialModalData, show]);
-
-  React.useEffect(() => {
-    if (isSuccess) {
-      refetchGetWhatsappData();
-    }
-  }, [isSuccess]);
 
   React.useEffect(() => {
     setEditData(true);

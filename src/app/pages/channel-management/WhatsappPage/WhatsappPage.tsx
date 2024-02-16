@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import WhatsappConfigurationModal from "./ConfigurationModal/ConfigurationModal";
-import CustomSnackBar from "./ConfigurationModal/CustomSnackBar";
 import WhatsappAppDetails from "./WhatsappAppDetails";
 import AuditLogs from "./AuditLogs";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 const serviceAxiosGetWhatsappData = async ({ channelName, accessKey }: any) => {
   const response = await axios.get(
@@ -28,9 +28,11 @@ const initialValue = {
 
 const WhatsappPage = ({ channelName, accessKey }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
-  const [showSnackBar, setShowSnackBar] = React.useState<boolean>(false);
-  const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
-  const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
   const [channelConfigurationData, setChannelConfigurationData] =
     React.useState<any>(initialValue);
   const [showPassword, setShowPassword] = React.useState(false);
@@ -377,16 +379,14 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
         initialModalData={channelConfigurationData}
         refetchGetWhatsappData={refetchGetWhatsappData}
         accessKey={accessKey}
-        setShowSnackBar={setShowSnackBar}
-        setSeveritySnackBar={setSeveritySnackBar}
-        setMessageSnackBar={setMessageSnackBar}
+        setSnackbar={setSnackbar}
       />
 
       <CustomSnackBar
-        openSnackBar={showSnackBar}
-        setShowSnackBar={setShowSnackBar}
-        severitySnackBar={severitySnackBar}
-        messageSnackBar={messageSnackBar}
+        showSnackbar={snackbar.showSnackbar}
+        setSnackbar={setSnackbar}
+        severitySnackBar={snackbar.severitySnackBar}
+        messageSnackBar={snackbar.messageSnackBar}
       />
     </div>
   );

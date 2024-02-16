@@ -15,6 +15,7 @@ import EditMediaModal from "./AddMediaModal/EditMediaModal";
 
 const CustomActionButton = ({
   detailMediaData,
+  setSnackbar,
 }: // accessKey,
 // channelName,
 // refetchWhatsAppContactListData,
@@ -91,6 +92,7 @@ any) => {
           handleEditModalClose={() => {
             setShowEditModal(false);
           }}
+          setSnackbar={setSnackbar}
         />
 
         <EditMediaModal
@@ -101,6 +103,8 @@ any) => {
           }}
           detailMediaData={detailMediaData}
           deleteModalOpen={() => setShowDeleteModal(true)}
+          setSnackbar={setSnackbar}
+
           // setData={setAddMediaModalData}
           // serverResponse={serverResponse}
           // setServerResponse={setServerResponse}

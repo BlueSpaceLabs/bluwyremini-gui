@@ -10,9 +10,11 @@ import { KTCard } from "../../../../../_metronic/helpers";
 import CustomSnackBar from "../../../../components/CustomSnackbar";
 
 const TelegramTempPage = ({ channelName, accessKey }: any) => {
-  const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);
-  const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
-  const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
   const [searchContact, setSearchContact] = useState<string>("");
   const [fromDate, setFromDate] = useState<string>("");
   const [toDate, setToDate] = useState<string>("");
@@ -86,9 +88,7 @@ const TelegramTempPage = ({ channelName, accessKey }: any) => {
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
-          setShowSnackbar={setShowSnackbar}
-          setSeveritySnackBar={setSeveritySnackBar}
-          setMessageSnackBar={setMessageSnackBar}
+          setSnackbar={setSnackbar}
         />
 
         <AddWhatsAppContactModal
@@ -98,15 +98,14 @@ const TelegramTempPage = ({ channelName, accessKey }: any) => {
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
-          setShowSnackbar={setShowSnackbar}
-          setSeveritySnackBar={setSeveritySnackBar}
-          setMessageSnackBar={setMessageSnackBar}
+          setSnackbar={setSnackbar}
         />
+
         <CustomSnackBar
-          showSnackbar={showSnackbar}
-          setShowSnackbar={setShowSnackbar}
-          severitySnackBar={severitySnackBar}
-          messageSnackBar={messageSnackBar}
+          showSnackbar={snackbar.showSnackbar}
+          setSnackbar={setSnackbar}
+          severitySnackBar={snackbar.severitySnackBar}
+          messageSnackBar={snackbar.messageSnackBar}
         />
       </KTCard>
     </>

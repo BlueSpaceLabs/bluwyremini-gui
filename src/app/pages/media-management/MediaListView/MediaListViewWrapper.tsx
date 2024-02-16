@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { KTCard } from "../../../../_metronic/helpers";
 
 import {
@@ -14,6 +14,7 @@ import CustomMediaTable from "./CustomTable";
 // import { getMediaListData } from "../../../services/MediaManagement";
 // import { useQuery } from "react-query";
 import axios from "axios";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
@@ -21,6 +22,12 @@ const accessKey =
 const MediaListView = () => {
   const { itemIdForUpdate } = useListView();
   const [mediaListViewData, setMediaListViewData] = React.useState([]);
+
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
 
   const [channelType, setChannelType] = React.useState("");
   const [mediaType, setMediaType] = React.useState("");
@@ -71,16 +78,26 @@ const MediaListView = () => {
         <UsersListHeader
           setChannelType={setChannelType}
           setMediaType={setMediaType}
+          setSnackbar={setSnackbar}
         />
         {/* <UsersTable /> */}
         <CustomMediaTable
           tableData={mediaListViewData}
+          setSnackbar={setSnackbar}
+
           // accessKey={accessKey}
           // channelName={channelName}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
           // setShowSnackbar={setShowSnackbar}
           // setSeveritySnackBar={setSeveritySnackBar}
           // setMessageSnackBar={setMessageSnackBar}
+        />
+
+        <CustomSnackBar
+          showSnackbar={snackbar.showSnackbar}
+          setSnackbar={setSnackbar}
+          severitySnackBar={snackbar.severitySnackBar}
+          messageSnackBar={snackbar.messageSnackBar}
         />
       </KTCard>
       {itemIdForUpdate !== undefined && <UserEditModal />}

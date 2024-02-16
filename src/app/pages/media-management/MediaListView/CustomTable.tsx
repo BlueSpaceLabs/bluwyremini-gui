@@ -100,6 +100,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
 
 export default function CustomMediaTable({
   tableData,
+  setSnackbar,
 }: // accessKey,
 // channelName,
 // refetchWhatsAppContactListData,
@@ -231,6 +232,8 @@ any) {
                     {/* <UserActionsCell id={1} /> */}
                     <CustomActionButton
                       detailMediaData={row}
+                      setSnackbar={setSnackbar}
+
                       // accessKey={accessKey}
                       // channelName={channelName}
                       // refetchWhatsAppContactListData={

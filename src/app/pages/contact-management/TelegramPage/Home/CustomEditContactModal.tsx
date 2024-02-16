@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import { postEditWhatsappContact } from "../../../../services/ContactManagement";
+import axios from "axios";
 
 // type Props = {
 //   show: boolean;
@@ -20,9 +21,7 @@ const EditWhatsAppContactModal = ({
   channelName,
   // refetchWhatsAppContactListData,
   setRefetchData,
-  setShowSnackbar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
+  setSnackbar,
 }: any) => {
   const [addWhatsappContactInput, setAddWhatsappContactInput] =
     React.useState<any>(initialModalData);
@@ -37,7 +36,7 @@ const EditWhatsAppContactModal = ({
     });
   };
 
-  const handleSubmitForm = () => {
+  const handleSubmitForm = async () => {
     if (
       addWhatsappContactInput?.bluwyreId.length < 2 ||
       addWhatsappContactInput?.mobileNo.length < 2 ||
@@ -48,43 +47,113 @@ const EditWhatsAppContactModal = ({
     ) {
       setFormError(true);
     } else {
-      mutateAsync(
-        {
-          channelName: channelName,
-          requestData: {
-            tenant: "bsl",
-            accessKey: accessKey,
-            contact_data: {
-              bluwyreId: addWhatsappContactInput?.bluwyreId,
-              mobileNo: addWhatsappContactInput?.mobileNo,
-              crmFullname: addWhatsappContactInput?.crmFullname,
-              nameToAddress: addWhatsappContactInput?.nameToAddress,
-              wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
-              wabaName: addWhatsappContactInput?.wabaName,
-            },
+      setFormError(false);
+
+      try {
+        const data = {
+          tenant: "bsl",
+          accessKey: accessKey,
+          contact_data: {
+            bluwyreId: addWhatsappContactInput?.bluwyreId,
+            mobileNo: addWhatsappContactInput?.mobileNo,
+            crmFullname: addWhatsappContactInput?.crmFullname,
+            nameToAddress: addWhatsappContactInput?.nameToAddress,
+            wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
+            wabaName: addWhatsappContactInput?.wabaName,
           },
-        },
-        {
-          onSuccess: () => {
-            setShowSnackbar(true);
-            setSeveritySnackBar("success");
-            setMessageSnackBar("Successfully updated Contact Details !");
-            // refetchWhatsAppContactListData();
-            setRefetchData((preValue: boolean) => !preValue);
+        };
+
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
           },
-          onError: () => {
-            setShowSnackbar(true);
-            setSeveritySnackBar("error");
-            setMessageSnackBar("Failed to update Contact Details !");
-          },
-          onSettled: () => {
-            setFormError(false);
-            handleClose();
-          },
-        }
-      );
+        };
+
+        const response = await axios.post(
+          `http://3.108.229.60:8082/bluwyremini-backend/info/modifyContactInfo.php?channelName=${channelName}`,
+          data,
+          config
+        );
+
+        console.log("response", response);
+
+        // refetchWhatsAppContactListData();
+        setRefetchData((preValue: boolean) => !preValue);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully updated Contact Details !",
+        });
+
+        // setRefetchList((preV: boolean) => !preV);
+      } catch (error) {
+        console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to add Contact Details !",
+        });
+      } finally {
+        setFormError(false);
+        handleClose();
+      }
     }
   };
+
+  // const handleSubmitForm = () => {
+  //   if (
+  //     addWhatsappContactInput?.bluwyreId.length < 2 ||
+  //     addWhatsappContactInput?.mobileNo.length < 2 ||
+  //     addWhatsappContactInput?.crmFullname.length < 2 ||
+  //     addWhatsappContactInput?.nameToAddress.length < 2 ||
+  //     addWhatsappContactInput?.wabaMobileNo.length < 2 ||
+  //     addWhatsappContactInput?.wabaName.length < 2
+  //   ) {
+  //     setFormError(true);
+  //   } else {
+  //     mutateAsync(
+  //       {
+  //         channelName: channelName,
+  //         requestData: {
+  //           tenant: "bsl",
+  //           accessKey: accessKey,
+  //           contact_data: {
+  //             bluwyreId: addWhatsappContactInput?.bluwyreId,
+  //             mobileNo: addWhatsappContactInput?.mobileNo,
+  //             crmFullname: addWhatsappContactInput?.crmFullname,
+  //             nameToAddress: addWhatsappContactInput?.nameToAddress,
+  //             wabaMobileNo: addWhatsappContactInput?.wabaMobileNo,
+  //             wabaName: addWhatsappContactInput?.wabaName,
+  //           },
+  //         },
+  //       },
+  //       {
+  //         onSuccess: () => {
+  //           setShowSnackbar(true);
+  //           setSeveritySnackBar("success");
+  //           setMessageSnackBar("Successfully updated Contact Details !");
+  //           // refetchWhatsAppContactListData();
+  //           setRefetchData((preValue: boolean) => !preValue);
+  //         },
+  //         onError: () => {
+  //           setShowSnackbar(true);
+  //           setSeveritySnackBar("error");
+  //           setMessageSnackBar("Failed to update Contact Details !");
+  //         },
+  //         onSettled: () => {
+  //           setFormError(false);
+  //           handleClose();
+  //         },
+  //       }
+  //     );
+  //   }
+  // };
 
   return createPortal(
     <Modal

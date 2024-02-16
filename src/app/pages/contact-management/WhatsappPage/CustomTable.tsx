@@ -104,9 +104,7 @@ export default function CustomContactTable({
   channelName,
   // refetchWhatsAppContactListData,
   setRefetchData,
-  setShowSnackbar,
-  setSeveritySnackBar,
-  setMessageSnackBar,
+  setSnackbar,
 }: any) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -229,9 +227,7 @@ export default function CustomContactTable({
                       //   refetchWhatsAppContactListData
                       // }
                       setRefetchData={setRefetchData}
-                      setShowSnackbar={setShowSnackbar}
-                      setSeveritySnackBar={setSeveritySnackBar}
-                      setMessageSnackBar={setMessageSnackBar}
+                      setSnackbar={setSnackbar}
                     />
                   </TableCell>
                 </TableRow>

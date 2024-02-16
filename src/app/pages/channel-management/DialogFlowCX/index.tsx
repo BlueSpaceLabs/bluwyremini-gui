@@ -10,9 +10,11 @@ import CustomSnackBar from "../../../components/CustomSnackbar";
 const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
   console.log(channelName, accessKey);
 
-  const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);
-  const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
-  const [messageSnackBar, setMessageSnackBar] = React.useState<string>("");
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
 
   const [dialogFlowCXListData, setDialogFlowCXListData] = useState(null);
   const [error, setError] = useState(null);
@@ -61,16 +63,14 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
         handleClose={() => setShowModal(false)}
         initialModalData={dialogFlowCXListData}
         setRefetch={setRefetch}
-        setShowSnackbar={setShowSnackbar}
-        setSeveritySnackBar={setSeveritySnackBar}
-        setMessageSnackBar={setMessageSnackBar}
+        setSnackbar={setSnackbar}
       />
 
       <CustomSnackBar
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        severitySnackBar={severitySnackBar}
-        messageSnackBar={messageSnackBar}
+        showSnackbar={snackbar.showSnackbar}
+        setSnackbar={setSnackbar}
+        severitySnackBar={snackbar.severitySnackBar}
+        messageSnackBar={snackbar.messageSnackBar}
       />
     </Box>
   );

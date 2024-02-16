@@ -17,7 +17,7 @@ export default function CustomSnackBar({
   messageSnackBar,
 }: any) {
   console.log(
-    "CustomSnackBar called internal",
+    "CustomSnackBar called",
     { showSnackbar },
     { setSnackbar },
     { severitySnackBar },

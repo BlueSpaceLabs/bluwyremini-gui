@@ -9,19 +9,23 @@ import { WithChildren } from "../../_metronic/helpers";
 import ContactManagement from "../pages/contact-management/ContactManagement";
 import TemplateManagement from "../pages/template-management/TemplateManagement";
 import MessagesPage from "../pages/messages/MessagesPage";
+//import CampaignManagement from "../pages/campaign-management/CampaignManagement";
 // import StaticDataManagement from "../pages/static-data/StaticDataManagement";
 // import Tickets from "../pages/tickets-management/TicketsManagement";
 import Profile from "../pages/settings/profile/Profile";
 import Sendmessage from "../pages/settings/send-message/Sendmessage";
+//import KeyWordsPage from "../pages/settings/keywords/KeyWordsPage";
+import KeyWordsPage from "../pages/settings/keywords";
 import Faqs from "../pages/settings/Faqs";
 import ChannelManagement from "../pages/channel-management/ChannelManagement";
 import MediaManagement from "../pages/media-management/MediaManagement";
-import StaticDataManagement from "../pages/static-data";
-import KeyWordsPage from "../pages/settings/keywords";
 import AgentsPage from "../pages/agents-management";
+import StaticDataManagement from "../pages/static-data";
+import SignInPage from "../pages/login-management/SignIn";
 import CampaignManagementPage from "../pages/campaign-management";
 import PushedCampaign from "../pages/campaign-management/PushedCampaign";
 import ActiveCampaign from "../pages/campaign-management/ActiveCampaign";
+
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -37,6 +41,8 @@ const PrivateRoutes = () => {
     <Routes>
       <Route element={<MasterLayout />}>
         {/* Redirect to Dashboard after success login/registartion */}
+
+        <Route path="sign-in" element={<SignInPage />} />
         <Route path="auth/*" element={<Navigate to="/dashboard" />} />
         {/* Pages */}
         <Route path="dashboard" element={<DashboardWrapper />} />
@@ -44,13 +50,14 @@ const PrivateRoutes = () => {
         <Route path="channels/" element={<ChannelManagement />} />
         <Route path="contact-management/*" element={<ContactManagement />} />
         <Route path="messages/*" element={<MessagesPage />} />
-        <Route
+		 <Route
           path="campaign-management"
           element={<CampaignManagementPage />}
         />
         <Route path="campaign-management/pushed" element={<PushedCampaign />} />
         <Route path="campaign-management/active" element={<ActiveCampaign />} />
-
+		
+       
         <Route path="staticdatamanagement" element={<StaticDataManagement />} />
         <Route path="template-management/*" element={<TemplateManagement />} />
         <Route path="media-management/*" element={<MediaManagement />} />
@@ -58,7 +65,7 @@ const PrivateRoutes = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="sendmessage" element={<Sendmessage />} />
         <Route path="keywords" element={<KeyWordsPage />} />
-        <Route path="agents" element={<AgentsPage />} />
+		<Route path="agents" element={<AgentsPage />} />
         <Route path="faqs" element={<Faqs />} />
         {/* <Route path="tickets" element={<Tickets />} /> */}
 

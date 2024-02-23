@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchKeyWordFilter from "./SearchFilter";
 import { KTIcon } from "../../../../../_metronic/helpers";
+import RoleChecker from "../../../../RoleChecker";
 
 const ListViewHeader = ({ setSearchKeyWord, showAddModal }: any) => {
   return (
@@ -25,14 +26,16 @@ const ListViewHeader = ({ setSearchKeyWord, showAddModal }: any) => {
         {/* end::Export */}
 
         {/* begin::Add user */}
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={showAddModal}
-        >
-          <KTIcon iconName="plus" className="fs-2" />
-          Add KeyWord
-        </button>
+        <RoleChecker defaultRole="ADMIN_ROLE">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={showAddModal}
+          >
+            <KTIcon iconName="plus" className="fs-2" />
+            Add KeyWord
+          </button>
+        </RoleChecker>
         {/* end::Add user */}
       </div>
     </div>

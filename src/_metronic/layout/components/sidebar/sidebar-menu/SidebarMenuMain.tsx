@@ -2,24 +2,29 @@ import { useIntl } from "react-intl";
 import { KTIcon } from "../../../../helpers";
 import { SidebarMenuItemWithSub } from "./SidebarMenuItemWithSub";
 import { SidebarMenuItem } from "./SidebarMenuItem";
+import RoleChecker from "../../../../../app/RoleChecker";
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
 
   return (
     <>
-      <SidebarMenuItem
-        to="/dashboard"
-        icon="element-11"
-        title={intl.formatMessage({ id: "MENU.DASHBOARD" })}
-        fontIcon="bi-app-indicator"
-      />
-      <SidebarMenuItem
-        to="/channels"
-        icon="whatsapp"
-        title="Channel Configurations"
-        fontIcon="bi-layers"
-      />
+      <RoleChecker defaultRole="ADMIN_ROLE">
+        <SidebarMenuItem
+          to="/dashboard"
+          icon="element-11"
+          title={intl.formatMessage({ id: "MENU.DASHBOARD" })}
+          fontIcon="bi-app-indicator"
+        />
+      </RoleChecker>
+      <RoleChecker defaultRole="ADMIN_ROLE">
+        <SidebarMenuItem
+          to="/channels"
+          icon="whatsapp"
+          title="Channel Configurations"
+          fontIcon="bi-layers"
+        />
+      </RoleChecker>
       <SidebarMenuItem
         to="/contact-management/"
         icon="phone"
@@ -82,12 +87,14 @@ const SidebarMenuMain = () => {
           hasBullet={true}
         />
       </SidebarMenuItemWithSub>
-      <SidebarMenuItem
-        to="/agents"
-        icon="messages"
-        title="Agents"
-        fontIcon="bi-layers"
-      />
+      <RoleChecker defaultRole="ADMIN_ROLE">
+        <SidebarMenuItem
+          to="/agents"
+          icon="messages"
+          title="Agents"
+          fontIcon="bi-layers"
+        />
+      </RoleChecker>
       <SidebarMenuItem
         to="/crafted/account/overview"
         icon="messages"

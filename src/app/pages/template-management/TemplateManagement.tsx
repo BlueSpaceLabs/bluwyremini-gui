@@ -39,8 +39,7 @@ const TemplateManagement: FC = () => {
               element={
                 <>
                   <PageTitle breadcrumbs={[]}> Templates </PageTitle>
-                  {/* <WhatsappPageWrapper /> */}
-                  <ComingSoon />
+                  <WhatsappPageWrapper />
                 </>
               }
             />

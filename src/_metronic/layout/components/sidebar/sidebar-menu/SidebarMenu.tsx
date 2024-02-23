@@ -38,8 +38,8 @@ const SidebarMenu = () => {
     // Fetch unread message count initially
     fetchData();
 
-    // Poll for unread message count every 5 seconds (adjust as needed)
-    const intervalUnreadMessageCountFetch = setInterval(fetchData, 1000 * 5);
+    // Poll for unread message count every 20 seconds (adjust as needed)
+    const intervalUnreadMessageCountFetch = setInterval(fetchData, 1000 * 20);
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalUnreadMessageCountFetch);

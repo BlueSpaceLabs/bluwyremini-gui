@@ -16,13 +16,14 @@ export default function CustomSnackBar({
   severitySnackBar,
   messageSnackBar,
 }: any) {
-  console.log(
-    "CustomSnackBar called",
-    { showSnackbar },
-    { setSnackbar },
-    { severitySnackBar },
-    { messageSnackBar }
-  );
+  // console.log(
+  //   "CustomSnackBar called",
+  //   { showSnackbar },
+  //   { setSnackbar },
+  //   { severitySnackBar },
+  //   { messageSnackBar }
+  // );
+
   //   const [snackbar, setSnackbar] = useState({
   //     showSnackbar: false,
   //     severitySnackBar: "",

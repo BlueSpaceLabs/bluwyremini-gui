@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import {  Dropdown1 } from "../../../../_metronic/partials";
 // import { KTIcon } from "../../../../_metronic/helpers";
 import { ChatConversation } from "./chat/ChatInner";
 import axios from "axios";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 // import { useQuery } from "react-query";
 
 // const serviceConversationDetails = async (selectedId: any) => {
@@ -26,6 +27,13 @@ const MessagesConversation = ({
   selectedKeyWord,
 }: any) => {
   const [conversationData, setConversationData] = React.useState([]);
+  const [agentListData, setAgentListData] = React.useState([]);
+  const [agentSelectedId, setAgentSelectedId] = React.useState("");
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
 
   const [sendMessageClick, setSendMessageClick] =
     React.useState<boolean>(false);
@@ -81,13 +89,79 @@ const MessagesConversation = ({
     return () => clearInterval(intervalMessageFetch);
   }, [selectedInbox?.custNumber, sendMessageClick]);
 
+  useEffect(() => {
+    const url =
+      "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+    const params = {
+      accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        // console.log(responseData.dataArray);
+        setAgentListData(responseData.dataArray);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [selectedInbox]);
+
+  useEffect(() => {
+    const handleAssignAgent = async () => {
+      const accessKey =
+        "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
+      try {
+        const url =
+          "http://3.108.229.60:8082/bluwyremini-backend/info/assignedChatToAgent.php";
+
+        const params = {
+          accessKey: accessKey,
+          id: selectedInbox.custNumber,
+          agentId: agentSelectedId,
+        };
+
+        const response = await axios.get(url, { params });
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Assign Agent",
+        });
+
+        // console.log("assignedChatToAgent", response.data);
+      } catch (error) {
+        console.error("Error fetching updateMsgStatusRead:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Assign Agent",
+        });
+      } finally {
+        // setIsLoading(false);
+      }
+    };
+
+    if (agentSelectedId) handleAssignAgent();
+  }, [agentSelectedId]);
+
   if (selectedInbox?.custNumber) {
     return (
       <React.Fragment>
         <div className="card" id="kt_chat_messenger">
-          <div className="card-header" id="kt_chat_messenger_header">
-            <div className="card-title">
-              <div className="symbol-group symbol-hover"></div>
+          <div className="card-header pt-3" id="kt_chat_messenger_header">
+            <div className="card-title w-100 d-flex justify-content-between align-items-center">
+              {/* <div className="symbol-group symbol-hover"></div> */}
               <div className="d-flex justify-content-center flex-column me-3">
                 <span
                   className="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1"
@@ -101,6 +175,28 @@ const MessagesConversation = ({
                   <span className="badge badge-success badge-circle w-10px h-10px me-1"></span>
                   <span className="fs-7 fw-bold text-gray-500">Active</span>
                 </div>
+              </div>
+
+              <div style={{ width: "200px" }}>
+                <select
+                  className="form-select form-select-solid form-select-lg"
+                  value={agentSelectedId}
+                  onChange={(event: any) => {
+                    setAgentSelectedId(event.target.value);
+                  }}
+                >
+                  <option value="" selected disabled>
+                    Assign Agents
+                  </option>
+                  {agentListData?.length > 0 &&
+                    agentListData.map((item: any) => {
+                      return (
+                        <option key={item.id} value={item.id}>
+                          {`${item.firstName} ${item.lastName}`}
+                        </option>
+                      );
+                    })}
+                </select>
               </div>
             </div>
 
@@ -142,6 +238,13 @@ const MessagesConversation = ({
             messageTab={messageTab}
           />
         </div>
+
+        <CustomSnackBar
+          showSnackbar={snackbar.showSnackbar}
+          setSnackbar={setSnackbar}
+          severitySnackBar={snackbar.severitySnackBar}
+          messageSnackBar={snackbar.messageSnackBar}
+        />
       </React.Fragment>
     );
   } else {

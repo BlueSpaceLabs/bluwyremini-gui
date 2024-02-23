@@ -3,7 +3,7 @@ import MessagesInbox from "./MessagesInbox";
 import MessagesConversation from "./MessagesConversation";
 import MessagesProfile from "./MessagesProfile";
 
-const MessagesChat = ({ messageTab }: any) => {
+const MessagesChat = ({ messageTab, selectedKeyWord, newMessageData }: any) => {
   const [showProfile, setShowProfile] = React.useState<boolean>(false);
   const [selectedInbox, setSelectedInbox] = React.useState(null);
 
@@ -22,6 +22,7 @@ const MessagesChat = ({ messageTab }: any) => {
         <MessagesInbox
           messageTab={messageTab}
           setSelectedUser={setSelectedInbox}
+          newMessageData={newMessageData}
         />
       </div>
 
@@ -30,6 +31,7 @@ const MessagesChat = ({ messageTab }: any) => {
           setShowProfile={setShowProfile}
           selectedInbox={selectedInbox}
           messageTab={messageTab}
+          selectedKeyWord={selectedKeyWord}
         />
       </div>
       {showProfile && (

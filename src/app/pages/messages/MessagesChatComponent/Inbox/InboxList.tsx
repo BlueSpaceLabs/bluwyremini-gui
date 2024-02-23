@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { useQuery } from "react-query";
 import axios from "axios";
 
@@ -16,8 +16,24 @@ import axios from "axios";
 //   return response.data;
 // };
 
-const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
+const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   const [inboxListData, setInboxListData] = React.useState([]);
+
+  // const [newMessage, setNewMessage] = useState("");
+
+  // console.log("newMessageData InboxList", newMessageData);
+
+  const newMessageCount = (input: any) => {
+    if (newMessageData?.hasOwnProperty(input)) {
+      return (
+        <span className="badge badge-sm badge-circle badge-light-success">
+          {newMessageData[input]}
+        </span>
+      );
+    } else {
+      return null;
+    }
+  };
 
   // const {
   //   data: inboxAPIData,
@@ -51,7 +67,7 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
         if (response?.data?.length > 0) setInboxListData(response?.data);
         else setInboxListData([]);
       } catch (error) {
-        console.log("error fetching", error);
+        console.error("error fetching", error);
         // setError(error);
       } finally {
         // setIsLoading(false);
@@ -106,6 +122,14 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
       (differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
     );
 
+    // if (minutes < 1) {
+    // setSnackbar({
+    //   showSnackbar: true,
+    //   severitySnackBar: "success",
+    //   messageSnackBar: "Incoming New Message !",
+    // });
+    // }
+
     if (days > 0) return `${days} days`;
     else if (hours > 0) return `${hours} hrs`;
     else return `${minutes} mins`;
@@ -123,7 +147,7 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
     >
       {inboxListData.length > 0 ? (
         inboxListData.map((item: any) => (
-          <div className="d-flex flex-stack py-4">
+          <div className="d-flex flex-stack py-4" key={item.custNumber}>
             <div className="d-flex align-items-center">
               <div className="symbol symbol-45px symbol-circle">
                 <span className="symbol-label bg-light-warning text-warning fs-6 fw-bolder">
@@ -148,9 +172,8 @@ const InboxList = ({ inboxChannel, setSelectedUser }: any) => {
               <span className="text-muted fs-7 mb-1">
                 {calculateTimeDifference(item?.lastInteractionDatetime)}
               </span>
-              <span className="badge badge-sm badge-circle badge-light-success">
-                6
-              </span>
+
+              {newMessageCount(item?.custNumber)}
             </div>
 
             <div className="separator separator-dashed d-none"></div>

@@ -1,5 +1,4 @@
-import React from "react";
-import { ChatInner, Dropdown1 } from "../../../../_metronic/partials";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 //const MessagesProfile = ({ setShowProfile }) => {
@@ -9,7 +8,18 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
     mobileNumber: "",
     emailId: "",
     createdDate: "",
+    address: "",
   });
+
+  const [profileDataEdit, setProfileDataEdit] = React.useState({
+    profileName: "",
+    mobileNumber: "",
+    emailId: "",
+    createdDate: "",
+    address: "",
+  });
+
+  const [editData, setEditData] = useState(false);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -29,12 +39,14 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
 
         const response = await axios.get(url, { params });
 
-        console.log(response.data);
+        // console.log("response getChatUserDetails", response.data);
+
         setProfileData({
           profileName: response?.data[0]?.custName,
           mobileNumber: selectedInbox?.custNumber,
           emailId: "",
           createdDate: "",
+          address: "",
         });
       } catch (error) {
         // setError(error);
@@ -45,6 +57,10 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
 
     if (selectedInbox?.custNumber && selectedInbox?.custName) fetchData();
   }, [selectedInbox?.custNumber]);
+
+  useEffect(() => {
+    if (editData) setProfileDataEdit(profileData);
+  }, [editData, profileData]);
 
   return (
     <React.Fragment>
@@ -93,30 +109,107 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
         </div>
         {/* <ChatInner /> */}
         <div className="d-flex flex-column p-4">
+          <div style={{ textAlign: "right" }}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setEditData(true)}
+            >
+              Edit
+            </button>
+          </div>
+
           <div className="py-2">
             <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
               Mobile Number
             </div>
-            <div className="fw-bold text-gray-500">
-              {profileData.mobileNumber}
-            </div>
+            {editData ? (
+              <div>
+                <input
+                  type="text"
+                  className="form-control form-control-solid"
+                  placeholder="Edit Mobile Number"
+                  value={profileDataEdit.mobileNumber}
+
+                  // onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className="fw-bold text-gray-500">
+                {profileData.mobileNumber}
+              </div>
+            )}
           </div>
 
           <div className="py-2">
             <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
               Email Id
             </div>
-            <div className="fw-bold text-gray-500">{profileData.emailId}</div>
+            {editData ? (
+              <div>
+                <input
+                  type="text"
+                  className="form-control form-control-solid"
+                  placeholder="Edit Email Id"
+                  value={profileDataEdit.emailId}
+                  // onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className="fw-bold text-gray-500">{profileData.emailId}</div>
+            )}
           </div>
 
           <div className="py-2">
             <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
-              Created Date
+              Address
             </div>
-            <div className="fw-bold text-gray-500">
-              {profileData.createdDate}
-            </div>
+            {editData ? (
+              <div>
+                <input
+                  type="text"
+                  className="form-control form-control-solid"
+                  placeholder="Edit Address"
+                  value={profileDataEdit.address}
+
+                  // onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+            ) : (
+              <div className="fw-bold text-gray-500">{profileData.address}</div>
+            )}
           </div>
+
+          {editData ? null : (
+            <div className="py-2">
+              <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
+                Created Date
+              </div>
+              <div className="fw-bold text-gray-500">
+                {profileData.createdDate}
+              </div>
+            </div>
+          )}
+
+          {editData && (
+            <div className="d-flex justify-content-between pt-3">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setEditData(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setEditData(false)}
+              >
+                Update
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </React.Fragment>

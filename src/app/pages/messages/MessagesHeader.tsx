@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { KTIcon } from "../../../_metronic/helpers";
 import TicketsModal from "./MessagesChatComponent/TicketsModal/TicketsModal";
+import axios from "axios";
+import CustomSnackBar from "../../components/CustomSnackbar";
 // import { Link, useLocation } from "react-router-dom";
 
 const initialValue = {
@@ -11,79 +13,227 @@ const initialValue = {
   config4Data: null,
 };
 
-const MessagesHeader = ({ messageTab, SetMessageTab }: any) => {
+const HeaderCard = ({
+  messageTab,
+  setMessageTab,
+  headerName,
+  headerValue,
+  newMessage,
+}: any) => {
+  return (
+    <div
+      className={`${
+        messageTab === headerValue ? "text-primary" : "text-gray-500"
+      } position-relative`}
+      style={{ cursor: "pointer", padding: "0.5rem" }}
+      onClick={() => setMessageTab(headerValue)}
+      // "all"
+    >
+      {headerName}
+      {newMessage > 0 && (
+        <span
+          style={{
+            display: "inline-block",
+            backgroundColor: "red",
+            color: "white",
+            minHeight: "1.5rem",
+            minWidth: "1.5rem",
+            textAlign: "center",
+            padding: "0.3rem",
+            borderRadius: "50%",
+            marginLeft: "0.5rem",
+            fontSize: "0.9rem",
+          }}
+        >
+          {newMessage}
+        </span>
+
+        // <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        //   99+
+        // </span>
+      )}
+    </div>
+  );
+};
+
+const MessagesHeader = ({
+  messageTab,
+  setMessageTab,
+  selectedKeyWord,
+  setSelectedKeyWord,
+  messageUnreadCount,
+  totalMessage,
+}: any) => {
   //   const location = useLocation();
   const [showTicketsModal, setShowTicketsModal] =
     React.useState<boolean>(false);
   const [createTicketsData, setCreateTicketsData] =
     React.useState<any>(initialValue);
+  const [keywordListData, setKeywordListData] = useState([]);
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
+  const [totalMessageCount, setTotalMessageCount] = React.useState(0);
+
+  // console.log("messageUnreadCount MessagesHeader", messageUnreadCount);
+  useEffect(() => {
+    const url =
+      "http://3.108.229.60:8082/bluwyremini-backend/info/getKeywordDetails.php";
+    const params = {
+      accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+
+        // console.log("response getKeywordDetails:", response.data);
+        setKeywordListData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (totalMessageCount < totalMessage) {
+      setTotalMessageCount(totalMessage);
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "success",
+        messageSnackBar: "Incoming New Message !",
+      });
+    } else {
+      setTotalMessageCount(totalMessage);
+    }
+  }, [totalMessage, totalMessageCount]);
 
   return (
     <div className="card mb-1 mb-xl-1">
-      <div className="card-body pt-2 pb-2 d-flex align-items-center">
-        <div className="w-75 py-3 d-flex gap-8 fw-bold fs-6 ">
-          <div
-            className={`${
-              messageTab === "all" ? "text-primary" : "text-gray-500"
-            } `}
-            style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("all")}
-          >
-            All Messages
-          </div>
-          <div
-            className={`${
-              messageTab === "whatsapp" ? "text-primary" : "text-gray-500"
-            } `}
-            style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("whatsapp")}
-          >
-            Whatsapp
-          </div>
-          
-          <div
-            className={`${
-              messageTab === "messenger" ? "text-primary" : "text-gray-500"
-            } `}
-            style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("messenger")}
-          >
-            Messenger
-          </div>
-          <div
-            className={`${
-              messageTab === "instagram" ? "text-primary" : "text-gray-500"
-            } `}
-            style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("instagram")}
-          >
-            Instagram
-          </div>
-          <div
-            className={`${
-              messageTab === "telegram" ? "text-primary" : "text-gray-500"
-            } `}
-            style={{ cursor: "pointer" }}
-            onClick={() => SetMessageTab("telegram")}
-          >
-            Telegram
+      <div
+        className="card-body pt-2 pb-2"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ width: "66%" }}>
+          <div className="py-3 d-flex gap-6 fw-bold fs-6 ">
+            <HeaderCard
+              messageTab={messageTab}
+              setMessageTab={setMessageTab}
+              headerName={"All Messages"}
+              headerValue={"all"}
+              newMessage={
+                messageUnreadCount?.totalCount
+                  ? Number(messageUnreadCount?.totalCount)
+                  : 0
+              }
+            />
+
+            <HeaderCard
+              messageTab={messageTab}
+              setMessageTab={setMessageTab}
+              headerName={"Whatsapp"}
+              headerValue={"whatsapp"}
+              newMessage={
+                messageUnreadCount?.wabaCount
+                  ? Number(messageUnreadCount?.wabaCount)
+                  : 0
+              }
+            />
+
+            <HeaderCard
+              messageTab={messageTab}
+              setMessageTab={setMessageTab}
+              headerName={"Messenger"}
+              headerValue={"messenger"}
+              newMessage={
+                messageUnreadCount?.fbmCount
+                  ? Number(messageUnreadCount?.fbmCount)
+                  : 0
+              }
+            />
+
+            <HeaderCard
+              messageTab={messageTab}
+              setMessageTab={setMessageTab}
+              headerName={"Instagram"}
+              headerValue={"instagram"}
+              newMessage={
+                messageUnreadCount?.instaCount
+                  ? Number(messageUnreadCount?.instaCount)
+                  : 0
+              }
+            />
+
+            <HeaderCard
+              messageTab={messageTab}
+              setMessageTab={setMessageTab}
+              headerName={"Telegram"}
+              headerValue={"telegram"}
+              newMessage={
+                messageUnreadCount?.telegarmCount
+                  ? Number(messageUnreadCount?.telegarmCount)
+                  : 0
+              }
+            />
           </div>
         </div>
-        <div className="w-25 d-flex justify-content-end">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => setShowTicketsModal(true)}
-          >
-            <KTIcon iconName="plus" className="fs-2" />
-            Create Ticket
-          </button>
+        <div
+          style={{ width: "33%" }}
+          className="d-flex align-items-center justify-content-end gap-3"
+        >
+          <div style={{ width: "200px" }}>
+            <select
+              className="form-select form-select-solid form-select-lg"
+              value={selectedKeyWord}
+              onChange={(event: any) => {
+                setSelectedKeyWord(event.target.value);
+              }}
+            >
+              <option value="" selected disabled>
+                Auto Responses
+              </option>
+              {keywordListData?.length > 0 &&
+                keywordListData.map((item: any) => {
+                  return (
+                    <option key={item.id} value={item.description}>
+                      {item.keyword}
+                    </option>
+                  );
+                })}
+            </select>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => setShowTicketsModal(true)}
+            >
+              <KTIcon iconName="plus" className="fs-2" />
+              Create Ticket
+            </button>
+          </div>
         </div>
       </div>
       <TicketsModal
         show={showTicketsModal}
         handleClose={() => setShowTicketsModal(false)}
         setData={setCreateTicketsData}
+      />
+
+      <CustomSnackBar
+        showSnackbar={snackbar.showSnackbar}
+        setSnackbar={setSnackbar}
+        severitySnackBar={snackbar.severitySnackBar}
+        messageSnackBar={snackbar.messageSnackBar}
       />
     </div>
   );

@@ -25,8 +25,10 @@ const ChatConversation = ({
   messageTab,
 }: any) => {
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
+  const [messageUpdateAPI, setMessageUpdateAPI] = useState<boolean>(false);
+
   const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
+  // const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
   const chatContainerRef = React.useRef<HTMLDivElement | null>(null);
 
   // const [userInfos] = useState<UserInfoModel[]>(defaultUserInfos);
@@ -67,7 +69,8 @@ const ChatConversation = ({
             phoneNoId:
               // whatsAppStoredData?.phoneNoId,
               "104801782499737",
-            fbSenderId: messageTab === "messenger" ?  selectedInbox?.fbSenderId : null,
+            fbSenderId:
+              messageTab === "messenger" ? selectedInbox?.fbSenderId : null,
           }
         );
 
@@ -123,7 +126,8 @@ const ChatConversation = ({
           phoneNoId:
             // whatsAppStoredData?.phoneNoId,
             "104801782499737",
-          fbSenderId: messageTab === "messenger" ?  selectedInbox?.fbSenderId : null,
+          fbSenderId:
+            messageTab === "messenger" ? selectedInbox?.fbSenderId : null,
         }
       );
 
@@ -141,7 +145,36 @@ const ChatConversation = ({
     }
   };
 
+  const handleMessageClick = async () => {
+    const accessKey =
+      "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
+    try {
+      const url =
+        "http://3.108.229.60:8082/bluwyremini-backend/info/updateMsgStatusRead.php";
+
+      const params = {
+        accessKey: accessKey,
+        custId: selectedInbox.custNumber,
+        // fbSenderId:
+        //   messageTab === "messenger" ? selectedInbox?.fbSenderId : null,
+      };
+
+      const response = await axios.get(url, { params });
+
+      // console.log("updateMsgStatusRead", response.data);
+    } catch (error) {
+      console.error("Error fetching updateMsgStatusRead:", error);
+    } finally {
+      // setIsLoading(false);
+    }
+  };
+
   const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    setMessageUpdateAPI(true);
+
+    if (e) handleMessageClick();
+
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
       handleSendMessageClick();
@@ -368,6 +401,7 @@ const ChatConversation = ({
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={onEnterPress}
+          onClick={handleMessageClick}
         ></textarea>
 
         <div className="d-flex flex-stack">

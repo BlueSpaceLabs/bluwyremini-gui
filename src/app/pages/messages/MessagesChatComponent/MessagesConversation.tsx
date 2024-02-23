@@ -23,8 +23,8 @@ const MessagesConversation = ({
   setShowProfile,
   selectedInbox,
   messageTab,
+  selectedKeyWord,
 }: any) => {
-  const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [conversationData, setConversationData] = React.useState([]);
 
   const [sendMessageClick, setSendMessageClick] =

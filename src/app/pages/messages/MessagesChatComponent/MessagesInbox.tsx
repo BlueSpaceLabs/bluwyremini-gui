@@ -22,7 +22,11 @@ import InboxList from "./Inbox/InboxList";
 //   return response.data;
 // };
 
-const MessagesInbox = ({ messageTab, setSelectedUser }: any) => {
+const MessagesInbox = ({
+  messageTab,
+  setSelectedUser,
+  newMessageData,
+}: any) => {
   //   const [messageTab, SetMessageTab] = React.useState("all_messages");
 
   return (
@@ -84,6 +88,7 @@ const MessagesInbox = ({ messageTab, setSelectedUser }: any) => {
           <InboxList
             inboxChannel={messageTab}
             setSelectedUser={setSelectedUser}
+            newMessageData={newMessageData}
           />
           {/* <div
             className="scroll-y me-n5 pe-5 h-200px h-lg-auto"

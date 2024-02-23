@@ -11,6 +11,7 @@ interface Authentication {
   inputUserPassword: string;
   setInputUserPassword: React.Dispatch<React.SetStateAction<string>>;
   isLoggedIn: boolean;
+  loginError: string;
   handleLoginClick: () => Promise<void>;
   handleLogoutClick: () => Promise<void>;
 }
@@ -22,6 +23,7 @@ const useAuthentication = (): Authentication => {
   const [customerAccessKey, setCustomerAccessKey] = useState<string>("");
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<string>("");
 
   const handleLoginClick = async (): Promise<void> => {
     console.log("handleLoginClick");
@@ -60,6 +62,7 @@ const useAuthentication = (): Authentication => {
           setInputUserName("");
           setInputUserPassword("");
           setIsLoggedIn(true);
+          setLoginError("");
           window.location.reload();
         } else {
           console.log("subhro test 506");
@@ -71,6 +74,12 @@ const useAuthentication = (): Authentication => {
         console.log("subhro test 507");
 
         setIsLoggedIn(false);
+
+        setLoginError(
+          error.response.data
+            ? error.response.data
+            : "Failed to Login, try again !"
+        );
 
         console.error("Error Login:", error.response.data);
       }
@@ -332,6 +341,7 @@ const useAuthentication = (): Authentication => {
     setInputUserPassword,
     handleLoginClick,
     isLoggedIn,
+    loginError,
     handleLogoutClick,
   };
 };

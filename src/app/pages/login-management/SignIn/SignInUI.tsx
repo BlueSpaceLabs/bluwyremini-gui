@@ -12,13 +12,14 @@ export function SignInPageUI() {
     inputUserPassword,
     setInputUserPassword,
     handleLoginClick,
+    loginError,
   } = useAuthentication();
 
   return (
     <div
       className="form w-100"
       //onSubmit={formik.handleSubmit}
-      noValidate
+      // noValidate
       id="kt_login_signin_form_testlogin"
     >
       {/* begin::Heading */}
@@ -30,12 +31,12 @@ export function SignInPageUI() {
       </div>
       {/* begin::Heading */}
 
-      <div className="mb-10 bg-light-info p-8 rounded">
+      {/* <div className="mb-10 bg-light-info p-8 rounded">
         <div className="text-info">
           Use account <strong>admin@demo.com</strong> and password{" "}
           <strong>demo</strong> to continue.
         </div>
-      </div>
+      </div> */}
 
       {/* begin::Form group */}
       <div className="fv-row mb-8">
@@ -83,9 +84,9 @@ export function SignInPageUI() {
         <div />
 
         {/* begin::Link */}
-        <Link to="/auth/forgot-password" className="link-primary">
+        {/* <Link to="/auth/forgot-password" className="link-primary">
           Forgot Password ?
-        </Link>
+        </Link> */}
         {/* end::Link */}
       </div>
       {/* end::Wrapper */}
@@ -112,12 +113,17 @@ export function SignInPageUI() {
       </div>
       {/* end::Action */}
 
-      <div className="text-gray-500 text-center fw-semibold fs-6">
+      <div className="fs-6 text-danger">
+        {loginError?.error} {" : "}
+        {loginError?.error_description}
+      </div>
+
+      {/* <div className="text-gray-500 text-center fw-semibold fs-6">
         Not a Member yet?{" "}
         <Link to="/auth/registration" className="link-primary">
           Sign up
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

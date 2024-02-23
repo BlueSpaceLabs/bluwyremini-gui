@@ -31,18 +31,18 @@ export function SignInPageUI() {
       </div>
       {/* begin::Heading */}
 
-      {/* <div className="mb-10 bg-light-info p-8 rounded">
+       <div className="mb-10 bg-light-info p-8 rounded">
         <div className="text-info">
-          Use account <strong>admin@demo.com</strong> and password{" "}
-          <strong>demo</strong> to continue.
+         Enter your <strong>account credentials</strong>
+          <strong></strong> to continue.
         </div>
-      </div> */}
+      </div> 
 
       {/* begin::Form group */}
       <div className="fv-row mb-8">
-        <label className="form-label fs-6 fw-bolder text-gray-900">Email</label>
+        <label className="form-label fs-6 fw-bolder text-gray-900">Username</label>
         <input
-          placeholder="Email"
+          placeholder=""
           className={clsx("form-control bg-transparent")}
           type="email"
           name="email"
@@ -84,9 +84,9 @@ export function SignInPageUI() {
         <div />
 
         {/* begin::Link */}
-        {/* <Link to="/auth/forgot-password" className="link-primary">
+         <Link to="/auth/forgot-password" className="link-primary">
           Forgot Password ?
-        </Link> */}
+        </Link> 
         {/* end::Link */}
       </div>
       {/* end::Wrapper */}

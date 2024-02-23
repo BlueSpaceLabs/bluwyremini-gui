@@ -13,6 +13,7 @@ const DetailCardUI = ({
     setCampaignData((prevData) => ({
       ...prevData,
       campaignChannel: channel.toLowerCase(),
+      userActiveCount: activeUser,
     }));
     showModal(true);
   };
@@ -45,6 +46,7 @@ const initialCampaignData = {
   campaignUploadFile: "",
   campaignChannel: "",
   selectedTime: "",
+  userActiveCount: "",
 };
 
 const accessKey =

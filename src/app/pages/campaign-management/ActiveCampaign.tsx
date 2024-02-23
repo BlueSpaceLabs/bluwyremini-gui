@@ -1,12 +1,9 @@
 import React from "react";
 import ActiveUserDetails from "./ActiveUser";
 import { PageTitle } from "../../../_metronic/layout/core";
-import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
-const ActiveCampaign = () => {
-  const navigate = useNavigate();
-
+const ActiveCampaign = ({ onBackClick }: any) => {
   return (
     <>
       <PageTitle breadcrumbs={[]}>Campaign Management</PageTitle>
@@ -14,7 +11,7 @@ const ActiveCampaign = () => {
       <Box display={"flex"} justifyContent={"flex-end"} pb={2}>
         <button
           className="btn btn-secondary align-self-end"
-          onClick={() => navigate("/campaign-management")}
+          onClick={onBackClick}
         >
           Back to Campaign Management
         </button>

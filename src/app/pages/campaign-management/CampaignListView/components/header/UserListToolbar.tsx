@@ -27,7 +27,10 @@ const initialValue = {
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
-const UsersListToolbar = () => {
+const UsersListToolbar = ({
+  showCreateAppModal,
+  setShowCreateAppModal,
+}: any) => {
   const [showCampaignMessage, setShowCampaignMessage] = React.useState("");
   const { setItemIdForUpdate } = useListView();
   const [campaignInputData, setCampaignInputData] =
@@ -35,13 +38,12 @@ const UsersListToolbar = () => {
   console.log("campaignInputData", campaignInputData);
 
   const { config } = useLayout();
-  const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false);
   const [steps, setSteps] = useState<number>(1);
 
   const [tenant, setTenant] = React.useState<string>("bsl");
-  const [accessKey, setAccessKey] = React.useState<string>(
-    "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm"
-  );
+  // const [accessKey, setAccessKey] = React.useState<string>(
+  //   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm"
+  // );
 
   //const { mutateAsync } = useMutation(postAddCampaign);
 
@@ -108,7 +110,7 @@ const UsersListToolbar = () => {
       data-kt-user-table-toolbar="base"
     >
       <DateRangeFilter setFromDate={setFromDate} setToDate={setToDate} />
-      
+
       <UsersListFilter />
 
       {/* begin::Export */}
@@ -130,7 +132,7 @@ const UsersListToolbar = () => {
         Add User
   </button>*/}
       {/* end::Add user */}
-      {config.app?.toolbar?.primaryButton && (
+      {/* {config.app?.toolbar?.primaryButton && (
         <a
           href="#"
           onClick={() => setShowCreateAppModal(true)}
@@ -138,7 +140,7 @@ const UsersListToolbar = () => {
         >
           Add Campaign
         </a>
-      )}
+      )} */}
       {/* <CreateAppModal
         show={showCreateAppModal}
         handleClose={() => setShowCreateAppModal(false)}

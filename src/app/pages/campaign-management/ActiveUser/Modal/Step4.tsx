@@ -87,12 +87,12 @@ const Step4 = ({
                   </div>
                   {/*end::Step 1*/}
                   {/*begin::Step 2*/}
-                  <div
+                  {/* <div
                     className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
                     <h3 className="stepper-title">Creative Uploads</h3>
-                  </div>
+                  </div> */}
                   {/*end::Step 2*/}
                   {/*begin::Step 3*/}
                   <div

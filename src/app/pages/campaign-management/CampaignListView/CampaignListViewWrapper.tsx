@@ -8,7 +8,7 @@ import {
 import { QueryRequestProvider } from "../CampaignListView/core/QueryRequestProvider";
 import { QueryResponseProvider } from "../CampaignListView/core/QueryResponseProvider";
 import { UsersListHeader } from "../CampaignListView/components/header/UsersListHeader";
-import { UsersTable } from "../CampaignListView/table/UsersTable";
+// import { UsersTable } from "../CampaignListView/table/UsersTable";
 import { UserEditModal } from "../CampaignListView/user-edit-modal/UserEditModal";
 import CustomCampaignTable from "./CustomTable";
 import { useQuery } from "react-query";
@@ -17,7 +17,10 @@ import { getCampaignDataAPI } from "../../../services/CampaignManagement";
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
-const CampaignListView = () => {
+const CampaignListView = ({
+  showCreateAppModal,
+  setShowCreateAppModal,
+}: any) => {
   const { itemIdForUpdate } = useListView();
 
   const [campaignListViewData, setCampaignListViewData] = React.useState([]);
@@ -36,7 +39,10 @@ const CampaignListView = () => {
   return (
     <>
       <KTCard>
-        <UsersListHeader />
+        <UsersListHeader
+          showCreateAppModal={showCreateAppModal}
+          setShowCreateAppModal={setShowCreateAppModal}
+        />
         {/* <UsersTable /> */}
 
         <CustomCampaignTable tableData={campaignListViewData} />
@@ -46,11 +52,17 @@ const CampaignListView = () => {
   );
 };
 
-const CampaignListViewWrapper = () => (
+const CampaignListViewWrapper = ({
+  showCreateAppModal,
+  setShowCreateAppModal,
+}: any) => (
   <QueryRequestProvider>
     <QueryResponseProvider>
       <ListViewProvider>
-        <CampaignListView />
+        <CampaignListView
+          showCreateAppModal={showCreateAppModal}
+          setShowCreateAppModal={setShowCreateAppModal}
+        />
       </ListViewProvider>
     </QueryResponseProvider>
   </QueryRequestProvider>

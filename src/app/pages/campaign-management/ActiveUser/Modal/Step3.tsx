@@ -56,12 +56,12 @@ const Step3 = ({
                   </div>
                   {/*end::Step 1*/}
                   {/*begin::Step 2*/}
-                  <div
+                  {/* <div
                     className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
                     <h3 className="stepper-title">Creative Uploads</h3>
-                  </div>
+                  </div> */}
                   {/*end::Step 2*/}
                   {/*begin::Step 3*/}
                   <div
@@ -1030,6 +1030,17 @@ const Step3 = ({
                         </select>
                         {/*end::Row*/}
                       </div>
+                      <div className="text-muted fw-semibold fs-4">
+                        <span className="link-primary">
+                          {campaignInputData.userActiveCount}
+                        </span>{" "}
+                        Active User on{" "}
+                        <span style={{ textTransform: "capitalize" }}>
+                          {campaignInputData.campaignChannel}
+                        </span>{" "}
+                        Channel
+                      </div>
+
                       {/*end::Input group*/}
                       {/*begin::Input group*/}
 
@@ -1246,7 +1257,7 @@ const Step3 = ({
                         className="btn btn-lg btn-light-primary me-3"
                         data-kt-stepper-action="previous"
                         data-kt-stepper-state="hide-on-last-step"
-                        onClick={() => setSteps(2)}
+                        onClick={() => setSteps(1)}
                       >
                         <i className="ki-outline ki-arrow-left fs-3 me-1" />{" "}
                         Back

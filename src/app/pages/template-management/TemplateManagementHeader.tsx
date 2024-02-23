@@ -21,7 +21,7 @@ const TemplateManagementHeader: FC = () => {
                 Whatsapp
               </Link>
             </li>
-{/*
+
             <li className="nav-item">
               <Link
                 className={
@@ -58,7 +58,6 @@ const TemplateManagementHeader: FC = () => {
                 Telegram
               </Link>
             </li>
-              */}
           </ul>
         </div>
       </div>

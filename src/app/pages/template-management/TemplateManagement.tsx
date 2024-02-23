@@ -6,65 +6,81 @@ import { FacebookPageWrapper } from "./FacebookPage/FacebookPage";
 import { TelegramPageWrapper } from "./TelegramPage/TelegramPage";
 import { InstagramPageWrapper } from "./InstagramPage/InstagramPage";
 import { TemplateManagementHeader } from "./TemplateManagementHeader";
+import { KTCard } from "../../../_metronic/helpers";
 
+const ComingSoon = () => {
+  return (
+    <KTCard>
+      <div
+        className="card p-3 d-flex justify-content-center align-items-center"
+        style={{ height: "250px" }}
+      >
+        <h3 className="fw-bolder fs-1 text-gray-900">Coming Soon !</h3>
+      </div>
+    </KTCard>
+  );
+};
 const TemplateManagement: FC = () => {
   return (
     <>
       {/*<PageTitle breadcrumbs={[]}>Templates</PageTitle>*/}
-      <div style={{marginTop:-30}}>
-      <Routes>
-        <Route
-          element={
-            <>
-              <TemplateManagementHeader />
-              <Outlet />
-            </>
-          }
-        >
+      <div style={{ marginTop: -30 }}>
+        <Routes>
           <Route
-            path="/whatsapp"
             element={
               <>
-                <PageTitle breadcrumbs={[]}> Templates </PageTitle>
-                <WhatsappPageWrapper />
+                <TemplateManagementHeader />
+                <Outlet />
               </>
             }
-          />
-{/*}
-          <Route
-            path="/facebook"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Templates </PageTitle>
-                <FacebookPageWrapper />
-              </>
-            }
-          />
-          <Route
-            path="/instagram"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Templates</PageTitle>
-                <InstagramPageWrapper />
-              </>
-            }
-          />
-          <Route
-            path="/telegram"
-            element={
-              <>
-                <PageTitle breadcrumbs={[]}>Templates </PageTitle>
-                <TelegramPageWrapper />
-              </>
-            }
-          />*/}
-          <Route
-            index
-            element={<Navigate to="/template-management/whatsapp" />}
-          />
-        </Route>
-      </Routes>
-     </div>
+          >
+            <Route
+              path="/whatsapp"
+              element={
+                <>
+                  <PageTitle breadcrumbs={[]}> Templates </PageTitle>
+                  {/* <WhatsappPageWrapper /> */}
+                  <ComingSoon />
+                </>
+              }
+            />
+            <Route
+              path="/facebook"
+              element={
+                <>
+                  <PageTitle breadcrumbs={[]}>Templates </PageTitle>
+                  {/* <FacebookPageWrapper /> */}
+                  <ComingSoon />
+                </>
+              }
+            />
+            <Route
+              path="/instagram"
+              element={
+                <>
+                  <PageTitle breadcrumbs={[]}>Templates</PageTitle>
+                  {/* <InstagramPageWrapper /> */}
+                  <ComingSoon />
+                </>
+              }
+            />
+            <Route
+              path="/telegram"
+              element={
+                <>
+                  <PageTitle breadcrumbs={[]}>Templates </PageTitle>
+                  {/* <TelegramPageWrapper /> */}
+                  <ComingSoon />
+                </>
+              }
+            />
+            <Route
+              index
+              element={<Navigate to="/template-management/whatsapp" />}
+            />
+          </Route>
+        </Routes>
+      </div>
     </>
   );
 };

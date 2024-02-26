@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { KTIcon, toAbsoluteUrl } from "../../../_metronic/helpers";
 import { Link } from "react-router-dom";
 import { Dropdown1 } from "../../../_metronic/partials";
@@ -6,60 +6,92 @@ import { useLocation } from "react-router";
 import { useQuery } from "react-query";
 import axios from "axios";
 
-const serviceGetAgentProfileDetails = async () => {
-  const url =
-    "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
-  const accessKey =
-    "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-  const agentName = "rohitborkar";
+// const serviceGetAgentProfileDetails = async () => {
+//   const url =
+//     "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+//   const accessKey =
+//     "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+//   const agentName = "rohitborkar";
 
-  try {
-    const response = await axios.get(url, {
-      params: {
-        accessKey,
-        agentName,
-      },
-    });
+//   try {
+//     const response = await axios.get(url, {
+//       params: {
+//         accessKey,
+//         agentName,
+//       },
+//     });
 
-    return response.data;
-  } catch (error) {
-    throw new Error("Error fetching agent profile details");
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     throw new Error("Error fetching agent profile details");
+//   }
+// };
 
 const initialProfileData = {
   agentAddress: "",
+  agentType: "",
   company: "",
   companyWebsite: "",
   country: "",
   createdDatetime: "",
   emailId: "",
   firstName: "",
+  id: "",
   language: "",
   lastName: "",
   mobileNo: "",
   modifiedDatetime: "",
   role: "",
   timezone: "",
+  username: "",
 };
 
 const AccountHeader: FC = () => {
   const location = useLocation();
   const [profileData, setProfileData] = React.useState(initialProfileData);
+  const storedUserName = sessionStorage.getItem("userName");
 
-  const {
-    data: getProfileData,
-    // error,
-    // isLoading,
-  } = useQuery("agentProfileDetails", serviceGetAgentProfileDetails);
+  // const {
+  //   data: getProfileData,
+  //   // error,
+  //   // isLoading,
+  // } = useQuery("agentProfileDetails", serviceGetAgentProfileDetails);
 
-  // console.log({ profileData });
+  // // console.log({ profileData });
 
-  React.useEffect(() => {
-    if (getProfileData) {
-      setProfileData(getProfileData.dataArray);
-    }
-  }, [getProfileData]);
+  // React.useEffect(() => {
+  //   if (getProfileData) {
+  //     setProfileData(getProfileData.dataArray);
+  //   }
+  // }, [getProfileData]);
+
+  useEffect(() => {
+    const fetchAgentProfile = async () => {
+      try {
+        const url =
+          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const accessKey =
+          "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
+        const response = await axios.get(url, {
+          params: {
+            accessKey,
+            agentName: storedUserName,
+          },
+        });
+
+        const responseData = response.data;
+        const responseProfileData = responseData?.dataArray[0];
+        // console.log("response getAgentProfileDetails", responseProfileData);
+
+        if (responseProfileData) setProfileData(responseProfileData);
+      } catch (error) {
+        console.error("Error fetching agent profile details:", error);
+      }
+    };
+
+    if (storedUserName) fetchAgentProfile();
+  }, [storedUserName]);
 
   return (
     <div className="card mb-5 mb-xl-10">

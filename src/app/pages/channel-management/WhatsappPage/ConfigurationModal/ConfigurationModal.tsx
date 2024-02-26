@@ -44,6 +44,7 @@ const WhatsappConfigurationModal = ({
   const { mutate, isLoading, isError, error, isSuccess } = useMutation(
     serviceAxiosPostWhatsappData
   );
+  const storedUserName = sessionStorage.getItem("userName");
 
   const [whatsappModalInput, setWhatsappModalInput] =
     React.useState<any>(initialModalData);
@@ -87,6 +88,7 @@ const WhatsappConfigurationModal = ({
             accessToken: whatsappModalInput?.accessToken,
             webhookUrl: whatsappModalInput?.waWebhookUrl,
             webhookToken: whatsappModalInput?.waWebhookToken,
+            updatedBy: storedUserName,
           },
         };
 

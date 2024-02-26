@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const base_url = "http://127.0.0.1:8080";
 const realm = "demo-realm";
@@ -17,7 +18,6 @@ interface Authentication {
 }
 
 const useAuthentication = (): Authentication => {
-  console.log("subhro 0013 useAuthentication");
   const [inputUserName, setInputUserName] = useState<string>("");
   const [inputUserPassword, setInputUserPassword] = useState<string>("");
   const [customerAccessKey, setCustomerAccessKey] = useState<string>("");
@@ -26,10 +26,7 @@ const useAuthentication = (): Authentication => {
   const [loginError, setLoginError] = useState<string>("");
 
   const handleLoginClick = async (): Promise<void> => {
-    console.log("handleLoginClick");
-
     if (inputUserName && inputUserPassword) {
-      console.log("subhro test 501");
       const url = `${base_url}/realms/${realm}/protocol/openid-connect/token`;
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -41,23 +38,18 @@ const useAuthentication = (): Authentication => {
       loginData.append("password", inputUserPassword);
       loginData.append("grant_type", "password");
 
-      console.log("subhro test 502");
-
       try {
-        console.log("subhro test 503");
-
         const response = await axios.post(url, loginData, { headers });
 
         const responseData = response.data;
-        console.log("handleLoginClick :", response.data);
-
-        console.log("subhro test 504");
+        // console.log("handleLoginClick :", response.data);
 
         if (responseData) {
-          console.log("subhro test 505");
-
           sessionStorage.setItem("accessToken", responseData.access_token);
           sessionStorage.setItem("refreshToken", responseData.refresh_token);
+
+          const decodedToken = jwtDecode(responseData.access_token);
+          sessionStorage.setItem("userName", decodedToken?.preferred_username);
 
           setInputUserName("");
           setInputUserPassword("");
@@ -65,14 +57,10 @@ const useAuthentication = (): Authentication => {
           setLoginError("");
           window.location.reload();
         } else {
-          console.log("subhro test 506");
-
           sessionStorage.clear();
           setIsLoggedIn(false);
         }
       } catch (error: any) {
-        console.log("subhro test 507");
-
         setIsLoggedIn(false);
 
         setLoginError(
@@ -103,7 +91,7 @@ const useAuthentication = (): Authentication => {
 
     try {
       const response = await axios.post(url, data, { headers });
-      console.log("handleLogoutClick :", response.data);
+      // console.log("handleLogoutClick :", response.data);
 
       sessionStorage.clear();
       setIsLoggedIn(false);
@@ -133,11 +121,17 @@ const useAuthentication = (): Authentication => {
             },
           });
           const responseData = response.data;
-          console.log("getRefreshedAccessToken", responseData);
+          // console.log("getRefreshedAccessToken", responseData);
 
           if (responseData) {
             sessionStorage.setItem("accessToken", responseData.access_token);
             sessionStorage.setItem("refreshToken", responseData.refresh_token);
+
+            const decodedToken = jwtDecode(responseData.access_token);
+            sessionStorage.setItem(
+              "userName",
+              decodedToken?.preferred_username
+            );
 
             setIsLoggedIn(true);
           } else {
@@ -162,8 +156,6 @@ const useAuthentication = (): Authentication => {
     // Clean-up function
     return () => clearInterval(interval);
   }, []);
-
-  console.log("isLoggedIn", isLoggedIn);
 
   // Get Tenant & Access Key
   useEffect(() => {

@@ -30,6 +30,7 @@ const InstagramConfigModal = ({
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
   const [editData, setEditData] = React.useState<boolean>(true);
+  const storedUserName = sessionStorage.getItem("userName");
 
   useEffect(() => {
     setModalInput({
@@ -85,6 +86,7 @@ const InstagramConfigModal = ({
               instaId: modalInput.instagramId,
               instaWebhookUrl: modalInput.instaWebhookUrl,
               instaWebhookToken: modalInput.instaWebhookToken,
+              updatedBy: storedUserName,
             },
           },
           {

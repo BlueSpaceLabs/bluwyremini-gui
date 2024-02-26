@@ -28,6 +28,7 @@ const TelegramConfigModal = ({
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
   const [editData, setEditData] = React.useState<boolean>(true);
+  const storedUserName = sessionStorage.getItem("userName");
 
   useEffect(() => {
     setModalInput({
@@ -76,6 +77,7 @@ const TelegramConfigModal = ({
               telegramToken: modalInput.telegramToken,
               telegramWebhookUrl: modalInput.telegramWebhookUrl,
               telegramWebookToken: modalInput.telegramWebookToken,
+              updatedBy: storedUserName,
             },
           },
           {

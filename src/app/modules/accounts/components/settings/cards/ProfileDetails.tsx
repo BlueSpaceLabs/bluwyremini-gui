@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import { toAbsoluteUrl } from "../../../../../../_metronic/helpers";
 import {
   IProfileDetails,
@@ -10,169 +10,202 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+// const accessKey =
+//   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
-const serviceGetAgentProfileDetails = async () => {
-  const url =
-    "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+// const serviceGetAgentProfileDetails = async () => {
+//   const url =
+//     "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
 
-  const agentName = "rohitborkar";
+//   const agentName = "rohitborkar";
 
-  try {
-    const response = await axios.get(url, {
-      params: {
-        accessKey,
-        agentName,
-      },
-    });
+//   try {
+//     const response = await axios.get(url, {
+//       params: {
+//         accessKey,
+//         agentName,
+//       },
+//     });
 
-    return response.data;
-  } catch (error) {
-    throw new Error("Error fetching agent profile details");
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     throw new Error("Error fetching agent profile details");
+//   }
+// };
 
-const servicePostEditAgentProfile = async (reqData: any) => {
-  const url =
-    "http://3.108.229.60:8082/bluwyremini-backend/info/modifyAgentProfileDetails.php?id=2";
+// const servicePostEditAgentProfile = async (reqData: any) => {
+//   const url =
+//     "http://3.108.229.60:8082/bluwyremini-backend/info/modifyAgentProfileDetails.php?id=2";
 
-  try {
-    const response = await axios.post(url, reqData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+//   try {
+//     const response = await axios.post(url, reqData, {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
 
-    return response.data;
-  } catch (error) {
-    throw new Error("Error modifying agent profile details");
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     throw new Error("Error modifying agent profile details");
+//   }
+// };
 
 const initialProfileData = {
   agentAddress: "",
+  agentType: "",
   company: "",
   companyWebsite: "",
   country: "",
   createdDatetime: "",
   emailId: "",
   firstName: "",
+  id: "",
   language: "",
   lastName: "",
   mobileNo: "",
   modifiedDatetime: "",
   role: "",
   timezone: "",
+  username: "",
 };
 
-const profileDetailsSchema = Yup.object().shape({
-  fName: Yup.string().required("First name is required"),
-  lName: Yup.string().required("Last name is required"),
-  company: Yup.string().required("Company name is required"),
-  contactPhone: Yup.string().required("Contact phone is required"),
-  companySite: Yup.string().required("Company site is required"),
-  country: Yup.string().required("Country is required"),
-  language: Yup.string().required("Language is required"),
-  timeZone: Yup.string().required("Time zone is required"),
-  currency: Yup.string().required("Currency is required"),
-});
+// const profileDetailsSchema = Yup.object().shape({
+//   fName: Yup.string().required("First name is required"),
+//   lName: Yup.string().required("Last name is required"),
+//   company: Yup.string().required("Company name is required"),
+//   contactPhone: Yup.string().required("Contact phone is required"),
+//   companySite: Yup.string().required("Company site is required"),
+//   country: Yup.string().required("Country is required"),
+//   language: Yup.string().required("Language is required"),
+//   timeZone: Yup.string().required("Time zone is required"),
+//   currency: Yup.string().required("Currency is required"),
+// });
 
 const ProfileDetails: FC = () => {
   const navigate = useNavigate();
+  const storedUserName = sessionStorage.getItem("userName");
 
   const [profileData, setProfileData] = React.useState(initialProfileData);
-  const [showMessage, setShowMessage] = React.useState({
-    type: "",
-    message: "",
-  });
 
-  const {
-    data: getProfileData,
-    // error,
-    // isLoading,
-  } = useQuery("agentProfileDetails", serviceGetAgentProfileDetails);
+  // const [showMessage, setShowMessage] = React.useState({
+  //   type: "",
+  //   message: "",
+  // });
 
-  const queryClient = useQueryClient();
+  useEffect(() => {
+    const fetchAgentProfile = async () => {
+      try {
+        const url =
+          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const accessKey =
+          "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
-  const mutation = useMutation(servicePostEditAgentProfile, {
-    onSuccess: (data) => {
-      // console.log("Profile Update successful:", data);
-      // Invalidate and refetch the relevant queries after a successful mutation
-      queryClient.invalidateQueries("agentProfileDetails");
-      setShowMessage({
-        type: "success",
-        message: data?.message,
-      });
-    },
-    onError: (error: any) => {
-      console.error("Profile Update error:", error.message);
-      setShowMessage({
-        type: "error",
-        message: error?.message,
-      });
-    },
-    onSettled: (data, error) => {
-      // console.log("Profile Update completed:", data, error);
-      setTimeout(() => {
-        navigate("/crafted/account/overview");
-      }, 1000);
-    },
-  });
+        const response = await axios.get(url, {
+          params: {
+            accessKey,
+            agentName: storedUserName,
+          },
+        });
+
+        const responseData = response.data;
+        const responseProfileData = responseData?.dataArray[0];
+        // console.log("response getAgentProfileDetails", responseProfileData);
+
+        if (responseProfileData) setProfileData(responseProfileData);
+      } catch (error) {
+        console.error("Error fetching agent profile details:", error);
+      }
+    };
+
+    if (storedUserName) fetchAgentProfile();
+  }, [storedUserName]);
+
+  // const {
+  //   data: getProfileData,
+  //   // error,
+  //   // isLoading,
+  // } = useQuery("agentProfileDetails", serviceGetAgentProfileDetails);
+
+  // const queryClient = useQueryClient();
+
+  // const mutation = useMutation(servicePostEditAgentProfile, {
+  //   onSuccess: (data) => {
+  //     // console.log("Profile Update successful:", data);
+  //     // Invalidate and refetch the relevant queries after a successful mutation
+  //     queryClient.invalidateQueries("agentProfileDetails");
+  //     setShowMessage({
+  //       type: "success",
+  //       message: data?.message,
+  //     });
+  //   },
+  //   onError: (error: any) => {
+  //     console.error("Profile Update error:", error.message);
+  //     setShowMessage({
+  //       type: "error",
+  //       message: error?.message,
+  //     });
+  //   },
+  //   onSettled: (data, error) => {
+  //     // console.log("Profile Update completed:", data, error);
+  //     setTimeout(() => {
+  //       navigate("/crafted/account/overview");
+  //     }, 1000);
+  //   },
+  // });
 
   // console.log({ profileData });
 
-  const handleUpdateClick = () => {
-    const requestData = {
-      tenant: "bsl",
-      accessKey: accessKey,
-      agent_data: {
-        mobileNo: profileData.mobileNo,
-        firstName: profileData.firstName,
-        lastName: profileData.lastName,
-        emailAddress: profileData.emailId,
-        designation: profileData.role,
-        address: profileData.agentAddress,
-        company: profileData.company,
-        comapanyWebsite: profileData.companyWebsite,
-        country: profileData.country,
-        language: profileData.language,
-        timeZone: profileData.timezone,
-      },
-    };
-    // console.log("requestData", requestData);
+  // const handleUpdateClick = () => {
+  //   const requestData = {
+  //     tenant: "bsl",
+  //     accessKey: accessKey,
+  //     agent_data: {
+  //       mobileNo: profileData.mobileNo,
+  //       firstName: profileData.firstName,
+  //       lastName: profileData.lastName,
+  //       emailAddress: profileData.emailId,
+  //       designation: profileData.role,
+  //       address: profileData.agentAddress,
+  //       company: profileData.company,
+  //       comapanyWebsite: profileData.companyWebsite,
+  //       country: profileData.country,
+  //       language: profileData.language,
+  //       timeZone: profileData.timezone,
+  //     },
+  //   };
+  //   // console.log("requestData", requestData);
 
-    mutation.mutate(requestData);
-  };
+  //   mutation.mutate(requestData);
+  // };
 
-  React.useEffect(() => {
-    if (getProfileData) {
-      setProfileData(getProfileData.dataArray);
-    }
-  }, [getProfileData]);
+  // React.useEffect(() => {
+  //   if (getProfileData) {
+  //     setProfileData(getProfileData.dataArray);
+  //   }
+  // }, [getProfileData]);
 
   const [data, setData] = useState<IProfileDetails>(initialValues);
-  const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
-    const updatedData = Object.assign(data, fieldsToUpdate);
-    setData(updatedData);
-  };
+  // const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
+  //   const updatedData = Object.assign(data, fieldsToUpdate);
+  //   setData(updatedData);
+  // };
 
-  const [loading, setLoading] = useState(false);
-  const formik = useFormik<IProfileDetails>({
-    initialValues,
-    validationSchema: profileDetailsSchema,
-    onSubmit: (values) => {
-      setLoading(true);
-      setTimeout(() => {
-        values.communications.email = data.communications.email;
-        values.communications.phone = data.communications.phone;
-        values.allowMarketing = data.allowMarketing;
-        const updatedData = Object.assign(data, values);
-        setData(updatedData);
-        setLoading(false);
-      }, 1000);
-    },
-  });
+  // const [loading, setLoading] = useState(false);
+  // const formik = useFormik<IProfileDetails>({
+  //   initialValues,
+  //   validationSchema: profileDetailsSchema,
+  //   onSubmit: (values) => {
+  //     setLoading(true);
+  //     setTimeout(() => {
+  //       values.communications.email = data.communications.email;
+  //       values.communications.phone = data.communications.phone;
+  //       values.allowMarketing = data.allowMarketing;
+  //       const updatedData = Object.assign(data, values);
+  //       setData(updatedData);
+  //       setLoading(false);
+  //     }, 1000);
+  //   },
+  // });
 
   return (
     <div className="card mb-5 mb-xl-10">
@@ -190,7 +223,10 @@ const ProfileDetails: FC = () => {
       </div>
 
       <div id="kt_account_profile_details" className="collapse show">
-        <form onSubmit={formik.handleSubmit} noValidate className="form">
+        <form
+          //  onSubmit={formik.handleSubmit} noValidate
+          className="form"
+        >
           <div className="card-body border-top p-9">
             <div className="row mb-6">
               <label className="col-lg-4 col-form-label fw-bold fs-6">
@@ -1164,20 +1200,20 @@ const ProfileDetails: FC = () => {
             </div> */}
           </div>
 
-          <div
+          {/* <div
             className="d-flex justify-content-center py-3"
             style={{
               color: `${showMessage.type === "success" ? "green" : "red"}`,
             }}
           >
             {showMessage.message}
-          </div>
+          </div> */}
 
           <div className="card-footer d-flex justify-content-end py-6 px-9">
             <button
               type="submit"
               className="btn btn-primary"
-              onClick={handleUpdateClick}
+              // onClick={handleUpdateClick}
               // disabled={loading}
             >
               Update Details

@@ -357,7 +357,6 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
             <br />
             <h3>Audit Logs</h3>
             <br />
-            <br />
             {channelConfigurationData.appId && <AuditLogs />}
           </div>
 

@@ -65,11 +65,6 @@ const AuditLogs = () => {
       <div className="row mb-7">
         <label className="col-lg-4 fw-bold text-muted">
           Date and Timestamp
-          {/* <i
-              className="fas fa-exclamation-circle ms-1 fs-7"
-              data-bs-toggle="tooltip"
-              title="Access Token Tooltip"
-            ></i> */}
         </label>
 
         <div className="col-lg-8 d-flex align-items-center">
@@ -82,13 +77,34 @@ const AuditLogs = () => {
       </div>
 
       <div className="row mb-7">
+        <label className="col-lg-4 fw-bold text-muted">Modified On</label>
+
+        <div className="col-lg-8 d-flex align-items-center">
+          <span className="fw-bolder fs-6 me-2">
+            {/* {detailData.modifiedOn
+              ? detailData.modifiedOn
+              : "No Data to show."} */}
+            No Data to show.
+          </span>
+        </div>
+      </div>
+
+      <div className="row mb-7">
+        <label className="col-lg-4 fw-bold text-muted">Modified By</label>
+
+        <div className="col-lg-8 d-flex align-items-center">
+          <span className="fw-bolder fs-6 me-2">
+            {/* {detailData.modifiedBy
+              ? detailData.modifiedBy
+              : "No Data to show."} */}
+            No Data to show.
+          </span>
+        </div>
+      </div>
+
+      {/* <div className="row mb-7">
         <label className="col-lg-4 fw-bold text-muted">
           Field Updated
-          {/* <i
-              className="fas fa-exclamation-circle ms-1 fs-7"
-              data-bs-toggle="tooltip"
-              title="App Id Tooltip"
-            ></i> */}
         </label>
 
         <div className="col-lg-8 d-flex align-items-center">
@@ -96,16 +112,11 @@ const AuditLogs = () => {
             {detailData.throughput ? detailData.throughput : "No Data to show."}
           </span>
         </div>
-      </div>
+      </div> */}
 
-      <div className="row mb-7">
+      {/* <div className="row mb-7">
         <label className="col-lg-4 fw-bold text-muted">
           Status
-          {/* <i
-              className="fas fa-exclamation-circle ms-1 fs-7"
-              data-bs-toggle="tooltip"
-              title="App Id Tooltip"
-            ></i> */}
         </label>
 
         <div className="col-lg-8 d-flex align-items-center">
@@ -113,16 +124,11 @@ const AuditLogs = () => {
             {detailData.throughput ? detailData.throughput : "No Data to show."}
           </span>
         </div>
-      </div>
+      </div> */}
 
-      <div className="row mb-7">
+      {/* <div className="row mb-7">
         <label className="col-lg-4 fw-bold text-muted">
           Old Value
-          {/* <i
-              className="fas fa-exclamation-circle ms-1 fs-7"
-              data-bs-toggle="tooltip"
-              title="App Id Tooltip"
-            ></i> */}
         </label>
 
         <div className="col-lg-8 d-flex align-items-center">
@@ -130,16 +136,11 @@ const AuditLogs = () => {
             {detailData.throughput ? detailData.throughput : "No Data to show."}
           </span>
         </div>
-      </div>
+      </div> */}
 
-      <div className="row mb-7">
+      {/* <div className="row mb-7">
         <label className="col-lg-4 fw-bold text-muted">
           Updated Value
-          {/* <i
-              className="fas fa-exclamation-circle ms-1 fs-7"
-              data-bs-toggle="tooltip"
-              title="App Id Tooltip"
-            ></i> */}
         </label>
 
         <div className="col-lg-8 d-flex align-items-center">
@@ -147,7 +148,7 @@ const AuditLogs = () => {
             {detailData.throughput ? detailData.throughput : "No Data to show."}
           </span>
         </div>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };

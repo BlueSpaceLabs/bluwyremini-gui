@@ -70,6 +70,8 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
         if (response?.data?.length > 0) setInboxListData(response?.data);
         else setInboxListData([]);
       } catch (error) {
+        setInboxListData([]);
+
         console.error("error fetching", error);
         // setError(error);
       } finally {

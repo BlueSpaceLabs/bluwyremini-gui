@@ -79,8 +79,10 @@ const SidebarMenu = () => {
         const responseProfileData = responseData?.dataArray[0];
         // console.log("response getAgentProfileDetails", responseProfileData);
 
-        if (responseProfileData)
+        if (responseProfileData) {
           sessionStorage.setItem("userId", responseProfileData?.id);
+          sessionStorage.setItem("userType", responseProfileData?.agentType);
+        }
       } catch (error) {
         console.error("Error fetching agent profile details:", error);
       }

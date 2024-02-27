@@ -19,6 +19,7 @@ import axios from "axios";
 const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   const [inboxListData, setInboxListData] = React.useState([]);
   const storedUserId = sessionStorage.getItem("userId");
+  const storedUserType = sessionStorage.getItem("userType");
 
   // const [newMessage, setNewMessage] = useState("");
 
@@ -59,6 +60,7 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
           assignedTo: storedUserId,
+          userType: storedUserType === "ADMIN_ROLE" ? "admin" : "agent",
           channelName: inboxChannel,
         };
 

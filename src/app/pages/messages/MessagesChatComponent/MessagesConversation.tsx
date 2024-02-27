@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ChatConversation } from "./chat/ChatInner";
 import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar";
+import RoleChecker from "../../../RoleChecker";
 // import { useQuery } from "react-query";
 
 // const serviceConversationDetails = async (selectedId: any) => {
@@ -190,35 +191,36 @@ const MessagesConversation = ({
                   <span className="fs-7 fw-bold text-gray-500">Active</span>
                 </div>
               </div>
-
-              <div style={{ width: "200px" }}>
-                <select
-                  className="form-select form-select-solid form-select-lg"
-                  value={agentSelected}
-                  onChange={(event: any) => {
-                    setAgentSelected(event.target.value);
-                  }}
-                >
-                  <option value="" selected disabled>
-                    Assign Agents
-                  </option>
-                  {agentListData?.length > 0 &&
-                    agentListData.map((item: any) => {
-                      return (
-                        <option
-                          key={item.id}
-                          // value={`${item.id},${item.username}`}
-                          value={JSON.stringify({
-                            id: item.id,
-                            username: item.username,
-                          })}
-                        >
-                          {`${item.firstName} ${item.lastName}`}
-                        </option>
-                      );
-                    })}
-                </select>
-              </div>
+              <RoleChecker defaultRole="ADMIN_ROLE">
+                <div style={{ width: "200px" }}>
+                  <select
+                    className="form-select form-select-solid form-select-lg"
+                    value={agentSelected}
+                    onChange={(event: any) => {
+                      setAgentSelected(event.target.value);
+                    }}
+                  >
+                    <option value="" selected disabled>
+                      Assign Agents
+                    </option>
+                    {agentListData?.length > 0 &&
+                      agentListData.map((item: any) => {
+                        return (
+                          <option
+                            key={item.id}
+                            // value={`${item.id},${item.username}`}
+                            value={JSON.stringify({
+                              id: item.id,
+                              username: item.username,
+                            })}
+                          >
+                            {`${item.firstName} ${item.lastName}`}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+              </RoleChecker>
             </div>
 
             <div className="card-toolbar">

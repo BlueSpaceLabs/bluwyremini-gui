@@ -27,9 +27,13 @@ const ChatConversation = ({
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [messageUpdateAPI, setMessageUpdateAPI] = useState<boolean>(false);
 
+  // console.log("selectedInbox", selectedInbox);
   const [message, setMessage] = useState<string>("");
   // const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
   const chatContainerRef = React.useRef<HTMLDivElement | null>(null);
+
+  const storedUserName = sessionStorage.getItem("userName");
+  const storedUserId = sessionStorage.getItem("userId");
 
   // const [userInfos] = useState<UserInfoModel[]>(defaultUserInfos);
 
@@ -59,6 +63,8 @@ const ChatConversation = ({
             message: message,
             phoneNo: selectedInbox.custNumber,
             custName: selectedInbox.custName,
+            chatId: selectedInbox.chatId,
+            assignedTo: storedUserId,
             userType: "agent",
             accesskey:
               // whatsAppStoredData?.accessToken,
@@ -115,6 +121,8 @@ const ChatConversation = ({
           close_chat: 1,
           phoneNo: selectedInbox.custNumber,
           custName: selectedInbox.custName,
+          chatId: selectedInbox.chatId,
+          assignedTo: storedUserId,
           userType: "agent",
           tenant: "bsl",
           accesskey:

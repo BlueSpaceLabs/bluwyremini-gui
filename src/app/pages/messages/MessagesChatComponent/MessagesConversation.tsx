@@ -28,7 +28,7 @@ const MessagesConversation = ({
 }: any) => {
   const [conversationData, setConversationData] = React.useState([]);
   const [agentListData, setAgentListData] = React.useState([]);
-  const [agentSelectedId, setAgentSelectedId] = React.useState("");
+  const [agentSelected, setAgentSelected] = React.useState("");
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,
     severitySnackBar: "",
@@ -115,18 +115,32 @@ const MessagesConversation = ({
     const handleAssignAgent = async () => {
       const accessKey =
         "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+      const tenant = "bsl";
 
       try {
         const url =
           "http://3.108.229.60:8082/bluwyremini-backend/info/assignedChatToAgent.php";
 
-        const params = {
+        const selectedAgent = JSON.parse(agentSelected);
+
+        const data = {
+          tenant: tenant,
           accessKey: accessKey,
-          id: selectedInbox.custNumber,
-          agentId: agentSelectedId,
+          chat_data: {
+            id: selectedInbox.custNumber,
+            agentId: selectedAgent?.id,
+            chatid: selectedInbox.chatId,
+            agentName: selectedAgent?.username,
+          },
         };
 
-        const response = await axios.get(url, { params });
+        const response = await axios.post(url, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        // console.log("Response assignedChatToAgent:", response.data);
 
         setSnackbar({
           showSnackbar: true,
@@ -152,8 +166,8 @@ const MessagesConversation = ({
       }
     };
 
-    if (agentSelectedId) handleAssignAgent();
-  }, [agentSelectedId]);
+    if (agentSelected) handleAssignAgent();
+  }, [agentSelected]);
 
   if (selectedInbox?.custNumber) {
     return (
@@ -180,9 +194,9 @@ const MessagesConversation = ({
               <div style={{ width: "200px" }}>
                 <select
                   className="form-select form-select-solid form-select-lg"
-                  value={agentSelectedId}
+                  value={agentSelected}
                   onChange={(event: any) => {
-                    setAgentSelectedId(event.target.value);
+                    setAgentSelected(event.target.value);
                   }}
                 >
                   <option value="" selected disabled>
@@ -191,7 +205,14 @@ const MessagesConversation = ({
                   {agentListData?.length > 0 &&
                     agentListData.map((item: any) => {
                       return (
-                        <option key={item.id} value={item.id}>
+                        <option
+                          key={item.id}
+                          // value={`${item.id},${item.username}`}
+                          value={JSON.stringify({
+                            id: item.id,
+                            username: item.username,
+                          })}
+                        >
                           {`${item.firstName} ${item.lastName}`}
                         </option>
                       );

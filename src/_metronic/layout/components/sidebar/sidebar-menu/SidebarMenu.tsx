@@ -58,6 +58,37 @@ const SidebarMenu = () => {
     }
   }, [TotalMessageOld, TotalMessageNew]);
 
+  const storedUserName = sessionStorage.getItem("userName");
+
+  useEffect(() => {
+    const fetchAgentProfile = async () => {
+      try {
+        const url =
+          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const accessKey =
+          "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
+        const response = await axios.get(url, {
+          params: {
+            accessKey,
+            agentName: storedUserName,
+          },
+        });
+
+        const responseData = response.data;
+        const responseProfileData = responseData?.dataArray[0];
+        // console.log("response getAgentProfileDetails", responseProfileData);
+
+        if (responseProfileData)
+          sessionStorage.setItem("userId", responseProfileData?.id);
+      } catch (error) {
+        console.error("Error fetching agent profile details:", error);
+      }
+    };
+
+    if (storedUserName) fetchAgentProfile();
+  }, [storedUserName]);
+
   return (
     <div className="app-sidebar-menu overflow-hidden flex-column-fluid">
       <div

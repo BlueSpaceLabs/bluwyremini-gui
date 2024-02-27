@@ -18,6 +18,7 @@ import axios from "axios";
 
 const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   const [inboxListData, setInboxListData] = React.useState([]);
+  const storedUserId = sessionStorage.getItem("userId");
 
   // const [newMessage, setNewMessage] = useState("");
 
@@ -57,7 +58,7 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
         const params = {
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-          id: "2",
+          assignedTo: storedUserId,
           channelName: inboxChannel,
         };
 

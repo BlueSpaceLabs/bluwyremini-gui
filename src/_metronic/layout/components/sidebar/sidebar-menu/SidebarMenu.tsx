@@ -14,38 +14,6 @@ const SidebarMenu = () => {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getMsgUnreadCount.php";
-        const response = await axios.get(url, {
-          params: {
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-          },
-        });
-        // console.log(
-        //   "response getMsgUnreadCount sidebar",
-        //   response.data
-        // );
-
-        setTotalMessageNew(Number(response.data.totalCount));
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    // Fetch unread message count initially
-    fetchData();
-
-    // Poll for unread message count every 20 seconds (adjust as needed)
-    const intervalUnreadMessageCountFetch = setInterval(fetchData, 1000 * 20);
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalUnreadMessageCountFetch);
-  }, []);
-
-  useEffect(() => {
     if (TotalMessageOld < TotalMessageNew) {
       setTotalMessageOld(TotalMessageNew);
       setSnackbar({
@@ -90,6 +58,43 @@ const SidebarMenu = () => {
 
     if (storedUserName) fetchAgentProfile();
   }, [storedUserName]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedUserId = sessionStorage.getItem("userId");
+      const storedUserType = sessionStorage.getItem("userType");
+
+      try {
+        const url =
+          "http://3.108.229.60:8082/bluwyremini-backend/info/getMsgUnreadCount.php";
+        const response = await axios.get(url, {
+          params: {
+            accessKey:
+              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            assignedTo: storedUserId,
+            userType: storedUserType === "ADMIN_ROLE" ? "admin" : "agent",
+          },
+        });
+        // console.log(
+        //   "response getMsgUnreadCount sidebar",
+        //   response.data
+        // );
+
+        setTotalMessageNew(Number(response.data.totalCount));
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    // Fetch unread message count initially
+    fetchData();
+
+    // Poll for unread message count every 20 seconds (adjust as needed)
+    const intervalUnreadMessageCountFetch = setInterval(fetchData, 1000 * 20);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalUnreadMessageCountFetch);
+  }, []);
 
   return (
     <div className="app-sidebar-menu overflow-hidden flex-column-fluid">

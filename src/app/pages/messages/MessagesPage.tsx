@@ -31,6 +31,9 @@ const MessagesPage = () => {
   const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [messageUnreadCount, setMessageUnreadCount] = React.useState(null);
 
+  const storedUserId = sessionStorage.getItem("userId");
+  const storedUserType = sessionStorage.getItem("userType");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,6 +42,8 @@ const MessagesPage = () => {
         const response = await axios.get(url, {
           params: {
             accessKey: accessKey,
+            assignedTo: storedUserId,
+            userType: storedUserType === "ADMIN_ROLE" ? "admin" : "agent",
           },
         });
         // console.log("response getMsgUnreadCount", response.data);

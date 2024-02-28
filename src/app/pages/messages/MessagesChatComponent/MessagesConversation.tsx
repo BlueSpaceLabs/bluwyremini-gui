@@ -200,7 +200,7 @@ const MessagesConversation = ({
                       setAgentSelected(event.target.value);
                     }}
                   >
-                    <option value="" selected disabled>
+                    <option value="" selected>
                       Assign Agents
                     </option>
                     {agentListData?.length > 0 &&

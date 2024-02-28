@@ -15,6 +15,12 @@ export function SignInPageUI() {
     loginError,
   } = useAuthentication();
 
+  const handleEnterKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      handleLoginClick();
+    }
+  };
+
   return (
     <div
       className="form w-100"
@@ -31,16 +37,18 @@ export function SignInPageUI() {
       </div>
       {/* begin::Heading */}
 
-       <div className="mb-10 bg-light-info p-8 rounded">
+      <div className="mb-10 bg-light-info p-8 rounded">
         <div className="text-info">
-         Enter your <strong>account credentials</strong>
+          Enter your <strong>account credentials</strong>
           <strong></strong> to continue.
         </div>
-      </div> 
+      </div>
 
       {/* begin::Form group */}
       <div className="fv-row mb-8">
-        <label className="form-label fs-6 fw-bolder text-gray-900">Username</label>
+        <label className="form-label fs-6 fw-bolder text-gray-900">
+          Username
+        </label>
         <input
           placeholder=""
           className={clsx("form-control bg-transparent")}
@@ -49,6 +57,7 @@ export function SignInPageUI() {
           autoComplete="off"
           value={inputUserName}
           onChange={(e) => setInputUserName(e.target.value)}
+          onKeyDown={handleEnterKeyPress}
         />
 
         {/*}        <div className='fv-plugins-message-container'>
@@ -68,6 +77,7 @@ export function SignInPageUI() {
           className={clsx("form-control bg-transparent")}
           value={inputUserPassword}
           onChange={(e) => setInputUserPassword(e.target.value)}
+          onKeyDown={handleEnterKeyPress}
         />
 
         {/*}
@@ -84,9 +94,9 @@ export function SignInPageUI() {
         <div />
 
         {/* begin::Link */}
-         <Link to="/auth/forgot-password" className="link-primary">
+        <Link to="/auth/forgot-password" className="link-primary">
           Forgot Password ?
-        </Link> 
+        </Link>
         {/* end::Link */}
       </div>
       {/* end::Wrapper */}
@@ -98,6 +108,7 @@ export function SignInPageUI() {
           id="kt_sign_in_submit"
           className="btn btn-primary"
           onClick={handleLoginClick}
+          // login logic
 
           //disabled={formik.isSubmitting || !formik.isValid}
         >

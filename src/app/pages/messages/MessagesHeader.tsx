@@ -197,7 +197,7 @@ const MessagesHeader = ({
                 setSelectedKeyWord(event.target.value);
               }}
             >
-              <option value="" selected disabled>
+              <option value="" selected>
                 Auto Responses
               </option>
               {keywordListData?.length > 0 &&

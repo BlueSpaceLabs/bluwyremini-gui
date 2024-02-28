@@ -95,6 +95,8 @@ const useAuthentication = (): Authentication => {
 
       sessionStorage.clear();
       setIsLoggedIn(false);
+
+      window.location.reload();
     } catch (error: any) {
       console.error("Error logging out:", error.response.data);
     }

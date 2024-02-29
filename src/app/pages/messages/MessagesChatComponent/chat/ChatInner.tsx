@@ -9,12 +9,15 @@ import {
 } from "../../../../../_metronic/helpers";
 import { useMutation } from "react-query";
 import axios from "axios";
+import useStaticData from "../../../../StaticData";
 // type Props = {
 //   selectedKeyWord?: string;
 //   isDrawer?: boolean;
 // };
 
 const bufferMessages = defaultMessages;
+
+const domain_url = "http://3.108.229.60:8082";
 
 const ChatConversation = ({
   isDrawer = false,
@@ -24,6 +27,8 @@ const ChatConversation = ({
   setSendMessageClick,
   messageTab,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [messageUpdateAPI, setMessageUpdateAPI] = useState<boolean>(false);
 
@@ -58,7 +63,7 @@ const ChatConversation = ({
             : "all";
 
         const response = await axios.post(
-          `http://3.108.229.60:8082/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
+          `${domain_url}/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
           {
             message: message,
             phoneNo: selectedInbox.custNumber,
@@ -113,8 +118,7 @@ const ChatConversation = ({
           : "all";
 
       const response = await axios.post(
-        // "http://3.108.229.60:8082/php-dialogflowcx-backend-service/channelWhatsapp/chatWithUser.php",
-        `http://3.108.229.60:8082/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
+        `${domain_url}/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
         {
           message:
             "Thank you. Please enter *Hi* to start new conversion for any query.",
@@ -158,9 +162,7 @@ const ChatConversation = ({
       "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
     try {
-      const url =
-        "http://3.108.229.60:8082/bluwyremini-backend/info/updateMsgStatusRead.php";
-
+      const url = `${baseUrl}/updateMsgStatusRead.php`;
       const params = {
         accessKey: accessKey,
         custId: selectedInbox.custNumber,

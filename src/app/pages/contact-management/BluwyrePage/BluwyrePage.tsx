@@ -8,21 +8,22 @@ import { UsersListHeader } from "./components/header/UsersListHeader";
 import { UsersTable } from "./table/UsersTable";
 import { UserEditModal } from "./user-edit-modal/UserEditModal";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 const BluwyrePage = () => {
+  const { baseUrl } = useStaticData();
   const [bluwyreListData, setBluwyreListData] = React.useState([]);
+
   React.useEffect(() => {
     const serviceGetContactDetails = async () => {
       try {
-        const response = await axios.get(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getContactChannelDetails.php",
-          {
-            params: {
-              accessKey:
-                "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-            },
-          }
-        );
+        const url = `${baseUrl}/getContactChannelDetails.php`;
+        const response = await axios.get(url, {
+          params: {
+            accessKey:
+              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          },
+        });
         const responseData = response?.data;
 
         // console.log("responseData", responseData);

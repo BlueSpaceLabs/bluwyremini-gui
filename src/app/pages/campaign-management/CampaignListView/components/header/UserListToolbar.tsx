@@ -13,6 +13,7 @@ import { useLayout } from "../../../../../../_metronic/layout/core";
 import CustomStepsModal from "../../campaign-modal/custom-steps";
 import { postAddCampaign } from "../../../../../services/CampaignManagement";
 import { DateRangeFilter } from "./DateRangeFilter";
+import useStaticData from "../../../../../StaticData";
 
 const initialValue = {
   campaignName: "",
@@ -31,6 +32,8 @@ const UsersListToolbar = ({
   showCreateAppModal,
   setShowCreateAppModal,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [showCampaignMessage, setShowCampaignMessage] = React.useState("");
   const { setItemIdForUpdate } = useListView();
   const [campaignInputData, setCampaignInputData] =
@@ -66,16 +69,14 @@ const UsersListToolbar = ({
     formData.append("avatar", campaignInputData.campaignUploadFile);
 
     try {
+      const url = `${baseUrl}/addCampaignDetails.php`;
+
       let res = axios
-        .post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addCampaignDetails.php",
-          formData,
-          {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          }
-        )
+        .post(url, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
         .then(function (response) {
           console.log(response.data);
 

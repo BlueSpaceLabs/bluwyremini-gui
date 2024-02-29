@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { KTIcon } from "../../../../../_metronic/helpers";
+import useStaticData from "../../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -20,6 +21,8 @@ const DeleteKeyWordModal = ({
   setRefetchList,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const handleDeleteClick = async () => {
     try {
       const config = {
@@ -30,11 +33,9 @@ const DeleteKeyWordModal = ({
         },
       };
 
-      const response = await axios.post(
-        "http://3.108.229.60:8082/bluwyremini-backend/info/deleteKeywordDetails.php",
-        null,
-        config
-      );
+      const url = `${baseUrl}/deleteKeywordDetails.php`;
+
+      const response = await axios.post(url, null, config);
 
       setRefetchList((preV: boolean) => !preV);
       console.log("Response:", response);

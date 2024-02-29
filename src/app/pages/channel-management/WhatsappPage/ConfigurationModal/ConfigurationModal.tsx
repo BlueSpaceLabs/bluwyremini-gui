@@ -4,6 +4,7 @@ import axios from "axios";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
+import useStaticData from "../../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -41,6 +42,8 @@ const WhatsappConfigurationModal = ({
   accessKey,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const { mutate, isLoading, isError, error, isSuccess } = useMutation(
     serviceAxiosPostWhatsappData
   );
@@ -98,11 +101,8 @@ const WhatsappConfigurationModal = ({
           },
         };
 
-        const response = await axios.post(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=whatsapp`,
-          data,
-          config
-        );
+        const url = `${baseUrl}/addConfigurationDetails.php?channelName=whatsapp`;
+        const response = await axios.post(url, data, config);
 
         console.log("response", response);
 

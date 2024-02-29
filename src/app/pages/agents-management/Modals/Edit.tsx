@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
 import DeleteAgentsModal from "./Delete";
+import useStaticData from "../../../StaticData";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
 // import { url } from "inspector";
 
@@ -42,6 +43,7 @@ const EditAgentsModal = ({
   setSnackbar,
 }: any) => {
   const [agentInputData, setAgentInputData] = useState(initialData);
+  const { baseUrl } = useStaticData();
 
   const [formError, setFormError] = React.useState<boolean>(false);
   const [showDeleteAgentsModal, setShowDeleteAgentsModal] =
@@ -100,7 +102,7 @@ const EditAgentsModal = ({
         const selectedId = detailData.id;
 
         const response = await axios.put(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/modifyAgentProfileDetails.php?id=${selectedId}`,
+          `${baseUrl}/modifyAgentProfileDetails.php?id=${selectedId}`,
 
           data,
           config

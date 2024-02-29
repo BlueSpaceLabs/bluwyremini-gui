@@ -8,13 +8,17 @@ import CustomContactTable from "./CustomTable";
 import axios from "axios";
 import { KTCard } from "../../../../../_metronic/helpers";
 import CustomSnackBar from "../../../../components/CustomSnackbar";
+import useStaticData from "../../../../StaticData";
 
 const FaceBookTempPage = ({ channelName, accessKey }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,
     severitySnackBar: "",
     messageSnackBar: "",
   });
+
   const [searchContact, setSearchContact] = useState<string>("");
   const [fromDate, setFromDate] = useState<string>("");
   const [toDate, setToDate] = useState<string>("");
@@ -42,19 +46,18 @@ const FaceBookTempPage = ({ channelName, accessKey }: any) => {
   React.useEffect(() => {
     const serviceGetContactDetails = async () => {
       try {
-        const response = await axios.get(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getContactDetails.php",
-          {
-            params: {
-              channelName: "messenger",
-              accessKey:
-                "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-              search: searchContact,
-              from: fromDate,
-              to: toDate,
-            },
-          }
-        );
+        const url = `${baseUrl}/getContactDetails.php`;
+
+        const response = await axios.get(url, {
+          params: {
+            channelName: "messenger",
+            accessKey:
+              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            search: searchContact,
+            from: fromDate,
+            to: toDate,
+          },
+        });
         const responseData = response?.data;
 
         // console.log("responseData", responseData);

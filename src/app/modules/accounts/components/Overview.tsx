@@ -9,10 +9,11 @@ import {
 } from "../../../../_metronic/partials/widgets";
 // import { useQuery } from "react-query";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 // const serviceGetAgentProfileDetails = async () => {
-//   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+
+//   const url = `${baseUrl}/getAgentProfileDetails.php`
 //   const accessKey =
 //     "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 //   const agentName = "rohitborkar";
@@ -50,6 +51,8 @@ const initialProfileData = {
   username: "",
 };
 export function Overview() {
+  const { baseUrl } = useStaticData();
+
   const [profileData, setProfileData] = React.useState(initialProfileData);
   const storedUserName = sessionStorage.getItem("userName");
 
@@ -70,8 +73,7 @@ export function Overview() {
   useEffect(() => {
     const fetchAgentProfile = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const url = `${baseUrl}/getAgentProfileDetails.php`;
         const accessKey =
           "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 

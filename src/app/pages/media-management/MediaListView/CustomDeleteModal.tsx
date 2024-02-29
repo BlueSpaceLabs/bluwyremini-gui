@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -19,9 +20,11 @@ const CustomDeleteModal = ({
   handleEditModalClose,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const handleDeleteClick = async () => {
-    const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/deleteMediaDetails.php";
+    const url = `${baseUrl}/deleteMediaDetails.php`;
+
     const accessKey =
       "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 

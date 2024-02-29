@@ -10,7 +10,7 @@ import InboxList from "./Inbox/InboxList";
 
 // const serviceInboxListData = async () => {
 //   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+//     `${baseUrl}/getChatUsersList.php`;
 //   const params = {
 //     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
 //     id: "2",

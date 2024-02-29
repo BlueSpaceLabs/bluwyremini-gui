@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
 // import { url } from "inspector";
 
@@ -36,6 +37,7 @@ const AddAgentsModal = ({
   setRefetchList,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
   const [agentInputData, setAgentInputData] = useState(initialData);
 
   const [formError, setFormError] = React.useState<boolean>(false);
@@ -87,7 +89,7 @@ const AddAgentsModal = ({
         };
 
         const response = await axios.post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addAgentProfileDetails.php",
+          `${baseUrl}/addAgentProfileDetails.php`,
           data,
           config
         );

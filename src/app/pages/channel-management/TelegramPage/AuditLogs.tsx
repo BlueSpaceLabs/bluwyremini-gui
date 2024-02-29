@@ -13,7 +13,7 @@ const AuditLogs = () => {
   //     const fetchData = async () => {
   //       try {
   //         const response = await axios.get(
-  //           "http://3.108.229.60:8082/bluwyremini-backend/info/getWabaBusinessInfo.php",
+  //           `${baseUrl}/getWabaBusinessInfo.php`,
   //           {
   //             params: {
   //               accessKey:

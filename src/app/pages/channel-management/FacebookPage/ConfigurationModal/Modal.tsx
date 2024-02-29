@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import ModalBody from "./ModalBody";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import { Box } from "@mui/material";
+import useStaticData from "../../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -28,6 +29,8 @@ const FacebookConfigModal = ({
   setRefetch,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
   const [editData, setEditData] = React.useState<boolean>(true);
@@ -77,8 +80,10 @@ const FacebookConfigModal = ({
         // let whatsAppStoredData;
         // if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
+        const url = `${baseUrl}/addConfigurationDetails.php?channelName=messenger`;
+
         const response = await axios.post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=messenger",
+          url,
           {
             tenant: "bsl",
             accessKey:

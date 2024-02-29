@@ -6,9 +6,11 @@ import TelegramConfigModal from "./ConfigurationModal/Modal";
 import TelegramDataList from "./DataList";
 import AuditLogs from "./AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
+import useStaticData from "../../../StaticData";
 
 const TelegramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);
+  const { baseUrl } = useStaticData();
 
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,
@@ -23,17 +25,16 @@ const TelegramPage = ({ channelName, accessKey }: any) => {
   const [refetch, setRefetch] = React.useState<boolean>(false);
 
   const serviceGetTelegramData = async () => {
+    const url = `${baseUrl}/getChannelDetails.php`;
+
     try {
-      const response = await axios.get(
-        "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php",
-        {
-          params: {
-            channelName: "telegram",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-          },
-        }
-      );
+      const response = await axios.get(url, {
+        params: {
+          channelName: "telegram",
+          accessKey:
+            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+        },
+      });
       const responseData = response?.data;
 
       // console.log("responseData", responseData);

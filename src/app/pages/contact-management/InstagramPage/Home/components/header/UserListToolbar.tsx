@@ -22,7 +22,7 @@ const UsersListToolbar = ({
   //     const serviceGetContactDetails = async () => {
   //       try {
   //         const response = await axios.get(
-  //           "http://3.108.229.60:8082/bluwyremini-backend/info/getContactDetails.php",
+  //           `${baseUrl}/getContactDetails.php`,
   //           {
   //             params: {
   //               channelName: "whatsapp",

@@ -8,6 +8,7 @@ import { useMutation } from "react-query";
 import { toAbsoluteUrl } from "../../../../../_metronic/helpers";
 import { postAddMedia } from "../../../../services/MediaManagement";
 import axios from "axios";
+import useStaticData from "../../../../StaticData";
 // import { StepperComponent } from "../../../../../_metronic/assets/ts/components";
 
 // type Props = {
@@ -30,6 +31,8 @@ const AddMediaModal = ({
   setServerResponse,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [mediaTitle, setMediaTitle] = React.useState<string>("");
   const [mediaDescription, setMediaDescription] = React.useState<string>("");
   const [mediaChannel, setMediaChannel] = React.useState<string>("whatsApp");
@@ -69,16 +72,14 @@ const AddMediaModal = ({
       formData.append("tenant", tenant);
 
       try {
+        const url = `${baseUrl}/addMediaDetails.php`;
+
         let response = axios
-          .post(
-            "http://3.108.229.60:8082/bluwyremini-backend/info/addMediaDetails.php",
-            formData,
-            {
-              headers: {
-                "content-type": "multipart/form-data",
-              },
-            }
-          )
+          .post(url, formData, {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          })
           .then(function (response) {
             console.log(response.data);
             setMediaTitle("");

@@ -5,10 +5,10 @@ import { Dropdown1 } from "../../../_metronic/partials";
 import { useLocation } from "react-router";
 import { useQuery } from "react-query";
 import axios from "axios";
+import useStaticData from "../../StaticData";
 
 // const serviceGetAgentProfileDetails = async () => {
-//   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+//   const url = `${baseUrl}/getAgentProfileDetails.php`;
 //   const accessKey =
 //     "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 //   const agentName = "rohitborkar";
@@ -47,6 +47,8 @@ const initialProfileData = {
 };
 
 const AccountHeader: FC = () => {
+  const { baseUrl } = useStaticData();
+
   const location = useLocation();
   const [profileData, setProfileData] = React.useState(initialProfileData);
   const storedUserName = sessionStorage.getItem("userName");
@@ -68,8 +70,7 @@ const AccountHeader: FC = () => {
   useEffect(() => {
     const fetchAgentProfile = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const url = `${baseUrl}/getAgentProfileDetails.php`;
         const accessKey =
           "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 

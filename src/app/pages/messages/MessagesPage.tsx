@@ -4,6 +4,7 @@ import { PageTitle } from "../../../_metronic/layout/core";
 import { MessagesHeader } from "./MessagesHeader";
 import { MessagesChat } from "./MessagesChatComponent/MessagesChat";
 import axios from "axios";
+import useStaticData from "../../StaticData";
 // import { Private } from "./components/Private";
 // import { Group } from "./components/Group";
 // import { Drawer } from "./components/Drawer";
@@ -27,6 +28,8 @@ const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
 const MessagesPage = () => {
+  const { baseUrl } = useStaticData();
+
   const [messageTab, setMessageTab] = React.useState("all");
   const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [messageUnreadCount, setMessageUnreadCount] = React.useState(null);
@@ -37,8 +40,7 @@ const MessagesPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getMsgUnreadCount.php";
+        const url = `${baseUrl}/getMsgUnreadCount.php`;
         const response = await axios.get(url, {
           params: {
             accessKey: accessKey,

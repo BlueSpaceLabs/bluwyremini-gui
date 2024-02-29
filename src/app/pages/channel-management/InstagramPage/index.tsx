@@ -6,9 +6,11 @@ import InstagramDataList from "./DataList";
 import InstagramConfigModal from "./ConfigurationModal/Modal";
 import AuditLogs from "./AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
+import useStaticData from "../../../StaticData";
 
 const InstagramPage = ({ channelName, accessKey }: any) => {
   // console.log(channelName, accessKey);
+  const { baseUrl } = useStaticData();
 
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,
@@ -24,16 +26,15 @@ const InstagramPage = ({ channelName, accessKey }: any) => {
 
   const serviceGetInstagramData = async () => {
     try {
-      const response = await axios.get(
-        "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php",
-        {
-          params: {
-            channelName: "instagram",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-          },
-        }
-      );
+      const url = `${baseUrl}/getChannelDetails.php`;
+
+      const response = await axios.get(url, {
+        params: {
+          channelName: "instagram",
+          accessKey:
+            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+        },
+      });
       const responseData = response?.data;
 
       console.log("responseData", responseData);

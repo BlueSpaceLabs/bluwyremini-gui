@@ -1,6 +1,9 @@
 import React from "react";
+import useStaticData from "../../../StaticData";
 
 const AuditLogs = () => {
+  const { baseUrl } = useStaticData();
+
   const [detailData, setDetailData] = React.useState({
     verified_name: null,
     throughput: null,
@@ -13,7 +16,7 @@ const AuditLogs = () => {
   //     const fetchData = async () => {
   //       try {
   //         const response = await axios.get(
-  //           "http://3.108.229.60:8082/bluwyremini-backend/info/getWabaBusinessInfo.php",
+  //           `${baseUrl}/getWabaBusinessInfo.php``,
   //           {
   //             params: {
   //               accessKey:

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import { KTIcon } from "../../../../_metronic/helpers";
+import useStaticData from "../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -21,6 +22,7 @@ const DeleteAgentsModal = ({
   setSnackbar,
 }: any) => {
   // console.log("detailData", detailData);
+  const { baseUrl } = useStaticData();
 
   const handleDeleteClick = async () => {
     try {
@@ -33,7 +35,7 @@ const DeleteAgentsModal = ({
       };
 
       const response = await axios.post(
-        "http://3.108.229.60:8082/bluwyremini-backend/info/deleteAgentProfileDetails.php",
+        `${baseUrl}/deleteAgentProfileDetails.php`,
         null,
         config
       );

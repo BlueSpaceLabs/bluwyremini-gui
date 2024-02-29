@@ -9,13 +9,13 @@ import { useFormik } from "formik";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useStaticData from "../../../../../StaticData";
 
 // const accessKey =
 //   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
 // const serviceGetAgentProfileDetails = async () => {
-//   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+//   const url =  `${baseUrl}/getAgentProfileDetails.php`;
 
 //   const agentName = "rohitborkar";
 
@@ -34,8 +34,7 @@ import { useNavigate } from "react-router-dom";
 // };
 
 // const servicePostEditAgentProfile = async (reqData: any) => {
-//   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/modifyAgentProfileDetails.php?id=2";
+//   const url =  `${baseUrl}/modifyAgentProfileDetails.php?id=2`;
 
 //   try {
 //     const response = await axios.post(url, reqData, {
@@ -82,6 +81,8 @@ const initialProfileData = {
 // });
 
 const ProfileDetails: FC = () => {
+  const { baseUrl } = useStaticData();
+
   const navigate = useNavigate();
   const storedUserName = sessionStorage.getItem("userName");
 
@@ -95,8 +96,8 @@ const ProfileDetails: FC = () => {
   useEffect(() => {
     const fetchAgentProfile = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const url = `${baseUrl}/getAgentProfileDetails.php`;
+
         const accessKey =
           "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 

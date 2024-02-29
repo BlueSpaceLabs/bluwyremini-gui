@@ -3,8 +3,11 @@ import PageHeader from "./header";
 import CustomContactTable from "./table";
 import { KTCard } from "../../../../_metronic/helpers";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 const FacebookPage = () => {
+  const { baseUrl } = useStaticData();
+
   const [facebookListData, setFacebookListData] = React.useState([]);
   // const [showSnackbar, setShowSnackbar] = React.useState<boolean>(false);
   // const [severitySnackBar, setSeveritySnackBar] = React.useState<string>("");
@@ -19,19 +22,17 @@ const FacebookPage = () => {
   React.useEffect(() => {
     const serviceGetContactDetails = async () => {
       try {
-        const response = await axios.get(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getContactDetails.php",
-          {
-            params: {
-              channelName: "whatsapp",
-              accessKey:
-                "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-              search: searchContact,
-              from: fromDate,
-              to: toDate,
-            },
-          }
-        );
+        const url = `${baseUrl}/getContactDetails.php`;
+        const response = await axios.get(url, {
+          params: {
+            channelName: "whatsapp",
+            accessKey:
+              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            search: searchContact,
+            from: fromDate,
+            to: toDate,
+          },
+        });
         const responseData = response?.data;
 
         // console.log("responseData", responseData);

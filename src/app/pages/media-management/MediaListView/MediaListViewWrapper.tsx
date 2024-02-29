@@ -15,11 +15,14 @@ import CustomMediaTable from "./CustomTable";
 // import { useQuery } from "react-query";
 import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar";
+import useStaticData from "../../../StaticData";
 
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
 const MediaListView = () => {
+  const { baseUrl } = useStaticData();
+
   const { itemIdForUpdate } = useListView();
   const [mediaListViewData, setMediaListViewData] = React.useState([]);
 
@@ -49,8 +52,7 @@ const MediaListView = () => {
 
   React.useEffect(() => {
     const getMediaListData = async () => {
-      const url =
-        "http://3.108.229.60:8082/bluwyremini-backend/info/getMediaDetails.php";
+      const url = `${baseUrl}/getMediaDetails.php`;
 
       const params = {
         accessKey: accessKey,

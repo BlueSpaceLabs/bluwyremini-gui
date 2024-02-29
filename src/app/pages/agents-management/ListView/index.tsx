@@ -4,8 +4,11 @@ import { KTCard } from "../../../../_metronic/helpers";
 import CustomAgentsTable from "./CustomTable";
 import ListViewHeader from "./ListViewHeader";
 import AddAgentsModal from "../Modals/Add";
+import useStaticData from "../../../StaticData";
 
 const AgentsListView = ({ setSnackbar }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [agentsListViewData, setAgentsListViewData] = useState([]);
   const [searchAgent, setSearchAgent] = useState<string>("");
   const [showAddAgentsModal, setShowAddAgentsModal] = useState(false);
@@ -14,8 +17,7 @@ const AgentsListView = ({ setSnackbar }: any) => {
 
   // console.log("refetchList", refetchList);
   useEffect(() => {
-    const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+    const url = `${baseUrl}/getAgentProfileDetails.php`;
     const params = {
       accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
       searchAgent: searchAgent,

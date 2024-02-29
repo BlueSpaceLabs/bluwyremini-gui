@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
 import { postAddWhatsappContact } from "../../../services/ContactManagement";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -32,6 +33,8 @@ const AddWhatsAppContactModal = ({
   setRefetchData,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const { mutateAsync } = useMutation(postAddWhatsappContact);
 
   const [addWhatsappContactInput, setAddWhatsappContactInput] =
@@ -82,11 +85,9 @@ const AddWhatsAppContactModal = ({
           },
         };
 
-        const response = await axios.post(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/addContactInfo.php?channelName=${channelName}`,
-          data,
-          config
-        );
+        const url = `${baseUrl}/addContactInfo.php?channelName=${channelName}`;
+
+        const response = await axios.post(url, data, config);
 
         console.log("response", response);
 

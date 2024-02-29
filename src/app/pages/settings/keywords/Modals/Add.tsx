@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import axios from "axios";
+import useStaticData from "../../../../StaticData";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
 // import { url } from "inspector";
 
@@ -21,6 +22,8 @@ const AddKeyWordModal = ({
   setRefetchList,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [keyWordTitle, setKeyWordTitle] = React.useState<string>("");
   const [keyWordDescription, setKeyWordDescription] =
     React.useState<string>("");
@@ -49,11 +52,9 @@ const AddKeyWordModal = ({
           },
         };
 
-        const response = await axios.post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addKeyword.php",
-          data,
-          config
-        );
+        const url = `${baseUrl}/addKeyword.php`;
+
+        const response = await axios.post(url, data, config);
 
         console.log("response", response);
 

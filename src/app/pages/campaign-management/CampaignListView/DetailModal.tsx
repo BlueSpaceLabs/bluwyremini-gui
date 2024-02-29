@@ -5,6 +5,7 @@ import { KTIcon } from "../../../../_metronic/helpers";
 import CustomDeleteModal from "./CustomDeleteModal";
 import axios from "axios";
 import EditCampaignModal from "./EditModal";
+import useStaticData from "../../../StaticData";
 // import EditKeyWordModal from "./Edit";
 
 // type Props = {
@@ -31,6 +32,8 @@ const DetailCampaignModal = ({
   selectedId,
   setRefetchList,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [showEditCampaignModal, setShowEditCampaignModal] =
     React.useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = React.useState<boolean>(false);
@@ -38,8 +41,8 @@ const DetailCampaignModal = ({
   const [campaignDetailData, setCampaignDetailData] = useState([]);
 
   useEffect(() => {
-    const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getCampaignList.php";
+    const url = `${baseUrl}/getCampaignList.php`;
+
     const params = {
       accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
       id: selectedId,

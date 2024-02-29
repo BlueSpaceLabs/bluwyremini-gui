@@ -8,6 +8,7 @@ import { useMutation } from "react-query";
 import { toAbsoluteUrl } from "../../../../../_metronic/helpers";
 import { postAddMedia } from "../../../../services/MediaManagement";
 import axios from "axios";
+import useStaticData from "../../../../StaticData";
 // import { StepperComponent } from "../../../../../_metronic/assets/ts/components";
 
 // type Props = {
@@ -32,6 +33,8 @@ const EditMediaModal = ({
 }: // serverResponse,
 // setServerResponse,
 any) => {
+  const { baseUrl } = useStaticData();
+
   const [mediaTitle, setMediaTitle] = React.useState<string>("");
   const [mediaDescription, setMediaDescription] = React.useState<string>("");
   const [mediaChannel, setMediaChannel] = React.useState<string>("whatsApp");
@@ -94,10 +97,12 @@ any) => {
       formData.append("tenant", tenant);
 
       try {
+        const url = `${baseUrl}/updateMediaDetails.php?id=${mediaId}`;
+
         let res = axios
           .post(
-            // "http://3.108.229.60:8082/bluwyremini-backend/info/addMediaDetails.php",
-            `http://3.108.229.60:8082/bluwyremini-backend/info/updateMediaDetails.php?id=${mediaId}`,
+            // `${baseUrl}/addMediaDetails.php`,
+            url,
 
             formData,
             {
@@ -143,8 +148,8 @@ any) => {
 
   React.useEffect(() => {
     const getMediaDetails = async () => {
-      const url =
-        "http://3.108.229.60:8082/bluwyremini-backend/info/getMediaDetails.php";
+      const url = `${baseUrl}/getMediaDetails.php`;
+
       const accessKey =
         "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
       const selectedId = detailMediaData?.id;

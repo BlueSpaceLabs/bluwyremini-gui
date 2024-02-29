@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ActiveUserCampaignModal from "./Modal";
+import useStaticData from "../../../StaticData";
 
 const DetailCardUI = ({
   channel,
@@ -55,6 +56,8 @@ const accessKey =
 const tenant = "bsl";
 
 const ActiveUserDetails = () => {
+  const { baseUrl } = useStaticData();
+
   const [data, setData] = useState(null);
 
   const [activeUserCampaignData, setActiveUserCampaignData] =
@@ -66,15 +69,15 @@ const ActiveUserDetails = () => {
   const [showCampaignMessage, setShowCampaignMessage] = React.useState("");
 
   useEffect(() => {
-    const apiUrl =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getActiveUserCampaignDetails.php";
+    const url = `${baseUrl}/getActiveUserCampaignDetails.php`;
+
     const params = {
       accessKey: accessKey,
     };
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(apiUrl, { params });
+        const response = await axios.get(url, { params });
 
         console.log("subhro 007", response.data);
         setData(response.data);
@@ -107,16 +110,14 @@ const ActiveUserDetails = () => {
     formData.append("avatar", activeUserCampaignData.campaignUploadFile);
 
     try {
+      const url = `${baseUrl}/addCampaignDetailsRealTime.php`;
+
       let res = axios
-        .post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addCampaignDetailsRealTime.php",
-          formData,
-          {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          }
-        )
+        .post(url, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
         .then(function (response) {
           console.log(response.data);
 

@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import { postEditWhatsappContact } from "../../../../services/ContactManagement";
 import axios from "axios";
+import useStaticData from "../../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -23,6 +24,8 @@ const EditWhatsAppContactModal = ({
   setRefetchData,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [addWhatsappContactInput, setAddWhatsappContactInput] =
     React.useState<any>(initialModalData);
   const [formError, setFormError] = React.useState<boolean>(false);
@@ -69,11 +72,9 @@ const EditWhatsAppContactModal = ({
           },
         };
 
-        const response = await axios.post(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/modifyContactInfo.php?channelName=${channelName}`,
-          data,
-          config
-        );
+        const url = `${baseUrl}/modifyContactInfo.php?channelName=${channelName}`;
+
+        const response = await axios.post(url, data, config);
 
         console.log("response", response);
 

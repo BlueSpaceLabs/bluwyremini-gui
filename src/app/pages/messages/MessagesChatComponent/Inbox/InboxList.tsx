@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 // import { useQuery } from "react-query";
 import axios from "axios";
+import useStaticData from "../../../../StaticData";
 
 // const serviceInboxListData = async (inboxChannel: string) => {
 //   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+//     `${baseUrl}/getChatUsersList.php`;
 //   const params = {
 //     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
 //     id: "2",
@@ -17,6 +18,8 @@ import axios from "axios";
 // };
 
 const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [inboxListData, setInboxListData] = React.useState([]);
   const storedUserId = sessionStorage.getItem("userId");
   const storedUserType = sessionStorage.getItem("userType");
@@ -54,8 +57,8 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
       // if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+        const url = `${baseUrl}/getChatUsersList.php`;
+
         const params = {
           accessKey:
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
@@ -92,7 +95,7 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   //     const fetchData = async () => {
   //       try {
   //         const url =
-  //           "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUsersList.php";
+  //           `${baseUrl}/getChatUsersList.php`;
   //         const params = {
   //           accessKey:
   //             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",

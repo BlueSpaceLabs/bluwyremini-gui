@@ -5,6 +5,7 @@ import { Modal } from "react-bootstrap";
 import ModalBody from "./ModalBody";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import { Box } from "@mui/material";
+import useStaticData from "../../../../StaticData";
 
 // type Props = {
 //   show: boolean;
@@ -25,6 +26,8 @@ const TelegramConfigModal = ({
   setRefetch,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [modalInput, setModalInput] = useState(initialValue);
   const [formError, setFormError] = React.useState<boolean>(false);
   const [editData, setEditData] = React.useState<boolean>(true);
@@ -67,8 +70,10 @@ const TelegramConfigModal = ({
       // if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
       try {
+        const url = `${baseUrl}/addConfigurationDetails.php?channelName=telegram`;
+
         const response = await axios.post(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/addConfigurationDetails.php?channelName=telegram",
+          url,
           {
             tenant: "bsl",
             accessKey:

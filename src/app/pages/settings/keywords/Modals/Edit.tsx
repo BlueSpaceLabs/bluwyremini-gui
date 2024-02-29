@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../../_metronic/helpers";
 import axios from "axios";
 import DeleteKeyWordModal from "./Delete";
+import useStaticData from "../../../../StaticData";
 // import { KTIcon } from "../../../../../../_metronic/helpers";
 // import { url } from "inspector";
 
@@ -24,6 +25,8 @@ const EditKeyWordModal = ({
   closeDetailModal,
   setSnackbar,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [keyWordTitle, setKeyWordTitle] = React.useState<string>("");
   const [keyWordDescription, setKeyWordDescription] =
     React.useState<string>("");
@@ -55,11 +58,9 @@ const EditKeyWordModal = ({
 
         const selectedId = initialData.id;
 
-        const response = await axios.put(
-          `http://3.108.229.60:8082/bluwyremini-backend/info/updateKeywordDetails.php?id=${selectedId}`,
-          data,
-          config
-        );
+        const url = `${baseUrl}/updateKeywordDetails.php?id=${selectedId}`;
+
+        const response = await axios.put(url, data, config);
 
         setRefetchList((preV: boolean) => !preV);
         console.log("response", response);

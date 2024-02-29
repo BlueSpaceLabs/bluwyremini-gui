@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import useStaticData from "./StaticData";
 
 const base_url = "http://127.0.0.1:8080";
 const realm = "demo-realm";
@@ -18,6 +19,8 @@ interface Authentication {
 }
 
 const useAuthentication = (): Authentication => {
+  const { baseUrl } = useStaticData();
+
   const [inputUserName, setInputUserName] = useState<string>("");
   const [inputUserPassword, setInputUserPassword] = useState<string>("");
   const [customerAccessKey, setCustomerAccessKey] = useState<string>("");
@@ -164,8 +167,7 @@ const useAuthentication = (): Authentication => {
     const fetchData = async () => {
       const accessKey =
         "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-      const url =
-        "http://3.108.229.60:8082/bluwyremini-backend/info/getCustomerTenantDetails.php";
+      const url = `${baseUrl}/getCustomerTenantDetails.php`;
 
       try {
         const response = await axios.get(url, {
@@ -194,8 +196,7 @@ const useAuthentication = (): Authentication => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php";
+        const url = `${baseUrl}/getChannelDetails.php`;
         const channelName = "whatsapp";
         const response = await axios.get(url, {
           params: {
@@ -221,8 +222,8 @@ const useAuthentication = (): Authentication => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php";
+        const url = `${baseUrl}/getChannelDetails.php`;
+
         const channelName = "telegram";
         const response = await axios.get(url, {
           params: {
@@ -248,8 +249,8 @@ const useAuthentication = (): Authentication => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php";
+        const url = `${baseUrl}/getChannelDetails.php`;
+
         const channelName = "instagram";
         const response = await axios.get(url, {
           params: {
@@ -275,8 +276,7 @@ const useAuthentication = (): Authentication => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php";
+        const url = `${baseUrl}/getChannelDetails.php`;
         const channelName = "messenger";
         const response = await axios.get(url, {
           params: {
@@ -302,8 +302,7 @@ const useAuthentication = (): Authentication => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChannelDetails.php";
+        const url = `${baseUrl}/getChannelDetails.php`;
         const channelName = "dialogflowcx";
         const response = await axios.get(url, {
           params: {

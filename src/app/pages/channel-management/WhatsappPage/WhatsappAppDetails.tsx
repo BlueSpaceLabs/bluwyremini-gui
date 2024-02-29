@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
+  const { baseUrl } = useStaticData();
+
   console.log({ channelConfigurationData });
   const [detailData, setDetailData] = React.useState({
     verified_name: null,
@@ -12,7 +15,7 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
   // React.useEffect(() => {
   //   const fetchData = async () => {
   //     const url =
-  //       "http://3.108.229.60:8082/bluwyremini-backend/info/getWabaBusinessInfo.php";
+  //       `${baseUrl}/getWabaBusinessInfo.php`;
   //     try {
   //       const params = {
   //         accessKey:
@@ -46,18 +49,17 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getWabaBusinessInfo.php",
-          {
-            params: {
-              accessKey:
-                "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
-              phoneNoId: channelConfigurationData?.phoneNoId,
-              accessToken: channelConfigurationData?.accessToken,
-              channelName: "whatsapp",
-            },
-          }
-        );
+        const url = `${baseUrl}/getWabaBusinessInfo.php`;
+
+        const response = await axios.get(url, {
+          params: {
+            accessKey:
+              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            phoneNoId: channelConfigurationData?.phoneNoId,
+            accessToken: channelConfigurationData?.accessToken,
+            channelName: "whatsapp",
+          },
+        });
         if (response.data) {
           setDetailData({
             verified_name: response.data.verifiedName,

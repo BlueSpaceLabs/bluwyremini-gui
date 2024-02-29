@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 //const MessagesProfile = ({ setShowProfile }) => {
 const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [profileData, setProfileData] = React.useState({
     profileName: "",
     mobileNumber: "",
@@ -28,8 +31,7 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
       if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUserDetails.php";
+        const url = `${baseUrl}/getChatUserDetails.php`;
 
         const params = {
           accessKey:

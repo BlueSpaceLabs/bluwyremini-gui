@@ -5,11 +5,12 @@ import { ChatConversation } from "./chat/ChatInner";
 import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import RoleChecker from "../../../RoleChecker";
+import useStaticData from "../../../StaticData";
 // import { useQuery } from "react-query";
 
 // const serviceConversationDetails = async (selectedId: any) => {
 //   const url =
-//     "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUserDetails.php";
+//        `${baseUrl}/getChatUserDetails.php`;
 
 //   const params = {
 //     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
@@ -27,6 +28,8 @@ const MessagesConversation = ({
   messageTab,
   selectedKeyWord,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [conversationData, setConversationData] = React.useState([]);
   const [agentListData, setAgentListData] = React.useState([]);
   const [agentSelected, setAgentSelected] = React.useState("");
@@ -60,8 +63,7 @@ const MessagesConversation = ({
       if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getChatUserDetails.php";
+        const url = `${baseUrl}/getChatUserDetails.php`;
 
         const params = {
           accessKey:
@@ -91,8 +93,8 @@ const MessagesConversation = ({
   }, [selectedInbox?.custNumber, sendMessageClick]);
 
   useEffect(() => {
-    const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+    const url = `${baseUrl}/getAgentProfileDetails.php`;
+
     const params = {
       accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
     };
@@ -119,8 +121,7 @@ const MessagesConversation = ({
       const tenant = "bsl";
 
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/assignedChatToAgent.php";
+        const url = `${baseUrl}/assignedChatToAgent.php`;
 
         const selectedAgent = JSON.parse(agentSelected);
 

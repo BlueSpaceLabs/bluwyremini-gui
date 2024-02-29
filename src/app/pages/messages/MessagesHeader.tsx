@@ -3,6 +3,7 @@ import { KTIcon } from "../../../_metronic/helpers";
 import TicketsModal from "./MessagesChatComponent/TicketsModal/TicketsModal";
 import axios from "axios";
 import CustomSnackBar from "../../components/CustomSnackbar";
+import useStaticData from "../../StaticData";
 // import { Link, useLocation } from "react-router-dom";
 
 const initialValue = {
@@ -64,6 +65,8 @@ const MessagesHeader = ({
   messageUnreadCount,
   totalMessage,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
   //   const location = useLocation();
   const [showTicketsModal, setShowTicketsModal] =
     React.useState<boolean>(false);
@@ -79,8 +82,8 @@ const MessagesHeader = ({
 
   // console.log("messageUnreadCount MessagesHeader", messageUnreadCount);
   useEffect(() => {
-    const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getKeywordDetails.php";
+    const url = `${baseUrl}/getKeywordDetails.php`;
+
     const params = {
       accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
     };

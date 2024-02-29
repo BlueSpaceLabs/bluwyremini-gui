@@ -4,8 +4,11 @@ import ListViewHeader from "./ListViewHeader";
 import axios from "axios";
 import { KTCard } from "../../../../../_metronic/helpers";
 import AddKeyWordModal from "../Modals/Add";
+import useStaticData from "../../../../StaticData";
 
 const KeyWordListView = ({ setSnackbar }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [keyWordListViewData, setKeyWordListViewData] = useState([]);
   const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   const [showAddKeyWordModal, setShowAddKeyWordModal] = useState(false);
@@ -14,8 +17,8 @@ const KeyWordListView = ({ setSnackbar }: any) => {
 
   console.log("refetchList", refetchList);
   useEffect(() => {
-    const url =
-      "http://3.108.229.60:8082/bluwyremini-backend/info/getKeywordDetails.php";
+    const url = `${baseUrl}/getKeywordDetails.php`;
+
     const params = {
       accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
       searchKeyWord: searchKeyWord,

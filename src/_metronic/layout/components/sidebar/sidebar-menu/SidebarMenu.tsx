@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { SidebarMenuMain } from "./SidebarMenuMain";
 import CustomSnackBar from "../../../../../app/components/CustomSnackbar";
 import axios from "axios";
+import useStaticData from "../../../../../app/StaticData";
 
 const SidebarMenu = () => {
+  const { baseUrl } = useStaticData();
+
   const [TotalMessageOld, setTotalMessageOld] = useState(0);
   const [TotalMessageNew, setTotalMessageNew] = useState(0);
 
@@ -31,8 +34,7 @@ const SidebarMenu = () => {
   useEffect(() => {
     const fetchAgentProfile = async () => {
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getAgentProfileDetails.php";
+        const url = `${baseUrl}/getAgentProfileDetails.php`;
         const accessKey =
           "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
 
@@ -65,8 +67,8 @@ const SidebarMenu = () => {
       const storedUserType = sessionStorage.getItem("userType");
 
       try {
-        const url =
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getMsgUnreadCount.php";
+        const url = `${baseUrl}/getMsgUnreadCount.php`;
+
         const response = await axios.get(url, {
           params: {
             accessKey:

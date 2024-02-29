@@ -1,10 +1,13 @@
 import React from "react";
 import { Box } from "@mui/material";
 import axios from "axios";
+import useStaticData from "../../../StaticData";
 
 const CampaignStatus = () => {
+  const { baseUrl } = useStaticData();
+
   const [campaignStatusData, setCampaignStatusData] = React.useState([]);
-  
+
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -13,10 +16,9 @@ const CampaignStatus = () => {
             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
         };
 
-        const response = await axios.get(
-          "http://3.108.229.60:8082/bluwyremini-backend/info/getLast5CampaignStatus.php",
-          { params }
-        );
+        const url = `${baseUrl}/getLast5CampaignStatus.php`;
+
+        const response = await axios.get(url, { params });
 
         setCampaignStatusData(response.data);
       } catch (error) {

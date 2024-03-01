@@ -1,7 +1,13 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-const ListCard = ({ labelTitle, tooltip, listData }: any) => {
+const ListCard = ({ labelTitle, tooltip, listData, textareaData }: any) => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Box className="row mb-7">
       <label className="col-lg-4 fw-bold text-muted">
@@ -16,9 +22,25 @@ const ListCard = ({ labelTitle, tooltip, listData }: any) => {
       </label>
 
       <Box className="col-lg-8 d-flex align-items-center">
-        <span className="fw-bolder fs-6 me-2">
-          {listData ? listData : "No Data to show."}
-        </span>
+        {textareaData ? (
+          <textarea
+            rows={4}
+            cols={70}
+            value={
+              textareaData
+                ? showPassword
+                  ? textareaData
+                  : "*".repeat(textareaData.length)
+                : "No Data to show."
+            }
+            onClick={togglePasswordVisibility}
+            readOnly
+          />
+        ) : (
+          <span className="fw-bolder fs-6 me-2">
+            {listData ? listData : "No Data to show."}
+          </span>
+        )}
       </Box>
     </Box>
   );
@@ -28,7 +50,10 @@ const FacebookDataList = ({ facebookData }: any) => {
   // console.log("facebookData", facebookData);
 
   return (
-    <Box className="card-body p-9" style={{backgroundColor:"lavender",padding:10, borderRadius:10}}>
+    <Box
+      className="card-body p-9"
+      style={{ backgroundColor: "lavender", padding: 10, borderRadius: 10 }}
+    >
       <ListCard labelTitle={"App Id"} listData={facebookData?.appId} />
       <ListCard
         labelTitle={"Business Id"}
@@ -36,7 +61,7 @@ const FacebookDataList = ({ facebookData }: any) => {
       />
       <ListCard
         labelTitle={"Facebook Access Token"}
-        listData={facebookData?.fbAccessToken}
+        textareaData={facebookData?.fbAccessToken}
       />
       <ListCard
         labelTitle={"Facebook Webhook Token"}

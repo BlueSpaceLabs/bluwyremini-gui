@@ -63,10 +63,10 @@ const InstagramConfigModal = ({
   const handleSubmit = async () => {
     if (
       modalInput?.appId.length < 2 ||
-      modalInput?.businessId.length < 2 ||
-      modalInput?.instaWebhookToken.length < 2 ||
-      modalInput?.instaWebhookUrl.length < 2 ||
-      modalInput?.instagramId.length < 2
+      modalInput?.businessId.length < 2
+      // modalInput?.instaWebhookToken.length < 2 ||
+      // modalInput?.instaWebhookUrl.length < 2 ||
+      // modalInput?.instagramId.length < 2
     ) {
       setFormError(true);
     } else {

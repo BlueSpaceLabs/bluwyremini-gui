@@ -64,15 +64,15 @@ const WhatsappConfigurationModal = ({
 
   const handleSubmitForm = async () => {
     if (
-      whatsappModalInput?.channelName.length < 2 ||
-      whatsappModalInput?.accessToken.length < 2 ||
+      // whatsappModalInput?.channelName.length < 2 ||
+      // whatsappModalInput?.accessToken.length < 2 ||
       whatsappModalInput?.appId.length < 2 ||
-      whatsappModalInput?.businessId.length < 2 ||
-      whatsappModalInput?.displayNo.length < 2 ||
-      whatsappModalInput?.permanentToken.length < 2 ||
-      whatsappModalInput?.phoneNoId.length < 2 ||
-      whatsappModalInput?.waWebhookToken.length < 2 ||
-      whatsappModalInput?.waWebhookUrl.length < 2
+      whatsappModalInput?.businessId.length < 2
+      // whatsappModalInput?.displayNo.length < 2 ||
+      // whatsappModalInput?.permanentToken.length < 2 ||
+      // whatsappModalInput?.phoneNoId.length < 2 ||
+      // whatsappModalInput?.waWebhookToken.length < 2 ||
+      // whatsappModalInput?.waWebhookUrl.length < 2
     ) {
       setFormError(true);
     } else {
@@ -181,37 +181,14 @@ const WhatsappConfigurationModal = ({
         <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Access Token</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Access Token."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="accessToken"
-              placeholder="Enter Access Token"
-              value={whatsappModalInput?.accessToken}
-              onChange={handleInputChange}
-              readOnly={editData}
-            />
-            {whatsappModalInput?.accessToken?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Access Token is Required.</div>
-              </div>
-            )}
-          </div>
-
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Application Id</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Application Id."
-              ></i>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Application Id."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -232,11 +209,13 @@ const WhatsappConfigurationModal = ({
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Business Id</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Business Id."
-              ></i>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Business Id."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -256,12 +235,41 @@ const WhatsappConfigurationModal = ({
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Display Number</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Display Number."
-              ></i>
+              <span>Access Token</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Access Token."
+                ></i>
+              )}
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="accessToken"
+              placeholder="Enter Access Token"
+              value={whatsappModalInput?.accessToken}
+              onChange={handleInputChange}
+              readOnly={editData}
+            />
+            {/* {whatsappModalInput?.accessToken?.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Access Token is Required.</div>
+              </div>
+            )} */}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span>Display Number</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Display Number."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -272,21 +280,23 @@ const WhatsappConfigurationModal = ({
               onChange={handleInputChange}
               readOnly={editData}
             />
-            {whatsappModalInput?.displayNo?.length < 2 && formError && (
+            {/* {whatsappModalInput?.displayNo?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Display Number is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Permanent Token</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Permanent Token."
-              ></i>
+              <span>Permanent Token</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Permanent Token."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -297,23 +307,25 @@ const WhatsappConfigurationModal = ({
               onChange={handleInputChange}
               readOnly={editData}
             />
-            {whatsappModalInput?.permanentToken?.length < 2 && formError && (
+            {/* {whatsappModalInput?.permanentToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
                   Permanent Token is Required.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Phone Number Id</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Phone Number Id."
-              ></i>
+              <span>Phone Number Id</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Phone Number Id."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -324,23 +336,26 @@ const WhatsappConfigurationModal = ({
               onChange={handleInputChange}
               readOnly={editData}
             />
-            {whatsappModalInput?.phoneNoId?.length < 2 && formError && (
+            {/* {whatsappModalInput?.phoneNoId?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
                   Phone Number Id is Required.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">WA Webhook Token</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel WA Webhook Token."
-              ></i>
+              <span>WA Webhook Token</span>
+              <span>Phone Number Id</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel WA Webhook Token."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -351,23 +366,25 @@ const WhatsappConfigurationModal = ({
               onChange={handleInputChange}
               readOnly={editData}
             />
-            {whatsappModalInput?.waWebhookToken?.length < 2 && formError && (
+            {/* {whatsappModalInput?.waWebhookToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
                   WA Webhook Token is Required.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">WA Webhook Url</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel WA Webhook Url."
-              ></i>
+              <span>WA Webhook Url</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel WA Webhook Url."
+                ></i>
+              )}
             </label>
             <input
               type="text"
@@ -378,11 +395,11 @@ const WhatsappConfigurationModal = ({
               onChange={handleInputChange}
               readOnly={editData}
             />
-            {whatsappModalInput?.waWebhookUrl?.length < 2 && formError && (
+            {/* {whatsappModalInput?.waWebhookUrl?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">WA Webhook Url is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
 

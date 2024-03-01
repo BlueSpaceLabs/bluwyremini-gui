@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 const CustomInputCard = ({
   labelTitle,
+  required,
   tooltipTitle,
   inputValue,
   inputName,
@@ -13,8 +14,9 @@ const CustomInputCard = ({
   return (
     <Box className=" fv-row mb-10 " sx={{ width: "45%" }}>
       <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-        <span className="required">{labelTitle}</span>
-        {tooltipTitle && (
+        <span className={required && "required"}>{labelTitle}</span>
+
+        {tooltipTitle && !readOnly && (
           <i
             className="fas fa-exclamation-circle ms-2 fs-7"
             data-bs-toggle="tooltip"
@@ -30,7 +32,7 @@ const CustomInputCard = ({
         onChange={handleInputChange}
         readOnly={readOnly}
       />
-      {inputValue?.length < 2 && formError && (
+      {required && inputValue?.length < 2 && formError && (
         <Box className="fv-plugins-message-container">
           <Box className="fv-help-block">{labelTitle} is Required.</Box>
         </Box>
@@ -50,6 +52,8 @@ const ModalBody = ({
       <Box className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
         <CustomInputCard
           labelTitle={"App Id"}
+          tooltipTitle={"App Id"}
+          required={true}
           inputValue={modalInput.appId}
           inputName={"appId"}
           handleInputChange={handleInputChange}
@@ -59,6 +63,8 @@ const ModalBody = ({
 
         <CustomInputCard
           labelTitle={"Business Id"}
+          tooltipTitle={"Business Id"}
+          required={true}
           inputValue={modalInput.businessId}
           inputName={"businessId"}
           handleInputChange={handleInputChange}
@@ -68,6 +74,7 @@ const ModalBody = ({
 
         <CustomInputCard
           labelTitle={"Instagram Webhook Token"}
+          tooltipTitle={"Instagram Webhook Token"}
           inputValue={modalInput.instaWebhookToken}
           inputName={"instaWebhookToken"}
           handleInputChange={handleInputChange}
@@ -77,6 +84,7 @@ const ModalBody = ({
 
         <CustomInputCard
           labelTitle={"Instagram Webhook Url"}
+          tooltipTitle={"Instagram Webhook Url"}
           inputValue={modalInput.instaWebhookUrl}
           inputName={"instaWebhookUrl"}
           handleInputChange={handleInputChange}
@@ -86,6 +94,7 @@ const ModalBody = ({
 
         <CustomInputCard
           labelTitle={"Instagram Id"}
+          tooltipTitle={"Instagram Id"}
           inputValue={modalInput.instagramId}
           inputName={"instagramId"}
           handleInputChange={handleInputChange}

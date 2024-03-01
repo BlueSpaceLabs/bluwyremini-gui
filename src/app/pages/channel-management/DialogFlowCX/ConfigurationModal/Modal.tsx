@@ -71,13 +71,13 @@ const DialogFlowCXConfigModal = ({
   const handleSubmit = async () => {
     console.log();
     if (
-      modalInput?.dcxAgentName.length < 2 ||
-      modalInput?.dcxApiKey.length < 2 ||
-      modalInput?.dcxClientEmail.length < 2 ||
-      modalInput?.dcxPhoneNo.length < 2 ||
-      modalInput?.dcxLocation.length < 2 ||
-      modalInput?.dcxPrivateKey.length < 2 ||
-      modalInput?.dcxProjectId.length < 2
+      modalInput?.dcxAgentName.length < 2
+      // modalInput?.dcxApiKey.length < 2 ||
+      // modalInput?.dcxClientEmail.length < 2 ||
+      // modalInput?.dcxPhoneNo.length < 2 ||
+      // modalInput?.dcxLocation.length < 2 ||
+      // modalInput?.dcxPrivateKey.length < 2 ||
+      // modalInput?.dcxProjectId.length < 2
     ) {
       setFormError(true);
     } else {

@@ -57,9 +57,9 @@ const TelegramConfigModal = ({
   const handleSubmit = async () => {
     console.log();
     if (
-      modalInput?.telegramToken.length < 2 ||
-      modalInput?.telegramWebhookUrl.length < 2 ||
-      modalInput?.telegramWebookToken.length < 2
+      modalInput?.telegramToken.length < 2
+      // modalInput?.telegramWebhookUrl.length < 2 ||
+      // modalInput?.telegramWebookToken.length < 2
     ) {
       setFormError(true);
     } else {

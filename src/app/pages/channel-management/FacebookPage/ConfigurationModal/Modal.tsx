@@ -65,11 +65,11 @@ const FacebookConfigModal = ({
   const handleSubmit = async () => {
     if (
       modalInput?.appId.length < 2 ||
-      modalInput?.businessId.length < 2 ||
-      modalInput?.fbAccessToken.length < 2 ||
-      modalInput?.fbWebhookToken.length < 2 ||
-      modalInput?.fbWebhookUrl.length < 2 ||
-      modalInput?.pageId.length < 2
+      modalInput?.businessId.length < 2
+      // modalInput?.fbAccessToken.length < 2 ||
+      // modalInput?.fbWebhookToken.length < 2 ||
+      // modalInput?.fbWebhookUrl.length < 2 ||
+      // modalInput?.pageId.length < 2
     ) {
       setFormError(true);
     } else {

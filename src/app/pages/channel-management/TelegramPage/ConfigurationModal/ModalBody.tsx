@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 const CustomInputCard = ({
   labelTitle,
+  required,
   tooltipTitle,
   inputValue,
   inputName,
@@ -13,8 +14,8 @@ const CustomInputCard = ({
   return (
     <Box className=" fv-row mb-10 " sx={{ width: "45%" }}>
       <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-        <span className="required">{labelTitle}</span>
-        {tooltipTitle && (
+        <span className={required && "required"}>{labelTitle}</span>
+        {tooltipTitle && !readOnly && (
           <i
             className="fas fa-exclamation-circle ms-2 fs-7"
             data-bs-toggle="tooltip"
@@ -30,7 +31,7 @@ const CustomInputCard = ({
         onChange={handleInputChange}
         readOnly={readOnly}
       />
-      {inputValue?.length < 2 && formError && (
+      {required && inputValue?.length < 2 && formError && (
         <Box className="fv-plugins-message-container">
           <Box className="fv-help-block">{labelTitle} is Required.</Box>
         </Box>
@@ -50,6 +51,8 @@ const ModalBody = ({
       <Box className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
         <CustomInputCard
           labelTitle={"Telegram Token"}
+          tooltipTitle={"Telegram Token"}
+          required={true}
           inputValue={modalInput.telegramToken}
           inputName={"telegramToken"}
           handleInputChange={handleInputChange}
@@ -59,6 +62,7 @@ const ModalBody = ({
 
         <CustomInputCard
           labelTitle={"Telegram Webhook Url"}
+          tooltipTitle={"Telegram Webhook Url"}
           inputValue={modalInput.telegramWebhookUrl}
           inputName={"telegramWebhookUrl"}
           handleInputChange={handleInputChange}
@@ -67,6 +71,7 @@ const ModalBody = ({
         />
         <CustomInputCard
           labelTitle={"telegram Webhook Token"}
+          tooltipTitle={"telegram Webhook Token"}
           inputValue={modalInput.telegramWebookToken}
           inputName={"telegramWebookToken"}
           handleInputChange={handleInputChange}

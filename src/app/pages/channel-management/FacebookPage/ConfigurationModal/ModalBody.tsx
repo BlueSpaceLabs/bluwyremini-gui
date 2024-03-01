@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 const CustomInputCard = ({
   labelTitle,
+  required,
   tooltipTitle,
   inputValue,
   inputName,
@@ -13,8 +14,8 @@ const CustomInputCard = ({
   return (
     <Box className=" fv-row mb-10 " sx={{ width: "45%" }}>
       <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-        <span className="required">{labelTitle}</span>
-        {tooltipTitle && (
+        <span className={required && "required"}>{labelTitle}</span>
+        {tooltipTitle && !readOnly && (
           <i
             className="fas fa-exclamation-circle ms-2 fs-7"
             data-bs-toggle="tooltip"
@@ -30,7 +31,7 @@ const CustomInputCard = ({
         onChange={handleInputChange}
         readOnly={readOnly}
       />
-      {inputValue?.length < 2 && formError && (
+      {required && inputValue?.length < 2 && formError && (
         <Box className="fv-plugins-message-container">
           <Box className="fv-help-block">{labelTitle} is Required.</Box>
         </Box>
@@ -50,6 +51,8 @@ const ModalBody = ({
       <Box className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
         <CustomInputCard
           labelTitle={"App Id"}
+          tooltipTitle={"App Id"}
+          required={true}
           inputValue={modalInput.appId}
           inputName={"appId"}
           handleInputChange={handleInputChange}
@@ -58,6 +61,8 @@ const ModalBody = ({
         />
         <CustomInputCard
           labelTitle={"Business Id"}
+          tooltipTitle={"Business Id"}
+          required={true}
           inputValue={modalInput.businessId}
           inputName={"businessId"}
           handleInputChange={handleInputChange}
@@ -66,6 +71,7 @@ const ModalBody = ({
         />
         <CustomInputCard
           labelTitle={"Facebook Access Token"}
+          tooltipTitle={"Facebook Access Token"}
           inputValue={modalInput.fbAccessToken}
           inputName={"fbAccessToken"}
           handleInputChange={handleInputChange}
@@ -74,6 +80,7 @@ const ModalBody = ({
         />
         <CustomInputCard
           labelTitle={"Facebook Webhook Token"}
+          tooltipTitle={"Facebook Webhook Token"}
           inputValue={modalInput.fbWebhookToken}
           inputName={"fbWebhookToken"}
           handleInputChange={handleInputChange}
@@ -82,6 +89,7 @@ const ModalBody = ({
         />
         <CustomInputCard
           labelTitle={"Facebook Webhook Url"}
+          tooltipTitle={"Facebook Webhook Url"}
           inputValue={modalInput.fbWebhookUrl}
           inputName={"fbWebhookUrl"}
           handleInputChange={handleInputChange}
@@ -90,6 +98,7 @@ const ModalBody = ({
         />
         <CustomInputCard
           labelTitle={"Page Id"}
+          tooltipTitle={"Page Id"}
           inputValue={modalInput.pageId}
           inputName={"pageId"}
           handleInputChange={handleInputChange}

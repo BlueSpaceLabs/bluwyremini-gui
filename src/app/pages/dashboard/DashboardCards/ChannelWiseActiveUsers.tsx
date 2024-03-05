@@ -48,12 +48,12 @@ const ChannelWiseActiveUsers = () => {
           style={{ backgroundColor: "" }}
         >
           <Box className="card-body">
-            <Box className=" text-white fw-bold fs-2 mb-1 mt-1">
+            <Box className=" text-white fw-bol fs-2 mb-1 mt-1">
               Channnel Wise Active Users
             </Box>
             In last 24 hrs.
             <br />
-            <Box className={`fw-semibold text-white`}>
+            <Box className={`text-white`}>
               <span
                 className="bi bi-whatsapp"
                 style={{ fontSize: 25, color: "lightblue" }}
@@ -62,7 +62,7 @@ const ChannelWiseActiveUsers = () => {
               </span>{" "}
               - {wabaCount}
             </Box>
-            <Box className={`fw-semibold text-white`}>
+            <Box className={`text-white`}>
               <span
                 className="bi bi-messenger"
                 style={{ fontSize: 25, color: "lightblue" }}
@@ -71,7 +71,7 @@ const ChannelWiseActiveUsers = () => {
               </span>{" "}
               - {fbmCount}
             </Box>
-            <Box className={`fw-semibold text-white`}>
+            <Box className={`text-white`}>
               <span
                 className="bi bi-instagram"
                 style={{ fontSize: 25, color: "lightblue" }}
@@ -80,7 +80,7 @@ const ChannelWiseActiveUsers = () => {
               </span>{" "}
               - {instaCount}
             </Box>
-            <Box className={`fw-semibold text-white`}>
+            <Box className={`text-white`}>
               <span
                 className="bi bi-telegram"
                 style={{ fontSize: 25, color: "lightblue" }}
@@ -95,7 +95,7 @@ const ChannelWiseActiveUsers = () => {
                 to="/contact-management"
                 className="btn"
                 style={{
-                  backgroundColor: "red",
+                  backgroundColor: "#CC2936", //CC2936, D7263D, BF211E, BB0A21
                   color: "white",
                   minWidth: 300,
                 }}

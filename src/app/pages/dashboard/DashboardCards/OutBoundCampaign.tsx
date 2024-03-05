@@ -57,14 +57,14 @@ const OutBoundCampaign = () => {
           style={{ backgroundColor: "" }}
         >
           <Box className="card-body">
-            <Box className=" text-white fw-bold fs-2 mb-1 mt-1">
+            <Box className=" text-white fw-bol fs-2 mb-1 mt-1">
               Outbound Campaign
             </Box>
             Summary of last 30 days
             <br />
             <br />
             <Box
-              className={`fw-semibold text-lightgray`}
+              className={`text-lightgray`}
               style={{ color: "lightblue" }}
             >
               Campaigns Created : {campaignsCreated}

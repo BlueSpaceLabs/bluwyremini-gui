@@ -23,12 +23,10 @@ const CustomDeleteModal = ({
   const { baseUrl } = useStaticData();
 
   const handleDeleteClick = async () => {
-    const url = `${baseUrl}/deleteMediaDetails.php`;
-
-    const accessKey =
-      "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
     try {
+      const url = `${baseUrl}/deleteMediaDetails.php`;
+      const accessKey = sessionStorage.getItem("accessKey");
+
       const response = await axios.post(url, null, {
         params: {
           accessKey,

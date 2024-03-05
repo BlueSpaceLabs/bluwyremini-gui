@@ -7,7 +7,7 @@ import useStaticData from "../../../../StaticData";
 //   const url =
 //     `${baseUrl}/getChatUsersList.php`;
 //   const params = {
-//     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+//     accessKey: accessKey,
 //     id: "2",
 //     channelName: inboxChannel,
 //   };
@@ -58,10 +58,10 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
 
       try {
         const url = `${baseUrl}/getChatUsersList.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const params = {
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
           assignedTo: storedUserId,
           userType: storedUserType === "ADMIN_ROLE" ? "admin" : "agent",
           channelName: inboxChannel,
@@ -96,9 +96,11 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   //       try {
   //         const url =
   //           `${baseUrl}/getChatUsersList.php`;
+  // const accessKey = sessionStorage.getItem("accessKey");
+
   //         const params = {
   //           accessKey:
-  //             "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+  //             accessKey,
   //           id: "2",
   //           channelName: inboxChannel,
   //         };

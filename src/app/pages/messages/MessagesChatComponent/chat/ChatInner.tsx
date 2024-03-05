@@ -158,11 +158,10 @@ const ChatConversation = ({
   };
 
   const handleMessageClick = async () => {
-    const accessKey =
-      "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
     try {
       const url = `${baseUrl}/updateMsgStatusRead.php`;
+      const accessKey = sessionStorage.getItem("accessKey");
+
       const params = {
         accessKey: accessKey,
         custId: selectedInbox.custNumber,

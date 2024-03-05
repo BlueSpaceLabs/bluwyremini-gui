@@ -25,9 +25,6 @@ const initialValue = {
   selectedTime: "now",
 };
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 const UsersListToolbar = ({
   showCreateAppModal,
   setShowCreateAppModal,
@@ -44,13 +41,12 @@ const UsersListToolbar = ({
   const [steps, setSteps] = useState<number>(1);
 
   const [tenant, setTenant] = React.useState<string>("bsl");
-  // const [accessKey, setAccessKey] = React.useState<string>(
-  //   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm"
-  // );
 
   //const { mutateAsync } = useMutation(postAddCampaign);
 
   const handleCampaignSubmit = () => {
+    const accessKey = sessionStorage.getItem("accessKey");
+
     // console.log('campaignName',campaignInputData.campaignName)
     //console.log('uploadfile ',campaignInputData.campaignUploadFile)
     const formData = new FormData();

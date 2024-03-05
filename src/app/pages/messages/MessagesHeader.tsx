@@ -83,9 +83,10 @@ const MessagesHeader = ({
   // console.log("messageUnreadCount MessagesHeader", messageUnreadCount);
   useEffect(() => {
     const url = `${baseUrl}/getKeywordDetails.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
 
     const params = {
-      accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+      accessKey: accessKey,
     };
 
     const fetchData = async () => {

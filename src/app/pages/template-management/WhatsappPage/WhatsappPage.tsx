@@ -13,9 +13,14 @@ import CustomTemplateTable from "./CustomTable";
 const serviceAxiosGetTemplateWhatsappData = async () => {
   const url =
     "http://3.108.229.60:8082/bluwyremini-backend/info/getTemplatesList.php";
+
+  // const accessKey = sessionStorage.getItem("accessKey");
+  const accessKey =
+    "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+
   const params = {
     templateStatus: "approved",
-    accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+    accessKey: accessKey,
     waba_id: "116042751363278",
     access_token:
       "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",

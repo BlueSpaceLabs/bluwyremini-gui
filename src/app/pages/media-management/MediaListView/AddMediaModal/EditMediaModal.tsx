@@ -20,9 +20,6 @@ const modalsRoot = document.getElementById("root-modals") || document.body;
 
 const blankImg = toAbsoluteUrl("media/svg/avatars/blank.svg");
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 const EditMediaModal = ({
   show,
   handleClose,
@@ -71,6 +68,8 @@ any) => {
     if (mediaTitle.length < 2 || mediaDescription.length < 2) {
       setFormError(true);
     } else {
+      const accessKey = sessionStorage.getItem("accessKey");
+
       /*mutateAsync({
         requestData: {
           tenant: "bsl",
@@ -150,11 +149,11 @@ any) => {
     const getMediaDetails = async () => {
       const url = `${baseUrl}/getMediaDetails.php`;
 
-      const accessKey =
-        "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
       const selectedId = detailMediaData?.id;
 
       try {
+        const accessKey = sessionStorage.getItem("accessKey");
+
         const response = await axios.get(url, {
           params: {
             accessKey,

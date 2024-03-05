@@ -14,10 +14,11 @@ const ChannelDetails = () => {
     const serviceGetContactDetails = async () => {
       try {
         const url = `${baseUrl}/getContactChannelDetails.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
+
         const response = await axios.get(url, {
           params: {
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
           },
         });
         const responseData = response?.data;

@@ -89,13 +89,13 @@ const DialogFlowCXConfigModal = ({
         // if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
         const url = `${baseUrl}/addConfigurationDetails.php?channelName=dialogflowcx`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.post(
           url,
           {
             tenant: "bsl",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             customer_data: {
               dcxAgentName: modalInput.dcxAgentName,
               dcxPrivateKey: modalInput.dcxPrivateKey,

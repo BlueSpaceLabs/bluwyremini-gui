@@ -11,11 +11,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useStaticData from "../../../../../StaticData";
 
-// const accessKey =
-//   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 // const serviceGetAgentProfileDetails = async () => {
 //   const url =  `${baseUrl}/getAgentProfileDetails.php`;
+// const accessKey = sessionStorage.getItem("accessKey");
 
 //   const agentName = "rohitborkar";
 
@@ -97,9 +95,7 @@ const ProfileDetails: FC = () => {
     const fetchAgentProfile = async () => {
       try {
         const url = `${baseUrl}/getAgentProfileDetails.php`;
-
-        const accessKey =
-          "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {

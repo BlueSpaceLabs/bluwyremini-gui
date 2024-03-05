@@ -17,9 +17,11 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
   //     const url =
   //       `${baseUrl}/getWabaBusinessInfo.php`;
   //     try {
+  // const accessKey = sessionStorage.getItem("accessKey");
+
   //       const params = {
   //         accessKey:
-  //           "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+  //           accessKey,
   //         // channelConfigurationData.accessToken,
   //         phoneNoId: channelConfigurationData.phoneNoId,
   //         accessToken: channelConfigurationData.permanentToken,
@@ -50,11 +52,11 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
     const fetchData = async () => {
       try {
         const url = `${baseUrl}/getWabaBusinessInfo.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             phoneNoId: channelConfigurationData?.phoneNoId,
             accessToken: channelConfigurationData?.accessToken,
             channelName: "whatsapp",

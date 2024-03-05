@@ -71,10 +71,11 @@ const EditAgentsModal = ({
       setFormError(false);
 
       try {
+        const accessKey = sessionStorage.getItem("accessKey");
+
         const data = {
           tenant: "bsl",
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
           agent_data: {
             mobileNo: agentInputData.mobileNo,
             firstName: agentInputData.firstName,

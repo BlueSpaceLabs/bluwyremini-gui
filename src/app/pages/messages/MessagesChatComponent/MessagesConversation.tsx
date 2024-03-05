@@ -13,7 +13,7 @@ import useStaticData from "../../../StaticData";
 //        `${baseUrl}/getChatUserDetails.php`;
 
 //   const params = {
-//     accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+//     accessKey: accessKey,
 //     id: selectedId,
 //   };
 
@@ -64,10 +64,10 @@ const MessagesConversation = ({
 
       try {
         const url = `${baseUrl}/getChatUserDetails.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const params = {
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
           id: selectedInbox?.custNumber,
         };
 
@@ -94,9 +94,10 @@ const MessagesConversation = ({
 
   useEffect(() => {
     const url = `${baseUrl}/getAgentProfileDetails.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
 
     const params = {
-      accessKey: "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+      accessKey: accessKey,
     };
 
     const fetchData = async () => {
@@ -116,12 +117,11 @@ const MessagesConversation = ({
 
   useEffect(() => {
     const handleAssignAgent = async () => {
-      const accessKey =
-        "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
       const tenant = "bsl";
 
       try {
         const url = `${baseUrl}/assignedChatToAgent.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const selectedAgent = JSON.parse(agentSelected);
 

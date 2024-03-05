@@ -35,8 +35,7 @@ const SidebarMenu = () => {
     const fetchAgentProfile = async () => {
       try {
         const url = `${baseUrl}/getAgentProfileDetails.php`;
-        const accessKey =
-          "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {
@@ -68,11 +67,11 @@ const SidebarMenu = () => {
 
       try {
         const url = `${baseUrl}/getMsgUnreadCount.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             assignedTo: storedUserId,
             userType: storedUserType === "ADMIN_ROLE" ? "admin" : "agent",
           },

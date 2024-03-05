@@ -26,7 +26,9 @@ const initialValue = {
   waWebhookUrl: null,
 };
 
-const WhatsappPage = ({ channelName, accessKey }: any) => {
+const WhatsappPage = ({ channelName }: any) => {
+  const accessKey = sessionStorage.getItem("accessKey");
+
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,

@@ -25,10 +25,11 @@ const DeleteKeyWordModal = ({
 
   const handleDeleteClick = async () => {
     try {
+      const accessKey = sessionStorage.getItem("accessKey");
+
       const config = {
         params: {
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
           id: detailData.id,
         },
       };

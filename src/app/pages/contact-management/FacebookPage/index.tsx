@@ -23,11 +23,12 @@ const FacebookPage = () => {
     const serviceGetContactDetails = async () => {
       try {
         const url = `${baseUrl}/getContactDetails.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
+
         const response = await axios.get(url, {
           params: {
             channelName: "whatsapp",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             search: searchContact,
             from: fromDate,
             to: toDate,

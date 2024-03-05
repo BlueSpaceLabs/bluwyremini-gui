@@ -17,9 +17,6 @@ import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 const MediaListView = () => {
   const { baseUrl } = useStaticData();
 
@@ -53,6 +50,7 @@ const MediaListView = () => {
   React.useEffect(() => {
     const getMediaListData = async () => {
       const url = `${baseUrl}/getMediaDetails.php`;
+      const accessKey = sessionStorage.getItem("accessKey");
 
       const params = {
         accessKey: accessKey,
@@ -87,7 +85,6 @@ const MediaListView = () => {
           tableData={mediaListViewData}
           setSnackbar={setSnackbar}
 
-          // accessKey={accessKey}
           // channelName={channelName}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
           // setShowSnackbar={setShowSnackbar}

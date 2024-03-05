@@ -16,9 +16,6 @@ import CustomCampaignTable from "./CustomTable";
 import useStaticData from "../../../StaticData";
 import axios from "axios";
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 const CampaignListView = ({
   showCreateAppModal,
   setShowCreateAppModal,
@@ -44,6 +41,8 @@ const CampaignListView = ({
 
   useEffect(() => {
     const url = `${baseUrl}/getCampaignList.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
+
     const params = {
       accessKey: accessKey,
     };

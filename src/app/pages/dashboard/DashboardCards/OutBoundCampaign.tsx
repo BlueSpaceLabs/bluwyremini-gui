@@ -22,10 +22,10 @@ const OutBoundCampaign = () => {
     const fetchData = async () => {
       try {
         const url = `${baseUrl}/getLast31DaysCampaignData.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const params = {
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
         };
 
         const response = await axios.get(url, { params });

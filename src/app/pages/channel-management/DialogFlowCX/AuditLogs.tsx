@@ -1,8 +1,8 @@
 import React from "react";
-import useStaticData from "../../../StaticData";
+// import useStaticData from "../../../StaticData";
 
 const AuditLogs = () => {
-  const { baseUrl } = useStaticData();
+  // const { baseUrl } = useStaticData();
 
   const [detailData, setDetailData] = React.useState({
     verified_name: null,
@@ -15,12 +15,13 @@ const AuditLogs = () => {
   //   React.useEffect(() => {
   //     const fetchData = async () => {
   //       try {
+  // const accessKey = sessionStorage.getItem("accessKey");
+
   //         const response = await axios.get(
   //           `${baseUrl}/getWabaBusinessInfo.php``,
   //           {
   //             params: {
-  //               accessKey:
-  //                 "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+  //               accessKey:accessKey,
   //               phoneNoId: channelConfigurationData?.phoneNoId,
   //               accessToken: channelConfigurationData?.accessToken,
   //               channelName: "whatsapp",

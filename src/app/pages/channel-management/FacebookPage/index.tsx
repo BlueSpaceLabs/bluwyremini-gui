@@ -8,7 +8,7 @@ import AuditLogs from "./AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
 
-const FacebookPage = ({ channelName, accessKey }: any) => {
+const FacebookPage = ({ channelName }: any) => {
   // console.log(channelName, accessKey);
   const { baseUrl } = useStaticData();
 
@@ -27,12 +27,12 @@ const FacebookPage = ({ channelName, accessKey }: any) => {
   const serviceGetFacebookData = async () => {
     try {
       const url = `${baseUrl}/getChannelDetails.php`;
+      const accessKey = sessionStorage.getItem("accessKey");
 
       const response = await axios.get(url, {
         params: {
           channelName: "messenger",
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
         },
       });
       const responseData = response?.data;

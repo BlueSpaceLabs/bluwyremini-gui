@@ -10,7 +10,7 @@ import { KTCard } from "../../../../../_metronic/helpers";
 import CustomSnackBar from "../../../../components/CustomSnackbar";
 import useStaticData from "../../../../StaticData";
 
-const TelegramTempPage = ({ channelName, accessKey }: any) => {
+const TelegramTempPage = ({ channelName }: any) => {
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,
     severitySnackBar: "",
@@ -46,12 +46,12 @@ const TelegramTempPage = ({ channelName, accessKey }: any) => {
     const serviceGetContactDetails = async () => {
       try {
         const url = `${baseUrl}/getContactDetails.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {
             channelName: "telegram",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             search: searchContact,
             from: fromDate,
             to: toDate,
@@ -86,7 +86,6 @@ const TelegramTempPage = ({ channelName, accessKey }: any) => {
         />
         <CustomContactTable
           tableData={whatsAppListViewData}
-          accessKey={accessKey}
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
@@ -96,7 +95,6 @@ const TelegramTempPage = ({ channelName, accessKey }: any) => {
         <AddWhatsAppContactModal
           show={showAddContactModal}
           handleClose={() => setShowAddContactModal(false)}
-          accessKey={accessKey}
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}

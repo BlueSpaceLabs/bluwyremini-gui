@@ -20,8 +20,7 @@ const modalsRoot = document.getElementById("root-modals") || document.body;
 
 const blankImg = toAbsoluteUrl("media/svg/avatars/blank.svg");
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
+const accessKey = sessionStorage.getItem("accessKey");
 
 const AddMediaModal = ({
   show,

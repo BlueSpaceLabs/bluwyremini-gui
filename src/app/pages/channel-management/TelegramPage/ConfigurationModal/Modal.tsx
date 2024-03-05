@@ -71,13 +71,13 @@ const TelegramConfigModal = ({
 
       try {
         const url = `${baseUrl}/addConfigurationDetails.php?channelName=telegram`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.post(
           url,
           {
             tenant: "bsl",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             customer_data: {
               telegramToken: modalInput.telegramToken,
               telegramWebhookUrl: modalInput.telegramWebhookUrl,

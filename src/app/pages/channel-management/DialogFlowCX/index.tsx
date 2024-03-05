@@ -8,7 +8,7 @@ import AuditLogs from "./AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
 
-const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
+const DialogFlowCXPage = ({ channelName }: any) => {
   const { baseUrl } = useStaticData();
 
   // console.log(channelName, accessKey);
@@ -28,12 +28,12 @@ const DialogFlowCXPage = ({ channelName, accessKey }: any) => {
   const serviceGetDialogFlowCXData = async () => {
     try {
       const url = `${baseUrl}/getChannelDetails.php`;
+      const accessKey = sessionStorage.getItem("accessKey");
 
       const response = await axios.get(url, {
         params: {
           channelName: "dialogflowcx",
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
         },
       });
       const responseData = response?.data;

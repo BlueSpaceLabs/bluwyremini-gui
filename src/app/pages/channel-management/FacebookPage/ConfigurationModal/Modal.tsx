@@ -81,13 +81,13 @@ const FacebookConfigModal = ({
         // if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
         const url = `${baseUrl}/addConfigurationDetails.php?channelName=messenger`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.post(
           url,
           {
             tenant: "bsl",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             customer_data: {
               appId: modalInput.appId,
               businessId: modalInput.businessId,

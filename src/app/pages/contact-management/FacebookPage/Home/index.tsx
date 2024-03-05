@@ -10,7 +10,7 @@ import { KTCard } from "../../../../../_metronic/helpers";
 import CustomSnackBar from "../../../../components/CustomSnackbar";
 import useStaticData from "../../../../StaticData";
 
-const FaceBookTempPage = ({ channelName, accessKey }: any) => {
+const FaceBookTempPage = ({ channelName }: any) => {
   const { baseUrl } = useStaticData();
 
   const [snackbar, setSnackbar] = useState({
@@ -47,12 +47,12 @@ const FaceBookTempPage = ({ channelName, accessKey }: any) => {
     const serviceGetContactDetails = async () => {
       try {
         const url = `${baseUrl}/getContactDetails.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {
             channelName: "messenger",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey,
             search: searchContact,
             from: fromDate,
             to: toDate,
@@ -87,7 +87,6 @@ const FaceBookTempPage = ({ channelName, accessKey }: any) => {
         />
         <CustomContactTable
           tableData={whatsAppListViewData}
-          accessKey={accessKey}
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
@@ -97,7 +96,6 @@ const FaceBookTempPage = ({ channelName, accessKey }: any) => {
         <AddWhatsAppContactModal
           show={showAddContactModal}
           handleClose={() => setShowAddContactModal(false)}
-          accessKey={accessKey}
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}

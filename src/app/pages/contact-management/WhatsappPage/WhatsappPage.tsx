@@ -9,7 +9,7 @@ import axios from "axios";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
 
-const WhatsappPage = ({ channelName, accessKey }: any) => {
+const WhatsappPage = ({ channelName }: any) => {
   const { baseUrl } = useStaticData();
 
   const [snackbar, setSnackbar] = useState({
@@ -45,12 +45,12 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
     const serviceGetContactDetails = async () => {
       try {
         const url = `${baseUrl}/getContactDetails.php`;
+        const accessKey = sessionStorage.getItem("accessKey");
 
         const response = await axios.get(url, {
           params: {
             channelName: "whatsapp",
-            accessKey:
-              "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+            accessKey: accessKey,
             search: searchContact,
             from: fromDate,
             to: toDate,
@@ -85,7 +85,6 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
         />
         <CustomContactTable
           tableData={whatsAppListViewData}
-          accessKey={accessKey}
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}
@@ -95,7 +94,6 @@ const WhatsappPage = ({ channelName, accessKey }: any) => {
         <AddWhatsAppContactModal
           show={showAddContactModal}
           handleClose={() => setShowAddContactModal(false)}
-          accessKey={accessKey}
           channelName={channelName}
           setRefetchData={setRefetchData}
           // refetchWhatsAppContactListData={refetchWhatsAppContactListData}

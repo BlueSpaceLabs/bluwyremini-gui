@@ -50,9 +50,6 @@ const initialCampaignData = {
   userActiveCount: "",
 };
 
-const accessKey =
-  "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
-
 const tenant = "bsl";
 
 const ActiveUserDetails = () => {
@@ -70,6 +67,7 @@ const ActiveUserDetails = () => {
 
   useEffect(() => {
     const url = `${baseUrl}/getActiveUserCampaignDetails.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
 
     const params = {
       accessKey: accessKey,
@@ -92,6 +90,8 @@ const ActiveUserDetails = () => {
   }, []);
 
   const handleActiveUserCampaignSubmit = async () => {
+    const accessKey = sessionStorage.getItem("accessKey");
+
     // console.log('campaignName',campaignInputData.campaignName)
     //console.log('uploadfile ',campaignInputData.campaignUploadFile)
     const formData = new FormData();

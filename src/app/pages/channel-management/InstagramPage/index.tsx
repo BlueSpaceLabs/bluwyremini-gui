@@ -8,7 +8,7 @@ import AuditLogs from "./AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
 
-const InstagramPage = ({ channelName, accessKey }: any) => {
+const InstagramPage = ({ channelName }: any) => {
   // console.log(channelName, accessKey);
   const { baseUrl } = useStaticData();
 
@@ -27,12 +27,12 @@ const InstagramPage = ({ channelName, accessKey }: any) => {
   const serviceGetInstagramData = async () => {
     try {
       const url = `${baseUrl}/getChannelDetails.php`;
+      const accessKey = sessionStorage.getItem("accessKey");
 
       const response = await axios.get(url, {
         params: {
           channelName: "instagram",
-          accessKey:
-            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          accessKey: accessKey,
         },
       });
       const responseData = response?.data;

@@ -16,6 +16,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { CustomActionButton } from "./CustomActionButton";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -97,9 +98,17 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-export default function CustomCampaignTable({ tableData }: any) {
+export default function CustomCampaignTable({
+  tableData,
+  setRefetchList,
+}: any) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [snackbar, setSnackbar] = React.useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -121,98 +130,119 @@ export default function CustomCampaignTable({ tableData }: any) {
 
   if (tableData.length > 0) {
     return (
-      <TableContainer sx={{ pt: 4 }}>
-        <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
-          <TableHead>
-            <TableRow>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Campaign Name
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Channel
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Delivery Report
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Execution Date Time
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Created Date Time
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Campaign Status
-              </TableCell>
-              <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                Action
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? tableData.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : tableData
-            ).map((row: any) => {
-              return (
-                <TableRow key={row.id}>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    <span style={{ color: "black" }}>{row.campaignName}</span>
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.channel}
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    Sent: {row.sentCount}, Delivered: {row.deliveredCount},
-                    Read: {row.readCount}
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.executionDatetime}
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.createdDatetime}
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {row.campaignStatus}
-                  </TableCell>
-                  <TableCell className="text-gray-600 fw-bold fs-8 py-8">
-                    {/* Action */}
-                    {/* <UserActionsCell id={1} /> */}
-                    <CustomActionButton detailCampaignData={row} />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+      <>
+        <TableContainer sx={{ pt: 4 }}>
+          <Table sx={{ minWidth: "100%" }} aria-label="custom pagination table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Campaign Name
+                </TableCell>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Channel
+                </TableCell>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Delivery Report
+                </TableCell>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Execution Date Time
+                </TableCell>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Created Date Time
+                </TableCell>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Campaign Status
+                </TableCell>
+                <TableCell className="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                  Action
+                </TableCell>
               </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
-                count={tableData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: {
-                    "aria-label": "rows per page",
-                  },
-                  native: true,
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {(rowsPerPage > 0
+                ? tableData.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : tableData
+              ).map((row: any) => {
+                return (
+                  <TableRow key={row.id}>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      <span style={{ color: "black" }}>{row.campaignName}</span>
+                    </TableCell>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      {row.channel === "whatsapp"
+                        ? "WA"
+                        : row.channel === "telegram"
+                        ? "TEL"
+                        : row.channel === "instagram"
+                        ? "INSTA"
+                        : row.channel === "messenger"
+                        ? "FBM"
+                        : "NA"}
+                    </TableCell>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      Sent: {row.sentCount}, Delivered: {row.deliveredCount},
+                      Read: {row.readCount}
+                    </TableCell>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      {row.executionDatetime}
+                    </TableCell>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      {row.createdDatetime}
+                    </TableCell>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      {row.campaignStatus}
+                    </TableCell>
+                    <TableCell className="text-gray-600 fw-bold fs-8 py-8">
+                      {/* Action */}
+                      {/* <UserActionsCell id={1} /> */}
+                      <CustomActionButton
+                        detailCampaignData={row}
+                        setSnackbar={setSnackbar}
+                        setRefetchList={setRefetchList}
+                      />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[10, 25, { label: "All", value: -1 }]}
+                  colSpan={3}
+                  count={tableData.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </TableContainer>
+
+        <CustomSnackBar
+          showSnackbar={snackbar.showSnackbar}
+          setSnackbar={setSnackbar}
+          severitySnackBar={snackbar.severitySnackBar}
+          messageSnackBar={snackbar.messageSnackBar}
+        />
+      </>
     );
   } else {
     return (

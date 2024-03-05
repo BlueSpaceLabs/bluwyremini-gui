@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { KTCard } from "../../../../_metronic/helpers";
 
 import {
@@ -11,8 +11,10 @@ import { UsersListHeader } from "../CampaignListView/components/header/UsersList
 // import { UsersTable } from "../CampaignListView/table/UsersTable";
 import { UserEditModal } from "../CampaignListView/user-edit-modal/UserEditModal";
 import CustomCampaignTable from "./CustomTable";
-import { useQuery } from "react-query";
-import { getCampaignDataAPI } from "../../../services/CampaignManagement";
+// import { useQuery } from "react-query";
+// import { getCampaignDataAPI } from "../../../services/CampaignManagement";
+import useStaticData from "../../../StaticData";
+import axios from "axios";
 
 const accessKey =
   "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm";
@@ -21,20 +23,44 @@ const CampaignListView = ({
   showCreateAppModal,
   setShowCreateAppModal,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
+  const [refetchList, setRefetchList] = useState<boolean>(false);
+
   const { itemIdForUpdate } = useListView();
 
   const [campaignListViewData, setCampaignListViewData] = React.useState([]);
 
-  const {
-    data: getCampaignData,
-    isLoading,
-    error,
-  } = useQuery("getCampaignData", () => getCampaignDataAPI(accessKey));
+  // const {
+  //   data: getCampaignData,
+  //   isLoading,
+  //   error,
+  // } = useQuery("getCampaignData", () => getCampaignDataAPI(accessKey));
 
-  React.useEffect(() => {
-    console.log({ getCampaignData });
-    if (getCampaignData?.length > 0) setCampaignListViewData(getCampaignData);
-  }, [getCampaignData]);
+  // React.useEffect(() => {
+  //   console.log({ getCampaignData });
+  //   if (getCampaignData?.length > 0) setCampaignListViewData(getCampaignData);
+  // }, [getCampaignData]);
+
+  useEffect(() => {
+    const url = `${baseUrl}/getCampaignList.php`;
+    const params = {
+      accessKey: accessKey,
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        setCampaignListViewData(responseData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [refetchList]);
 
   return (
     <>
@@ -45,7 +71,10 @@ const CampaignListView = ({
         />
         {/* <UsersTable /> */}
 
-        <CustomCampaignTable tableData={campaignListViewData} />
+        <CustomCampaignTable
+          tableData={campaignListViewData}
+          setRefetchList={setRefetchList}
+        />
       </KTCard>
       {itemIdForUpdate !== undefined && <UserEditModal />}
     </>

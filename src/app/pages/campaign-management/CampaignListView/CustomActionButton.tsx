@@ -10,7 +10,11 @@ import DetailCampaignModal from "./DetailModal";
 //   id: ID;
 // };
 
-const CustomActionButton = ({ detailCampaignData }: any) => {
+const CustomActionButton = ({
+  detailCampaignData,
+  setSnackbar,
+  setRefetchList,
+}: any) => {
   const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
 
   const [showDetailCampaignModal, setShowDetailCampaignModal] =
@@ -74,7 +78,8 @@ const CustomActionButton = ({ detailCampaignData }: any) => {
         show={showDetailCampaignModal}
         handleClose={() => setShowDetailCampaignModal(false)}
         selectedId={detailCampaignData.id}
-        // setRefetchList={setRefetchList}
+        setRefetchList={setRefetchList}
+        setSnackbar={setSnackbar}
       />
     </>
   );

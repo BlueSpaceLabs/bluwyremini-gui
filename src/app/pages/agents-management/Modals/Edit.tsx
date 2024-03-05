@@ -53,13 +53,13 @@ const EditAgentsModal = ({
     if (
       agentInputData.mobileNo.length < 2 ||
       agentInputData.firstName.length < 2 ||
-      agentInputData.lastName.length < 2 ||
+      // agentInputData.lastName.length < 2 ||
       agentInputData.emailAddress.length < 2 ||
-      agentInputData.designation.length < 2 ||
-      agentInputData.address.length < 2 ||
-      agentInputData.country.length < 2 ||
-      agentInputData.company.length < 2 ||
-      agentInputData.companyWebsite.length < 2 ||
+      // agentInputData.designation.length < 2 ||
+      // agentInputData.address.length < 2 ||
+      // agentInputData.country.length < 2 ||
+      // agentInputData.company.length < 2 ||
+      // agentInputData.companyWebsite.length < 2 ||
       // agentInputData.agentUsername.length < 2 ||
       // agentInputData.agentPassword.length < 2 ||
       agentInputData.agentType.length < 2
@@ -244,6 +244,7 @@ const EditAgentsModal = ({
               name="agentType"
               onChange={handleInputChange}
               value={agentInputData.agentType}
+              disabled
             >
               <option value="Agent">Agent</option>
               <option value="Admin">Admin</option>
@@ -308,7 +309,7 @@ const EditAgentsModal = ({
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Last Name</span>
+              <span>Last Name</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -324,11 +325,11 @@ const EditAgentsModal = ({
               value={agentInputData.lastName}
               onChange={handleInputChange}
             />
-            {agentInputData.lastName.length < 2 && formError && (
+            {/* {agentInputData.lastName.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Last Name is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
@@ -358,7 +359,7 @@ const EditAgentsModal = ({
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Designation</span>
+              <span>Designation</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -374,16 +375,16 @@ const EditAgentsModal = ({
               value={agentInputData.designation}
               onChange={handleInputChange}
             />
-            {agentInputData.designation.length < 2 && formError && (
+            {/* {agentInputData.designation.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Designation is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Address</span>
+              <span>Agent Address</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -399,16 +400,16 @@ const EditAgentsModal = ({
               value={agentInputData.address}
               onChange={handleInputChange}
             />
-            {agentInputData.address.length < 2 && formError && (
+            {/* {agentInputData.address.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Agent Address is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Country</span>
+              <span>Agent Country</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -424,16 +425,16 @@ const EditAgentsModal = ({
               value={agentInputData.country}
               onChange={handleInputChange}
             />
-            {agentInputData.country.length < 2 && formError && (
+            {/* {agentInputData.country.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Agent Country is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Company</span>
+              <span>Agent Company</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -449,16 +450,16 @@ const EditAgentsModal = ({
               value={agentInputData.company}
               onChange={handleInputChange}
             />
-            {agentInputData.company.length < 2 && formError && (
+            {/* {agentInputData.company.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Agent Company is Required.</div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Agent Company Website</span>
+              <span>Agent Company Website</span>
               {/* <i
                 className="fas fa-exclamation-circle ms-2 fs-7"
                 data-bs-toggle="tooltip"
@@ -474,13 +475,13 @@ const EditAgentsModal = ({
               value={agentInputData.companyWebsite}
               onChange={handleInputChange}
             />
-            {agentInputData.companyWebsite.length < 2 && formError && (
+            {/* {agentInputData.companyWebsite.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
                   Agent Company Website is Required.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* <div className=" fv-row mb-3 w-100 ">

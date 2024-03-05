@@ -2,6 +2,8 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { Modal } from "react-bootstrap";
 import { KTIcon } from "../../../../_metronic/helpers";
+import useStaticData from "../../../StaticData";
+import axios from "axios";
 
 // type Props = {
 //   show: boolean;
@@ -13,9 +15,57 @@ const modalsRoot = document.getElementById("root-modals") || document.body;
 const CustomDeleteModal = ({
   show,
   handleClose,
+  handleDetailModalClose,
   selectedId,
   campaignDetailData,
+  setSnackbar,
+  setRefetchList,
 }: any) => {
+  const { baseUrl } = useStaticData();
+
+  const handleDeleteClick = async () => {
+    try {
+      const config = {
+        params: {
+          accessKey:
+            "$2y$10$0MNB6SNrJCDmXpZgb14Cgu7r3ZcEVlbbk8XvmRn2x9hKZXebK5Grm",
+          id: selectedId,
+        },
+      };
+
+      const response = await axios.post(
+        `${baseUrl}/deleteCampaignDetails.php`,
+        null,
+        config
+      );
+
+      // console.log("Response:", response);
+
+      setRefetchList((preV: boolean) => !preV);
+
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "success",
+        messageSnackBar: response?.data?.message
+          ? response?.data?.message
+          : "Successfully Deleted Agents",
+      });
+    } catch (error) {
+      // console.error("Error:", error);
+
+      setSnackbar({
+        showSnackbar: true,
+        severitySnackBar: "error",
+        messageSnackBar: error?.response?.data?.message
+          ? error?.response?.data?.message
+          : "Failed to Delete Agent !",
+      });
+    } finally {
+      handleDetailModalClose();
+      handleClose();
+    }
+  };
+
   return createPortal(
     <Modal
       tabIndex={-1}
@@ -60,7 +110,7 @@ const CustomDeleteModal = ({
           type="button"
           className="btn btn-lg btn-primary"
           data-kt-stepper-action="submit"
-          onClick={handleClose}
+          onClick={handleDeleteClick}
         >
           Confirm
           <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />

@@ -340,6 +340,17 @@ any) => {
             </div>
           </div>
 
+          <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
+            <div className="w-25">
+              <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+                <span>Media Type</span>
+              </label>
+            </div>
+            <div className="w-75">
+              <span className="fw-bolder fs-5 text-gray-500">{mediaType}</span>
+            </div>
+          </div>
+
           <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span className="required">Media Title</span>
@@ -390,17 +401,6 @@ any) => {
             )}
           </div>
 
-          <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
-            <div className="w-25">
-              <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-                <span>Media Type</span>
-              </label>
-            </div>
-            <div className="w-75">
-              <span className="fw-bolder fs-5 text-gray-500">{mediaType}</span>
-            </div>
-          </div>
-
           {/* <div className=" fv-row mb-3 w-100 ">
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
               <span>Media Type</span> */}
@@ -446,6 +446,31 @@ any) => {
               <option value="messenger">Messenger</option>
             </select>
           </div>
+        </div>
+
+        <div className=" fv-row mb-3 w-100 ">
+          <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+            <span className="required">Media URL</span>
+            {/* <i
+                className="fas fa-exclamation-circle ms-2 fs-7"
+                data-bs-toggle="tooltip"
+                title="Specify Media Title."
+              ></i> */}
+          </label>
+          <input
+            type="text"
+            className="form-control form-control-lg form-control-solid"
+            // name="config1"
+            value={imageURL ? imageURL : ""}
+            onChange={(event) => {
+              setImageURL(event.target.value);
+            }}
+          />
+          {/* {mediaTitle.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">Media Title is Required.</div>
+              </div>
+            )} */}
         </div>
 
         <div className=" fv-row mb-3 w-100 d-flex justify-content-sm-between gap-3">
@@ -529,31 +554,6 @@ any) => {
               </div>
             )} */}
         {/* </div> */}
-
-        <div className=" fv-row mb-3 w-100 ">
-          <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-            <span className="required">Media URL</span>
-            {/* <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Media Title."
-              ></i> */}
-          </label>
-          <input
-            type="text"
-            className="form-control form-control-lg form-control-solid"
-            // name="config1"
-            value={imageURL ? imageURL : ""}
-            onChange={(event) => {
-              setImageURL(event.target.value);
-            }}
-          />
-          {/* {mediaTitle.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Media Title is Required.</div>
-              </div>
-            )} */}
-        </div>
 
         {/*end::Form Group */}
       </div>

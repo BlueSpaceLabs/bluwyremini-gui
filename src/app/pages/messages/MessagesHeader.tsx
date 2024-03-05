@@ -125,7 +125,7 @@ const MessagesHeader = ({
           justifyContent: "space-between",
         }}
       >
-        <div style={{ width: "66%" }}>
+        <div style={{ width: "63%" }}>
           <div className="py-3 d-flex gap-6 fw-bold fs-6 ">
             <HeaderCard
               messageTab={messageTab}
@@ -189,9 +189,15 @@ const MessagesHeader = ({
           </div>
         </div>
         <div
-          style={{ width: "33%" }}
+          style={{ width: "36%" }}
           className="d-flex align-items-center justify-content-end gap-3"
         >
+          <i
+            className="fas fa-cogs ms-1 fs-7"
+            data-bs-toggle="tooltip"
+            title="Automated Responses"
+          ></i>
+
           <div style={{ width: "200px" }}>
             <select
               className="form-select form-select-solid form-select-lg"
@@ -201,7 +207,7 @@ const MessagesHeader = ({
               }}
             >
               <option value="" selected>
-                Auto Responses
+                Select Response
               </option>
               {keywordListData?.length > 0 &&
                 keywordListData.map((item: any) => {

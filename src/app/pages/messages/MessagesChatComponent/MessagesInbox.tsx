@@ -83,13 +83,22 @@ const MessagesInbox = ({
         <div
           className="card-body pt-5 scroll-y"
           id="kt_chat_contacts_body"
-          style={{ height: "438px" }}
+          style={{
+            height: "438px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
         >
           <InboxList
             inboxChannel={messageTab}
             setSelectedUser={setSelectedUser}
             newMessageData={newMessageData}
           />
+          <div className="text-muted fs-7 mt-1" style={{ textAlign: "center" }}>
+            CRM Ticketing integration required to create tickets
+          </div>
+
           {/* <div
             className="scroll-y me-n5 pe-5 h-200px h-lg-auto"
             data-kt-scroll="true"
@@ -104,11 +113,9 @@ const MessagesInbox = ({
             )}
 
             <div className="separator separator-dashed d-none"></div> */}
-
           {/* {(messageTab === "whatsapp" || messageTab === "all_messages") && (
               <WhatsAppInbox inboxListData={inboxListData} />
             )} */}
-
           {/* <div className="separator separator-dashed d-none"></div>
 
             {(messageTab === "instagram" || messageTab === "all_messages") && (
@@ -120,9 +127,7 @@ const MessagesInbox = ({
             {(messageTab === "facebook" || messageTab === "all_messages") && (
               <FacebookInbox />
             )} */}
-
           {/* <div className="separator separator-dashed d-none"></div> */}
-
           {/* {(messageTab === "all_messages" || "whatsapp") && (
           <div className="d-flex flex-stack py-4">
             <div className="d-flex align-items-center">
@@ -154,9 +159,7 @@ const MessagesInbox = ({
             </div>
           </div>
         )} */}
-
           {/* <div className="separator separator-dashed d-none"></div> */}
-
           {/* {(messageTab === "all_messages" || "whatsapp") && (
           <div className="d-flex flex-stack py-4">
             <div className="d-flex align-items-center">
@@ -185,9 +188,7 @@ const MessagesInbox = ({
             </div>
           </div>
         )} */}
-
           {/* <div className="separator separator-dashed d-none"></div> */}
-
           {/* {(messageTab === "all_messages" || "whatsapp") && (
           <div className="d-flex flex-stack py-4">
             <div className="d-flex align-items-center">

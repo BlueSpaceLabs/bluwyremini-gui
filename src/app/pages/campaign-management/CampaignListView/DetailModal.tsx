@@ -31,6 +31,7 @@ const DetailCampaignModal = ({
   handleClose,
   selectedId,
   setRefetchList,
+  setSnackbar,
 }: any) => {
   const { baseUrl } = useStaticData();
 
@@ -175,8 +176,11 @@ const DetailCampaignModal = ({
       <CustomDeleteModal
         show={showDeleteModal}
         handleClose={() => setShowDeleteModal(false)}
+        handleDetailModalClose={handleClose}
         selectedId={selectedId}
         campaignDetailData={campaignDetailData}
+        setSnackbar={setSnackbar}
+        setRefetchList={setRefetchList}
       />
 
       <EditCampaignModal

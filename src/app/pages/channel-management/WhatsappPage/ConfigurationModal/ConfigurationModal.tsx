@@ -244,18 +244,50 @@ const WhatsappConfigurationModal = ({
                 ></i>
               )}
             </label>
-            <input
-              type="text"
+
+            <textarea
               className="form-control form-control-lg form-control-solid"
+              rows={6}
               name="accessToken"
-              placeholder="Enter Access Token"
               value={whatsappModalInput?.accessToken}
+              placeholder="Enter Access Token"
               onChange={handleInputChange}
               readOnly={editData}
-            />
+            ></textarea>
+
             {/* {whatsappModalInput?.accessToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Access Token is Required.</div>
+              </div>
+            )} */}
+          </div>
+
+          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
+            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
+              <span>Permanent Token</span>
+              {!editData && (
+                <i
+                  className="fas fa-exclamation-circle ms-2 fs-7"
+                  data-bs-toggle="tooltip"
+                  title="Specify Channel Permanent Token."
+                ></i>
+              )}
+            </label>
+
+            <textarea
+              className="form-control form-control-lg form-control-solid"
+              rows={6}
+              name="permanentToken"
+              placeholder="Enter Permanent Token"
+              value={whatsappModalInput?.permanentToken}
+              onChange={handleInputChange}
+              readOnly={editData}
+            ></textarea>
+            {/* {whatsappModalInput?.permanentToken?.length < 2 && formError && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  Permanent Token is Required.
+                </div>
               </div>
             )} */}
           </div>
@@ -283,35 +315,6 @@ const WhatsappConfigurationModal = ({
             {/* {whatsappModalInput?.displayNo?.length < 2 && formError && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">Display Number is Required.</div>
-              </div>
-            )} */}
-          </div>
-
-          <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span>Permanent Token</span>
-              {!editData && (
-                <i
-                  className="fas fa-exclamation-circle ms-2 fs-7"
-                  data-bs-toggle="tooltip"
-                  title="Specify Channel Permanent Token."
-                ></i>
-              )}
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="permanentToken"
-              placeholder="Enter Permanent Token"
-              value={whatsappModalInput?.permanentToken}
-              onChange={handleInputChange}
-              readOnly={editData}
-            />
-            {/* {whatsappModalInput?.permanentToken?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  Permanent Token is Required.
-                </div>
               </div>
             )} */}
           </div>

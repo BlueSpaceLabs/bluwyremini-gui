@@ -202,7 +202,7 @@ const MessagesConversation = ({
                     }}
                   >
                     <option value="" selected>
-                      Assign Agents
+                      Assign To
                     </option>
                     {agentListData?.length > 0 &&
                       agentListData.map((item: any) => {

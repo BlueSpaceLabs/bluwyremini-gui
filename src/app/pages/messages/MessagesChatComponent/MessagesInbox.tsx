@@ -34,8 +34,8 @@ const MessagesInbox = ({
   return (
     <React.Fragment>
       <div className="card card-flush">
-        <div className="card-header pt-7" id="kt_chat_contacts_header">
-          {/* <div className="w-100 py-3 d-flex justify-content-between flex-wrap fw-bold fs-7 text-gray-500">
+        {/* <div className="card-header pt-7" id="kt_chat_contacts_header"> */}
+        {/* <div className="w-100 py-3 d-flex justify-content-between flex-wrap fw-bold fs-7 text-gray-500">
         <div
           style={{ cursor: "pointer" }}
           onClick={() => SetMessageTab("all_messages")}
@@ -67,7 +67,7 @@ const MessagesInbox = ({
           Facebook
         </div>
       </div> */}
-          <form className="w-100 position-relative" autoComplete="off">
+        {/* <form className="w-100 position-relative" autoComplete="off">
             <KTIcon
               iconName="magnifier"
               className="fs-2 text-lg-1 text-gray-500 position-absolute top-50 ms-5 translate-middle-y"
@@ -79,11 +79,11 @@ const MessagesInbox = ({
               name="search"
               placeholder="Search by username or email..."
             />
-          </form>
-        </div>
+          </form> */}
+        {/* </div> */}
 
         <div
-          className="card-body pt-5 scroll-y"
+          className="card-body pt-2 scroll-y"
           id="kt_chat_contacts_body"
           style={{
             height: "438px",

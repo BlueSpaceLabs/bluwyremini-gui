@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { useQuery } from "react-query";
 import axios from "axios";
 import useStaticData from "../../../../StaticData";
+import SearchInboxFilter from "./SearchFilter";
 
 // const serviceInboxListData = async (inboxChannel: string) => {
 //   const url =
@@ -20,6 +21,7 @@ import useStaticData from "../../../../StaticData";
 const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   const { baseUrl } = useStaticData();
 
+  const [searchInbox, setSearchInbox] = useState<string>("");
   const [inboxListData, setInboxListData] = React.useState([]);
   const storedUserId = sessionStorage.getItem("userId");
   const storedUserType = sessionStorage.getItem("userType");
@@ -65,6 +67,7 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
           assignedTo: storedUserId,
           userType: storedUserType === "ADMIN_ROLE" ? "admin" : "agent",
           channelName: inboxChannel,
+          search: searchInbox,
         };
 
         const response = await axios.get(url, { params });
@@ -89,7 +92,7 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalInboxFetch);
-  }, [inboxChannel]);
+  }, [inboxChannel, searchInbox]);
 
   //   React.useEffect(() => {
   //     const fetchData = async () => {
@@ -146,52 +149,58 @@ const InboxList = ({ inboxChannel, setSelectedUser, newMessageData }: any) => {
   };
 
   return (
-    <div
-      className="scroll-y me-n5 pe-5 h-200px h-lg-auto"
-      data-kt-scroll="true"
-      data-kt-scroll-activate="{default: false, lg: true}"
-      data-kt-scroll-max-height="auto"
-      data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header"
-      data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body"
-      data-kt-scroll-offset="0px"
-    >
-      {inboxListData.length > 0 ? (
-        inboxListData.map((item: any) => (
-          <div className="d-flex flex-stack py-4" key={item.custNumber}>
-            <div className="d-flex align-items-center">
-              <div className="symbol symbol-45px symbol-circle">
-                <span className="symbol-label bg-light-warning text-warning fs-6 fw-bolder">
-                  {item?.custName[0]}
-                </span>
+    <div>
+      <SearchInboxFilter setDebouncedSearchTerm={setSearchInbox} />
+
+      <div
+        className="scroll-y me-n5 pe-5 h-200px h-lg-auto"
+        data-kt-scroll="true"
+        data-kt-scroll-activate="{default: false, lg: true}"
+        data-kt-scroll-max-height="auto"
+        data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header"
+        data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body"
+        data-kt-scroll-offset="0px"
+      >
+        {inboxListData.length > 0 ? (
+          inboxListData.map((item: any) => (
+            <div className="d-flex flex-stack py-4" key={item.custNumber}>
+              <div className="d-flex align-items-center">
+                <div className="symbol symbol-45px symbol-circle">
+                  <span className="symbol-label bg-light-warning text-warning fs-6 fw-bolder">
+                    {item?.custName[0]}
+                  </span>
+                </div>
+
+                <div className="ms-5">
+                  <span
+                    // href="#"
+                    className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setSelectedUser(item)}
+                  >
+                    {item?.custName}
+                  </span>
+                  <div className="fw-bold text-gray-500">
+                    {item?.custNumber}
+                  </div>
+                </div>
               </div>
 
-              <div className="ms-5">
-                <span
-                  // href="#"
-                  className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setSelectedUser(item)}
-                >
-                  {item?.custName}
+              <div className="d-flex flex-column align-items-end ms-2">
+                <span className="text-muted fs-7 mb-1">
+                  {calculateTimeDifference(item?.lastInteractionDatetime)}
                 </span>
-                <div className="fw-bold text-gray-500">{item?.custNumber}</div>
+
+                {newMessageCount(item?.custNumber)}
               </div>
+
+              <div className="separator separator-dashed d-none"></div>
             </div>
-
-            <div className="d-flex flex-column align-items-end ms-2">
-              <span className="text-muted fs-7 mb-1">
-                {calculateTimeDifference(item?.lastInteractionDatetime)}
-              </span>
-
-              {newMessageCount(item?.custNumber)}
-            </div>
-
-            <div className="separator separator-dashed d-none"></div>
-          </div>
-        ))
-      ) : (
-        <span className="fw-bold text-gray-500">No inbox list to show.</span>
-      )}
+          ))
+        ) : (
+          <span className="fw-bold text-gray-500">No inbox list to show.</span>
+        )}
+      </div>
     </div>
   );
 };

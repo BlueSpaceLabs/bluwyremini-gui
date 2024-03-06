@@ -32,6 +32,7 @@ const DateRangeFilter = ({ setFromDate, setToDate }: any) => {
     setStartDate("");
     setEndDate("");
   };
+
   const handleSubmit = () => {
     // Validate if a date is selected
     if (!startDate || !endDate) {

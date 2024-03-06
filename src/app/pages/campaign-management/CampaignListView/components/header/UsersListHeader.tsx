@@ -6,11 +6,15 @@ import { UsersListSearchComponent } from "./UsersListSearchComponent";
 const UsersListHeader = ({
   showCreateAppModal,
   setShowCreateAppModal,
+  setChannelType,
+  setFromDate,
+  setToDate,
 }: any) => {
   // const { selected } = useListView();
   return (
     <div className="card-header border-0 pt-6">
       <UsersListSearchComponent />
+
       {/* begin::Card toolbar */}
       <div className="card-toolbar">
         {/* begin::Group actions */}
@@ -20,6 +24,9 @@ const UsersListHeader = ({
           <UsersListToolbar
             showCreateAppModal={showCreateAppModal}
             setShowCreateAppModal={setShowCreateAppModal}
+            setChannelType={setChannelType}
+            setFromDate={setFromDate}
+            setToDate={setToDate}
           />
         )}
         {/* end::Group actions */}

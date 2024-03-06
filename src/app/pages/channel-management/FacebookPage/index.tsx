@@ -4,7 +4,7 @@ import PageHeader from "./PageHeader";
 import axios from "axios";
 import FacebookDataList from "./DataList";
 import FacebookConfigModal from "./ConfigurationModal/Modal";
-import AuditLogs from "./AuditLogs";
+import AuditLogs from "../AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
 
@@ -24,42 +24,44 @@ const FacebookPage = ({ channelName }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [refetch, setRefetch] = React.useState<boolean>(false);
 
-  const serviceGetFacebookData = async () => {
-    try {
-      const url = `${baseUrl}/getChannelDetails.php`;
-      const accessKey = sessionStorage.getItem("accessKey");
-
-      const response = await axios.get(url, {
-        params: {
-          channelName: "messenger",
-          accessKey: accessKey,
-        },
-      });
-      const responseData = response?.data;
-
-      // console.log("responseData", responseData);
-
-      setFacebookData(responseData.data);
-    } catch (error: any) {
-      setError(error);
-    } finally {
-      setLoading(false); // Set loading to false regardless of success or failure
-    }
-  };
-
   useEffect(() => {
-    serviceGetFacebookData();
-  }, [refetch]);
+    const url = `${baseUrl}/getChannelDetails.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
+
+    const params = {
+      accessKey: accessKey,
+      channelName: "messenger",
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        // console.log("responseData getChannelDetails", responseData?.data);
+
+        setFacebookData(responseData?.data);
+      } catch (error) {
+        setFacebookData(null);
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [refetch, baseUrl, channelName]);
 
   return (
-    <Box className="card mb-5 mb-xl-10" style={{  paddingLeft: 20, paddingRight:20}}>
+    <Box
+      className="card mb-5 mb-xl-10"
+      style={{ paddingLeft: 20, paddingRight: 20 }}
+    >
       <PageHeader setShowModal={setShowModal} />
-    
+
       <FacebookDataList facebookData={facebookData} />
 
       <br />
 
-      <AuditLogs />
+      <AuditLogs auditLogsData={facebookData} />
 
       <FacebookConfigModal
         show={showModal}

@@ -15,14 +15,13 @@ const KeyWordListView = ({ setSnackbar }: any) => {
 
   const [refetchList, setRefetchList] = useState<boolean>(false);
 
-  console.log("refetchList", refetchList);
   useEffect(() => {
     const url = `${baseUrl}/getKeywordDetails.php`;
     const accessKey = sessionStorage.getItem("accessKey");
 
     const params = {
       accessKey: accessKey,
-      searchKeyWord: searchKeyWord,
+      search: searchKeyWord,
     };
 
     const fetchData = async () => {
@@ -32,17 +31,13 @@ const KeyWordListView = ({ setSnackbar }: any) => {
         console.log("response", response.data);
         setKeyWordListViewData(response.data);
       } catch (error) {
+        setKeyWordListViewData([]);
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-
-    // Clean up effect
-    return () => {
-      // Optionally, cancel ongoing requests or perform other cleanup
-    };
-  }, [refetchList, searchKeyWord]); // Empty dependency array means this effect will only run once after the initial render
+  }, [refetchList, searchKeyWord]);
 
   return (
     <React.Fragment>

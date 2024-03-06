@@ -15,14 +15,13 @@ const AgentsListView = ({ setSnackbar }: any) => {
 
   const [refetchList, setRefetchList] = useState<boolean>(false);
 
-  // console.log("refetchList", refetchList);
   useEffect(() => {
     const url = `${baseUrl}/getAgentProfileDetails.php`;
     const accessKey = sessionStorage.getItem("accessKey");
 
     const params = {
       accessKey: accessKey,
-      searchAgent: searchAgent,
+      search: searchAgent,
     };
 
     const fetchData = async () => {
@@ -32,24 +31,20 @@ const AgentsListView = ({ setSnackbar }: any) => {
 
         setAgentsListViewData(responseData.dataArray);
       } catch (error) {
+        setAgentsListViewData([]);
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-
-    // Clean up effect
-    return () => {
-      // Optionally, cancel ongoing requests or perform other cleanup
-    };
-  }, [refetchList, searchAgent]); // Empty dependency array means this effect will only run once after the initial render
+  }, [refetchList, searchAgent]);
 
   return (
     <React.Fragment>
       <KTCard>
         {/* search & add modal */}
         <ListViewHeader
-          setSearchAgent={setSearchAgent}
+          setSearchKeyWord={setSearchAgent}
           showAddModal={() => setShowAddAgentsModal(true)}
         />
 

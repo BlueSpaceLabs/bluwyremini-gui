@@ -4,9 +4,9 @@ import PageHeader from "./PageHeader";
 import axios from "axios";
 import TelegramConfigModal from "./ConfigurationModal/Modal";
 import TelegramDataList from "./DataList";
-import AuditLogs from "./AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
 import useStaticData from "../../../StaticData";
+import AuditLogs from "../AuditLogs";
 
 const TelegramPage = ({ channelName }: any) => {
   // console.log(channelName, accessKey);
@@ -24,43 +24,44 @@ const TelegramPage = ({ channelName }: any) => {
   const [showModal, setShowModal] = React.useState<boolean>(false);
   const [refetch, setRefetch] = React.useState<boolean>(false);
 
-  const serviceGetTelegramData = async () => {
-    const url = `${baseUrl}/getChannelDetails.php`;
-
-    try {
-      const accessKey = sessionStorage.getItem("accessKey");
-
-      const response = await axios.get(url, {
-        params: {
-          channelName: "telegram",
-          accessKey: accessKey,
-        },
-      });
-      const responseData = response?.data;
-
-      // console.log("responseData", responseData);
-
-      setTelegramData(responseData.data);
-    } catch (error: any) {
-      setError(error);
-    } finally {
-      setLoading(false); // Set loading to false regardless of success or failure
-    }
-  };
-
   useEffect(() => {
-    serviceGetTelegramData();
-  }, [refetch]);
+    const url = `${baseUrl}/getChannelDetails.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
+
+    const params = {
+      accessKey: accessKey,
+      channelName: "telegram",
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        // console.log("responseData getChannelDetails", responseData?.data);
+
+        setTelegramData(responseData?.data);
+      } catch (error) {
+        setTelegramData(null);
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [refetch, baseUrl, channelName]);
 
   return (
-    <Box className="card mb-5 mb-xl-10" style={{  paddingLeft: 20, paddingRight:20}}>
+    <Box
+      className="card mb-5 mb-xl-10"
+      style={{ paddingLeft: 20, paddingRight: 20 }}
+    >
       <PageHeader setShowModal={setShowModal} />
 
       <TelegramDataList telegramData={telegramData} />
 
       <br />
 
-      <AuditLogs />
+      <AuditLogs auditLogsData={telegramData} />
 
       <TelegramConfigModal
         show={showModal}

@@ -23,6 +23,9 @@ const CampaignListView = ({
   const { baseUrl } = useStaticData();
 
   const [refetchList, setRefetchList] = useState<boolean>(false);
+  const [channelType, setChannelType] = React.useState("");
+  const [fromDate, setFromDate] = useState<string>("");
+  const [toDate, setToDate] = useState<string>("");
 
   const { itemIdForUpdate } = useListView();
 
@@ -45,6 +48,9 @@ const CampaignListView = ({
 
     const params = {
       accessKey: accessKey,
+      channelType: channelType,
+      from: fromDate,
+      to: toDate,
     };
 
     const fetchData = async () => {
@@ -59,7 +65,7 @@ const CampaignListView = ({
     };
 
     fetchData();
-  }, [refetchList]);
+  }, [refetchList, channelType, fromDate, toDate]);
 
   return (
     <>
@@ -67,6 +73,9 @@ const CampaignListView = ({
         <UsersListHeader
           showCreateAppModal={showCreateAppModal}
           setShowCreateAppModal={setShowCreateAppModal}
+          setChannelType={setChannelType}
+          setFromDate={setFromDate}
+          setToDate={setToDate}
         />
         {/* <UsersTable /> */}
 

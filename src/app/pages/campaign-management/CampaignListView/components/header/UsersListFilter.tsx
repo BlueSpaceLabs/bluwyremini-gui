@@ -1,14 +1,25 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MenuComponent } from "../../../../../../_metronic/assets/ts/components";
 import { initialQueryState, KTIcon } from "../../../../../../_metronic/helpers";
 import { useQueryRequest } from "../../core/QueryRequestProvider";
 import { useQueryResponse } from "../../core/QueryResponseProvider";
 
-const UsersListFilter = () => {
+const UsersListFilter = ({ setChannelType }: any) => {
   const { updateState } = useQueryRequest();
   const { isLoading } = useQueryResponse();
   const [role, setRole] = useState<string | undefined>();
   const [lastLogin, setLastLogin] = useState<string | undefined>();
+
+  const [channel, setChannel] = React.useState("");
+
+  const handleApplyFilter = () => {
+    setChannelType(channel);
+  };
+
+  const handleResetFilter = () => {
+    setChannel("");
+    setChannelType("");
+  };
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -60,13 +71,15 @@ const UsersListFilter = () => {
           <div className="mb-10">
             <label className="form-label fs-6 fw-bold">Channel:</label>
             <select
+              name="channelType"
               className="form-select form-select-solid fw-bolder"
               data-kt-select2="true"
               data-placeholder="Select option"
               data-allow-clear="true"
               data-kt-user-table-filter="role"
               data-hide-search="true"
-              onChange={(e) => setRole(e.target.value)}
+              // onChange={(e) => setRole(e.target.value)}
+              onChange={(e) => setChannel(e.target.value)}
               value={role}
             >
               <option value="">Select Channel</option>
@@ -78,27 +91,27 @@ const UsersListFilter = () => {
           </div>
           {/* end::Input group */}
 
-      
-
           {/* begin::Actions */}
           <div className="d-flex justify-content-end">
             <button
               type="button"
-              disabled={isLoading}
-              onClick={filterData}
+              // disabled={isLoading}
+              // onClick={filterData}
               className="btn btn-light btn-active-light-primary fw-bold me-2 px-6"
-              data-kt-menu-dismiss="true"
-              data-kt-user-table-filter="reset"
+              // data-kt-menu-dismiss="true"
+              // data-kt-user-table-filter="reset"
+              onClick={handleResetFilter}
             >
               Reset
             </button>
             <button
-              disabled={isLoading}
+              // disabled={isLoading}
               type="button"
-              onClick={resetData}
+              // onClick={resetData}
               className="btn btn-primary fw-bold px-6"
-              data-kt-menu-dismiss="true"
-              data-kt-user-table-filter="filter"
+              // data-kt-menu-dismiss="true"
+              // data-kt-user-table-filter="filter"
+              onClick={handleApplyFilter}
             >
               Apply
             </button>

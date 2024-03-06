@@ -25,22 +25,28 @@ const initialValue = {
   selectedTime: "now",
 };
 
+const tenant = "bsl";
+
 const UsersListToolbar = ({
   showCreateAppModal,
   setShowCreateAppModal,
+  setChannelType,
+  setFromDate,
+  setToDate,
 }: any) => {
   const { baseUrl } = useStaticData();
 
   const [showCampaignMessage, setShowCampaignMessage] = React.useState("");
-  const { setItemIdForUpdate } = useListView();
+  const [showExport, setShowExport] = useState<boolean>(false);
   const [campaignInputData, setCampaignInputData] =
     React.useState(initialValue);
-  console.log("campaignInputData", campaignInputData);
-
-  const { config } = useLayout();
   const [steps, setSteps] = useState<number>(1);
 
-  const [tenant, setTenant] = React.useState<string>("bsl");
+  // const { setItemIdForUpdate } = useListView();
+
+  // console.log("campaignInputData", campaignInputData);
+
+  // const { config } = useLayout();
 
   //const { mutateAsync } = useMutation(postAddCampaign);
 
@@ -91,16 +97,6 @@ const UsersListToolbar = ({
     }
   };
 
-  const [fromDate, setFromDate] = useState<string>("");
-  const [toDate, setToDate] = useState<string>("");
-  const [showExport, setShowExport] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log("Calling API", { fromDate }, { toDate });
-    if (fromDate && toDate) setShowExport(true);
-    else setShowExport(false);
-  }, [fromDate, toDate]);
-
   return (
     <div
       className="d-flex justify-content-end"
@@ -108,7 +104,7 @@ const UsersListToolbar = ({
     >
       <DateRangeFilter setFromDate={setFromDate} setToDate={setToDate} />
 
-      <UsersListFilter />
+      <UsersListFilter setChannelType={setChannelType} />
 
       {/* begin::Export */}
       {showExport && (

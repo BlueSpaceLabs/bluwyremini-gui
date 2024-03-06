@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import WhatsappConfigurationModal from "./ConfigurationModal/ConfigurationModal";
 import WhatsappAppDetails from "./WhatsappAppDetails";
-import AuditLogs from "./AuditLogs";
+import AuditLogs from "../AuditLogs";
 import CustomSnackBar from "../../../components/CustomSnackbar";
+import useStaticData from "../../../StaticData";
 
 const serviceAxiosGetWhatsappData = async ({ channelName, accessKey }: any) => {
   const response = await axios.get(
@@ -27,6 +28,7 @@ const initialValue = {
 };
 
 const WhatsappPage = ({ channelName }: any) => {
+  const { baseUrl } = useStaticData();
   const accessKey = sessionStorage.getItem("accessKey");
 
   const [showModal, setShowModal] = React.useState<boolean>(false);
@@ -42,6 +44,7 @@ const WhatsappPage = ({ channelName }: any) => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const [auditLogsData, setAuditLogsData] = React.useState(null);
 
   const {
     data: getWhatsappData,
@@ -60,7 +63,7 @@ const WhatsappPage = ({ channelName }: any) => {
 
   React.useEffect(() => {
     const respData = getWhatsappData?.data;
-    console.log({ respData });
+    // console.log({ respData });
 
     if (respData) {
       setChannelConfigurationData({
@@ -76,6 +79,32 @@ const WhatsappPage = ({ channelName }: any) => {
       });
     }
   }, [getWhatsappData?.data]);
+
+  useEffect(() => {
+    const url = `${baseUrl}/getChannelDetails.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
+
+    const params = {
+      accessKey: accessKey,
+      channelName: channelName,
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        // console.log("responseData getChannelDetails", responseData?.data);
+
+        setAuditLogsData(responseData?.data);
+      } catch (error) {
+        setAuditLogsData(null);
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [baseUrl, channelName]);
 
   return (
     <div>
@@ -122,7 +151,7 @@ const WhatsappPage = ({ channelName }: any) => {
 
             <div className="row mb-7">
               <label className="col-lg-4 fw-bold text-muted">
-                Access Token
+                WABA Id
                 {/* <i
                 className="fas fa-exclamation-circle ms-1 fs-7"
                 data-bs-toggle="tooltip"
@@ -137,9 +166,8 @@ const WhatsappPage = ({ channelName }: any) => {
                   : "No Data to show."}
               </span> */}
                 <textarea
-                  name="postContent"
-                  rows={4}
-                  cols={70}
+                  className="form-control form-control-lg form-control-solid"
+                  rows={3}
                   value={
                     channelConfigurationData.accessToken
                       ? showPassword
@@ -150,8 +178,7 @@ const WhatsappPage = ({ channelName }: any) => {
                       : "No Data to show."
                   }
                   onClick={togglePasswordVisibility}
-                  readOnly
-                />
+                ></textarea>
                 {/* <input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
@@ -240,9 +267,8 @@ const WhatsappPage = ({ channelName }: any) => {
                   : "No Data to show."}
               </span> */}
                 <textarea
-                  name="postContent"
-                  rows={4}
-                  cols={70}
+                  className="form-control form-control-lg form-control-solid"
+                  rows={3}
                   value={
                     channelConfigurationData.permanentToken
                       ? showPassword
@@ -253,8 +279,8 @@ const WhatsappPage = ({ channelName }: any) => {
                       : "No Data to show."
                   }
                   onClick={togglePasswordVisibility}
-                  readOnly
-                />
+                ></textarea>
+
                 {/*<input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"
@@ -348,19 +374,8 @@ const WhatsappPage = ({ channelName }: any) => {
           </div>
 
           <br />
-          <div
-            className=""
-            style={{
-              backgroundColor: "lavender",
-              padding: 10,
-              borderRadius: 10,
-            }}
-          >
-            <br />
-            <h3>Audit Logs</h3>
-            <br />
-            {channelConfigurationData.appId && <AuditLogs />}
-          </div>
+
+          <AuditLogs auditLogsData={auditLogsData} />
 
           {/* <div className="row mb-7" style={{backgroundColor:"lavender",padding:10}}>
             <br/>

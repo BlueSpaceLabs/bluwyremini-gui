@@ -51,7 +51,7 @@ const DialogFlowCXPage = ({ channelName }: any) => {
   }, [refetch]);
 
   return (
-    <Box className="card mb-5 mb-xl-10">
+    <Box className="card mb-5 mb-xl-10" style={{  paddingLeft: 20, paddingRight:20}}>
       <PageHeader setShowModal={setShowModal} />
 
       <DialogFlowDataList dialogFlowCXListData={dialogFlowCXListData} />

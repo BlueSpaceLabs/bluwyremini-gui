@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useStaticData from "../../../StaticData";
+import CustomSnackBar from "../../../components/CustomSnackbar";
 
 //const MessagesProfile = ({ setShowProfile }) => {
-const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
+const MessagesProfile = ({
+  setShowProfile,
+  selectedInbox,
+  messageTab,
+}: any) => {
   const { baseUrl } = useStaticData();
+
+  // console.log("selectedInbox", selectedInbox);
+
+  const [formError, setFormError] = React.useState<boolean>(false);
+  const [refetchList, setRefetchList] = useState<boolean>(false);
+  const [contactDetailData, setContactDetailData] = useState(null);
+  const [editContactDetail, setEditContactDetail] = useState({
+    address: "",
+    mobileNo: "",
+    emailId: "",
+  });
+  const [snackbar, setSnackbar] = useState({
+    showSnackbar: false,
+    severitySnackBar: "",
+    messageSnackBar: "",
+  });
 
   const [profileData, setProfileData] = React.useState({
     profileName: "",
@@ -63,6 +84,114 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
   useEffect(() => {
     if (editData) setProfileDataEdit(profileData);
   }, [editData, profileData]);
+
+  const handleInputChange = (e: any) => {
+    setEditContactDetail({
+      ...editContactDetail,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleContactDetailsUpdateSubmit = async () => {
+    if (editContactDetail.mobileNo.length < 2) {
+      setFormError(true);
+    } else {
+      setFormError(false);
+
+      try {
+        const accessKey = sessionStorage.getItem("accessKey");
+
+        const data = {
+          tenant: "bsl",
+          accessKey: accessKey,
+          contact_data: {
+            mobileNo: editContactDetail.mobileNo,
+            address: editContactDetail.address,
+            emailId: editContactDetail.emailId,
+            messengerId: selectedInbox?.fbSenderId,
+            telegramId: messageTab === "telegram" && selectedInbox?.custNumber,
+            instaId: selectedInbox?.instaId,
+          },
+        };
+
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const response = await axios.put(
+          `${baseUrl}/modifyContactDetailsMessages.php?channelName=${messageTab}`,
+          data,
+          config
+        );
+
+        setRefetchList((preV: boolean) => !preV);
+        // console.log("response", response);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "success",
+          messageSnackBar: response?.data?.message
+            ? response?.data?.message
+            : "Successfully Updated Contact Details",
+        });
+      } catch (error) {
+        console.error("Error:", error);
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to Update Contact Details",
+        });
+      } finally {
+        setEditData(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const url = `${baseUrl}/getContactDetailsMessages.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
+
+    const params = {
+      accessKey: accessKey,
+      channelName: messageTab,
+      custId: selectedInbox?.custNumber,
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        console.log("getContactDetailsMessages", responseData?.data);
+
+        const contactData = responseData?.data;
+
+        setContactDetailData(contactData);
+
+        setEditContactDetail({
+          address: contactData?.address,
+          mobileNo: contactData?.contactNumber,
+          emailId: contactData?.emailId,
+        });
+      } catch (error) {
+        setContactDetailData(null);
+        setEditContactDetail({
+          address: "",
+          mobileNo: "",
+          emailId: "",
+        });
+
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [refetchList, baseUrl, selectedInbox?.custNumber, messageTab]);
 
   return (
     <React.Fragment>
@@ -123,22 +252,37 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
 
           <div className="py-2">
             <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
-              Mobile Number
+              {messageTab === "telegram"
+                ? "Telegram Id"
+                : messageTab === "messenger"
+                ? "Messenger Id"
+                : messageTab === "instagram"
+                ? "Instagram Id"
+                : "Mobile Number"}
             </div>
+
             {editData ? (
               <div>
                 <input
                   type="text"
                   className="form-control form-control-solid"
                   placeholder="Edit Mobile Number"
-                  value={profileDataEdit.mobileNumber}
-
-                  // onChange={(e) => setSearchTerm(e.target.value)}
+                  value={editContactDetail.mobileNo}
+                  name="mobileNo"
+                  onChange={handleInputChange}
                 />
+
+                {editContactDetail.mobileNo.length < 2 && formError && (
+                  <div className="fv-plugins-message-container">
+                    <div className="fv-help-block">
+                      Mobile Number is Required.
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="fw-bold text-gray-500">
-                {profileData.mobileNumber}
+                {contactDetailData?.contactNumber}
               </div>
             )}
           </div>
@@ -147,18 +291,22 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
             <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
               Email Id
             </div>
+
             {editData ? (
               <div>
                 <input
                   type="text"
                   className="form-control form-control-solid"
                   placeholder="Edit Email Id"
-                  value={profileDataEdit.emailId}
-                  // onChange={(e) => setSearchTerm(e.target.value)}
+                  value={editContactDetail.emailId}
+                  name="emailId"
+                  onChange={handleInputChange}
                 />
               </div>
             ) : (
-              <div className="fw-bold text-gray-500">{profileData.emailId}</div>
+              <div className="fw-bold text-gray-500">
+                {contactDetailData?.emailId}
+              </div>
             )}
           </div>
 
@@ -166,19 +314,22 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
             <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
               Address
             </div>
+
             {editData ? (
               <div>
                 <input
                   type="text"
                   className="form-control form-control-solid"
                   placeholder="Edit Address"
-                  value={profileDataEdit.address}
-
-                  // onChange={(e) => setSearchTerm(e.target.value)}
+                  value={editContactDetail.address}
+                  name="address"
+                  onChange={handleInputChange}
                 />
               </div>
             ) : (
-              <div className="fw-bold text-gray-500">{profileData.address}</div>
+              <div className="fw-bold text-gray-500">
+                {contactDetailData?.address}
+              </div>
             )}
           </div>
 
@@ -188,7 +339,18 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
                 Created Date
               </div>
               <div className="fw-bold text-gray-500">
-                {profileData.createdDate}
+                {contactDetailData?.createdDatetime}
+              </div>
+            </div>
+          )}
+
+          {editData ? null : (
+            <div className="py-2">
+              <div className="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">
+                Last Modified Date
+              </div>
+              <div className="fw-bold text-gray-500">
+                {contactDetailData?.lastModifiedDatetime}
               </div>
             </div>
           )}
@@ -206,13 +368,20 @@ const MessagesProfile = ({ setShowProfile, selectedInbox }: any) => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => setEditData(false)}
+                onClick={handleContactDetailsUpdateSubmit}
               >
                 Update
               </button>
             </div>
           )}
         </div>
+
+        <CustomSnackBar
+          showSnackbar={snackbar.showSnackbar}
+          setSnackbar={setSnackbar}
+          severitySnackBar={snackbar.severitySnackBar}
+          messageSnackBar={snackbar.messageSnackBar}
+        />
       </div>
     </React.Fragment>
   );

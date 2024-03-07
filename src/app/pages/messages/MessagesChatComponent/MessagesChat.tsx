@@ -9,6 +9,7 @@ const MessagesChat = ({ messageTab, selectedKeyWord, newMessageData }: any) => {
 
   React.useEffect(() => {
     setSelectedInbox(null);
+    setShowProfile(false);
   }, [messageTab]);
 
   return (
@@ -39,6 +40,7 @@ const MessagesChat = ({ messageTab, selectedKeyWord, newMessageData }: any) => {
           <MessagesProfile
             setShowProfile={setShowProfile}
             selectedInbox={selectedInbox}
+            messageTab={messageTab}
           />
         </div>
       )}

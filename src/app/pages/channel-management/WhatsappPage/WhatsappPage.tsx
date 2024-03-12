@@ -160,14 +160,15 @@ const WhatsappPage = ({ channelName }: any) => {
               </label>
 
               <div className="col-lg-8 d-flex align-items-center">
-                {/* <span className="fw-bolder fs-6 me-2">
-                {channelConfigurationData.accessToken
-                  ? channelConfigurationData.accessToken
-                  : "No Data to show."}
-              </span> */}
-                <textarea
+                <span className="fw-bolder fs-6 me-2">
+                  {channelConfigurationData.accessToken
+                    ? channelConfigurationData.accessToken
+                    : "No Data to show."}
+                </span>
+                {/* <input
+                  type="text"
                   className="form-control form-control-lg form-control-solid"
-                  rows={3}
+                  // rows={3}
                   value={
                     channelConfigurationData.accessToken
                       ? showPassword
@@ -178,7 +179,29 @@ const WhatsappPage = ({ channelName }: any) => {
                       : "No Data to show."
                   }
                   onClick={togglePasswordVisibility}
-                ></textarea>
+                ></input> */}
+
+                {/* <div
+                  className="col-lg-1 d-flex align-items-center w-100"
+                  onClick={togglePasswordVisibility}
+                >
+                  <span
+                    className="fw-bolder fs-6"
+                    style={{
+                      display: "block",
+                      overflow: "hidden",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {channelConfigurationData.accessToken
+                      ? showPassword
+                        ? channelConfigurationData.accessToken
+                        : "*".repeat(
+                            channelConfigurationData.accessToken.length
+                          )
+                      : "No Data to show."}
+                  </span>
+                </div> */}
                 {/* <input
                 type={showPassword ? "text" : "password"}
                 className="form-control form-control-lg form-control-solid"

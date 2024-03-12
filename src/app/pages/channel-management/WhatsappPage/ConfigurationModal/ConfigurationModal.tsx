@@ -235,25 +235,35 @@ const WhatsappConfigurationModal = ({
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
             <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span>Access Token</span>
+              <span>WABA Id</span>
               {!editData && (
                 <i
                   className="fas fa-exclamation-circle ms-2 fs-7"
                   data-bs-toggle="tooltip"
-                  title="Specify Channel Access Token."
+                  title="Specify Channel WABA Id."
                 ></i>
               )}
             </label>
 
-            <textarea
+            {/* <textarea
               className="form-control form-control-lg form-control-solid"
               rows={6}
               name="accessToken"
               value={whatsappModalInput?.accessToken}
-              placeholder="Enter Access Token"
+              placeholder="Enter WABA Id"
               onChange={handleInputChange}
               readOnly={editData}
-            ></textarea>
+            ></textarea> */}
+
+            <input
+              type="text"
+              className="form-control form-control-lg form-control-solid"
+              name="accessToken"
+              placeholder="Enter WABA Id"
+              readOnly={editData}
+              value={whatsappModalInput?.accessToken}
+              onChange={handleInputChange}
+            />
 
             {/* {whatsappModalInput?.accessToken?.length < 2 && formError && (
               <div className="fv-plugins-message-container">

@@ -105,13 +105,13 @@ const MediaListView = () => {
 };
 
 const MediaListViewWrapper = () => (
-  <QueryRequestProvider>
-    <QueryResponseProvider>
-      <ListViewProvider>
-        <MediaListView />
-      </ListViewProvider>
-    </QueryResponseProvider>
-  </QueryRequestProvider>
+  // <QueryRequestProvider>
+  //   <QueryResponseProvider>
+  //     <ListViewProvider>
+  <MediaListView />
+  //     </ListViewProvider>
+  //   </QueryResponseProvider>
+  // </QueryRequestProvider>
 );
 
 export { MediaListViewWrapper };

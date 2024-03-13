@@ -2,9 +2,9 @@ import { FC } from "react";
 import { Navigate, Routes, Route, Outlet } from "react-router-dom";
 import { PageTitle } from "../../../_metronic/layout/core";
 import { WhatsappPageWrapper } from "./WhatsappPage/WhatsappPage";
-import { FacebookPageWrapper } from "./FacebookPage/FacebookPage";
-import { TelegramPageWrapper } from "./TelegramPage/TelegramPage";
-import { InstagramPageWrapper } from "./InstagramPage/InstagramPage";
+// import { FacebookPageWrapper } from "./FacebookPage/FacebookPage";
+// import { TelegramPageWrapper } from "./TelegramPage/TelegramPage";
+// import { InstagramPageWrapper } from "./InstagramPage/InstagramPage";
 import { TemplateManagementHeader } from "./TemplateManagementHeader";
 import { KTCard } from "../../../_metronic/helpers";
 

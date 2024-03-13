@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { KTIcon } from "../../../../_metronic/helpers";
-import {
-  ChartsWidget1,
-  ListsWidget5,
-  TablesWidget1,
-  TablesWidget5,
-} from "../../../../_metronic/partials/widgets";
+// import {
+//   ChartsWidget1,
+//   ListsWidget5,
+//   TablesWidget1,
+//   TablesWidget5,
+// } from "../../../../_metronic/partials/widgets";
 // import { useQuery } from "react-query";
 import axios from "axios";
 import useStaticData from "../../../StaticData";

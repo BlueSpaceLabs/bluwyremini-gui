@@ -103,13 +103,13 @@ const WhatsappPage = () => {
 };
 
 const WhatsappPageWrapper = () => (
-  <QueryRequestProvider>
-    <QueryResponseProvider>
-      <ListViewProvider>
-        <WhatsappPage />
-      </ListViewProvider>
-    </QueryResponseProvider>
-  </QueryRequestProvider>
+  // <QueryRequestProvider>
+  //   <QueryResponseProvider>
+  //     <ListViewProvider>
+  <WhatsappPage />
+  //     </ListViewProvider>
+  //   </QueryResponseProvider>
+  // </QueryRequestProvider>
 );
 
 export { WhatsappPageWrapper };

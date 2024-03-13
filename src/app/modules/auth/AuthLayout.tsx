@@ -65,7 +65,7 @@ const AuthLayout = () => {
           <Link to="/" className="mb-12">
             <img
               alt="BlueSpaceLabs"
-              src="../../../../public/media/logos/BlueSpaceLabsLogo.png"
+              src="../../../../../media/logos/BlueSpaceLabsLogo.png"
               className="h-50px"
             />
           </Link>

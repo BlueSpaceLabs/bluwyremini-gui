@@ -93,16 +93,16 @@ const CampaignListViewWrapper = ({
   showCreateAppModal,
   setShowCreateAppModal,
 }: any) => (
-  <QueryRequestProvider>
-    <QueryResponseProvider>
-      <ListViewProvider>
-        <CampaignListView
-          showCreateAppModal={showCreateAppModal}
-          setShowCreateAppModal={setShowCreateAppModal}
-        />
-      </ListViewProvider>
-    </QueryResponseProvider>
-  </QueryRequestProvider>
+  // <QueryRequestProvider>
+  //   <QueryResponseProvider>
+  //     <ListViewProvider>
+  <CampaignListView
+    showCreateAppModal={showCreateAppModal}
+    setShowCreateAppModal={setShowCreateAppModal}
+  />
+  //     </ListViewProvider>
+  //   </QueryResponseProvider>
+  // </QueryRequestProvider>
 );
 
 export { CampaignListViewWrapper };

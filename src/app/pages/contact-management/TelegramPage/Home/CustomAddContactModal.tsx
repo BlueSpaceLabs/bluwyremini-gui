@@ -6,6 +6,8 @@ import { KTIcon } from "../../../../../_metronic/helpers";
 import { postAddWhatsappContact } from "../../../../services/ContactManagement";
 import axios from "axios";
 import useStaticData from "../../../../StaticData";
+import CustomSelect from "../../components/CustomSelect";
+import CustomInput from "../../components/CustomInput";
 
 // type Props = {
 //   show: boolean;
@@ -27,7 +29,6 @@ const initialValue = {
 const AddWhatsAppContactModal = ({
   show,
   handleClose,
-  accessKey,
   channelName,
   // refetchWhatsAppContactListData,
   setRefetchData,
@@ -54,9 +55,9 @@ const AddWhatsAppContactModal = ({
       addWhatsappContactInput?.firstChannel.length < 2 ||
       // addWhatsappContactInput?.lastInteractedChannel.length < 2 ||
       addWhatsappContactInput?.mobileNo.length < 2 ||
-      addWhatsappContactInput?.crmFullname.length < 2 ||
-      addWhatsappContactInput?.nameToAddress.length < 2 ||
-      addWhatsappContactInput?.wabaMobileNo.length < 2
+      addWhatsappContactInput?.crmFullname.length < 2
+      // addWhatsappContactInput?.nameToAddress.length < 2 ||
+      // addWhatsappContactInput?.wabaMobileNo.length < 2
       // addWhatsappContactInput?.wabaName.length < 2
     ) {
       setFormError(true);
@@ -64,6 +65,8 @@ const AddWhatsAppContactModal = ({
       setFormError(false);
 
       try {
+        const accessKey = sessionStorage.getItem("accessKey");
+
         const data = {
           tenant: "bsl",
           accessKey: accessKey,
@@ -89,10 +92,12 @@ const AddWhatsAppContactModal = ({
 
         const response = await axios.post(url, data, config);
 
-        console.log("response", response);
+        // console.log("response", response);
 
         // refetchWhatsAppContactListData();
         setRefetchData((preValue: boolean) => !preValue);
+
+        setAddWhatsappContactInput(initialValue);
 
         setSnackbar({
           showSnackbar: true,
@@ -197,173 +202,120 @@ const AddWhatsAppContactModal = ({
         {/*begin::Form Group */}
         <div className="d-flex  flex-wrap flex-row justify-content-between align-items-start">
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">First Channel</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel firstChannel."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="firstChannel"
-              value={addWhatsappContactInput?.firstChannel}
-              onChange={handleInputChange}
+            <CustomSelect
+              labelTitle={"First Channel"}
+              required={"required"}
+              tooltip={"Specify Channel First Channel."}
+              inputName={"firstChannel"}
+              inputValue={addWhatsappContactInput?.firstChannel}
+              defaultOption={"Select Channel"}
+              inputOptionsArray={[
+                {
+                  value: "whatsapp",
+                  title: "Whatsapp",
+                },
+                {
+                  value: "messenger",
+                  title: "Messenger",
+                },
+                {
+                  value: "instagram",
+                  title: "Instagram",
+                },
+                {
+                  value: "telegram",
+                  title: "Telegram",
+                },
+              ]}
+              inputChange={handleInputChange}
+              inputError={formError}
+              inputErrorMessage={"First Channel is Required."}
             />
-            {addWhatsappContactInput?.firstChannel?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">firstChannel is Required.</div>
-              </div>
-            )}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="">Last Interacted Channel</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Last Interacted Channel."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="lastInteractedChannel"
-              value={addWhatsappContactInput?.lastInteractedChannel}
-              onChange={handleInputChange}
+            <CustomSelect
+              labelTitle={"Last Interacted Channel"}
+              // required={"required"}
+              tooltip={"Specify Channel Last Interacted Channel."}
+              inputName={"lastInteractedChannel"}
+              inputValue={addWhatsappContactInput?.lastInteractedChannel}
+              defaultOption={"Select Channel"}
+              inputOptionsArray={[
+                {
+                  value: "whatsapp",
+                  title: "Whatsapp",
+                },
+                {
+                  value: "messenger",
+                  title: "Messenger",
+                },
+                {
+                  value: "instagram",
+                  title: "Instagram",
+                },
+                {
+                  value: "telegram",
+                  title: "Telegram",
+                },
+              ]}
+              inputChange={handleInputChange}
+              // inputError={formError}
+              // inputErrorMessage={"Last Interacted Channel is Required."}
             />
-            {/*} {addWhatsappContactInput?.lastInteractedChannel?.length < 2 &&
-              formError && (
-                <div className="fv-plugins-message-container">
-                  <div className="fv-help-block">
-                    Last Interacted Channel is Required.
-                  </div>
-                </div>
-              )}*/}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Mobile Number</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Mobile Number."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="mobileNo"
-              value={addWhatsappContactInput?.mobileNo}
-              onChange={handleInputChange}
+            <CustomInput
+              labelTitle={"Mobile Number"}
+              required={"required"}
+              tooltip={"Specify Channel Mobile Number."}
+              inputName={"mobileNo"}
+              inputValue={addWhatsappContactInput?.mobileNo}
+              inputChange={handleInputChange}
+              inputError={formError}
+              inputErrorMessage={"Mobile Number is Required."}
             />
-            {addWhatsappContactInput?.mobileNo?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Mobile Number is Required.</div>
-              </div>
-            )}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Customer Full Name</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Customer Full Name."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="crmFullname"
-              value={addWhatsappContactInput?.crmFullname}
-              onChange={handleInputChange}
+            <CustomInput
+              labelTitle={"Customer Full Name"}
+              required={"required"}
+              tooltip={"Specify Channel Customer Full Name."}
+              inputName={"crmFullname"}
+              inputValue={addWhatsappContactInput?.crmFullname}
+              inputChange={handleInputChange}
+              inputError={formError}
+              inputErrorMessage={"Customer Full Name is Required."}
             />
-            {addWhatsappContactInput?.crmFullname?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  Customer Full Name is Required.
-                </div>
-              </div>
-            )}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Name To Address</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Name To Address."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="nameToAddress"
-              value={addWhatsappContactInput?.nameToAddress}
-              onChange={handleInputChange}
+            <CustomInput
+              labelTitle={"Name To Address"}
+              // required={"required"}
+              tooltip={"Specify Channel Name To Address."}
+              inputName={"nameToAddress"}
+              inputValue={addWhatsappContactInput?.nameToAddress}
+              inputChange={handleInputChange}
+              // inputError={formError}
+              // inputErrorMessage={"Name To Address is Required."}
             />
-            {addWhatsappContactInput?.nameToAddress?.length < 2 &&
-              formError && (
-                <div className="fv-plugins-message-container">
-                  <div className="fv-help-block">
-                    Name To Address is Required.
-                  </div>
-                </div>
-              )}
           </div>
 
           <div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">Telegram Id</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel Telegram Id."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="wabaMobileNo"
-              value={addWhatsappContactInput?.wabaMobileNo}
-              onChange={handleInputChange}
+            <CustomInput
+              labelTitle={"Telegram Id"}
+              // required={"required"}
+              tooltip={"Specify Channel Telegram Id."}
+              inputName={"wabaMobileNo"}
+              inputValue={addWhatsappContactInput?.wabaMobileNo}
+              inputChange={handleInputChange}
+              // inputError={formError}
+              // inputErrorMessage={"Telegram Id is Required."}
             />
-            {addWhatsappContactInput?.wabaMobileNo?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">Telegram Id is Required.</div>
-              </div>
-            )}
           </div>
-
-          {/*<div className=" fv-row mb-10 " style={{ width: "45%" }}>
-            <label className="d-flex align-items-center fs-5 fw-semibold mb-2">
-              <span className="required">WABA Name</span>
-              <i
-                className="fas fa-exclamation-circle ms-2 fs-7"
-                data-bs-toggle="tooltip"
-                title="Specify Channel WABA Name."
-              ></i>
-            </label>
-            <input
-              type="text"
-              className="form-control form-control-lg form-control-solid"
-              name="wabaName"
-              value={addWhatsappContactInput?.wabaName}
-              onChange={handleInputChange}
-            />
-            {addWhatsappContactInput?.wabaName?.length < 2 && formError && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">WABA Name is Required.</div>
-              </div>
-            )}
-          </div>*/}
         </div>
 
         {/*end::Form Group */}

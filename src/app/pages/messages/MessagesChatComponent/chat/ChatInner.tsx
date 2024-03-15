@@ -9,6 +9,8 @@ import clsx from "clsx";
 // } from "../../../../../_metronic/helpers";
 // import { useMutation } from "react-query";
 import axios from "axios";
+import EmojiPicker from "emoji-picker-react";
+
 import useStaticData from "../../../../StaticData";
 import KeyWordModal from "./KeyWordModal";
 // type Props = {
@@ -50,7 +52,13 @@ const ChatConversation = ({
 
   const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showEmojiUI, setShowEmojiUI] = useState(false);
+  const [emojiSelected, setEmojiSelected] = useState("");
 
+  const handleEmojiClick = (event) => {
+    setEmojiSelected(event.emoji);
+  };
+  console.log({ selectedFile }, { emojiSelected });
   const handleSendMessageClick = async () => {
     const storedData = sessionStorage.getItem("whatsAppStoredData");
     let whatsAppStoredData;
@@ -219,6 +227,10 @@ const ChatConversation = ({
   React.useEffect(() => {
     if (selectedKeyWord) setMessage(selectedKeyWord);
   }, [selectedKeyWord]);
+
+  React.useEffect(() => {
+    if (emojiSelected) setMessage(emojiSelected);
+  }, [emojiSelected]);
 
   const calculateTimeDifference = (chatTime: number) => {
     const currentDate: any = new Date();
@@ -402,6 +414,24 @@ const ChatConversation = ({
       </div>
 
       <div
+        style={{
+          position: "absolute",
+          bottom: 96,
+          left: 150,
+        }}
+      >
+        <EmojiPicker
+          open={showEmojiUI}
+          onEmojiClick={handleEmojiClick}
+          emojiStyle="facebook"
+          searchPlaceholder="Search..."
+          searchDisabled={false}
+          // width={500}
+          // height={500}
+        />
+      </div>
+
+      <div
         className="card-footer pt-4"
         id={
           isDrawer
@@ -468,6 +498,16 @@ const ChatConversation = ({
               onClick={() => setShowKeyWordModal(true)}
             >
               <i className="fas fa-cogs ms-1 fs-7"></i>
+            </button>
+
+            <button
+              className="btn btn-sm btn-icon btn-active-light-primary me-1"
+              type="button"
+              data-bs-toggle="tooltip"
+              title="Insert Emojis"
+              onClick={() => setShowEmojiUI((preValue) => !preValue)}
+            >
+              <i className="fas fa-smile ms-1 fs-3"></i>
             </button>
 
             {/* <div className="d-flex gap-3 align-items-center">

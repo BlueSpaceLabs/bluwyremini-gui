@@ -28,7 +28,7 @@ const MessagesPage = () => {
   const { baseUrl } = useStaticData();
 
   const [messageTab, setMessageTab] = React.useState("all");
-  const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
+  // const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
   const [messageUnreadCount, setMessageUnreadCount] = React.useState(null);
 
   const storedUserId = sessionStorage.getItem("userId");
@@ -76,8 +76,8 @@ const MessagesPage = () => {
               <MessagesHeader
                 messageTab={messageTab}
                 setMessageTab={setMessageTab}
-                selectedKeyWord={selectedKeyWord}
-                setSelectedKeyWord={setSelectedKeyWord}
+                // selectedKeyWord={selectedKeyWord}
+                // setSelectedKeyWord={setSelectedKeyWord}
                 messageUnreadCount={messageUnreadCount}
                 totalMessage={
                   messageUnreadCount?.totalCount
@@ -88,7 +88,7 @@ const MessagesPage = () => {
 
               <MessagesChat
                 messageTab={messageTab}
-                selectedKeyWord={selectedKeyWord}
+                // selectedKeyWord={selectedKeyWord}
                 newMessageData={messageUnreadCount?.userMsgCountData}
               />
             </div>

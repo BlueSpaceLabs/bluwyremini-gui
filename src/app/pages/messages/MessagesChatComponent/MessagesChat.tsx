@@ -12,6 +12,10 @@ const MessagesChat = ({ messageTab, selectedKeyWord, newMessageData }: any) => {
     setShowProfile(false);
   }, [messageTab]);
 
+  React.useEffect(() => {
+    if (selectedInbox) setShowProfile(true);
+  }, [selectedInbox]);
+
   return (
     <div
       style={{
@@ -29,6 +33,7 @@ const MessagesChat = ({ messageTab, selectedKeyWord, newMessageData }: any) => {
 
       <div style={{ width: `${showProfile ? "43%" : "58%"}` }}>
         <MessagesConversation
+          showProfile={showProfile}
           setShowProfile={setShowProfile}
           selectedInbox={selectedInbox}
           messageTab={messageTab}

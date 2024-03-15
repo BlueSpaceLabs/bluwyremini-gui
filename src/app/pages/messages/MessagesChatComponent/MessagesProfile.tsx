@@ -196,29 +196,38 @@ const MessagesProfile = ({
   return (
     <React.Fragment>
       <div className="card" id="kt_chat_messenger">
-        <div className="card-header" id="kt_chat_messenger_header">
-          <div className="card-title">
-            <div
-              className="symbol symbol-45px symbol-circle"
-              style={{ marginLeft: "-20px" }}
-            >
-              <span className="symbol-label bg-light-danger text-danger fs-6 fw-bolder">
-                {profileData.profileName[0]}
-              </span>
-            </div>
-            <div className="d-flex justify-content-center flex-column me-3">
-              <span
-                className="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1"
-                style={{ cursor: "pointer" }}
-                onClick={() => setShowProfile(false)}
-              >
-                {/* Brian Cox */}
-                {profileData.profileName}
-              </span>
+        <div className="card-header" style={{ padding: "0.3rem 0.6rem" }}>
+          <div className="card-title w-100">
+            <div className="w-100 d-flex justify-content-between align-items-start">
+              <div>
+                <div className="symbol symbol-45px symbol-circle">
+                  <span className="symbol-label bg-light-danger text-danger fs-6 fw-bolder">
+                    {profileData.profileName[0]}
+                  </span>
+                </div>
+                <div className="d-flex justify-content-center flex-column my-3">
+                  <span className="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">
+                    {profileData.profileName}
+                  </span>
 
-              <div className="mb-0 lh-1">
-                <span className="badge badge-success badge-circle w-10px h-10px me-1"></span>
-                <span className="fs-7 fw-bold text-gray-500">Active</span>
+                  <div className="mb-0 lh-1">
+                    <span className="badge badge-success badge-circle w-10px h-10px me-1"></span>
+                    <span className="fs-7 fw-bold text-gray-500">Active</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <button
+                    className="btn btn-sm btn-icon btn-active-light-primary me-1"
+                    type="button"
+                    data-bs-toggle="tooltip"
+                    title="Close Session"
+                    onClick={() => setShowProfile(false)}
+                  >
+                    <i className="bi bi-x-circle fs-3"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -269,7 +278,8 @@ const MessagesProfile = ({
                   placeholder="Edit Mobile Number"
                   value={editContactDetail.mobileNo}
                   name="mobileNo"
-                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
+                  disabled
                 />
 
                 {editContactDetail.mobileNo.length < 2 && formError && (

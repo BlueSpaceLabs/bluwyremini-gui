@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { KTIcon } from "../../../_metronic/helpers";
 import TicketsModal from "./MessagesChatComponent/TicketsModal/TicketsModal";
-import axios from "axios";
+// import axios from "axios";
 import CustomSnackBar from "../../components/CustomSnackbar";
 import useStaticData from "../../StaticData";
 // import { Link, useLocation } from "react-router-dom";
@@ -60,8 +60,8 @@ const HeaderCard = ({
 const MessagesHeader = ({
   messageTab,
   setMessageTab,
-  selectedKeyWord,
-  setSelectedKeyWord,
+  // selectedKeyWord,
+  // setSelectedKeyWord,
   messageUnreadCount,
   totalMessage,
 }: any) => {
@@ -72,7 +72,7 @@ const MessagesHeader = ({
     React.useState<boolean>(false);
   const [createTicketsData, setCreateTicketsData] =
     React.useState<any>(initialValue);
-  const [keywordListData, setKeywordListData] = useState([]);
+  // const [keywordListData, setKeywordListData] = useState([]);
   const [snackbar, setSnackbar] = useState({
     showSnackbar: false,
     severitySnackBar: "",
@@ -81,27 +81,27 @@ const MessagesHeader = ({
   const [totalMessageCount, setTotalMessageCount] = React.useState(0);
 
   // console.log("messageUnreadCount MessagesHeader", messageUnreadCount);
-  useEffect(() => {
-    const url = `${baseUrl}/getKeywordDetails.php`;
-    const accessKey = sessionStorage.getItem("accessKey");
+  // useEffect(() => {
+  //   const url = `${baseUrl}/getKeywordDetails.php`;
+  //   const accessKey = sessionStorage.getItem("accessKey");
 
-    const params = {
-      accessKey: accessKey,
-    };
+  //   const params = {
+  //     accessKey: accessKey,
+  //   };
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(url, { params });
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(url, { params });
 
-        // console.log("response getKeywordDetails:", response.data);
-        setKeywordListData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       // console.log("response getKeywordDetails:", response.data);
+  //       setKeywordListData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     if (totalMessageCount < totalMessage) {
@@ -193,7 +193,7 @@ const MessagesHeader = ({
           style={{ width: "36%" }}
           className="d-flex align-items-center justify-content-end gap-3"
         >
-          <i
+          {/* <i
             className="fas fa-cogs ms-1 fs-7"
             data-bs-toggle="tooltip"
             title="Automated Responses"
@@ -219,7 +219,7 @@ const MessagesHeader = ({
                   );
                 })}
             </select>
-          </div>
+          </div> */}
 
           <div>
             <button

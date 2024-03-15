@@ -1,33 +1,35 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import {
-  defaultMessages,
-  defaultUserInfos,
-  MessageModel,
-  UserInfoModel,
-  messageFromClient,
-} from "../../../../../_metronic/helpers";
-import { useMutation } from "react-query";
+// import {
+//   defaultMessages,
+//   defaultUserInfos,
+//   MessageModel,
+//   UserInfoModel,
+//   messageFromClient,
+// } from "../../../../../_metronic/helpers";
+// import { useMutation } from "react-query";
 import axios from "axios";
 import useStaticData from "../../../../StaticData";
+import KeyWordModal from "./KeyWordModal";
 // type Props = {
 //   selectedKeyWord?: string;
 //   isDrawer?: boolean;
 // };
 
-const bufferMessages = defaultMessages;
+// const bufferMessages = defaultMessages;
 
 const domain_url = "http://3.108.229.60:8082";
 
 const ChatConversation = ({
   isDrawer = false,
-  selectedKeyWord,
+  // selectedKeyWord,
   conversationData,
   selectedInbox,
   setSendMessageClick,
   messageTab,
 }: any) => {
   const { baseUrl } = useStaticData();
+  const fileInputRef = useRef(null);
 
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [messageUpdateAPI, setMessageUpdateAPI] = useState<boolean>(false);
@@ -36,6 +38,8 @@ const ChatConversation = ({
   const [message, setMessage] = useState<string>("");
   // const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
   const chatContainerRef = React.useRef<HTMLDivElement | null>(null);
+  const [showKeyWordModal, setShowKeyWordModal] =
+    React.useState<boolean>(false);
 
   const storedUserName = sessionStorage.getItem("userName");
   const storedUserId = sessionStorage.getItem("userId");
@@ -43,6 +47,9 @@ const ChatConversation = ({
   // const [userInfos] = useState<UserInfoModel[]>(defaultUserInfos);
 
   // console.log("selectedInbox", selectedInbox);
+
+  const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleSendMessageClick = async () => {
     const storedData = sessionStorage.getItem("whatsAppStoredData");
@@ -415,22 +422,34 @@ const ChatConversation = ({
 
         <div className="d-flex flex-stack">
           <div className="d-flex align-items-center me-2">
-            <button
+            {/* <button
               className="btn btn-sm btn-icon btn-active-light-primary me-1"
               type="button"
               data-bs-toggle="tooltip"
               title="Coming soon"
             >
               <i className="bi bi-paperclip fs-3"></i>
-            </button>
+            </button> */}
             <button
               className="btn btn-sm btn-icon btn-active-light-primary me-1"
               type="button"
               data-bs-toggle="tooltip"
               title="Coming soon"
+              onClick={() => {
+                fileInputRef.current.click();
+              }}
             >
               <i className="bi bi-upload fs-3"></i>
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={() => (event: any) => {
+                  setSelectedFile(event.target.files[0]);
+                }}
+              ></input>
             </button>
+
             <button
               className="btn btn-sm btn-icon btn-active-light-primary me-1"
               type="button"
@@ -440,6 +459,49 @@ const ChatConversation = ({
             >
               <i className="bi bi-x-circle fs-3"></i>
             </button>
+
+            <button
+              className="btn btn-sm btn-icon btn-active-light-primary me-1"
+              type="button"
+              data-bs-toggle="tooltip"
+              title="Insert Save Reply"
+              onClick={() => setShowKeyWordModal(true)}
+            >
+              <i className="fas fa-cogs ms-1 fs-7"></i>
+            </button>
+
+            {/* <div className="d-flex gap-3 align-items-center">
+              <i
+                className="fas fa-cogs ms-1 fs-7"
+                data-bs-toggle="tooltip"
+                title="Insert Save Reply"
+                onClick={() => {
+                  setShowKeyWordModal(true);
+                }}
+              ></i>
+
+              <div style={{ width: "200px" }}>
+                <select
+                  className="form-select form-select-solid form-select-lg"
+                  value={selectedKeyWord}
+                  onChange={(event: any) => {
+                    setSelectedKeyWord(event.target.value);
+                  }}
+                >
+                  <option value="" selected>
+                    Select Response
+                  </option>
+                  {keywordListData?.length > 0 &&
+                    keywordListData.map((item: any) => {
+                      return (
+                        <option key={item.id} value={item.description}>
+                          {item.keyword}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+            </div> */}
           </div>
           <button
             className="btn btn-primary"
@@ -452,6 +514,16 @@ const ChatConversation = ({
           </button>
         </div>
       </div>
+
+      <KeyWordModal
+        show={showKeyWordModal}
+        handleClose={() => {
+          setShowKeyWordModal(false);
+          setSelectedKeyWord("");
+        }}
+        selectedKeyWord={selectedKeyWord}
+        setSelectedKeyWord={setSelectedKeyWord}
+      />
     </div>
   );
 };

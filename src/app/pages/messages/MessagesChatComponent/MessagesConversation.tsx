@@ -23,6 +23,7 @@ import useStaticData from "../../../StaticData";
 // };
 
 const MessagesConversation = ({
+  showProfile,
   setShowProfile,
   selectedInbox,
   messageTab,
@@ -181,47 +182,58 @@ const MessagesConversation = ({
               <div className="d-flex justify-content-center flex-column me-3">
                 <span
                   className="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setShowProfile(true)}
+                  // style={{ cursor: "pointer" }}
                 >
                   {selectedInbox?.custName}
                 </span>
 
-                <div className="mb-0 lh-1">
+                {/* <div className="mb-0 lh-1">
                   <span className="badge badge-success badge-circle w-10px h-10px me-1"></span>
                   <span className="fs-7 fw-bold text-gray-500">Active</span>
-                </div>
+                </div> */}
+
+                <RoleChecker defaultRole="ADMIN_ROLE">
+                  <div style={{ width: "225px" }}>
+                    <select
+                      className="form-select form-select-solid form-select-lg"
+                      value={agentSelected}
+                      onChange={(event: any) => {
+                        setAgentSelected(event.target.value);
+                      }}
+                    >
+                      <option value="" selected>
+                        Assign Conversation
+                      </option>
+                      {agentListData?.length > 0 &&
+                        agentListData.map((item: any) => {
+                          return (
+                            <option
+                              key={item.id}
+                              // value={`${item.id},${item.username}`}
+                              value={JSON.stringify({
+                                id: item.id,
+                                username: item.username,
+                              })}
+                            >
+                              {`${item.firstName} ${item.lastName}`}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  </div>
+                </RoleChecker>
               </div>
-              <RoleChecker defaultRole="ADMIN_ROLE">
-                <div style={{ width: "200px" }}>
-                  <select
-                    className="form-select form-select-solid form-select-lg"
-                    value={agentSelected}
-                    onChange={(event: any) => {
-                      setAgentSelected(event.target.value);
-                    }}
+
+              {!showProfile && (
+                <div className="d-flex gap-1">
+                  <button
+                    className="btn btn-active-light-primary"
+                    onClick={() => setShowProfile(true)}
                   >
-                    <option value="" selected>
-                      Assign To
-                    </option>
-                    {agentListData?.length > 0 &&
-                      agentListData.map((item: any) => {
-                        return (
-                          <option
-                            key={item.id}
-                            // value={`${item.id},${item.username}`}
-                            value={JSON.stringify({
-                              id: item.id,
-                              username: item.username,
-                            })}
-                          >
-                            {`${item.firstName} ${item.lastName}`}
-                          </option>
-                        );
-                      })}
-                  </select>
+                    See Contact
+                  </button>
                 </div>
-              </RoleChecker>
+              )}
             </div>
 
             <div className="card-toolbar">

@@ -31,7 +31,6 @@ const ChatConversation = ({
   messageTab,
 }: any) => {
   const { baseUrl } = useStaticData();
-  const fileInputRef = useRef(null);
 
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [messageUpdateAPI, setMessageUpdateAPI] = useState<boolean>(false);
@@ -51,14 +50,33 @@ const ChatConversation = ({
   // console.log("selectedInbox", selectedInbox);
 
   const [selectedKeyWord, setSelectedKeyWord] = React.useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
   const [showEmojiUI, setShowEmojiUI] = useState(false);
   const [emojiSelected, setEmojiSelected] = useState("");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.files && event.target.files.length > 0) {
+      console.log("event.target.files", event.target.files);
+
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const handleFileUploadButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   const handleEmojiClick = (event) => {
     setEmojiSelected(event.emoji);
   };
-  console.log({ selectedFile }, { emojiSelected });
+  // console.log({ selectedFile }, { emojiSelected });
+
   const handleSendMessageClick = async () => {
     const storedData = sessionStorage.getItem("whatsAppStoredData");
     let whatsAppStoredData;
@@ -77,10 +95,33 @@ const ChatConversation = ({
             ? "channelInstagram"
             : "all";
 
+        // const formData = new FormData();
+
+        // formData.append("message", message);
+        // formData.append("avatar", selectedFile);
+
+        // formData.append("phoneNo", selectedInbox.custNumber);
+        // formData.append("custName", selectedInbox.custName);
+
+        // formData.append("chatId", selectedInbox.chatId);
+        // formData.append("assignedTo", storedUserId);
+        // formData.append("userType", "agent");
+        // formData.append(
+        //   "accesskey",
+        //   "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai"
+        // );
+        // formData.append("displayPhoneNo", "919810804885");
+        // formData.append("phoneNoId", "104801782499737");
+        // formData.append(
+        //   "fbSenderId",
+        //   messageTab === "messenger" ? selectedInbox?.fbSenderId : null
+        // );
+
         const response = await axios.post(
           `${domain_url}/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
           {
             message: message,
+            // avatar: selectedFile,
             phoneNo: selectedInbox.custNumber,
             custName: selectedInbox.custName,
             chatId: selectedInbox.chatId,
@@ -98,6 +139,8 @@ const ChatConversation = ({
             fbSenderId:
               messageTab === "messenger" ? selectedInbox?.fbSenderId : null,
           }
+
+          // formData
         );
 
         setMessage("");
@@ -465,18 +508,14 @@ const ChatConversation = ({
               type="button"
               data-bs-toggle="tooltip"
               title="Coming soon"
-              onClick={() => {
-                fileInputRef.current.click();
-              }}
+              onClick={handleFileUploadButtonClick}
             >
               <i className="bi bi-upload fs-3"></i>
               <input
                 type="file"
                 ref={fileInputRef}
                 style={{ display: "none" }}
-                onChange={() => (event: any) => {
-                  setSelectedFile(event.target.files[0]);
-                }}
+                onChange={handleFileInputChange}
               ></input>
             </button>
 

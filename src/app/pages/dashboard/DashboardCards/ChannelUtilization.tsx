@@ -44,7 +44,7 @@ const ChannelUtilization = () => {
     labels: labels,
     datasets: [
       {
-        label: "Channel Utilization",
+        label: "(%) Channel Utilization",
         backgroundColor: "rgb(255, 99, 132)",
         borderColor: "rgb(255, 99, 132)",
         data: [wabaCount, fbmCount, instaCount, telegarmCount],

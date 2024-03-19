@@ -40,9 +40,9 @@ const DashboardPage: FC = () => (
           style={{ backgroundColor: "" }}
         >
           <Box className="card-body">
-            <Box className="text-white fw-bold fs-2 mb-1 mt-1">Templates</Box>
+            <Box className="text-white fs-2 mb-1 mt-1">Templates</Box>
 
-            <Box className={`fw-semibold text-lightgray`}>Create</Box>
+            <Box className={`fw-semibold fw-bold text-lightgray`}>Create</Box>
             <br />
             <Box>
               <div className="head-text" style={{ position: "relative" }}>
@@ -70,19 +70,17 @@ const DashboardPage: FC = () => (
                 </div>
               </div>
 
-              <a
-                style={{
+              <Link style={{
                   backgroundColor: "green",
                   color: "white",
                   marginRight: 0,
                 }}
+                to="/template-management"
+                
                 className="menu-link px-3 btn btn-primary"
-                data-kt-users-table-filter="delete_row"
-                href={`https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278}`}
-                target="_blank"
               >
                 Template Management
-              </a>
+              </Link>
             </Box>
           </Box>
         </Box>
@@ -119,13 +117,23 @@ const DashboardPage: FC = () => (
       <div className="col-xl-4">
         <Box
           className="card bg card-xl-stretch mb-xl-8"
-          style={{ backgroundColor: "" }}
+          
         >
           <Box className="card-body">
             {/*<br/><h1 style={{color:"white", textAlign:"center"}}>Bot Analytics</h1><br/>*/}
             <img src={botlogo} height={150} width={320} />
-          </Box>
+            <center><a
+                style={{ fontSize:17 }}
+                className="btn"
+               
+                href={`https://dialogflow.cloud.google.com/cx/projects}`}
+                target="_blank"
+              >
+                <b>Manage Flows</b>
+              </a></center>
         </Box>
+          </Box>
+          
       </div>
     </div>
     {/* begin::Row */}
@@ -203,20 +211,20 @@ const DashboardPage: FC = () => (
               Explore platform APIs
             </h3>
             <br />{" "}
-            <center>
-              <center>
-                <button
-                  className="btn btn"
-                  style={{
-                    backgroundColor: "lightgray",
-                    color: "white",
-                    marginRight: 0,
-                  }}
-                >
-                  API Settings
-                </button>
+            <center>  
+                <Link style={{
+                  backgroundColor: "lightgray",
+                  color: "white",
+                  marginRight: 0,
+                }}
+                to="/sendmessage"
+                
+                className="menu-link px-3 btn btn-primary"
+              >
+                API Settings
+              </Link>
               </center>
-            </center>
+            
           </Box>
         </Box>
       </div>

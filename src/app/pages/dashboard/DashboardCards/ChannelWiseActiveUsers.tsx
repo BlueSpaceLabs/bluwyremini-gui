@@ -92,7 +92,7 @@ const ChannelWiseActiveUsers = () => {
             <br />
             <center>
               <Link
-                to="/contact-management"
+                to="/campaign-management"
                 className="btn"
                 style={{
                   backgroundColor: "#CC2936", //CC2936, D7263D, BF211E, BB0A21

@@ -58,7 +58,7 @@ const WhatsappAppDetails = ({ channelConfigurationData }: any) => {
           params: {
             accessKey: accessKey,
             phoneNoId: channelConfigurationData?.phoneNoId,
-            accessToken: channelConfigurationData?.accessToken,
+            accessToken: channelConfigurationData?.permanentToken,
             channelName: "whatsapp",
           },
         });

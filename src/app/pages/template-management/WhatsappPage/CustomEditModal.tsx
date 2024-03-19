@@ -9,6 +9,9 @@ import { KTIcon } from "../../../../_metronic/helpers";
 // };
 
 const modalsRoot = document.getElementById("root-modals") || document.body;
+const storedData = sessionStorage.getItem("whatsappConfig");
+  let whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
 const CustomEditModal = ({ show, handleClose, detailTemplateData }: any) => {
   return createPortal(
@@ -148,7 +151,7 @@ const CustomEditModal = ({ show, handleClose, detailTemplateData }: any) => {
           &nbsp;&nbsp;
           <a
             className="btn btn-primary"
-            href={`https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278&id=${detailTemplateData.id}`}
+            href={`https://business.facebook.com/wa/manage/message-templates/?business_id=${whatsAppStoredData.businessId}&waba_id=${whatsAppStoredData.accessToken}&id=${detailTemplateData.id}`}
             target="_blank"
           >
             Delete

@@ -13,6 +13,9 @@ const UsersListToolbar = () => {
   const [fromDate, setFromDate] = useState<string>("");
   const [toDate, setToDate] = useState<string>("");
   const [showExport, setShowExport] = useState<boolean>(false);
+  const storedData = sessionStorage.getItem("whatsappConfig");
+  let whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
   useEffect(() => {
     console.log("Calling API", { fromDate }, { toDate });
@@ -41,7 +44,7 @@ const UsersListToolbar = () => {
       {/* begin::Add user */}
       
       {/* end::Add user */}
-      <a href="https://business.facebook.com/wa/manage/message-templates/?business_id=1343361919334988&waba_id=116042751363278" target="_blank">
+      <a href={`https://business.facebook.com/wa/manage/message-templates/?business_id=${whatsAppStoredData.businessId}&waba_id=${whatsAppStoredData.accessToken}`} target="_blank">
 <input type="button" className="btn btn-primary" value="Add Template" />
 </a>
 

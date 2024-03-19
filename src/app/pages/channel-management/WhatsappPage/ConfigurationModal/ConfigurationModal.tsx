@@ -48,6 +48,9 @@ const WhatsappConfigurationModal = ({
     serviceAxiosPostWhatsappData
   );
   const storedUserName = sessionStorage.getItem("userName");
+  const storedData = sessionStorage.getItem("whatsappConfig");
+  let whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
   const [whatsappModalInput, setWhatsappModalInput] =
     React.useState<any>(initialModalData);
@@ -155,6 +158,7 @@ const WhatsappConfigurationModal = ({
         <h2>Configure Whatsapp Channel</h2>
         {/* begin::Close */}
         <div className="d-flex flex-start gap-3">
+          <a className="btn btn-lg btn-secondary" href={`https://developers.facebook.com/apps/${whatsAppStoredData.appId}/whatsapp-business/wa-dev-quickstart/?business_id=${whatsAppStoredData.businessId}`} target="_blank">Go to Business Manager </a>
           <button
             type="button"
             className="btn btn-lg btn-secondary"

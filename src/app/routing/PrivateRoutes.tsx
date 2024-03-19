@@ -23,6 +23,7 @@ import AgentsPage from "../pages/agents-management";
 import StaticDataManagement from "../pages/static-data";
 import SignInPage from "../pages/login-management/SignIn";
 import CampaignManagementPage from "../pages/campaign-management";
+import ContactUsPage from "../pages/contact-us";
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import("../modules/profile/ProfilePage"));
@@ -60,6 +61,7 @@ const PrivateRoutes = () => {
         <Route path="sendmessage" element={<Sendmessage />} />
         <Route path="keywords" element={<KeyWordsPage />} />
         <Route path="agents" element={<AgentsPage />} />
+        <Route path="contact-us" element={<ContactUsPage />} />
         <Route path="faqs" element={<Faqs />} />
         {/* <Route path="tickets" element={<Tickets />} /> */}
 

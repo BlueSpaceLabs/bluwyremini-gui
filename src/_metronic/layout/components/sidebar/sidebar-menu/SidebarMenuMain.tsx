@@ -102,6 +102,13 @@ const SidebarMenuMain = () => {
         fontIcon="bi-layers"
       />
       <SidebarMenuItem
+        to="/contact-us"
+        icon="pencil"
+        title="Contact US"
+        fontIcon="bi-layers"
+      />
+
+      <SidebarMenuItem
         to="/faqs"
         icon="messages"
         title="FAQs"

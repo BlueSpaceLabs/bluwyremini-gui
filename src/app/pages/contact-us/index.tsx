@@ -15,7 +15,7 @@ const ContactUsPage = () => {
       <div style={{ marginTop: "-30px" }}>
         <PageTitle breadcrumbs={[]}>Contact Us</PageTitle>
 
-        <ContactFormUI />
+        <ContactFormUI setSnackbar={setSnackbar} />
 
         <CustomSnackBar
           showSnackbar={snackbar.showSnackbar}

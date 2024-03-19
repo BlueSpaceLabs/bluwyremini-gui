@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { KTCard, KTIcon } from "../../../_metronic/helpers";
 import CustomInput from "./components/CustomInput";
 import CustomTextArea from "./components/CustomTextArea";
+import useStaticData from "../../StaticData";
+import axios from "axios";
 
 const initialData = {
   contactName: "",
@@ -11,7 +13,9 @@ const initialData = {
   contactMessage: "",
 };
 
-const ContactFormUI = () => {
+const ContactFormUI = ({ setSnackbar }: any) => {
+  const { baseUrl } = useStaticData();
+
   const [ContactInputData, setContactInputData] = useState(initialData);
   const [formError, setFormError] = React.useState<boolean>(false);
 
@@ -30,57 +34,64 @@ const ContactFormUI = () => {
       try {
         console.log({ ContactInputData });
 
-        // const accessKey = sessionStorage.getItem("accessKey");
-        // const data = {
-        //   tenant: "bsl",
-        //   accessKey: accessKey,
-        //   agent_data: {
-        //     mobileNo: agentInputData.mobileNo,
-        //     firstName: agentInputData.firstName,
-        //     lastName: agentInputData.lastName,
-        //     emailAddress: agentInputData.emailAddress,
-        //     designation: agentInputData.designation,
-        //     address: agentInputData.address,
-        //     country: agentInputData.country,
-        //     company: agentInputData.company,
-        //     comapanyWebsite: agentInputData.companyWebsite,
-        //     agentUsername: agentInputData.agentUsername,
-        //     agentPassword: agentInputData.agentPassword,
-        //     agentType: agentInputData.agentType,
-        //   },
-        // };
-        // const config = {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // };
-        // const response = await axios.post(
-        //   `${baseUrl}/addAgentProfileDetails.php`,
-        //   data,
-        //   config
-        // );
+        const accessKey = sessionStorage.getItem("accessKey");
+        const tenantName = sessionStorage.getItem("tenantName");
+
+        const data = {
+          tenant: tenantName,
+          accessKey: accessKey,
+          agent_data: {
+            mobileNo: ContactInputData.contactMobile,
+            fullName: ContactInputData.contactName,
+            emailId: ContactInputData.contactEmailId,
+            contactAddress: ContactInputData.contactAddress,
+            query: ContactInputData.contactMessage,
+          },
+        };
+
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const response = await axios.post(
+          `${baseUrl}/addContactUsFormDetails.php?accessKey=${accessKey}`,
+          data,
+          config
+        );
+
         // console.log("response:", response);
-        // setSnackbar({
-        //   showSnackbar: true,
-        //   severitySnackBar: "success",
-        //   messageSnackBar: response?.data?.message
-        //     ? response?.data?.message
-        //     : "Successfully Added Agents",
-        // });
-        // setRefetchList((preV: boolean) => !preV);
+
+        if (response?.data?.code === 0) {
+          setSnackbar({
+            showSnackbar: true,
+            severitySnackBar: "success",
+            messageSnackBar: response?.data?.message
+              ? response?.data?.message
+              : "Successfully Message Sent",
+          });
+        } else {
+          setSnackbar({
+            showSnackbar: true,
+            severitySnackBar: "error",
+            messageSnackBar: response?.data?.message
+              ? response?.data?.message
+              : "Failed to send Message",
+          });
+        }
       } catch (error) {
         // console.error("Error:", error);
-        // setSnackbar({
-        //   showSnackbar: true,
-        //   severitySnackBar: "error",
-        //   messageSnackBar: error?.response?.data?.message
-        //     ? error?.response?.data?.message
-        //     : "Failed to Add Agent",
-        // });
+
+        setSnackbar({
+          showSnackbar: true,
+          severitySnackBar: "error",
+          messageSnackBar: error?.response?.data?.message
+            ? error?.response?.data?.message
+            : "Failed to send Message",
+        });
       } finally {
         setContactInputData(initialData);
-
-        // handleClose();
       }
     }
   };

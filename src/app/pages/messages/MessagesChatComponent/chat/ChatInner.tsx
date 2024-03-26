@@ -75,14 +75,13 @@ const ChatConversation = ({
   const handleEmojiClick = (event) => {
     setEmojiSelected(event.emoji);
   };
-  // console.log({ selectedFile }, { emojiSelected });
 
   const handleSendMessageClick = async () => {
     const storedData = sessionStorage.getItem("whatsAppStoredData");
     let whatsAppStoredData;
     if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
-    if (message.length > 0)
+    if (message.length > 0 || selectedFile)
       try {
         const chatChannel =
           messageTab === "whatsapp"
@@ -95,52 +94,52 @@ const ChatConversation = ({
             ? "channelInstagram"
             : "all";
 
-        // const formData = new FormData();
+        const formData = new FormData();
 
-        // formData.append("message", message);
-        // formData.append("avatar", selectedFile);
+        formData.append("message", message);
+        formData.append("avatar", selectedFile);
 
-        // formData.append("phoneNo", selectedInbox.custNumber);
-        // formData.append("custName", selectedInbox.custName);
+        formData.append("phoneNo", selectedInbox.custNumber);
+        formData.append("custName", selectedInbox.custName);
 
-        // formData.append("chatId", selectedInbox.chatId);
-        // formData.append("assignedTo", storedUserId);
-        // formData.append("userType", "agent");
-        // formData.append(
-        //   "accesskey",
-        //   "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai"
-        // );
-        // formData.append("displayPhoneNo", "919810804885");
-        // formData.append("phoneNoId", "104801782499737");
-        // formData.append(
-        //   "fbSenderId",
-        //   messageTab === "messenger" ? selectedInbox?.fbSenderId : null
-        // );
+        formData.append("chatId", selectedInbox.chatId);
+        formData.append("assignedTo", storedUserId);
+        formData.append("userType", "agent");
+        formData.append(
+          "accesskey",
+          "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai"
+        );
+        formData.append("displayPhoneNo", "919810804885");
+        formData.append("phoneNoId", "104801782499737");
+        formData.append(
+          "fbSenderId",
+          messageTab === "messenger" ? selectedInbox?.fbSenderId : null
+        );
 
         const response = await axios.post(
           `${domain_url}/php-dialogflowcx-backend-service/${chatChannel}/chatWithUser.php`,
-          {
-            message: message,
-            // avatar: selectedFile,
-            phoneNo: selectedInbox.custNumber,
-            custName: selectedInbox.custName,
-            chatId: selectedInbox.chatId,
-            assignedTo: storedUserId,
-            userType: "agent",
-            accesskey:
-              // whatsAppStoredData?.accessToken,
-              "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
-            displayPhoneNo:
-              // whatsAppStoredData?.displayNo,
-              "919810804885",
-            phoneNoId:
-              // whatsAppStoredData?.phoneNoId,
-              "104801782499737",
-            fbSenderId:
-              messageTab === "messenger" ? selectedInbox?.fbSenderId : null,
-          }
+          // {
+          //   message: message,
+          //   // avatar: selectedFile,
+          //   phoneNo: selectedInbox.custNumber,
+          //   custName: selectedInbox.custName,
+          //   chatId: selectedInbox.chatId,
+          //   assignedTo: storedUserId,
+          //   userType: "agent",
+          //   accesskey:
+          //     // whatsAppStoredData?.accessToken,
+          //     "EAAvZAe0w3fFoBOZC5HtjhN0HAZAE1GQfc5jKrJuakkd7bAas84EohnNiO4aZBFxXRheZAwub30Ib6jbh8uthqq4xZA9JXD1NmTarNJ7ah4iVk3bVZC1csEHGw1pJNuHuf5uRxxqUU05G2UTdMWodn82PkDhEJSv9NUvaSJYWW16IQPy6XZCBJY9fy6X5R482tMai",
+          //   displayPhoneNo:
+          //     // whatsAppStoredData?.displayNo,
+          //     "919810804885",
+          //   phoneNoId:
+          //     // whatsAppStoredData?.phoneNoId,
+          //     "104801782499737",
+          //   fbSenderId:
+          //     messageTab === "messenger" ? selectedInbox?.fbSenderId : null,
+          // }
 
-          // formData
+          formData
         );
 
         setMessage("");
@@ -307,6 +306,11 @@ const ChatConversation = ({
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
   }, [conversationData]);
+
+  React.useEffect(() => {
+    setSelectedFile(null);
+    setMessage("");
+  }, [selectedInbox]);
 
   return (
     <div
@@ -492,6 +496,8 @@ const ChatConversation = ({
           onKeyDown={onEnterPress}
           onClick={handleMessageClick}
         ></textarea>
+
+        {selectedFile && <div>File Uploaded : {selectedFile?.name}</div>}
 
         <div className="d-flex flex-stack">
           <div className="d-flex align-items-center me-2">

@@ -7,7 +7,7 @@
    return (
     <div style={{marginTop:-30}}>
        <PageTitle breadcrumbs={[]}>Send Message</PageTitle>
-     <div><SwaggerUI url="https://qa-bluwyre-assets.s3.ap-south-1.amazonaws.com/openapi-v1.4.json" /></div>
+     <div><SwaggerUI url="https://qa-bluwyre-assets.s3.ap-south-1.amazonaws.com/openapi-v1.6.json" /></div>
      </div>
    )
  }

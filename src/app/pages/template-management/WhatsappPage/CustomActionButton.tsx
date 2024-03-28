@@ -13,6 +13,10 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
   const [showEditModal, setShowEditModal] = React.useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = React.useState<boolean>(false);
 
+  const storedData = sessionStorage.getItem("whatsappConfig");
+  var whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
   useEffect(() => {
     MenuComponent.reinitialization();
   }, []);
@@ -58,6 +62,7 @@ const CustomActionButton = ({ detailTemplateData }: any) => {
           show={showEditModal}
           handleClose={() => setShowEditModal(false)}
           detailTemplateData={detailTemplateData}
+          whatsAppStoredData ={whatsAppStoredData}
         />
         <CustomDeleteModal
           show={showDeleteModal}

@@ -57,8 +57,6 @@ const WhatsappPage = () => {
     let whatsAppStoredData;
     if (storedData) whatsAppStoredData = JSON.parse(storedData);
 
-    console.log("whatsAppStoredData", whatsAppStoredData);
-
     const params = {
       accessKey: accessKey,
       templateStatus: "approved",

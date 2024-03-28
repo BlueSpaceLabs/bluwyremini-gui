@@ -48,6 +48,11 @@ const initialCampaignData = {
   campaignChannel: "",
   selectedTime: "",
   userActiveCount: "",
+  campaignTemplate: "",
+  campaignParameter1: "",
+  campaignParameter2: "",
+  campaignParameter3: "",
+  campaignParameter4: "",
 };
 
 const tenant = "bsl";
@@ -108,6 +113,27 @@ const ActiveUserDetails = () => {
     formData.append("campaignChannel", activeUserCampaignData.campaignChannel);
     formData.append("selectedTime", activeUserCampaignData.selectedTime);
     formData.append("avatar", activeUserCampaignData.campaignUploadFile);
+
+    const templateValue = JSON.parse(campaignInputData.campaignTemplate);
+
+    formData.append("templateId", templateValue.id);
+    formData.append("templateName", templateValue.name);
+    formData.append(
+      "campaignParameter1",
+      activeUserCampaignData.campaignParameter1
+    );
+    formData.append(
+      "campaignParameter2",
+      activeUserCampaignData.campaignParameter2
+    );
+    formData.append(
+      "campaignParameter3",
+      activeUserCampaignData.campaignParameter3
+    );
+    formData.append(
+      "campaignParameter4",
+      activeUserCampaignData.campaignParameter4
+    );
 
     try {
       const url = `${baseUrl}/addCampaignDetailsRealTime.php`;

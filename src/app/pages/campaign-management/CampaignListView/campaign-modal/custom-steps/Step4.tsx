@@ -91,7 +91,8 @@ const Step4 = ({
                     className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Creative Uploads</h3>
+                    {/* <h3 className="stepper-title">Creative Uploads</h3> */}
+                    <h3 className="stepper-title">Channel</h3>
                   </div>
                   {/*end::Step 2*/}
                   {/*begin::Step 3*/}
@@ -99,7 +100,9 @@ const Step4 = ({
                     className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Audiences</h3>
+                    <h3 className="stepper-title">Creative Uploads</h3>
+
+                    {/* <h3 className="stepper-title">Channel</h3> */}
                   </div>
                   {/*end::Step 3*/}
                   {/*begin::Step 4*/}
@@ -1013,7 +1016,7 @@ const Step4 = ({
                       <div className="pb-10 pb-lg-12">
                         {/*begin::Title*/}
                         <h1 className="fw-bold text-gray-900">
-                          Configure Audiences
+                          Configure Channel
                         </h1>
                         {/*end::Title*/}
                         {/*begin::Description*/}

@@ -35,7 +35,7 @@ const CustomStepsModal = ({
         />
       )}
       {steps === 2 && (
-        <Step2
+        <Step3
           show={show}
           handleClose={handleClose}
           setSteps={setSteps}
@@ -44,7 +44,7 @@ const CustomStepsModal = ({
         />
       )}
       {steps === 3 && (
-        <Step3
+        <Step2
           show={show}
           handleClose={handleClose}
           setSteps={setSteps}

@@ -23,6 +23,7 @@ const initialValue = {
   campaignChannel: "",
   campaignLanguage: "",
   selectedTime: "now",
+  campaignTemplate: "",
 };
 
 const tenant = "bsl";
@@ -69,6 +70,11 @@ const UsersListToolbar = ({
     formData.append("campaignChannel", campaignInputData.campaignChannel);
     formData.append("selectedTime", campaignInputData.selectedTime);
     formData.append("avatar", campaignInputData.campaignUploadFile);
+
+    const templateValue = JSON.parse(campaignInputData.campaignTemplate);
+
+    formData.append("templateId", templateValue.id);
+    formData.append("templateName", templateValue.name);
 
     try {
       const url = `${baseUrl}/addCampaignDetails.php`;

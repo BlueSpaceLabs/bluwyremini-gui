@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useStaticData from "../../../../../StaticData";
+import axios from "axios";
 
 const Step3 = ({
   show,
@@ -7,6 +9,63 @@ const Step3 = ({
   campaignInputData,
   setCampaignInputData,
 }: any) => {
+  const { baseUrl } = useStaticData();
+  const [templateList, setTemplateList] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+
+  // console.log({ campaignInputData });
+
+  useEffect(() => {
+    if (campaignInputData?.campaignTemplate) {
+      const templateValue = JSON.parse(campaignInputData?.campaignTemplate);
+
+      if (templateValue?.id) {
+        const templatedToShow = templateList.find(
+          (obj) => obj.id === templateValue?.id
+        );
+        setSelectedTemplate(templatedToShow);
+      } else {
+        setSelectedTemplate(null);
+      }
+    }
+  }, [campaignInputData]);
+
+  useEffect(() => {
+    const url = `${baseUrl}/getTemplatesList.php`;
+    const accessKey = sessionStorage.getItem("accessKey");
+    const storedData = sessionStorage.getItem("whatsappConfig");
+
+    let whatsAppStoredData;
+    if (storedData) whatsAppStoredData = JSON.parse(storedData);
+
+    // console.log("whatsAppStoredData", whatsAppStoredData);
+
+    const params = {
+      accessKey: accessKey,
+      templateStatus: "approved",
+      waba_id: whatsAppStoredData?.accessToken,
+      access_token: whatsAppStoredData?.permanentToken,
+      channelName: "whatsapp",
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url, { params });
+        const responseData = response.data;
+
+        console.log("responseData", responseData);
+
+        if (responseData?.["0"]?.data?.length > 0)
+          setTemplateList(responseData?.["0"]?.data);
+      } catch (error) {
+        setTemplateList([]);
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   if (show)
     return (
       <div
@@ -57,18 +116,23 @@ const Step3 = ({
                   {/*end::Step 1*/}
                   {/*begin::Step 2*/}
                   <div
-                    className="stepper-item me-5 me-md-15 completed"
+                    // className="stepper-item me-5 me-md-15 completed"
+                    className="stepper-item me-5 me-md-15 current"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Creative Uploads</h3>
+                    {/* <h3 className="stepper-title">Creative Uploads</h3> */}
+                    <h3 className="stepper-title">Channel</h3>
                   </div>
                   {/*end::Step 2*/}
                   {/*begin::Step 3*/}
                   <div
-                    className="stepper-item me-5 me-md-15 current"
+                    // className="stepper-item me-5 me-md-15 current"
+                    className="stepper-item me-5 me-md-15 pending"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Audiences</h3>
+                    <h3 className="stepper-title">Creative Uploads</h3>
+
+                    {/* <h3 className="stepper-title">Channel</h3> */}
                   </div>
                   {/*end::Step 3*/}
                   {/*begin::Step 4*/}
@@ -982,7 +1046,7 @@ const Step3 = ({
                       <div className="pb-10 pb-lg-12">
                         {/*begin::Title*/}
                         <h1 className="fw-bold text-gray-900">
-                          Configure Audiences
+                          Configure Channel
                         </h1>
                         {/*end::Title*/}
                         {/*begin::Description*/}
@@ -1022,6 +1086,7 @@ const Step3 = ({
                             })
                           }
                         >
+                          <option value="">Select Channel</option>
                           <option value="whatsapp">whatsapp</option>
                           <option value="telegram">telegram</option>
                           <option value="messenger">messenger</option>
@@ -1030,6 +1095,98 @@ const Step3 = ({
                         {/*end::Row*/}
                       </div>
                       {/*end::Input group*/}
+
+                      {/*begin::Input group*/}
+                      {campaignInputData.campaignChannel === "whatsapp" && (
+                        <div className="fv-row mb-10">
+                          {/*begin::Label*/}
+                          <label className="fs-6 fw-semibold mb-2">
+                            Select Template
+                            <span
+                              className="ms-1"
+                              data-bs-toggle="tooltip"
+                              aria-label="Show your ads to either men or women, or select 'All' for both"
+                              data-bs-original-title="Show your ads to either men or women, or select 'All' for both"
+                              data-kt-initialized={1}
+                            >
+                              <i className="ki-outline ki-information-5 text-gray-500 fs-6" />
+                            </span>{" "}
+                          </label>
+                          {/*End::Label*/}
+                          {/*begin::Row*/}
+                          <select
+                            className="form-select form-select-solid form-select-lg"
+                            value={campaignInputData?.campaignTemplate}
+                            onChange={(e) =>
+                              setCampaignInputData({
+                                ...campaignInputData,
+                                campaignTemplate: e.target.value,
+                              })
+                            }
+                          >
+                            <option value="" selected>
+                              Select Template
+                            </option>
+
+                            {templateList?.map((item) => (
+                              <option
+                                key={item?.id}
+                                value={JSON.stringify({
+                                  id: item?.id,
+                                  name: item?.name,
+                                })}
+                              >
+                                {item?.name}
+                              </option>
+                            ))}
+                          </select>
+                          {/*end::Row*/}
+                        </div>
+                      )}
+                      {/*end::Input group*/}
+
+                      {selectedTemplate && (
+                        <>
+                          <div className="fv-row mb-10">
+                            <label className="col-lg-4 fw-bold text-muted">
+                              Template Components
+                              <i
+                                className="fas fa-exclamation-circle ms-1 fs-7"
+                                data-bs-toggle="tooltip"
+                                title="Country of origination"
+                              ></i>
+                            </label>
+
+                            <div className="col-lg-8 mt-3">
+                              {selectedTemplate?.components[0]?.text && (
+                                <>
+                                  <span className="fw-bolder fs-6 text-gray-900">
+                                    {selectedTemplate?.components[0]?.text}
+                                  </span>
+                                  <br />
+                                </>
+                              )}
+                              {selectedTemplate?.components[1]?.text && (
+                                <>
+                                  <span className="fw-bolder fs-7 text-gray-700">
+                                    {selectedTemplate?.components[1]?.text}
+                                  </span>
+                                  <br />
+                                </>
+                              )}
+                              {selectedTemplate?.components[2]?.text && (
+                                <>
+                                  <span className="fw-bolder fs-8 text-gray-500">
+                                    {selectedTemplate?.components[2]?.text}
+                                  </span>
+                                  <br />
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      )}
+
                       {/*begin::Input group*/}
 
                       {/*end::Input group*/}
@@ -1245,7 +1402,7 @@ const Step3 = ({
                         className="btn btn-lg btn-light-primary me-3"
                         data-kt-stepper-action="previous"
                         data-kt-stepper-state="hide-on-last-step"
-                        onClick={() => setSteps(2)}
+                        onClick={() => setSteps(1)}
                       >
                         <i className="ki-outline ki-arrow-left fs-3 me-1" />{" "}
                         Back
@@ -1272,7 +1429,7 @@ const Step3 = ({
                         type="button"
                         className="btn btn-lg btn-primary"
                         data-kt-stepper-action="next"
-                        onClick={() => setSteps(4)}
+                        onClick={() => setSteps(3)}
                       >
                         Continue
                         <i className="ki-outline ki-arrow-right fs-3 ms-1 me-0" />{" "}

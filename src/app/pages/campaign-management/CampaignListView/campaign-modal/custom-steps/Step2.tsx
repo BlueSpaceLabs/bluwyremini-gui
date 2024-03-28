@@ -33,7 +33,7 @@ const Step2 = ({
       ...campaignInputData,
       campaignUploadFile: null,
     });
-    setSteps(1);
+    setSteps(2);
   };
 
   if (show)
@@ -86,18 +86,22 @@ const Step2 = ({
                   {/*end::Step 1*/}
                   {/*begin::Step 2*/}
                   <div
-                    className="stepper-item me-5 me-md-15 current"
+                    // className="stepper-item me-5 me-md-15 current"
+                    className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Creative Uploads</h3>
+                    {/* <h3 className="stepper-title">Creative Uploads</h3> */}
+                    <h3 className="stepper-title">Channel</h3>
                   </div>
                   {/*end::Step 2*/}
                   {/*begin::Step 3*/}
                   <div
-                    className="stepper-item me-5 me-md-15 pending"
+                    className="stepper-item me-5 me-md-15 current"
+                    // className="stepper-item me-5 me-md-15 pending"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Audiences</h3>
+                    <h3 className="stepper-title">Creative Uploads</h3>
+                    {/* <h3 className="stepper-title">Channel</h3> */}
                   </div>
                   {/*end::Step 3*/}
                   {/*begin::Step 4*/}
@@ -566,7 +570,7 @@ const Step2 = ({
                       <div className="pb-10 pb-lg-12">
                         {/*begin::Title*/}
                         <h1 className="fw-bold text-gray-900">
-                          Configure Audiences
+                          Configure Channel
                         </h1>
                         {/*end::Title*/}
                         {/*begin::Description*/}
@@ -1018,7 +1022,7 @@ const Step2 = ({
                         className="btn btn-lg btn-light-primary me-3"
                         data-kt-stepper-action="previous"
                         data-kt-stepper-state="hide-on-last-step"
-                        onClick={() => setSteps(1)}
+                        onClick={() => setSteps(2)}
                       >
                         <i className="ki-outline ki-arrow-left fs-3 me-1" />{" "}
                         Back
@@ -1045,7 +1049,7 @@ const Step2 = ({
                         type="button"
                         className="btn btn-lg btn-primary"
                         data-kt-stepper-action="next"
-                        onClick={() => setSteps(3)}
+                        onClick={() => setSteps(4)}
                       >
                         Continue
                         <i className="ki-outline ki-arrow-right fs-3 ms-1 me-0" />{" "}

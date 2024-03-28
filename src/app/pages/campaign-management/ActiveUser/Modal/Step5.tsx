@@ -62,7 +62,7 @@ const Step5 = ({ show, handleClose, setSteps, showCampaignMessage }: any) => {
                     className="stepper-item me-5 me-md-15 completed"
                     data-kt-stepper-element="nav"
                   >
-                    <h3 className="stepper-title">Audiences</h3>
+                    <h3 className="stepper-title">Channel</h3>
                   </div>
                   {/*end::Step 3*/}
                   {/*begin::Step 4*/}
@@ -976,7 +976,7 @@ const Step5 = ({ show, handleClose, setSteps, showCampaignMessage }: any) => {
                       <div className="pb-10 pb-lg-12">
                         {/*begin::Title*/}
                         <h1 className="fw-bold text-gray-900">
-                          Configure Audiences
+                          Configure Channel
                         </h1>
                         {/*end::Title*/}
                         {/*begin::Description*/}
